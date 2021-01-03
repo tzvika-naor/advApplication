@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './ItemDetails.css'
+// import './ItemDetails.css'
 import history from '../History';
 
 function ItemDetails (props) {

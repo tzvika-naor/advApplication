@@ -7,20 +7,16 @@ const List = (props) => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-
-
         axios.get('http://localhost:5000/api/product')
             .then(response => {
                 const data = response.data.products;
                 console.log(data)
                 setItems(data);
-
                 let obj = data.map(item => {
                     item.id = item._id
                     delete item._id
                     return item;
                 })
-                // console.log(props);
             })
     }, []);
 
