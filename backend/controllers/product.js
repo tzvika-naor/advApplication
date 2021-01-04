@@ -1,18 +1,67 @@
 const Product = require('../models/product');
 
-exports.getProducts = (req, res, next) =>
-{
+
+exports.searchQuery = (req, res, next) => {
+    console.log(req.body);
+    var minPrice = '';
+    var reviews = req.body.reviews
+    const tmpMinPrice = req.body.minPrice;
+    if (tmpMinPrice.substring(2) === '+')
+        minPrice = parseInt(tmpMinPrice.substring(0, 2));
+    if (tmpMinPrice.substring(3) === '+')
+        minPrice = parseInt(tmpMinPrice.substring(0, 3));
+    const ProductQuery = Product.find({ price: { $gt: minPrice }, reviews: { $gt: reviews }, $query: { category: req.body.category } }).sort({ price: req.body.orderBy }).then(doc => {
+        console.log(doc)
+    })
+}
+exports.getCategory = (req, res, next) => {
     const ProductQuery = Product.find();//return all the Product
-    ProductQuery.then(documents =>
-    {
-         fetchedProducts = documents;
-         categories = fetchedProducts.map((product) => {
+    ProductQuery.then(documents => {
+        fetchedProducts = documents;
+        categories = fetchedProducts.map((product) => {
             return product.category
-         })
-         uniqCategories = [...new Set(categories)];
+        })
+        uniqCategories = [...new Set(categories)]; //this is the same as group by
         return Product.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
-    }).then(count =>
-    {
+    }).then(count => {
+        // console.log(count)
+        res.status(200).json({
+            message: 'product fetch succesfully!',
+            category: uniqCategories
+        })
+    })
+
+}
+exports.getReviews = (req, res, next) => {
+    const ProductQuery = Product.find();//return all the Product
+    ProductQuery.then(documents => {
+        console.log(documents)
+        fetchedProducts = documents;
+        reviews = fetchedProducts.map((product) => {
+            return product.reviews
+        })
+        uniqueReviews = [...new Set(reviews)]; //this is the same as group by
+        sortedReviews = uniqueReviews.sort(function (a, b) {
+            return a - b;
+        });
+    }).then(count => {
+        // console.log(count)
+        res.status(200).json({
+            message: 'product fetch succesfully!',
+            reviews: sortedReviews
+        })
+    })
+}
+exports.getProducts = (req, res, next) => {
+    const ProductQuery = Product.find();//return all the Product
+    ProductQuery.then(documents => {
+        fetchedProducts = documents;
+        categories = fetchedProducts.map((product) => {
+            return product.category
+        })
+        uniqCategories = [...new Set(categories)]; //this is the same as group by
+        return Product.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
+    }).then(count => {
         // console.log(count)
         res.status(200).json({
             message: 'product fetch succesfully!',
@@ -23,19 +72,16 @@ exports.getProducts = (req, res, next) =>
     })
 
 }
-exports.getProduct = (req, res, next) =>
-{
+exports.getProduct = (req, res, next) => {
     console.log(req.params.id)
-    Product.findById(req.params.id).then(document =>
-    {
+    Product.findById(req.params.id).then(document => {
         console.log(document)
         if (document) {
             res.status(200).json(product)
         } else {
             res.status(404).json({ message: 'product not found!' });
         }
-    }).catch(error =>
-    {
+    }).catch(error => {
         res.status(500).json({
             message: 'Fetching posts failed!',
             error: error
@@ -43,8 +89,7 @@ exports.getProduct = (req, res, next) =>
     });
 };
 
-exports.createProduct = (req, res, next) =>
-{
+exports.createProduct = (req, res, next) => {
     console.log(req.body);
     const product = new Product({
         title: req.body.title,
@@ -54,8 +99,7 @@ exports.createProduct = (req, res, next) =>
         image: req.body.image
     });
     console.log(product)
-    product.save().then(newProduct =>
-    {
+    product.save().then(newProduct => {
         res.status(201).json({
             message: "product added successfully",
             product: {
@@ -67,19 +111,17 @@ exports.createProduct = (req, res, next) =>
             }
         });
     })
-        .catch(error =>
-        {
+        .catch(error => {
             res.status(500).json({
                 message: 'Creating a product failed!',
                 // error: error
             });
         });
 };
-exports.updateProduct = (req, res, next) =>
-{
-console.log(req.params.id )
+exports.updateProduct = (req, res, next) => {
+    console.log(req.params.id)
     // console.log(req.body)
-       const product = new Product({
+    const product = new Product({
         title: req.body.title,
         price: req.body.price,
         description: req.body.description,
@@ -87,8 +129,7 @@ console.log(req.params.id )
         image: req.body.image
     });
     product._id = req.params.id;
-    Product.updateOne({ _id: req.params.id } , product ).then(result =>
-    {
+    Product.updateOne({ _id: req.params.id }, product).then(result => {
         if (result.n > 0) {
             res.status(200).json({
                 message: "update successful!"
@@ -100,11 +141,9 @@ console.log(req.params.id )
         }
     });
 }
-exports.deleteProduct = (req, res, next) =>
-{
+exports.deleteProduct = (req, res, next) => {
     console.log(req.params.id)
-    Product.deleteOne({ _id: req.params.id }).then(result =>
-    {
+    Product.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
             res.status(200).json({
                 message: "Deletion successful!"
@@ -113,8 +152,7 @@ exports.deleteProduct = (req, res, next) =>
             res.status(401).json({ message: "Not authorized!" });
         }
     })
-        .catch(error =>
-        {
+        .catch(error => {
             res.status(500).json({
                 message: "Fetching posts failed!"
             });

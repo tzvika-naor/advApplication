@@ -1,15 +1,15 @@
 import React from 'react';
-// import './Item.css'
 import { Link } from "react-router-dom";
 
 
-function Item (props) {
+function Product (props) {
+    console.log(props)
     return (
 
         <div className="col-lg-4 col-md-6 mb-4">
             <div id="card">
                 <Link to={{
-                    pathname: `/item/${props.id}`, item: props
+                    pathname: `/product/${props.id}`, product: props
                 }}><img id="card-img-top" src={props.image} alt={props.title} style={{ marginLeft: '10%', marginRight: '10%', marginTop: '10%', marginBottom: '10%', width: '60%', height: '150px' }} /></Link>
                 <div id="card-body">
                     <h5 className="card-title">
@@ -19,6 +19,7 @@ function Item (props) {
                     <p className="card-text">{props.description.slice(0, 30).toLowerCase()}...</p>
                 </div>
                 <div className="card-footer">
+                    {props.reviews}
                     <small className="text-muted">★ ★ ★ ★ ☆</small>
                 </div>
             </div>
@@ -29,4 +30,4 @@ function Item (props) {
 }
 
 
-export default Item
+export default Product

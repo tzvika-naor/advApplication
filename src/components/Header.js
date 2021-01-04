@@ -8,6 +8,17 @@ function Header () {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
+                <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <Link to='/products'  className="nav-link">Products</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/books'  className="nav-link">Books</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/television'  className="nav-link">TV</Link>
+                        </li>
+                    </ul>
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <Link to='/register'  className="nav-link">Register</Link>

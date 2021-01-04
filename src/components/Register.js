@@ -19,9 +19,7 @@ function Register () {
     const goBack = () => {
         history.push('/')
     }
-    const resetForm = () => {
 
-    }
     const onSubmit = (event) => {
         event.preventDefault();
         console.log(formData);

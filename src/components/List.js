@@ -1,22 +1,21 @@
-import Item from './Item'
+import Product from './Product'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 const List = (props) => {
-    console.log(props)
-
-    const [items, setItems] = useState([]);
+    const [products, setproducts] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
             .then(response => {
                 const data = response.data.products;
-                console.log(data)
-                setItems(data);
-                let obj = data.map(item => {
-                    item.id = item._id
-                    delete item._id
-                    return item;
+                // console.log(data)
+
+                let obj = data.map(product => {
+                    product.id = product._id
+                    delete product._id
+                    return product;
                 })
+                setproducts(obj);
             })
     }, []);
 
@@ -24,15 +23,16 @@ const List = (props) => {
 
         <div className="row">
             {
-                items.map((item) => {
-                    return <Item
-                        price={item.price}
-                        category={item.category}
-                        image={item.image}
-                        description={item.description}
-                        title={item.title}
-                        id={item.id}
-                        key={item.id}
+                products.map((product) => {
+                    return <Product
+                        price={product.price}
+                        category={product.category}
+                        image={product.image}
+                        description={product.description}
+                        title={product.title}
+                        reviews={product.reviews}
+                        id={product.id}
+                        key={product.id}
                     />
                 })
             }

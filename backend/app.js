@@ -24,7 +24,7 @@ app.use((req, res, next) =>
 app.use("/api/cart", cartRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
-//  app.use("/api/books",bookRoutes);
+//  app.use("/api/book",bookRoutes);
 
 
 module.exports = app;

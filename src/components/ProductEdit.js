@@ -1,19 +1,35 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import history from '../History';
 
-function ItemEdit (props) {
+function ProductEdit (props) {
 
+    const [categories, setCategories] = useState([]);
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/product/category').then((response) => {
+            setCategories(response.data.category);
+            console.log(response);
+        });
+        axios.get('http://localhost:5000/api/product/reviews').then((response) => {
+            console.log(response)
+            setReviews(response.data.reviews);
+            console.log(response.data.reviews);
+            // history.push('/')
+        })
+    }, [])
     console.log(props)
     const [formData, setFormData] = useState({
-        id: props.location.item.id,
-        title: props.location.item.title,
-        price: props.location.item.price,
-        category: props.location.item.category,
-        description: props.location.item.description,
-        image: props.location.item.image,
+        id: props.location.product.id,
+        title: props.location.product.title,
+        price: props.location.product.price,
+        review: props.location.product.review,
+        category: props.location.product.category,
+        description: props.location.product.description,
+        image: props.location.product.image,
     })
 
     const onSubmit = event => {
@@ -36,7 +52,6 @@ function ItemEdit (props) {
     }
 
     const change = (event) => {
-
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
     const resetForm = (event) => {
@@ -45,13 +60,14 @@ function ItemEdit (props) {
             title: '',
             price: '',
             category: '',
+            review: '',
             description: '',
             image: ''
         })
 
     }
     const goBack = (event) => {
-        const id = props.location.item.id;
+        const id = props.location.product.id;
         console.log(id)
         history.push('/');
     }
@@ -84,14 +100,24 @@ function ItemEdit (props) {
                             {/* <p>{validators.price}</p> */}
                             <br />
                             <label>Category</label>
-                            <input
+                            <select
                                 className="form-control"
-                                name="category"
-                                type="text"
+                                name='category'
                                 value={formData.category}
                                 onChange={event => change(event)}
-                            />
-                            {/* <p>{validators.category}</p> */}
+                            >
+                                {categories.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                            </select>
+                            <br />
+                            <label>Reviews</label>
+                            <select
+                                className="form-control"
+                                name='review'
+                                value={formData.review}
+                                onChange={event => change(event)}
+                            >
+                                {reviews.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                            </select>
                             <br />
                             <label>Description</label>
                             <textarea
@@ -122,4 +148,4 @@ function ItemEdit (props) {
         </div>
     )
 }
-export default ItemEdit;
+export default ProductEdit;
