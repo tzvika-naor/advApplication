@@ -75,7 +75,7 @@ function ProductEdit (props) {
 
     return (
         <div className="col-md-6">
-            <div className="card" id="formCard" style={{ height: '600px', top: 0 }}>
+            <div className="card" id="formCard" style={{ height: '700px', top: 0 }}>
                 <div className="card-body">
                     {
                         <form onSubmit={onSubmit}>
@@ -138,6 +138,8 @@ function ProductEdit (props) {
                                 value={formData.image}
                                 onChange={event => change(event)}
                             />
+            <img id="card-img-top" src={formData.image} alt={formData.title} style={{ width: '100px', height: '100px',marginTop:'20px' }} />
+
                             {/* <p>{validators.image}</p> */}
                             <Button type="button" id="goBack" variant="primary" style={{ position: 'absolute', bottom: '0', left: '0' }} onClick={(event) => goBack(event)}>Back</Button>
                             <Button type="submit" id="submit" variant="primary" style={{ position: 'absolute', bottom: '0', right: '0' }}>Submit</Button>
