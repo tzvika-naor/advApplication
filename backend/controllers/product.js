@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 
-
 exports.searchQuery = (req, res, next) => {
     console.log(req.body);
     var minPrice = '';
@@ -14,6 +13,7 @@ exports.searchQuery = (req, res, next) => {
         minPrice = tmpMinPrice.substring(0, 3);
     }
     minPrice = parseInt(minPrice);
+
     Product.find({
         category: req.body.category, price: { $gt: minPrice }, reviews: { $gt: reviews },
     }).sort({ price: req.body.orderBy }).then(documents => {

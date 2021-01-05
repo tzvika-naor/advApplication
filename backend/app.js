@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const productRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
 const userRoutes = require('./routes/user');
+// const scrapingData = require('./scrapingData');
 const app = express();
 
 mongoose.connect("mongodb+srv://advanced_applications:HC4HlY2ygfLzRyfD@cluster0.hjlul.mongodb.net/node-angular-react",
@@ -21,6 +22,7 @@ app.use((req, res, next) =>
 }
 );
 
+// console.log(scrapingData)  
 app.use("/api/cart", cartRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
