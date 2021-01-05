@@ -1,12 +1,11 @@
 import { Button } from 'react-bootstrap';
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import './productDetails.css'
 import history from '../History';
 
 function ProuctDetails (props) {
-
+    console.log(props)
     const product = props.location.product;
 
     const onDelete = (event) => {
@@ -18,7 +17,7 @@ function ProuctDetails (props) {
             })
     }
     return (
-        <div className="col-lg-4 offset-4" style={{ marginBottom: "140px" }} >
+        <div className="col-lg-4 col-md-6 offset-lg-4 offset-lg-3" style={{ marginBottom: "140px" }} >
             <div className="card-productDetails" style={{ marginTop: '10%' }}>
                 <h5 className="card-title" style={{ marginBottom: '15px' }}>
                     <Link to="/">{product.title}</Link>
@@ -33,11 +32,11 @@ function ProuctDetails (props) {
                 </div>
                 <Link to='/'><Button id="goBack" variant="primary" type="button">Back</Button></Link>
                 <Link to={{ pathname: `/product/${product.id}/edit`, product: product, isEdit: false }}>
-                    <Button id="add" variant="success" type="button" style={{ marginLeft: "100px" }}>Add</Button>
+                    <Button id="add" variant="success" type="button" style={{ marginLeft: "20px" }}>Add</Button>
                 </Link>
-                <Button id="delete" variant="danger" onClick={(event) => onDelete(event)} style={{ marginLeft: "30px" }}>Delete</Button>
-                <Link to={{ pathname: `/product/${product.id}/edit`, product: product, isEdit: true }}><Button id="edit" variant="info" style={{ marginLeft: "30px" }}>Edit</Button></Link>
-                <Button id="addToCart" variant="primary" style={{ position: "absolute", bottom: "0", right: "0" }}>Buy</Button>
+                <Button id="delete" variant="danger" onClick={(event) => onDelete(event)} style={{ marginLeft: "20px" }}>Delete</Button>
+                <Link to={{ pathname: `/product/${product.id}/edit`, product: product, isEdit: true }}><Button id="edit" variant="info" style={{ marginLeft: "20px" }}>Edit</Button></Link>
+                <Button id="addToCart" variant="primary" style={{marginLeft: "20px" }}>Buy</Button>
             </div>
         </div>
     )

@@ -72,7 +72,6 @@ function ProductEdit (props) {
         history.push('/');
     }
 
-
     return (
         <div className="col-md-6">
             <div className="card" id="formCard" style={{ height: '700px', top: 0 }}>

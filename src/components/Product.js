@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 function Product (props) {
-    console.log(props)
+    // console.log(props)
     return (
 
         <div className="col-lg-4 col-md-6 mb-4">
@@ -19,8 +19,8 @@ function Product (props) {
                     <p className="card-text">{props.description.slice(0, 30).toLowerCase()}...</p>
                 </div>
                 <div className="card-footer">
-                    {props.reviews}
-                    <small className="text-muted">★ ★ ★ ★ ☆</small>
+                 
+                    <small className="text-muted">{props.reviews}★ ★ ★ ★ ☆</small>
                 </div>
             </div>
         </div>

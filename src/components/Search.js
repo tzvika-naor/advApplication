@@ -4,8 +4,8 @@ import axios from 'axios';
 function Search (props) {
     const priceRange = ['', '0+', '20+', '50+', '100+', '200+', '500+'];
     const priceOrder = ['', 'high to low', 'low to high'];
-    const reviews = [0, 1, 2, 3, 4, 5];
- 
+    const reviews = ['' , 1, 2, 3, 4, 5];
+
     const [categories, setCategories] = useState([])// all categories
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
@@ -29,7 +29,7 @@ function Search (props) {
         category: '',
         minPrice: '',
         priceOrder: '',
-        orderBy: 0
+        orderBy: 1
     })
 
     const onChange = (event) => {
@@ -40,13 +40,14 @@ function Search (props) {
 
     const onClick = () => {
         if (searchForm.priceOrder === 'high to low')
-            setSearchForm({ ...searchForm, orderBy: -1 })
-        if (searchForm.priceOrder === 'low to high')
             setSearchForm({ ...searchForm, orderBy: 1 })
+        if (searchForm.priceOrder === 'low to high')
+            setSearchForm({ ...searchForm, orderBy: -1 })
 
         axios.post('http://localhost:5000/api/product/searchquery', searchForm)
             .then(response => {
-                console.log(response);
+                console.log(response.data.products);
+                props.searchResults(response.data.products);
             })
     }
     return (
@@ -100,7 +101,7 @@ function Search (props) {
                         {reviews.map((item, i) => <option value={item} key={i} >{item}</option>)}
                     </select>
                 </div>
-                <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "200px" }}>Submit</Button>
+                <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Submit</Button>
             </div>
         </div >
     )

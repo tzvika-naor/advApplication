@@ -13,34 +13,36 @@ import Login from './components/Login';
 import './App.css'
 
 function App () {
-  const [filterBy, setFilterBy] = useState('')
-  const [categorySelected, setCategorySelected] = useState('')
+  const [showQueryRes, setShowQueryRes] = useState(false);
+  const [searchRes, setSearchRes] = useState([])
+  // const [categorySelected, setCategorySelected] = useState('')
 
-  const selectCategory = (data) => {
-    setCategorySelected(data)
-    setFilterBy('category');
-    console.log(categorySelected)
+  const searchResults = (data) => {
+    console.log(data)
+    setSearchRes(data);
+    setShowQueryRes(true);
+  }
+  const resetSearch = (data) => {
+    setShowQueryRes(false);
   }
   return (
     <Router history={history}>
-      <Header />
+      <Header resetSearch={resetSearch}  />
       <Switch>
         <Route path="/product/:id/edit" component={ProductEdit} />
         <Route path="/product/:id" component={ProductDetails} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-
         <Fragment>
-
           <div className="row">
-            <div className="col-lg-3">
-              <Search data={selectCategory} filterBy={filterBy} />
+            <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+              <Search searchResults={searchResults} />
             </div>
-            <div className="col-lg-9">
-              <Route path='/' component={List} selectCategory={categorySelected} filterBy={filterBy} />
+            <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
+              <Route path='/' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} />}
+              />
             </div>
           </div>
-
         </Fragment>
       </Switch>
       <Footer />
