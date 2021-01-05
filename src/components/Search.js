@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 function Search (props) {
     const priceRange = ['', '0+', '20+', '50+', '100+', '200+', '500+'];
-    const priceOrder = ['', 'high to low', 'low to high'];
-    const reviews = ['' , 1, 2, 3, 4, 5];
+    const priceOrder = ['', 'high to low ↓', 'low to high ↑'];
+    const reviews = ['', '+1', '+2', '+3', '+4', '+5'];
 
     const [categories, setCategories] = useState([])// all categories
     useEffect(() => {
@@ -29,7 +29,7 @@ function Search (props) {
         category: '',
         minPrice: '',
         priceOrder: '',
-        orderBy: 1
+        orderBy: ''
     })
 
     const onChange = (event) => {
@@ -39,9 +39,9 @@ function Search (props) {
     }
 
     const onClick = () => {
-        if (searchForm.priceOrder === 'high to low')
+        if (searchForm.priceOrder === 'high to low ↓')
             setSearchForm({ ...searchForm, orderBy: 1 })
-        if (searchForm.priceOrder === 'low to high')
+        else
             setSearchForm({ ...searchForm, orderBy: -1 })
 
         axios.post('http://localhost:5000/api/product/searchquery', searchForm)
@@ -79,6 +79,17 @@ function Search (props) {
                     </select>
                 </div>
                 <div className="col-lg-12">
+                    <label>Minimum Reviews</label>
+                    <select
+                        name='reviews'
+                        value={searchForm.reviews}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "50px" }}
+                    >
+                        {reviews.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
+                </div>
+                <div className="col-lg-12">
                     <label>Price Order</label>
                     <select
                         name='priceOrder'
@@ -88,17 +99,6 @@ function Search (props) {
                         style={{ width: "100%", marginBottom: "50px" }}
                     >
                         {priceOrder.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                    </select>
-                </div>
-                <div className="col-lg-12">
-                    <label>Reviews</label>
-                    <select
-                        name='reviews'
-                        value={searchForm.reviews}
-                        onChange={onChange}
-                        style={{ width: "100%", marginBottom: "50px" }}
-                    >
-                        {reviews.map((item, i) => <option value={item} key={i} >{item}</option>)}
                     </select>
                 </div>
                 <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Submit</Button>

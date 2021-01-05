@@ -4,8 +4,7 @@ const Product = require('../models/product');
 exports.searchQuery = (req, res, next) => {
     console.log(req.body);
     var minPrice = '';
-    var reviews = parseInt(req.body.reviews);
-    console.log(reviews);
+    var reviews = parseInt(req.body.reviews.substring(1,2));
     const tmpMinPrice = req.body.minPrice;
     if (tmpMinPrice.substring(1) === '+')
         minPrice = tmpMinPrice.substring(0, 1);
@@ -14,8 +13,7 @@ exports.searchQuery = (req, res, next) => {
     if (tmpMinPrice.substring(3) === '+'){
         minPrice = tmpMinPrice.substring(0, 3);
     }
-        minPrice = parseInt(minPrice);
-    console.log(minPrice);
+    minPrice = parseInt(minPrice);
     Product.find({
         category: req.body.category, price: { $gt: minPrice }, reviews: { $gt: reviews },
     }).sort({ price: req.body.orderBy }).then(documents => {

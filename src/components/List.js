@@ -17,7 +17,7 @@ const List = (props) => {
                         return product;
                     })
                     // var reviewArr = []
-                    setproducts(data);
+                    setproducts(obj);
                     // setReviewArr(reviewArr = obj.map(el => {
                     //     return el.reviews;
                     // }))
