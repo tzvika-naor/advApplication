@@ -98,6 +98,13 @@ function ProductEdit (props) {
                             />
                             {/* <p>{validators.price}</p> */}
                             <br />
+                            {/* <div>
+                                <label>Choose a flavor:</label>
+                                <input  className="form-control"name={formData.category} list={formData.category} />
+                                <datalist id={formData.category}>
+                                    {categories.map((item, i) => <option value={item} key={i} >{item}</option>)}</datalist>
+                            </div>
+                            <br /> */}
                             <label>Category</label>
                             <select
                                 className="form-control"
@@ -137,7 +144,7 @@ function ProductEdit (props) {
                                 value={formData.image}
                                 onChange={event => change(event)}
                             />
-            <img id="card-img-top" src={formData.image} alt={formData.title} style={{ width: '100px', height: '100px',marginTop:'20px' }} />
+                            <img id="card-img-top" src={formData.image} alt={formData.title} style={{ width: '100px', height: '100px', marginTop: '20px' }} />
 
                             {/* <p>{validators.image}</p> */}
                             <Button type="button" id="goBack" variant="primary" style={{ position: 'absolute', bottom: '0', left: '0' }} onClick={(event) => goBack(event)}>Back</Button>

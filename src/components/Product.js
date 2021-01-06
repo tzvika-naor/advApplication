@@ -6,21 +6,20 @@ function Product (props) {
     // console.log(props)
     return (
 
-        <div className="col-lg-4 col-md-6 mb-4">
-            <div id="card">
+        <div className="col-lg-4 col-md-6 mb-4" style={{marginTop:"20px"}}>
+            <div id="card" style={{width:"80%"}}>
                 <Link to={{
                     pathname: `/product/${props.id}`, product: props
-                }}><img id="card-img-top" src={props.image} alt={props.title} style={{ marginLeft: '10%', marginRight: '10%', marginTop: '10%', marginBottom: '10%', width: '60%', height: '150px' }} /></Link>
+                }}><img id="card-img-top" src={props.image} alt={props.title} style={{ marginLeft: '30%', marginBottom: '10%', width: '40%', height: '100%' }} /></Link>
                 <div id="card-body">
-                    <h5 className="card-title">
+                    <h5 className="card-title" style={{ textAlign: "center" }}>
                         <Link to="">{props.title}</Link>
                     </h5>
-                    <h5>{props.price}$</h5>
-                    <p className="card-text">{props.description.slice(0, 30).toLowerCase()}...</p>
+                    <p className="card-text">{props.description.slice(0,60)}...</p>
+                    <Link><span style={{ float: "right" }}><h5>{props.price}$</h5></span></Link>
                 </div>
                 <div className="card-footer">
-                 
-                    <small className="text-muted">{props.reviews}★ ★ ★ ★ ☆</small>
+                    <p className="reviews">Reviews: {props.review}★</p>
                 </div>
             </div>
         </div>
