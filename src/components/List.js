@@ -88,17 +88,17 @@ const List = (props) => {
                     {
                         smartphones.map((smartphone) => {
                             return <Smartphone
-                            model = {smartphone.model}
-                            brand = {smartphone.brand}
-                            display = {smartphone.display}
-                            frontCamera = {smartphone.frontCamera}
-                            rearCamera = {smartphone.rearCamera}
-                            processor = {smartphone.processor}
-                            batteryCapacity = {smartphone.batteryCapacity}
-                            price = {smartphone.price}
-                            image = {smartphone.image}
-                            id ={smartphone.id}
-                            key ={smartphone.id}
+                                phoneModel={smartphone.phoneModel}
+                                brand={smartphone.brand}
+                                display={smartphone.display}
+                                frontCamera={smartphone.frontCamera}
+                                rearCamera={smartphone.rearCamera}
+                                processor={smartphone.processor}
+                                batteryCapacity={smartphone.batteryCapacity}
+                                price={smartphone.price}
+                                image={smartphone.image}
+                                id={smartphone.id}
+                                key={smartphone.id}
                             />
                         })
                     }
@@ -111,17 +111,17 @@ const List = (props) => {
                 {
                     props.searchResults.map((smartphone) => {
                         return <Smartphone
-                            model = {smartphone.model}
-                            brand = {smartphone.brand}
-                            display = {smartphone.display}
-                            frontCamera = {smartphone.frontCamera}
-                            rearCamera = {smartphone.rearCamera}
-                            processor = {smartphone.rearCamera}
-                            batteryCapacity = {smartphone.batteryCapacity}
-                            price = {smartphone.price}
-                            image = {smartphone.image}
-                            id ={smartphone.id}
-                            key ={smartphone.id}
+                            phoneModel={smartphone.phoneModel}
+                            brand={smartphone.brand}
+                            display={smartphone.display}
+                            frontCamera={smartphone.frontCamera}
+                            rearCamera={smartphone.rearCamera}
+                            processor={smartphone.rearCamera}
+                            batteryCapacity={smartphone.batteryCapacity}
+                            price={smartphone.price}
+                            image={smartphone.image}
+                            id={smartphone.id}
+                            key={smartphone.id}
                         />
                     })
                 }

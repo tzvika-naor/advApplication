@@ -6,8 +6,7 @@ import history from '../History';
 
 function SmartphoneEdit (props) {
     console.log(props)
-    const [categories, setCategories] = useState([]);
-    const [reviews, setReviews] = useState([]);
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone').then((response) => {
@@ -17,7 +16,7 @@ function SmartphoneEdit (props) {
     }, [])
     console.log(props)
     const [formData, setFormData] = useState({
-        model: props.location.smartphone.model,
+        phoneModel: props.location.smartphone.phoneModel,
         brand: props.location.smartphone.brand,
         display: props.location.smartphone.display,
         frontCamera: props.location.smartphone.frontCamera,
@@ -30,64 +29,73 @@ function SmartphoneEdit (props) {
     })
 
     const onSubmit = event => {
+        console.log(isEdit)
         event.preventDefault();
-        const isEdit = props.location.isEdit;
-
         if (isEdit) {
-            axios.put(`http://localhost:5000/api/product/${formData.id}`, formData).then((response) => {
+            axios.put(`http://localhost:5000/api/smartphone/${formData.id}`, formData).then((response) => {
                 console.log(response);
-                history.push('/')
+                history.push('/smartphones')
             })
         }
-        else {
-            axios.post('http://localhost:5000/api/product', formData).then((response) => {
-                console.log(response);
-                history.push('/');
-            })
 
+        else {
+            axios.post('http://localhost:5000/api/smartphone', formData).then((response) => {
+                console.log(response);
+                history.push('/smartphones');
+            })
         }
     }
 
     const change = (event) => {
+        console.log(formData)
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
     const resetForm = (event) => {
         setFormData({
-            model: '',
+            phoneModel: '',
             brand: '',
             display: '',
             frontCamera: '',
             rearCamera: '',
             processor: '',
             batteryCapacity: '',
-            price: '',
+            price: 0,
             image: ''
         })
 
     }
     const goBack = (event) => {
-        const id = props.location.product.id;
-        console.log(id)
-        // history.push('/smartphone');
+        history.push('/smartphones');
+    }
+    const onDelete = () => {
+        console.log(formData.id)
+        axios.delete(`http://localhost:5000/api/smartphone/${formData.id}`, formData).then((response) => {
+            console.log('smartphone deleted');
+            history.push('/smartphones')
+        })
     }
 
     return (
         <div>
-            <Button type="button" id="edit" variant="success" style={{ marginRight: '10px', marginLeft: "30px" }} onClick={(event) => resetForm(event)}>Edit</Button>
-            <Button type="button" id="add" variant="primary" style={{ marginRight: '10px' }} onClick={(event) => resetForm(event)}>Add</Button>
-            <Button type="button" id="delete" variant="danger" style={{ marginRight: '10px' }} onClick={(event) => resetForm(event)}>Delete</Button>
+            <Button type="button" id="edit" variant="success" style={{ marginRight: '10px', marginLeft: "30px" }} onClick={() =>{ 
+                  alert("UPDATE the form!");
+                setIsEdit(true)}}>Edit</Button>
+            <Button type="button" id="add" variant="primary" style={{ marginRight: '10px' }} onClick={() =>{
+                  alert("ADD a form!");
+                  setIsEdit(false)}}>Add</Button>
+            <Button type="button" id="delete" variant="danger" style={{ marginRight: '10px' }} onClick={() => onDelete()}>Delete</Button>
 
             <div className="col-md-6" style={{ marginTop: "20px" }}>
                 <div className="card" id="formCard" >
                     <div className="card-body">
                         {
                             <form onSubmit={onSubmit}>
-                                <label>Model</label>
+                                <label>Phone Model</label>
                                 <input
                                     className="form-control"
-                                    name="model"
+                                    name="phoneModel"
                                     type="text"
-                                    value={formData.model}
+                                    value={formData.phoneModel}
                                     onChange={event => change(event)}
                                 />
                                 <br />
@@ -131,6 +139,7 @@ function SmartphoneEdit (props) {
                                 <input
                                     className="form-control"
                                     name='processor'
+                                    type="text"
                                     value={formData.processor}
                                     onChange={event => change(event)} />
                                 <br />
@@ -138,6 +147,7 @@ function SmartphoneEdit (props) {
                                 <input
                                     className="form-control"
                                     name='batteryCapacity'
+                                    type="text"
                                     value={formData.batteryCapacity}
                                     onChange={event => change(event)}
                                 />
@@ -146,7 +156,7 @@ function SmartphoneEdit (props) {
                                 <input
                                     className="form-control"
                                     name="price"
-                                    type="text"
+                                    type="number"
                                     value={formData.price}
                                     onChange={event => change(event)}
                                 />

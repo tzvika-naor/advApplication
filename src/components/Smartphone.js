@@ -11,12 +11,12 @@ function Smartphone (props) {
                 <h3 className="card-title"> <span style={{ float: "right" , cursor:"pointer" , marginRight:"100px" }} ><FiShoppingCart /></span>
                     <Link to={{
                         pathname: `/smartphone/${props.id}/edit`, smartphone: props
-                    }}>{props.model}</Link>
+                    }}>{props.phoneModel}</Link>
                 </h3>
                 
                 <Link to={{
                     pathname: `/smartphone/${props.id}/edit`, smartphone: props
-                }}><img id="card-img-top" src={props.image} alt={props.model} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '50%', height: '300px' }} /></Link>
+                }}><img id="card-img-top" src={props.image} alt={props.phoneModel} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '50%', height: '300px' }} /></Link>
                 <div id="card-body">
                     <small><p className="card-text">Brand: {props.brand}</p></small>
                     <small><p className="card-text">Display: {props.display}</p></small>

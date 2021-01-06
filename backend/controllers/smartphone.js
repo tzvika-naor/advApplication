@@ -2,7 +2,6 @@ const Smartphone = require('../models/smartphone');
 exports.getSmartphones = (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
-        console.log(documents);
         fetchedSmartphones = documents;
         brand = fetchedSmartphones.map((Smartphone) => {
             return Smartphone.brand
@@ -21,14 +20,12 @@ exports.getSmartphones = (req, res, next) => {
 
 }
 exports.getSmartphone = (req, res, next) => {
-    console.log(req.params.id)
     Smartphone.findById(req.params.id).then(document => {
-        console.log(document)
         if (document) {
-                res.status(200).json({
-                    message: 'fetching succeeded',
-                    Smartphones: document
-                })
+            res.status(200).json({
+                message: 'fetching succeeded',
+                Smartphones: document
+            })
         } else {
             res.status(404).json({ message: 'Smartphone not found!' });
         }
@@ -41,23 +38,29 @@ exports.getSmartphone = (req, res, next) => {
 };
 
 exports.createSmartphone = (req, res, next) => {
-    console.log(req.body);
-    const Smartphone = new Smartphone({
-        title: req.body.title,
+    const smartphone = new Smartphone({
+        phoneModel: req.body.phoneModel,
+        brand: req.body.brand,
+        display: req.body.display,
+        processor: req.body.processor,
+        frontCamera: req.body.frontCamera,
+        rearCamera: req.body.rearCamera,
+        batteryCapacity: req.body.batteryCapacity,
         price: req.body.price,
-        category: req.body.category,
-        description: req.body.description,
         image: req.body.image
     });
-    console.log(Smartphone)
-    Smartphone.save().then(newSmartphone => {
+    smartphone.save().then(newSmartphone => {
         res.status(201).json({
             message: "Smartphone added successfully",
             Smartphone: {
-                title: newSmartphone.title,
+                phoneModel: newSmartphone.phoneModel,
+                brand: newSmartphone.brand,
+                display: newSmartphone.display,
+                processor: newSmartphone.processor,
+                frontCamera: newSmartphone.frontCamera,
+                rearCamera: newSmartphone.rearCamera,
+                batteryCapacity: newSmartphone.batteryCapacity,
                 price: newSmartphone.price,
-                description: newSmartphone.description,
-                category: newSmartphone.category,
                 image: newSmartphone.image
             }
         });
@@ -71,16 +74,21 @@ exports.createSmartphone = (req, res, next) => {
 };
 exports.updateSmartphone = (req, res, next) => {
     console.log(req.params.id)
-    // console.log(req.body)
-    const Smartphone = new Smartphone({
-        title: req.body.title,
+    const smartphone = new Smartphone({
+        phoneModel: req.body.phoneModel,
+        brand: req.body.brand,
+        display: req.body.display,
+        processor: req.body.processor,
+        frontCamera: req.body.frontCamera,
+        rearCamera: req.body.rearCamera,
+        batteryCapacity: req.body.batteryCapacity,
         price: req.body.price,
-        description: req.body.description,
-        category: req.body.category,
         image: req.body.image
     });
-    Smartphone._id = req.params.id;
-    Smartphone.updateOne({ _id: req.params.id }, Smartphone).then(result => {
+    console.log(smartphone)
+    smartphone._id = req.params.id;
+    console.log(smartphone)
+    Smartphone.updateOne({ _id: req.params.id }, smartphone).then(result => {
         if (result.n > 0) {
             res.status(200).json({
                 message: "update successful!"
@@ -93,7 +101,6 @@ exports.updateSmartphone = (req, res, next) => {
     });
 }
 exports.deleteSmartphone = (req, res, next) => {
-    console.log(req.params.id)
     Smartphone.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
             res.status(200).json({

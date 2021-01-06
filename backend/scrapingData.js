@@ -10,7 +10,7 @@ async function getMobiles () {
     const $ = cheerio.load(data);
     const table = $('#allplist');
     // console.log(table)
-    const models = []
+    const phoneModels = []
     const imageUrl = []
     const display = []
     const processor = []
@@ -22,8 +22,8 @@ async function getMobiles () {
 
     table.find('div > div._lpdscn > h3 > a').each((i, element) => {
 
-        const model = $(element).text()
-        models.push(model)
+        const phoneModel = $(element).text()
+        phoneModels.push(phoneModel)
 
     })
     table.find('div > div._lpimg > a._lpimga > img').each((i, element) => {
@@ -62,10 +62,10 @@ async function getMobiles () {
         const priceinRupee = $(element).text()
         price.push(priceinRupee)
     })
-    models.forEach((val, i) => {
+    phoneModels.forEach((val, i) => {
         var obj = {}
         var temp = val.split(' ');
-        obj.model = val;
+        obj.phoneModel = val;
         obj.image = imageUrl[i];
         if(obj.image === "https://gadgets.ndtv.com/static/mobile/images/spacer.png" )
         obj.image = "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80";
