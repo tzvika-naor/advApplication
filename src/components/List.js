@@ -93,7 +93,7 @@ const List = (props) => {
                             display = {smartphone.display}
                             frontCamera = {smartphone.frontCamera}
                             rearCamera = {smartphone.rearCamera}
-                            processor = {smartphone.rearCamera}
+                            processor = {smartphone.processor}
                             batteryCapacity = {smartphone.batteryCapacity}
                             price = {smartphone.price}
                             image = {smartphone.image}

@@ -67,6 +67,8 @@ async function getMobiles () {
         var temp = val.split(' ');
         obj.model = val;
         obj.image = imageUrl[i];
+        if(obj.image === "https://gadgets.ndtv.com/static/mobile/images/spacer.png" )
+        obj.image = "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80";
         obj.display = display[i];
         obj.processor = processor[i]
         obj.frontCamera = frontCamera[i];

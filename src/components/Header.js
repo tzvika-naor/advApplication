@@ -21,7 +21,7 @@ function Header (props) {
                             <Link to='/smartphones' className="nav-link">Smartphones</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/television' className="nav-link">TV</Link>
+                            <Link to='/Something' className="nav-link">Something</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">

@@ -1,29 +1,35 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-
+import { FiShoppingCart } from 'react-icons/fi';
 function Smartphone (props) {
     console.log(props)
     return (
 
         <div className="col-lg-4 col-md-6 mb-4">
-            <div id="card">
+            <div id="card" style={{ marginBottom: '20px' }}>
+                <h3 className="card-title"> <span style={{ float: "right" , cursor:"pointer" , marginRight:"100px" }} ><FiShoppingCart /></span>
+                    <Link to={{
+                        pathname: `/smartphone/${props.id}/edit`, smartphone: props
+                    }}>{props.model}</Link>
+                </h3>
+                
                 <Link to={{
-                    pathname: `/smartphone/${props.id}`, smartphone: props
-                }}><img id="card-img-top" src={props.image} alt={props.model} style={{ marginLeft: '10%', marginRight: '10%', marginTop: '10%', marginBottom: '10%', width: '60%', height: '150px' }} /></Link>
+                    pathname: `/smartphone/${props.id}/edit`, smartphone: props
+                }}><img id="card-img-top" src={props.image} alt={props.model} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '50%', height: '300px' }} /></Link>
                 <div id="card-body">
-                    <h5 className="card-title">
-                        <Link to="">{props.model}</Link>
-                    </h5>
-                    <h5>{props.price}$</h5>
-                    <p className="card-text">{props.brand}</p>
-                    <p className="card-text">{props.frontCamera}</p>
-                    <p className="card-text">{props.rearCamera}</p>
+                    <small><p className="card-text">Brand: {props.brand}</p></small>
+                    <small><p className="card-text">Display: {props.display}</p></small>
+                    <small><p className="card-text">Front Camera: {props.frontCamera}</p></small>
+                    <small><p className="card-text">Rear Camera: {props.rearCamera}</p></small>
+                    <small><p className="card-text">Processor: {props.processor}</p></small>
+                    <small><p className="card-text">Battery Capacity: {props.batteryCapacity}</p></small>
+
+                    <Link to={{
+                        pathname: `/smartphone/${props.id}/edit`, smartphone: props
+                    }}><h5 style={{ marginTop: '10px' }}>Sales For:  {props.price}$</h5></Link>
+
                 </div>
-                {/* <div className="card-footer">
-                 
-                    <small className="text-muted">{props.reviews}★ ★ ★ ★ ☆</small>
-                </div> */}
             </div>
         </div>
 

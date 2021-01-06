@@ -11,15 +11,15 @@
         "brand": "OnePlus"
     },
     {
-        "model": "Realme 7i",
-        "image": "https://i.gadgets360cdn.com/products/small/Realme-7i-DB-380x800-1599545371-240x180-1600328658.jpg?output-quality=80",
-        "display": "6.50-inch (720x1600)",
-        "processor": "Qualcomm Snapdragon 662",
-        "frontCamera": "16MP ",
-        "rearCamera": "64MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "5000mAh",
-        "price": 164,
-        "brand": "Realme"
+        "model": "Oppo Reno 2F",
+        "image": "https://i.gadgets360cdn.com/products/small/reno-2F-db-240x180-1567053607.jpg?output-quality=80",
+        "display": "6.53-inch (1,080x2,340)",
+        "processor": "MediaTek Helio P70",
+        "frontCamera": "16MP",
+        "rearCamera": "48MP + 8MP + 2MP + 2MP",
+        "batteryCapacity": "4000mAh",
+        "price": 245,
+        "brand": "Oppo"
     },
     {
         "model": "Samsung Galaxy M01",
@@ -44,15 +44,26 @@
         "brand": "Infinix"
     },
     {
-        "model": "Infinix Smart 4",
-        "image": "https://i.gadgets360cdn.com/products/small/infinix-smart-4-240x180-1604466215.jpg?output-quality=80",
-        "display": "6.82-inch (720x1640)",
-        "processor": "MediaTek Helio A22 ",
-        "frontCamera": "8MP ",
-        "rearCamera": "13MP + Depth",
-        "batteryCapacity": "6000mAh",
-        "price": 95,
-        "brand": "Infinix"
+        "model": "Redmi 9",
+        "image": "https://i.gadgets360cdn.com/products/small/redmi-9-1-240x180-1598512607.jpg?output-quality=80",
+        "display": "6.53-inch (720x1600)",
+        "processor": "MediaTek Helio G35",
+        "frontCamera": "5MP ",
+        "rearCamera": "13MP + 2MP ",
+        "batteryCapacity": "5000mAh",
+        "price": 125,
+        "brand": "Redmi"
+    },
+    {
+        "model": "Redmi Note 9 Pro",
+        "image": "https://i.gadgets360cdn.com/products/small/xiaomi-redmi-note-9-pro-240x180-1584001326.jpg?output-quality=80",
+        "display": "6.67-inch (1080x2400)",
+        "processor": "Qualcomm Snapdragon 720G",
+        "frontCamera": "16MP",
+        "rearCamera": "48MP + 8MP + 5MP + 2MP",
+        "batteryCapacity": "5020mAh",
+        "price": 177,
+        "brand": "Redmi"
     },
     {
         "model": "Oppo A15",
@@ -66,15 +77,37 @@
         "brand": "Oppo"
     },
     {
-        "model": "Poco M2",
-        "image": "https://i.gadgets360cdn.com/products/small/Poco-m2-DB-240x180-1599549138.jpg?output-quality=80",
-        "display": "6.53-inch (1080x2340)",
-        "processor": "MediaTek Helio G80",
-        "frontCamera": "8MP",
-        "rearCamera": "13MP + 8MP + 5MP + 2MP",
+        "model": "Oppo Reno",
+        "image": "https://i.gadgets360cdn.com/products/small/1554884513_120_oppo_reno.jpg?output-quality=80",
+        "display": "6.40-inch (1080x2340)",
+        "processor": "Qualcomm Snapdragon 710",
+        "frontCamera": "16MP ",
+        "rearCamera": "48MP + 5MP ",
+        "batteryCapacity": "3765mAh",
+        "price": 478,
+        "brand": "Oppo"
+    },
+    {
+        "model": "Realme 7i",
+        "image": "https://i.gadgets360cdn.com/products/small/Realme-7i-DB-380x800-1599545371-240x180-1600328658.jpg?output-quality=80",
+        "display": "6.50-inch (720x1600)",
+        "processor": "Qualcomm Snapdragon 662",
+        "frontCamera": "16MP ",
+        "rearCamera": "64MP + 8MP + 2MP + 2MP ",
         "batteryCapacity": "5000mAh",
-        "price": 136,
-        "brand": "Poco"
+        "price": 164,
+        "brand": "Realme"
+    },
+    {
+        "model": "Apple iPhone 7",
+        "image": "https://drop.ndtv.com/TECH/product_database/images/982016124827AM_120_iphone_7.jpeg?output-quality=80",
+        "display": "4.70-inch (750x1334)",
+        "processor": "Apple A10 Fusion",
+        "frontCamera": "7MP ",
+        "rearCamera": "12MP ",
+        "batteryCapacity": "1960mAh",
+        "price": 327,
+        "brand": "Apple"
     },
     {
         "model": "Xiaomi Mi 10i",
@@ -88,30 +121,8 @@
         "brand": "Xiaomi"
     },
     {
-        "model": "Samsung Galaxy F41",
-        "image": "https://i.gadgets360cdn.com/products/small/samsung-galaxy-f41-240x180-1602163714.jpg?output-quality=80",
-        "display": "6.40-inch (1080x2340)",
-        "processor": "Samsung Exynos 9611",
-        "frontCamera": "32MP",
-        "rearCamera": "64MP + 8MP + 5MP",
-        "batteryCapacity": "6000mAh",
-        "price": 211,
-        "brand": "Samsung"
-    },
-    {
-        "model": "Realme Narzo 20 Pro",
-        "image": "https://i.gadgets360cdn.com/products/small/realme-narzo-20-pro-240x180-1600674804.jpg?output-quality=80",
-        "display": "6.50-inch (1080x2400)",
-        "processor": "MediaTek Helio G95",
-        "frontCamera": "16MP ",
-        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "4500mAh",
-        "price": 191,
-        "brand": "Realme"
-    },
-    {
         "model": "Realme C3 (4GB RAM, 64GB)",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
         "display": "6.52-inch (720x1600)",
         "processor": "MediaTek Helio G70",
         "frontCamera": "5MP",
@@ -121,104 +132,91 @@
         "brand": "Realme"
     },
     {
-        "model": "Motorola Moto G 5G",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.70-inch (1080x2400)",
-        "processor": "Qualcomm Snapdragon 750G",
+        "model": "Realme Narzo 20 Pro",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.50-inch (1080x2400)",
+        "processor": "MediaTek Helio G95",
         "frontCamera": "16MP ",
-        "rearCamera": "48MP + 8MP + 2MP ",
-        "batteryCapacity": "5000mAh",
-        "price": 287,
-        "brand": "Motorola"
-    },
-    {
-        "model": "Realme 7 Pro",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.40-inch (1080x2400)",
-        "processor": "Qualcomm Snapdragon 720G",
-        "frontCamera": "32MP ",
-        "rearCamera": "64MP + 8MP + 2MP + 2MP ",
+        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
         "batteryCapacity": "4500mAh",
-        "price": 273,
+        "price": 191,
         "brand": "Realme"
     },
     {
-        "model": "Itel Vision 1",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.09-inch (720x1560)",
-        "processor": "Unisoc SC9863A",
-        "frontCamera": "5MP ",
-        "rearCamera": "8MP + 0.08MP",
-        "batteryCapacity": "4000mAh",
-        "price": 91,
-        "brand": "Itel"
-    },
-    {
-        "model": "Oppo A53 2020",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.50-inch (720x1600)",
-        "processor": "Qualcomm Snapdragon 460",
-        "frontCamera": "16MP ",
-        "rearCamera": "13MP + 2MP + 2MP ",
-        "batteryCapacity": "5000mAh",
-        "price": 177,
-        "brand": "Oppo"
-    },
-    {
-        "model": "Redmi Note 5 Pro (6GB RAM, 64GB)",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "5.99-inch (1080x2160)",
-        "processor": "Qualcomm Snapdragon 636",
-        "frontCamera": "20MP ",
-        "rearCamera": "12MP + 5MP ",
-        "batteryCapacity": "4000mAh",
-        "price": 163,
+        "model": "Redmi Note 9",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.53-inch (1080x2340)",
+        "processor": "MediaTek Helio G85",
+        "frontCamera": "13MP",
+        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
+        "batteryCapacity": "5020mAh",
+        "price": 164,
         "brand": "Redmi"
     },
     {
-        "model": "Realme C15",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.50-inch (720x1600)",
-        "processor": "MediaTek Helio G35",
-        "frontCamera": "8MP",
-        "rearCamera": "13MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "6000mAh",
-        "price": 133,
-        "brand": "Realme"
-    },
-    {
-        "model": "Realme Narzo 20",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.50-inch (720x1600)",
-        "processor": "MediaTek Helio G85",
-        "frontCamera": "8MP",
-        "rearCamera": "48MP + 8MP + 2MP ",
-        "batteryCapacity": "6000mAh",
-        "price": 143,
-        "brand": "Realme"
-    },
-    {
-        "model": "Realme C15 Qualcomm Edition",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.50-inch (720x1600)",
-        "processor": "Qualcomm Snapdragon 460",
-        "frontCamera": "8MP",
-        "rearCamera": "13MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "6000mAh",
-        "price": 136,
-        "brand": "Realme"
-    },
-    {
-        "model": "Realme Narzo 20A",
-        "image": "https://gadgets.ndtv.com/static/mobile/images/spacer.png",
-        "display": "6.50-inch (720x1600)",
+        "model": "Vivo S1 Pro",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.38-inch (1080x2340)",
         "processor": "Qualcomm Snapdragon 665",
+        "frontCamera": "32MP ",
+        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
+        "batteryCapacity": "4500mAh",
+        "price": 250,
+        "brand": "Vivo"
+    },
+    {
+        "model": "Samsung Galaxy F41",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.40-inch (1080x2340)",
+        "processor": "Samsung Exynos 9611",
+        "frontCamera": "32MP",
+        "rearCamera": "64MP + 8MP + 5MP",
+        "batteryCapacity": "6000mAh",
+        "price": 211,
+        "brand": "Samsung"
+    },
+    {
+        "model": "Redmi Note 9 Pro Max",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.67-inch (1080x2400)",
+        "processor": "Qualcomm Snapdragon 720G",
+        "frontCamera": "32MP ",
+        "rearCamera": "64MP + 8MP + 5MP + 2MP ",
+        "batteryCapacity": "5020mAh",
+        "price": 218,
+        "brand": "Redmi"
+    },
+    {
+        "model": "Oppo Reno 4 Pro",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.50-inch (1080x2400)",
+        "processor": "32MP ",
+        "frontCamera": "48MP + 8MP + 2MP + 2MP ",
+        "rearCamera": "4000mAh",
+        "batteryCapacity": "Android 10",
+        "price": 474,
+        "brand": "Oppo"
+    },
+    {
+        "model": "Poco M2",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.53-inch (1080x2340)",
+        "processor": "MediaTek Helio G80",
         "frontCamera": "8MP",
-        "rearCamera": "12MP + 2MP + 2MP ",
+        "rearCamera": "13MP + 8MP + 5MP + 2MP",
         "batteryCapacity": "5000mAh",
-        "price": 116,
-        "brand": "Realme"
+        "price": 136,
+        "brand": "Poco"
+    },
+    {
+        "model": "Motorola Edge+",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.70-inch",
+        "processor": "Qualcomm Snapdragon 865",
+        "frontCamera": "25MP ",
+        "rearCamera": "108MP + 16MP + 8MP ",
+        "batteryCapacity": "5000mAh",
+        "price": 879,
+        "brand": "Motorola"
     }
 ]
-
-
