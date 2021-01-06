@@ -18,7 +18,7 @@ function Header (props) {
                             <Link to='/products' className="nav-link">Products</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/books' className="nav-link">Books</Link>
+                            <Link to='/smartphones' className="nav-link">Smartphones</Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/television' className="nav-link">TV</Link>

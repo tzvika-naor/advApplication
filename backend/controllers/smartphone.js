@@ -1,32 +1,34 @@
 const Smartphone = require('../models/smartphone');
-
-
 exports.getSmartphones = (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
+        console.log(documents);
         fetchedSmartphones = documents;
-        categories = fetchedSmartphones.map((Smartphone) => {
-            return Smartphone.category
+        brand = fetchedSmartphones.map((Smartphone) => {
+            return Smartphone.brand
         })
-        uniqCategories = [...new Set(categories)]; //this is the same as group by
+        uniqBrands = [...new Set(brand)]; //this is the same as group by
         return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
         // console.log(count)
         res.status(200).json({
             message: 'Smartphone fetch succesfully!',
-            Smartphones: fetchedSmartphones,
-            category: uniqCategories,
+            smartphones: fetchedSmartphones,
+            brand: uniqBrands,
             maxSmartphones: count
         })
     })
-    
+
 }
 exports.getSmartphone = (req, res, next) => {
     console.log(req.params.id)
     Smartphone.findById(req.params.id).then(document => {
         console.log(document)
         if (document) {
-            res.status(200).json(Smartphone)
+                res.status(200).json({
+                    message: 'fetching succeeded',
+                    Smartphones: document
+                })
         } else {
             res.status(404).json({ message: 'Smartphone not found!' });
         }
@@ -60,12 +62,12 @@ exports.createSmartphone = (req, res, next) => {
             }
         });
     })
-    .catch(error => {
-        res.status(500).json({
-            message: 'Creating a Smartphone failed!',
-            // error: error
+        .catch(error => {
+            res.status(500).json({
+                message: 'Creating a Smartphone failed!',
+                // error: error
+            });
         });
-    });
 };
 exports.updateSmartphone = (req, res, next) => {
     console.log(req.params.id)
@@ -101,12 +103,12 @@ exports.deleteSmartphone = (req, res, next) => {
             res.status(401).json({ message: "Not authorized!" });
         }
     })
-    .catch(error => {
+        .catch(error => {
             res.status(500).json({
                 message: "Fetching posts failed!"
             });
         });
-    }
+}
     // exports.searchQuery = (req, res, next) => {
     //     console.log(req.body);
     //     var minPrice = '';
@@ -120,7 +122,7 @@ exports.deleteSmartphone = (req, res, next) => {
     //         minPrice = tmpMinPrice.substring(0, 3);
     //     }
     //     minPrice = parseInt(minPrice);
-    
+
     //     Smartphone.find({
     //         category: req.body.category, price: { $gt: minPrice }, reviews: { $gt: reviews },
     //     }).sort({ price: req.body.orderBy }).then(documents => {
@@ -152,7 +154,7 @@ exports.deleteSmartphone = (req, res, next) => {
     //             category: uniqCategories
     //         })
     //     })
-    
+
     // }
     // exports.getReviews = (req, res, next) => {
     //     const SmartphoneQuery = Smartphone.find();//return all the Smartphone

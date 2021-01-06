@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 function Search (props) {
+    console.log(props)
     const priceRange = ['', '0+', '20+', '50+', '100+', '200+', '500+'];
     const priceOrder = ['', 'high to low ↓', 'low to high ↑'];
     const reviews = ['', '+1', '+2', '+3', '+4', '+5'];
@@ -10,6 +11,7 @@ function Search (props) {
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
             .then(response => {
+                console.log(props)
                 console.log(response)
                 // const data = response.data.products;
                 const categories = response.data.category;
