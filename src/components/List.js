@@ -12,6 +12,7 @@ const List = (props) => {
 
         axios.get('http://localhost:5000/api/product')
             .then(response => {
+                console.log(response);
                 const data = response.data.products;
 
                 let obj = data.map(product => {
@@ -45,7 +46,7 @@ const List = (props) => {
             return (
                 <div className="row">
                     {
-                        products.map((product) => {
+                        products.map((product,index) => {
                             return <Product
                                 price={product.price}
                                 category={product.category}
@@ -55,6 +56,9 @@ const List = (props) => {
                                 review={product.reviews}
                                 id={product.id}
                                 key={product.id}
+                                index={index}
+                                
+
                             />
                         })
                     }
@@ -86,7 +90,7 @@ const List = (props) => {
             return (
                 <div className="row">
                     {
-                        smartphones.map((smartphone) => {
+                        smartphones.map((smartphone,index) => {
                             return <Smartphone
                                 phoneModel={smartphone.phoneModel}
                                 brand={smartphone.brand}
@@ -99,6 +103,8 @@ const List = (props) => {
                                 image={smartphone.image}
                                 id={smartphone.id}
                                 key={smartphone.id}
+                                index={index}
+                                // smartphone={smartphones}
                             />
                         })
                     }

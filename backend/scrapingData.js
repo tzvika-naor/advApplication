@@ -2,14 +2,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const page_url = 'https://gadgets.ndtv.com/mobiles/smartphones'
+const Smartphone = require('./models/smartphone');
 
 async function getMobiles () {
-    let canClose = false;
     let allData = {};
     const { data } = await axios.get(page_url);
     const $ = cheerio.load(data);
     const table = $('#allplist');
-    // console.log(table)
     const phoneModels = []
     const imageUrl = []
     const display = []
@@ -67,22 +66,16 @@ async function getMobiles () {
         var temp = val.split(' ');
         obj.phoneModel = val;
         obj.image = imageUrl[i];
-        if(obj.image === "https://gadgets.ndtv.com/static/mobile/images/spacer.png" )
-        obj.image = "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80";
+        if (obj.image === "https://gadgets.ndtv.com/static/mobile/images/spacer.png")
+            obj.image = "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80";
         obj.display = display[i];
         obj.processor = processor[i]
         obj.frontCamera = frontCamera[i];
         obj.rearCamera = rearCamera[i];
         obj.batteryCapacity = batteryCapacity[i];
-        var tempPrice = price[i];
-        var indexStarts = price[i].indexOf("₹");
-        var colon = price[i].indexOf(",");
-        var indexEnd = price[i].length
-        obj.price = Math.floor(parseFloat((tempPrice.substr(indexStarts+1,indexEnd)).replace(',',''))/73.1411)
-    
-        console.log(obj.price);
-        // console.log(indexEnd);
-        // var indexEnd = price[i]
+
+        var indexEnd = (price[i]).length
+        obj.price = Math.floor((price[i].substr(2, indexEnd)).replace(',', '') / 73.1411);
         obj.brand = temp[0];
         arr.push(obj)
     },
@@ -91,12 +84,28 @@ async function getMobiles () {
     function getData (data) {
         allData = data;
     }
-       var fd = fs.writeFile(__dirname + '/smartphones.json', JSON.stringify(allData), function (err) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("The file was saved!");
-        })
+    //creating a json file / if needed
+    //    var fd = fs.writeFile(__dirname + '/smartphones.json', JSON.stringify(allData), function (err) {
+    //         if (err) {
+    //             return console.log(err);
+    //         }
+    //         console.log("The file was saved!");
+    //     })
+
+    allData.map(smartphone => {
+        const smartPhones = new Smartphone({
+            phoneModel: smartphone.phoneModel,
+            brand: smartphone.brand,
+            display: smartphone.display,
+            processor: smartphone.processor,
+            frontCamera: smartphone.frontCamera,
+            rearCamera: smartphone.rearCamera,
+            batteryCapacity: smartphone.batteryCapacity,
+            price: smartphone.price,
+            image: smartphone.image
+        });
+        smartPhones.save();
+    })
 }
 module.exports = getMobiles();
 

@@ -40,24 +40,26 @@ exports.getCart = (req, res, next) =>
 };
 
 exports.createCart = (req, res, next) =>
-{
-    const url = req.protocol + '://' + req.get("host");
+{   
+    console.log(req.body)
     const cart = new Cart({
-        products: req.body.products,
+        smartphone: req.body.smartphone,
         numberOfProucts: req.body.numberOfProucts,
-        customerId: req.body.customerId,
+        // customerId: req.body.customerId,
         totalPrice: req.body.totalPrice
     });
+  console.log(cart);
     cart.save().then(createdCart =>
+        
     {
         res.status(201).json({
             message: "Cart added successfully",
             cart: {
-                id: createdCart._id,
-                products: createdCart.products,
-                numberOfProucts: createdCart.numberOfProucts,
-                customerId: createdCart.customerId,
-                totalPrice: createdCart.totalPrice,
+                id: createdCart._id
+                // createdCart: createdCart
+                // numberOfProucts: createdCart.numberOfProucts 
+                // customerId: createdCart.customerId,
+                // totalPrice: fetchData.totalPrice
             }
         });
     })

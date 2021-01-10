@@ -52,7 +52,9 @@ function ProductEdit (props) {
     }
 
     const change = (event) => {
+        console.log(event);
         setFormData({ ...formData, [event.target.name]: event.target.value })
+        console.log(formData)
     }
     const resetForm = (event) => {
         setFormData({
@@ -98,13 +100,14 @@ function ProductEdit (props) {
                             />
                             {/* <p>{validators.price}</p> */}
                             <br />
-                            {/* <div>
+                            <div>
                                 <label>Choose a flavor:</label>
-                                <input  className="form-control"name={formData.category} list={formData.category} />
-                                <datalist id={formData.category}>
-                                    {categories.map((item, i) => <option value={item} key={i} >{item}</option>)}</datalist>
+                                <input  className="form-control" name={formData.category} list={formData.category} onChange={event => change(event)}/>
+                                <datalist id={formData.category} >
+                                    {categories.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                                    </datalist>
                             </div>
-                            <br /> */}
+                            <br />
                             <label>Category</label>
                             <select
                                 className="form-control"

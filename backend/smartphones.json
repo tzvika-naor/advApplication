@@ -7,19 +7,19 @@
         "frontCamera": "32MP + 8MP ",
         "rearCamera": "48MP + 8MP + 5MP + 2MP ",
         "batteryCapacity": "4115mAh",
-        "price": 410,
+        "price": 382,
         "brand": "OnePlus"
     },
     {
-        "phoneModel": "Realme 7i",
-        "image": "https://i.gadgets360cdn.com/products/small/Realme-7i-DB-380x800-1599545371-240x180-1600328658.jpg?output-quality=80",
-        "display": "6.50-inch (720x1600)",
-        "processor": "Qualcomm Snapdragon 662",
-        "frontCamera": "16MP ",
-        "rearCamera": "64MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "5000mAh",
-        "price": 177,
-        "brand": "Realme"
+        "phoneModel": "Xiaomi Mi 10i",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.67-inch (1080x2400)",
+        "processor": "Qualcomm Snapdragon 750G",
+        "frontCamera": "16MP",
+        "rearCamera": "108MP + 8MP + 2MP + 2MP ",
+        "batteryCapacity": "4820mAh",
+        "price": 300,
+        "brand": "Xiaomi"
     },
     {
         "phoneModel": "Samsung Galaxy M01",
@@ -44,26 +44,15 @@
         "brand": "Infinix"
     },
     {
-        "phoneModel": "Oppo Reno 2F",
-        "image": "https://i.gadgets360cdn.com/products/small/reno-2F-db-240x180-1567053607.jpg?output-quality=80",
-        "display": "6.53-inch (1,080x2,340)",
-        "processor": "MediaTek Helio P70",
-        "frontCamera": "16MP",
-        "rearCamera": "48MP + 8MP + 2MP + 2MP",
-        "batteryCapacity": "4000mAh",
-        "price": 245,
-        "brand": "Oppo"
-    },
-    {
-        "phoneModel": "Redmi 9",
-        "image": "https://i.gadgets360cdn.com/products/small/redmi-9-1-240x180-1598512607.jpg?output-quality=80",
-        "display": "6.53-inch (720x1600)",
-        "processor": "MediaTek Helio G35",
-        "frontCamera": "5MP ",
-        "rearCamera": "13MP + 2MP ",
+        "phoneModel": "Realme 7i",
+        "image": "https://i.gadgets360cdn.com/products/small/Realme-7i-DB-380x800-1599545371-240x180-1600328658.jpg?output-quality=80",
+        "display": "6.50-inch (720x1600)",
+        "processor": "Qualcomm Snapdragon 662",
+        "frontCamera": "16MP ",
+        "rearCamera": "64MP + 8MP + 2MP + 2MP ",
         "batteryCapacity": "5000mAh",
-        "price": 125,
-        "brand": "Redmi"
+        "price": 189,
+        "brand": "Realme"
     },
     {
         "phoneModel": "Redmi Note 9 Pro",
@@ -84,56 +73,23 @@
         "frontCamera": "5MP",
         "rearCamera": "13MP + 2MP + 2MP",
         "batteryCapacity": "4230mAh",
-        "price": 133,
+        "price": 131,
         "brand": "Oppo"
     },
     {
-        "phoneModel": "Oppo Reno",
-        "image": "https://i.gadgets360cdn.com/products/small/1554884513_120_oppo_reno.jpg?output-quality=80",
-        "display": "6.40-inch (1080x2340)",
-        "processor": "Qualcomm Snapdragon 710",
-        "frontCamera": "16MP ",
-        "rearCamera": "48MP + 5MP ",
-        "batteryCapacity": "3765mAh",
-        "price": 478,
-        "brand": "Oppo"
-    },
-    {
-        "phoneModel": "Poco M2",
-        "image": "https://i.gadgets360cdn.com/products/small/Poco-m2-DB-240x180-1599549138.jpg?output-quality=80",
-        "display": "6.53-inch (1080x2340)",
-        "processor": "MediaTek Helio G80",
-        "frontCamera": "8MP",
-        "rearCamera": "13MP + 8MP + 5MP + 2MP",
-        "batteryCapacity": "5000mAh",
-        "price": 136,
-        "brand": "Poco"
-    },
-    {
-        "phoneModel": "Apple iPhone 7",
-        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "4.70-inch (750x1334)",
-        "processor": "Apple A10 Fusion",
-        "frontCamera": "7MP ",
-        "rearCamera": "12MP ",
-        "batteryCapacity": "1960mAh",
-        "price": 327,
-        "brand": "Apple"
-    },
-    {
-        "phoneModel": "Itel Vision 1",
-        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "6.09-inch (720x1560)",
-        "processor": "Unisoc SC9863A",
-        "frontCamera": "5MP ",
-        "rearCamera": "8MP + 0.08MP",
-        "batteryCapacity": "4000mAh",
-        "price": 91,
-        "brand": "Itel"
+        "phoneModel": "Samsung Galaxy M21",
+        "image": "https://i.gadgets360cdn.com/products/small/samsung-galaxy-m21-240x180-1584523800.jpg?output-quality=80",
+        "display": "6.40-inch (2340x1080)",
+        "processor": "Samsung Exynos 9611",
+        "frontCamera": "20MP",
+        "rearCamera": "48MP + 8MP + 5MP",
+        "batteryCapacity": "6000mAh",
+        "price": 191,
+        "brand": "Samsung"
     },
     {
         "phoneModel": "Realme C3 (4GB RAM, 64GB)",
-        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "image": "https://i.gadgets360cdn.com/products/small/realme-c3-240x180-1580975883.jpg?output-quality=80",
         "display": "6.52-inch (720x1600)",
         "processor": "MediaTek Helio G70",
         "frontCamera": "5MP",
@@ -143,26 +99,48 @@
         "brand": "Realme"
     },
     {
-        "phoneModel": "Xiaomi Mi 10i",
-        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "6.67-inch (1080x2400)",
-        "processor": "Qualcomm Snapdragon 750G",
-        "frontCamera": "16MP",
-        "rearCamera": "108MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "4820mAh",
-        "price": 300,
-        "brand": "Xiaomi"
+        "phoneModel": "iPhone 12",
+        "image": "https://i.gadgets360cdn.com/products/small/iphone-12-all-240x180-1602616603.jpg?output-quality=80",
+        "display": "6.10-inch (1170x2532)",
+        "processor": "12MP ",
+        "frontCamera": "12MP + 12MP ",
+        "rearCamera": "iOS 14",
+        "batteryCapacity": "3000mAh",
+        "price": 1091,
+        "brand": "iPhone"
     },
     {
-        "phoneModel": "Realme 6i",
+        "phoneModel": "Lava Z61",
         "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "6.50-inch (1080x2400)",
-        "processor": "MediaTek Helio G90T",
-        "frontCamera": "16MP ",
-        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "4300mAh",
-        "price": 188,
-        "brand": "Realme"
+        "display": "5.45-inch",
+        "processor": "1.5GHz quad-core",
+        "frontCamera": "5MP",
+        "rearCamera": "8MP",
+        "batteryCapacity": "1715mAh",
+        "price": 77,
+        "brand": "Lava"
+    },
+    {
+        "phoneModel": "Apple iPhone 6s",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "4.70-inch (750x1334)",
+        "processor": "Apple A9",
+        "frontCamera": "5MP ",
+        "rearCamera": "12MP ",
+        "batteryCapacity": "3000mAh",
+        "price": 136,
+        "brand": "Apple"
+    },
+    {
+        "phoneModel": "Lava Z61 (2GB RAM, 16GB)",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "5.45-inch",
+        "processor": "1.5GHz quad-core",
+        "frontCamera": "5MP",
+        "rearCamera": "8MP",
+        "batteryCapacity": "5020mAh",
+        "price": 77,
+        "brand": "Lava"
     },
     {
         "phoneModel": "Redmi Note 9",
@@ -176,15 +154,15 @@
         "brand": "Redmi"
     },
     {
-        "phoneModel": "Vivo S1 Pro",
+        "phoneModel": "Redmi Note 9 Pro Max (6GB RAM, 128GB)",
         "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "6.38-inch (1080x2340)",
-        "processor": "Qualcomm Snapdragon 665",
+        "display": "6.67-inch (1080x2400)",
+        "processor": "Qualcomm Snapdragon 720G",
         "frontCamera": "32MP ",
-        "rearCamera": "48MP + 8MP + 2MP + 2MP ",
-        "batteryCapacity": "4500mAh",
-        "price": 250,
-        "brand": "Vivo"
+        "rearCamera": "64MP + 8MP + 5MP + 2MP ",
+        "batteryCapacity": "6000mAh",
+        "price": 252,
+        "brand": "Redmi"
     },
     {
         "phoneModel": "Infinix Smart 4",
@@ -193,9 +171,31 @@
         "processor": "MediaTek Helio A22 ",
         "frontCamera": "8MP ",
         "rearCamera": "13MP + Depth",
-        "batteryCapacity": "6000mAh",
+        "batteryCapacity": "Android 10",
         "price": 95,
         "brand": "Infinix"
+    },
+    {
+        "phoneModel": "Samsung Galaxy A71",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.70-inch (1080x2400)",
+        "processor": "32MP ",
+        "frontCamera": "64MP + 12MP + 5MP + 5MP ",
+        "rearCamera": "4500mAh",
+        "batteryCapacity": "5000mAh",
+        "price": 375,
+        "brand": "Samsung"
+    },
+    {
+        "phoneModel": "Poco M2",
+        "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
+        "display": "6.53-inch (1080x2340)",
+        "processor": "MediaTek Helio G80",
+        "frontCamera": "8MP",
+        "rearCamera": "13MP + 8MP + 5MP + 2MP",
+        "batteryCapacity": "6000mAh",
+        "price": 136,
+        "brand": "Poco"
     },
     {
         "phoneModel": "Samsung Galaxy F41",
@@ -204,19 +204,18 @@
         "processor": "Samsung Exynos 9611",
         "frontCamera": "32MP",
         "rearCamera": "64MP + 8MP + 5MP",
-        "batteryCapacity": "6000mAh",
+        "batteryCapacity": "4000mAh",
         "price": 211,
         "brand": "Samsung"
     },
     {
-        "phoneModel": "Redmi Note 9 Pro Max",
+        "phoneModel": "Itel Vision 1",
         "image": "https://assets.gadgets360cdn.com/content/assets/icons/phone_icon.png?output-quality=80",
-        "display": "6.67-inch (1080x2400)",
-        "processor": "Qualcomm Snapdragon 720G",
-        "frontCamera": "32MP ",
-        "rearCamera": "64MP + 8MP + 5MP + 2MP ",
-        "batteryCapacity": "5020mAh",
-        "price": 218,
-        "brand": "Redmi"
+        "display": "6.09-inch (720x1560)",
+        "processor": "Unisoc SC9863A",
+        "frontCamera": "5MP ",
+        "rearCamera": "8MP + 0.08MP",
+        "price": 86,
+        "brand": "Itel"
     }
 ]

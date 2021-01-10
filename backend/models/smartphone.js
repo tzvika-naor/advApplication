@@ -10,12 +10,18 @@ const smartPhoneSchema = new Schema({
     frontCamera: { type: String, required: true },
     rearCamera: { type: String, required: true },
     batteryCapacity: { type: String, required: true },
-    price: { type: Number, required: true },
-    image: { type: String, required: true }
+    image: { type: String, required: true },
+    price: { type: Number , required: true  }
+    
 })
 // Apply the uniqueValidator plugin to userSchema.
 // smartPhoneSchema.plugin(uniqueValidator);
 module.exports = mongoose.model("Smartphone", smartPhoneSchema);
+
+
+
+
+
 
 
 

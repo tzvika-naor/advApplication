@@ -8,7 +8,7 @@ function SmartphoneEdit (props) {
     console.log(props)
     const [isEdit, setIsEdit] = useState(false);
 
-    useEffect(() => {
+    useEffect((props) => {
         axios.get('http://localhost:5000/api/smartphone').then((response) => {
             console.log(props);
             console.log(response);

@@ -35,5 +35,6 @@ app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/smartphone", smartphoneRoutes);
 
+// localhost:5000/api/product
 
 module.exports = app;

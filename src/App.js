@@ -15,8 +15,7 @@ import './App.css'
 function App () {
   const [showQueryRes, setShowQueryRes] = useState('');
   const [searchRes, setSearchRes] = useState([])
-  const [isActive, setIsActive] = ('products')
-  // const [categorySelected, setCategorySelected] = useState('')
+
   const searchResults = (data) => {
     console.log(data)
     setSearchRes(data);
@@ -25,9 +24,7 @@ function App () {
   const resetSearch = (data) => {
     setShowQueryRes(false);
   }
-  const setActiveComponent = (data) => {
-    console.log(data)
-  }
+ 
   return (
     <Router history={history}>
       <Header resetSearch={resetSearch} />
