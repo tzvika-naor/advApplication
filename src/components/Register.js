@@ -42,7 +42,6 @@ function Register () {
                                     value={formData.firstname}
                                     onChange={event => change(event)}
                                 />
-
                                 <br />
                                 <label>Last Name</label>
                                 <input
@@ -52,7 +51,6 @@ function Register () {
                                     value={formData.lastname}
                                     onChange={event => change(event)}
                                 />
-
                                 <br />
                                 <label>Email</label>
                                 <input
@@ -62,7 +60,6 @@ function Register () {
                                     value={formData.email}
                                     onChange={event => change(event)}
                                 />
-
                                 <br />
                                 <label>Password</label>
                                 <input
@@ -81,7 +78,6 @@ function Register () {
                                     value={formData.phone}
                                     onChange={event => change(event)}
                                 />
-
                                 <Button className="btn btn-block" type="submit" id="submit" variant="primary" style={{ marginTop: "80px" }}>Submit</Button>
                                 <Button className="btn btn-block" type="button" id="cancle" variant="danger" style={{}} onClick={(event) => goBack(event)}>Cancle</Button>
                             </form>

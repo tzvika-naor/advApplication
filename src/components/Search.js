@@ -6,11 +6,9 @@ import SearchSmartPhone from './SearchSmartPhone'
 import axios from 'axios';
 function Search (props) {
     const location = useLocation();
-
     const searchResults = (data) => {
         props.searchResults(data);
     }
-
     if (location.pathname === '/smartphones') {
         return (
             <div><SearchSmartPhone searchResults={searchResults} /></div>
