@@ -4,14 +4,12 @@ import axios from 'axios';
 import history from '../History';
 
 function ProuctDetails (props) {
-    console.log(props)
     const product = props.location.product;
 
     const onDelete = (event) => {
         const deleteproduct = props.location.product.id;
         axios.delete('http://localhost:5000/api/product/' + deleteproduct)
             .then(response => {
-                console.log(response);
                 history.push('/')
             })
     }

@@ -73,10 +73,29 @@ async function getMobiles () {
         obj.frontCamera = frontCamera[i];
         obj.rearCamera = rearCamera[i];
         obj.batteryCapacity = batteryCapacity[i];
-
         var indexEnd = (price[i]).length
         obj.price = Math.floor((price[i].substr(2, indexEnd)).replace(',', '') / 73.1411);
         obj.brand = temp[0];
+        if (obj.phoneModel === 'Infinix Smart 4')
+            obj.image = "https://expressmartke.com/wp-content/uploads/2020/09/Infinix-Smart-4-2.1.jpg"
+        if (obj.phoneModel === 'Motorola Razr (2019)')
+            obj.image = "https://motorolaus.vtexassets.com/arquivos/ids/158446-800-auto?width=800&height=auto&aspect=true"
+        if (obj.phoneModel === "Motorola Moto G5 Plus (4GB RAM, 32GB)")
+            obj.image = "https://www.91-img.com/pictures/114165-v1-moto-g5-plus-32gb-mobile-phone-large-1.jpg"
+        if (obj.phoneModel === "Redmi Note 9 Pro Max (6GB RAM, 128GB)")
+            obj.image = "https://images-na.ssl-images-amazon.com/images/I/81u6E5niDiL._SX679_.jpg"
+        if (obj.phoneModel === "Motorola Moto G5 Plus")
+            obj.image = "https://fdn2.gsmarena.com/vv/bigpic/motorola-moto-g-5g-plus.jpg"
+        if (obj.phoneModel === "Realme Narzo 20 Pro")
+            obj.image = "https://i.gadgets360cdn.com/products/large/realme-narzo-20-pro-380x800-1600674808.jpg"
+        if (obj.phoneModel === "Samsung Galaxy F41")
+            obj.image = "https://i1.wp.com/pricebey.com/wp-content/uploads/2020/10/Samsung-Galaxy-F41.jpg?fit=600%2C600&ssl=1"
+        if (obj.phoneModel === "Oppo Reno 2F")
+            obj.image = "https://www.91-img.com/pictures/135617-v4-oppo-reno-2f-mobile-phone-large-1.jpg?tr=h-330,c-at_max,q-60"
+        if (obj.phoneModel === "Realme C15")
+            obj.image = "https://i.gadgets360cdn.com/products/large/realme-c15-370x800-1597735244.jpg"
+        if (obj.phoneModel === "Realme C3 (4GB RAM, 64GB)")
+            obj.image = "https://i.gadgets360cdn.com/products/large/realme-c3-368x800-1580975894.jpg"
         arr.push(obj)
     },
         getData(arr)

@@ -12,16 +12,11 @@ function ProductEdit (props) {
     useEffect(() => {
         axios.get('http://localhost:5000/api/product/category').then((response) => {
             setCategories(response.data.category);
-            console.log(response);
         });
         axios.get('http://localhost:5000/api/product/reviews').then((response) => {
-            console.log(response)
             setReviews(response.data.reviews);
-            console.log(response.data.reviews);
-            // history.push('/')
         })
     }, [])
-    console.log(props)
     const [formData, setFormData] = useState({
         id: props.location.product.id,
         title: props.location.product.title,
@@ -38,23 +33,18 @@ function ProductEdit (props) {
 
         if (isEdit) {
             axios.put(`http://localhost:5000/api/product/${formData.id}`, formData).then((response) => {
-                console.log(response);
                 history.push('/')
             })
         }
         else {
             axios.post('http://localhost:5000/api/product', formData).then((response) => {
-                console.log(response);
                 history.push('/');
             })
 
         }
     }
-
     const change = (event) => {
-        console.log(event);
         setFormData({ ...formData, [event.target.name]: event.target.value })
-        console.log(formData)
     }
     const resetForm = (event) => {
         setFormData({
@@ -66,11 +56,8 @@ function ProductEdit (props) {
             description: '',
             image: ''
         })
-
     }
     const goBack = (event) => {
-        const id = props.location.product.id;
-        console.log(id)
         history.push('/');
     }
 

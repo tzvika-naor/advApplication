@@ -14,7 +14,6 @@ function Register () {
     })
     const change = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(formData);
     }
     const goBack = () => {
         history.push('/')
@@ -22,10 +21,8 @@ function Register () {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log(formData);
         axios.post('http://localhost:5000/api/user/signup', formData)
-            .then(response => {
-                console.log(response);
+            .then(response => { 
                 // history.push('/')
             })
     }

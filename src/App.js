@@ -15,7 +15,7 @@ import './App.css'
 function App () {
   const [showQueryRes, setShowQueryRes] = useState('');
   const [searchRes, setSearchRes] = useState([])
-
+  const [isActive, setIsActive] = useState('')
   const searchResults = (data) => {
     console.log(data)
     setSearchRes(data);
@@ -24,7 +24,10 @@ function App () {
   const resetSearch = (data) => {
     setShowQueryRes(false);
   }
- 
+  // const isActive = (data) => {
+  // console.log(data)
+  // }
+
   return (
     <Router history={history}>
       <Header resetSearch={resetSearch} />
@@ -40,8 +43,10 @@ function App () {
               <Search searchResults={searchResults} />
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
+
               <Route path='/products' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('products')} />} />
               <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} />} />
+              <Route path='/' render={(props) => <List activeComponent={('blabla')} />} />
             </div>
           </div>
         </Fragment>

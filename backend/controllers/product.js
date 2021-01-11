@@ -1,15 +1,14 @@
 const Product = require('../models/product');
 
 exports.searchQuery = (req, res, next) => {
-    console.log(req.body);
     var minPrice = '';
-    var reviews = parseInt(req.body.reviews.substring(1,2));
+    var reviews = parseInt(req.body.reviews.substring(1, 2));
     const tmpMinPrice = req.body.minPrice;
     if (tmpMinPrice.substring(1) === '+')
         minPrice = tmpMinPrice.substring(0, 1);
     if (tmpMinPrice.substring(2) === '+')
         minPrice = tmpMinPrice.substring(0, 2);
-    if (tmpMinPrice.substring(3) === '+'){
+    if (tmpMinPrice.substring(3) === '+') {
         minPrice = tmpMinPrice.substring(0, 3);
     }
     minPrice = parseInt(minPrice);
@@ -17,11 +16,11 @@ exports.searchQuery = (req, res, next) => {
     Product.find({
         category: req.body.category, price: { $gt: minPrice }, reviews: { $gt: reviews },
     }).sort({ price: req.body.orderBy }).then(documents => {
-            res.status(200).json({
-                message: 'query succeeded',
-                products: documents
-            })
+        res.status(200).json({
+            message: 'query succeeded',
+            products: documents
         })
+    })
         .catch((err) => {
             res.status(500).json({
                 message: 'something went wrong ',
@@ -39,7 +38,6 @@ exports.getCategory = (req, res, next) => {
         uniqCategories = [...new Set(categories)]; //this is the same as group by
         return Product.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
-        // console.log(count)
         res.status(200).json({
             message: 'product fetch succesfully!',
             category: uniqCategories
@@ -50,7 +48,6 @@ exports.getCategory = (req, res, next) => {
 exports.getReviews = (req, res, next) => {
     const ProductQuery = Product.find();//return all the Product
     ProductQuery.then(documents => {
-        console.log(documents)
         fetchedProducts = documents;
         reviews = fetchedProducts.map((product) => {
             return product.reviews
@@ -60,7 +57,6 @@ exports.getReviews = (req, res, next) => {
             return a - b;
         });
     }).then(count => {
-        // console.log(count)
         res.status(200).json({
             message: 'product fetch succesfully!',
             reviews: sortedReviews,
@@ -78,7 +74,6 @@ exports.getProducts = (req, res, next) => {
         uniqCategories = [...new Set(categories)]; //this is the same as group by
         return Product.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
-        // console.log(count)
         res.status(200).json({
             message: 'product fetch succesfully!',
             products: fetchedProducts,
@@ -89,9 +84,7 @@ exports.getProducts = (req, res, next) => {
 
 }
 exports.getProduct = (req, res, next) => {
-    console.log(req.params.id)
     Product.findById(req.params.id).then(document => {
-        console.log(document)
         if (document) {
             res.status(200).json(product)
         } else {
@@ -106,7 +99,6 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.createProduct = (req, res, next) => {
-    console.log(req.body);
     const product = new Product({
         title: req.body.title,
         price: req.body.price,
@@ -114,7 +106,6 @@ exports.createProduct = (req, res, next) => {
         description: req.body.description,
         image: req.body.image
     });
-    console.log(product)
     product.save().then(newProduct => {
         res.status(201).json({
             message: "product added successfully",
@@ -135,8 +126,6 @@ exports.createProduct = (req, res, next) => {
         });
 };
 exports.updateProduct = (req, res, next) => {
-    console.log(req.params.id)
-    // console.log(req.body)
     const product = new Product({
         title: req.body.title,
         price: req.body.price,
@@ -158,7 +147,6 @@ exports.updateProduct = (req, res, next) => {
     });
 }
 exports.deleteProduct = (req, res, next) => {
-    console.log(req.params.id)
     Product.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
             res.status(200).json({

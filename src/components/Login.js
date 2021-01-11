@@ -12,13 +12,12 @@ const Login = () => {
     })
     const change = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        console.log(formData);
     }
     const onSubmit = (event) => {
         event.preventDefault();
         axios.post('http://localhost:5000/api/user/login', formData)
             .then(response => {
-                console.log(response);
+                //
             })
     }
     return (

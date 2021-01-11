@@ -1,19 +1,46 @@
 const Smartphone = require('../models/smartphone');
+exports.searchQuery = (req, res, next) => {
+    console.log(req.body)
+    Smartphone.find({
+        brand: req.body.brand, $or: [{ display: { $gt: req.body.display } }, { batteryCapacity: { $gt: req.body.batteryCapacity } }],
+    }).then(documents => {
+        res.status(200).json({
+            message: 'query succeeded',
+            smartphone: documents
+        })
+    })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'something went wrong ',
+                error: err
+            })
+        })
+}
 exports.getSmartphones = (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
         fetchedSmartphones = documents;
-        brand = fetchedSmartphones.map((Smartphone) => {
-            return Smartphone.brand
-        })
-        uniqBrands = [...new Set(brand)]; //this is the same as group by
+        brand = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.brand))].sort()
+        display = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.display))].sort()
+        batteryCapacity = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.batteryCapacity))].sort()
+        processor = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.processor))].sort()
+        frontCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.frontCamera))].sort()
+        rearCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.rearCamera))].sort()
+        phoneModel = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.phoneModel))].sort()
         return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
-        // console.log(count)
         res.status(200).json({
             message: 'Smartphone fetch succesfully!',
             smartphones: fetchedSmartphones,
-            brand: uniqBrands,
+            unique: {
+                brand: brand,
+                display: display,
+                batteryCapacity: batteryCapacity,
+                processor: processor,
+                frontCamera: frontCamera,
+                rearCamera: rearCamera,
+                phoneModel: phoneModel
+            },
             maxSmartphones: count
         })
     })
@@ -73,7 +100,6 @@ exports.createSmartphone = (req, res, next) => {
         });
 };
 exports.updateSmartphone = (req, res, next) => {
-    console.log(req.params.id)
     const smartphone = new Smartphone({
         phoneModel: req.body.phoneModel,
         brand: req.body.brand,
@@ -85,9 +111,7 @@ exports.updateSmartphone = (req, res, next) => {
         price: req.body.price,
         image: req.body.image
     });
-    console.log(smartphone)
     smartphone._id = req.params.id;
-    console.log(smartphone)
     Smartphone.updateOne({ _id: req.params.id }, smartphone).then(result => {
         if (result.n > 0) {
             res.status(200).json({

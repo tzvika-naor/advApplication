@@ -5,16 +5,12 @@ import { Button } from 'react-bootstrap';
 import history from '../History';
 
 function SmartphoneEdit (props) {
-    console.log(props)
     const [isEdit, setIsEdit] = useState(false);
 
     useEffect((props) => {
         axios.get('http://localhost:5000/api/smartphone').then((response) => {
-            console.log(props);
-            console.log(response);
         });
     }, [])
-    console.log(props)
     const [formData, setFormData] = useState({
         phoneModel: props.location.smartphone.phoneModel,
         brand: props.location.smartphone.brand,
@@ -29,25 +25,21 @@ function SmartphoneEdit (props) {
     })
 
     const onSubmit = event => {
-        console.log(isEdit)
         event.preventDefault();
         if (isEdit) {
             axios.put(`http://localhost:5000/api/smartphone/${formData.id}`, formData).then((response) => {
-                console.log(response);
                 history.push('/smartphones')
             })
         }
 
         else {
             axios.post('http://localhost:5000/api/smartphone', formData).then((response) => {
-                console.log(response);
                 history.push('/smartphones');
             })
         }
     }
 
     const change = (event) => {
-        console.log(formData)
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
     const resetForm = (event) => {
@@ -68,9 +60,7 @@ function SmartphoneEdit (props) {
         history.push('/smartphones');
     }
     const onDelete = () => {
-        console.log(formData.id)
         axios.delete(`http://localhost:5000/api/smartphone/${formData.id}`, formData).then((response) => {
-            console.log('smartphone deleted');
             history.push('/smartphones')
         })
     }

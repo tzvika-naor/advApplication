@@ -4,7 +4,6 @@ import Smartphone from './Smartphone'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 const List = (props) => {
-    console.log(props)
     const [products, setproducts] = useState([]);
     const [smartphones, setSmartphones] = useState([]);
 
@@ -12,23 +11,16 @@ const List = (props) => {
 
         axios.get('http://localhost:5000/api/product')
             .then(response => {
-                console.log(response);
                 const data = response.data.products;
-
                 let obj = data.map(product => {
                     product.id = product._id
                     delete product._id
                     return product;
                 })
-                // var reviewArr = []
                 setproducts(obj);
-                // setReviewArr(reviewArr = obj.map(el => {
-                //     return el.reviews;
-                // }))
             })
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
-                console.log(response)
                 const data = response.data.smartphones;
                 let obj = data.map(smartphone => {
                     smartphone.id = smartphone._id
@@ -36,7 +28,6 @@ const List = (props) => {
                     return smartphone;
                 })
                 setSmartphones(obj);
-                console.log(obj)
             })
         // }
     }, []);
@@ -46,7 +37,7 @@ const List = (props) => {
             return (
                 <div className="row">
                     {
-                        products.map((product,index) => {
+                        products.map((product, index) => {
                             return <Product
                                 price={product.price}
                                 category={product.category}
@@ -57,7 +48,6 @@ const List = (props) => {
                                 id={product.id}
                                 key={product.id}
                                 index={index}
-                                
 
                             />
                         })
@@ -90,7 +80,7 @@ const List = (props) => {
             return (
                 <div className="row">
                     {
-                        smartphones.map((smartphone,index) => {
+                        smartphones.map((smartphone, index) => {
                             return <Smartphone
                                 phoneModel={smartphone.phoneModel}
                                 brand={smartphone.brand}
@@ -104,7 +94,7 @@ const List = (props) => {
                                 id={smartphone.id}
                                 key={smartphone.id}
                                 index={index}
-                                // smartphone={smartphones}
+                            // smartphone={smartphones}
                             />
                         })
                     }
@@ -133,6 +123,11 @@ const List = (props) => {
                 }
             </div>)
         }
+    }
+    else {
+        return (
+            <div><p>Nothing to show...</p></div>
+        )
     }
 }
 

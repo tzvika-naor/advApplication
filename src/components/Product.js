@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 function Product (props) {
-    // console.log(props)
+
     return (
 
         <div className="col-lg-4 col-md-6 mb-4" style={{marginTop:"20px"}}>
