@@ -7,6 +7,9 @@ const cartRoutes = require('./routes/cart');
 const userRoutes = require('./routes/user');
 const smartphoneRoutes = require('./routes/smartphone');
 const app = express();
+var http = require('http');
+const server = http.createServer(app);
+server.listen(5000);
 
 mongoose.connect("mongodb+srv://advanced_applications:HC4HlY2ygfLzRyfD@cluster0.hjlul.mongodb.net/node-angular-react",
     { useNewUrlParser: true, useUnifiedTopology: true })
