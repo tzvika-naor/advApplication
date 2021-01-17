@@ -22,6 +22,7 @@ function Order (props) {
     },[])
     return (
         <div>
+            <p>...</p>
             <p>Order Id: {orderId}</p>
             {smartphoneId.map(el => (
                 <li>{el}</li>
