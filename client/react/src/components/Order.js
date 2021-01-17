@@ -18,8 +18,8 @@ function Order (props) {
             .then(response => {
                 setOrderId(response.data.order.id)
                 console.log(response)
-            }, [])
-    })
+            })
+    },[])
     return (
         <div>
             <p>Order Id: {orderId}</p>
