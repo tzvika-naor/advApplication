@@ -1,17 +1,33 @@
 // import { Link } from 'react-router-dom';
-
-import { useState } from "react";
+import axios from 'axios'
+import { useEffect, useState } from "react";
 
 
 function Order (props) {
-    const [orderItems, setOrderItems] = useState(props.smartphones.location.selectedSmartPhones.selectedSmartPhones)
-    console.log(props.smartphones.location.selectedSmartPhones.selectedSmartPhones)
+    const [smartphoneId, setSmartphoneId] = useState(props.smartphones.location.id.smartphoneId)
+    const [total, setTotal] = useState(props.smartphones.location.price.smartphonePrice)
+    const [orderId, setOrderId] = useState('')
+    const item = {
+        id: smartphoneId,
+        totalPrice: total
+    }
+    console.log(props.smartphones.location)
+    console.log(smartphoneId.length);
+    useEffect(() => {
+        axios.post('http://localhost:5000/api/order', item)
+            .then(response => {
+                setOrderId(response.data.order.id)
+                console.log(response)
+            }, [])
+    })
     return (
         <div>
-            { orderItems.map(item => (
-                <li>{item}</li>
+            <p>Order Id: {orderId}</p>
+            {smartphoneId.map(el => (
+                <li>{el}</li>
             ))
-            }</div>
+            }
+        </div>
     )
 }
 export default Order;

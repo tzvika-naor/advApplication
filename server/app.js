@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const productRoutes = require('./routes/product');
-const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/order');
 const userRoutes = require('./routes/user');
 const smartphoneRoutes = require('./routes/smartphone');
 const app = express();
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', "GET, POST, PATCH, UPDATE, DELETE, PUT , OPTIONS");
     next();
 });
-app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/smartphone", smartphoneRoutes);

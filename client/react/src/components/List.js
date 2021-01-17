@@ -7,7 +7,8 @@ import history from '../History';
 const List = (props) => {
     const [products, setproducts] = useState([]);
     const [smartphones, setSmartphones] = useState([]);
-    const [selectedSmartPhones, setSelectedSmartPhones] = useState([]);
+    const [smartphoneId, setSmartphoneId] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
             .then(response => {
@@ -32,13 +33,16 @@ const List = (props) => {
         // }
     }, []);
     const getId = (data) => {
-        setSelectedSmartPhones([...selectedSmartPhones, data]);
+        console.log(data)
+        setSmartphoneId([...smartphoneId, data.id]);
+        setTotalPrice(totalPrice => totalPrice + data.price);
     }
-
     const goToPayment = () => {
         history.push({
             pathname: 'order',
-            selectedSmartPhones: { selectedSmartPhones }
+            id: { smartphoneId },
+            price: { totalPrice }
+
         })
     }
     if (props.activeComponent === 'products') {

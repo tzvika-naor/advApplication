@@ -6,7 +6,11 @@ function Smartphone (props) {
     const [id, setId] = useState([]);
 
     const click = (event, i) => {
-        props.getId(props.smartphone.id);
+        const addItem = {
+            price: +props.smartphone.price,
+            id:props.smartphone.id
+        }
+        props.getId(addItem);
     }
     return (
         <div className="col-lg-4 col-md-6 mb-4">
