@@ -11,11 +11,11 @@ import { Fragment } from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
 import SmartphoneEdit from './components/SmartphoneEdit'
+import Order from './components/Order'
 import './App.css'
 function App () {
   const [showQueryRes, setShowQueryRes] = useState('');
   const [searchRes, setSearchRes] = useState([])
-  const [isActive, setIsActive] = useState('')
   const searchResults = (data) => {
     console.log(data)
     setSearchRes(data);
@@ -43,11 +43,11 @@ function App () {
               <Search searchResults={searchResults} />
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
-
               <Route path='/products' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('products')} />} />
               <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} />} />
               <Route path='/' render={(props) => <List activeComponent={('blabla')} />} />
             </div>
+            <Route path='/order' render={(props) => <Order activeComponent={('order')} smartphones={props} />} />
           </div>
         </Fragment>
       </Switch>
