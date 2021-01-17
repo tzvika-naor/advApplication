@@ -37,6 +37,7 @@ function App () {
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path='/order' render={(props) => <Order activeComponent={('order')} smartphones={props} />} />
         <Fragment>
           <div className="row">
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
@@ -47,7 +48,6 @@ function App () {
               <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} />} />
               <Route path='/' render={(props) => <List activeComponent={('blabla')} />} />
             </div>
-            <Route path='/order' render={(props) => <Order activeComponent={('order')} smartphones={props} />} />
           </div>
         </Fragment>
       </Switch>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function Order (props) {
     const [smartphoneId, setSmartphoneId] = useState(props.smartphones.location.id.smartphoneId)
-    const [total, setTotal] = useState(props.smartphones.location.price.smartphonePrice)
+    const [total, setTotal] = useState(props.smartphones.location.price.totalPrice)
     const [orderId, setOrderId] = useState('')
     const item = {
         id: smartphoneId,
@@ -19,15 +19,15 @@ function Order (props) {
                 setOrderId(response.data.order.id)
                 console.log(response)
             })
-    },[])
+    }, [])
     return (
         <div>
-            <p>...</p>
-            <p>Order Id: {orderId}</p>
+            <p> Order Id: {orderId}</p>
             {smartphoneId.map(el => (
-                <li>{el}</li>
+                <li class="list-group-item">item ID: {el}</li>
             ))
             }
+            <p>Total Price: {total}</p>
         </div>
     )
 }
