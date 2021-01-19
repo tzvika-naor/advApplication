@@ -5,6 +5,7 @@ import axios from 'axios';
 import history from '../History';
 
 const List = (props) => {
+    const user = props.user.history.location.user.user;
     const [products, setproducts] = useState([]);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphoneBuy, setSmartphoneBuy] = useState([]);
@@ -38,13 +39,14 @@ const List = (props) => {
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {
-        if (smartphoneBuy.length === 0) 
-            alert('your cart is empty') 
-            else {
+        if (smartphoneBuy.length === 0)
+            alert('your cart is empty')
+        else {
             history.push({
                 pathname: 'order',
                 smartphoneBuy: { smartphoneBuy },
-                totalPrice: { totalPrice }
+                totalPrice: { totalPrice },
+                user: user
             })
         }
     }

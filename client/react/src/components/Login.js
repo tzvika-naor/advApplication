@@ -4,7 +4,6 @@ import axios from 'axios';
 import history from '../History';
 
 const Login = () => {
-
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -19,11 +18,14 @@ const Login = () => {
         event.preventDefault();
         axios.post('http://localhost:5000/api/user/login', formData)
             .then(response => {
-                console.log(response.data.user)
-              if(response.data.user){
-                  alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
-                  history.push("/smartphones");
-              }
+                const user = response.data.user;
+                if (response.data.user) {
+                    alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
+                    history.push({
+                        pathname: '/smartphones',
+                        user: { user }
+                    })
+                }
             })
     }
     return (
@@ -43,7 +45,6 @@ const Login = () => {
                                     value={formData.email}
                                     onChange={event => change(event)}
                                 />
-
                                 <br />
                                 <label>Password</label>
                                 <input
@@ -53,9 +54,7 @@ const Login = () => {
                                     value={formData.password}
                                     onChange={event => change(event)}
                                 />
-
                                 <Button className="btn btn-block" type="submit" id="submit" variant="primary" style={{ marginTop: "80px" }} >Submit</Button>
-
                             </form>
                         }</div>
                 </div>

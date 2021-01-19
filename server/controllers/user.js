@@ -44,6 +44,7 @@ exports.userLogin = (req, res, next) => {
             }
             else if (!documents) {
                 res.status(401).json({
+                    user: documents, 
                     message: "failed to login user does not exist"
                 });
             }

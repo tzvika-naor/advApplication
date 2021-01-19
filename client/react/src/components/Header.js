@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 function Header (props) {
-
-
     function click () {
         props.resetSearch(true)
     }

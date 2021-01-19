@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from 'react-icons/fi';
 // import credit from '/credit.jpg';
 function Smartphone (props) {
-    const [id, setId] = useState([]);
-
+   
     const click = (event, i) => {
         alert(`${props.smartphone.phoneModel} added to your order`);
         const addItem = {

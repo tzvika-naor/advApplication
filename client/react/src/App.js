@@ -33,13 +33,13 @@ function App () {
     <Router history={history}>
       <Header resetSearch={resetSearch} />
       <Switch>
-         <Route path='/' exact render={(props) => <Home />}   />
+        <Route path='/' exact render={(props) => <Home />} />
         <Route path="/product/:id/edit" component={ProductEdit} />
         <Route path="/product/:id" component={ProductDetails} />
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route path='/order' render={(props) => <Order activeComponent={('order')} smartphones={props} />} />
+        <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} />} />
         <Fragment>
           <div className="row">
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
@@ -47,7 +47,7 @@ function App () {
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
               <Route path='/products' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('products')} />} />
-              <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} />} />
+              <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} user={props} />} />
             </div>
           </div>
         </Fragment>

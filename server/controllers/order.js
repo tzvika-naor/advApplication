@@ -39,20 +39,25 @@ exports.getOrders = (req, res, next) =>{
 // };
 
 exports.createOrder = (req, res, next) =>
-{
+{   console.log(req.body)
     console.log(req.body.id)
     const order = new Order({
         smartphones: req.body.id,
         numberOfProucts: req.body.totalPrice,
+        userId: req.body.userId,
         // customerId: req.body.customerId,
         // totalPrice: req.body.totalPrice
     });
     order.save().then(createdOrder =>
     {
+        console.log(createdOrder)
         res.status(201).json({
             message: "Order added successfully",
             order: {
                 id: createdOrder._id,
+                date: createdOrder.data,
+                status: createdOrder.status,
+                user: createdOrder.userId
                 // products: createdOrder.products,
                 // numberOfProucts: createdOrder.numberOfProucts,
                 // customerId: createdOrder.customerId,
