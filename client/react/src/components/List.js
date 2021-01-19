@@ -7,7 +7,7 @@ import history from '../History';
 const List = (props) => {
     const [products, setproducts] = useState([]);
     const [smartphones, setSmartphones] = useState([]);
-    const [smartphoneId, setSmartphoneId] = useState([]);
+    const [smartphoneBuy, setSmartphoneBuy] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
@@ -34,16 +34,19 @@ const List = (props) => {
     }, []);
     const getId = (data) => {
         console.log(data)
-        setSmartphoneId([...smartphoneId, data.id]);
+        setSmartphoneBuy([...smartphoneBuy, data]);
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {
-        history.push({
-            pathname: 'order',
-            id: { smartphoneId },
-            price: { totalPrice }
-
-        })
+        if (smartphoneBuy.length === 0) 
+            alert('your cart is empty') 
+            else {
+            history.push({
+                pathname: 'order',
+                smartphoneBuy: { smartphoneBuy },
+                totalPrice: { totalPrice }
+            })
+        }
     }
     if (props.activeComponent === 'products') {
         if (!props.showQueryRes) {

@@ -6,10 +6,14 @@ function Smartphone (props) {
     const [id, setId] = useState([]);
 
     const click = (event, i) => {
+        alert(`${props.smartphone.phoneModel} added to your order`);
         const addItem = {
+            phoneModel: props.smartphone.phoneModel,
             price: +props.smartphone.price,
-            id:props.smartphone.id
+            id: props.smartphone.id,
+            image: props.smartphone.image
         }
+
         props.getId(addItem);
     }
     return (

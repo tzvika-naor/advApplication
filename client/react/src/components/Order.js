@@ -1,34 +1,39 @@
 // import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useEffect, useState } from "react";
-
-
 function Order (props) {
-    const [smartphoneId, setSmartphoneId] = useState(props.smartphones.location.id.smartphoneId)
-    const [total, setTotal] = useState(props.smartphones.location.price.totalPrice)
-    const [orderId, setOrderId] = useState('')
+    console.log(props)
     const item = {
-        id: smartphoneId,
-        totalPrice: total
+        id: props.smartphones.location.smartphoneBuy.smartphoneBuy.smartphoneId,
+        totalPrice: props.smartphones.location.totalPrice.totalPrice,
     }
-    console.log(props.smartphones.location)
-    console.log(smartphoneId.length);
+    const [smartphone, setSmartphone] = useState(props.smartphones.location.smartphoneBuy.smartphoneBuy)
+    const [orderId, setOrderId] = useState([]);
+    const [itemId, setItemId] = useState(props.smartphones.location.smartphoneBuy.smartphoneBuy.id)
+
     useEffect(() => {
-        axios.post('http://localhost:5000/api/order', item)
-            .then(response => {
-                setOrderId(response.data.order.id)
-                console.log(response)
-            })
+        
+            axios.post('http://localhost:5000/api/order', item)
+                .then(response => {
+                    setOrderId(response.data.order.id)
+                    console.log(response)
+                })
     }, [])
+
     return (
-        <div>
-            <p> Order Id: {orderId}</p>
-            {smartphoneId.map(el => (
-                <li class="list-group-item">item ID: {el}</li>
+        <div >
+            <h4> Order Id: {orderId}</h4>
+            {smartphone.map(el => (
+                <ul>
+                    <div >
+                        <li style={{ height: "120px", width: "500px" }} class="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price} </h4> </li>
+                    </div>
+                </ul>
             ))
             }
-            <p>Total Price: {total}</p>
+            <h4>Total Price: {props.smartphones.location.totalPrice.totalPrice}</h4>
         </div>
+
     )
 }
 export default Order;
