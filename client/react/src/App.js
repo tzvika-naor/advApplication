@@ -33,7 +33,7 @@ function App () {
     <Router history={history}>
       <Header resetSearch={resetSearch} />
       <Switch>
-         <Route path='/' exact render={(props) => <Home />} />
+         <Route path='/' exact render={(props) => <Home />}   />
         <Route path="/product/:id/edit" component={ProductEdit} />
         <Route path="/product/:id" component={ProductDetails} />
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />

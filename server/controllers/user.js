@@ -1,4 +1,5 @@
 
+const user = require('../models/user');
 const User = require('../models/user');
 
 exports.createUser = (req, res, next) => {
@@ -11,6 +12,7 @@ exports.createUser = (req, res, next) => {
     });
     user.save()
         .then(newUser => {
+            console.log(newUser)
             res.status(201).json({
                 message: "user created successfully",
                 user: {
@@ -31,23 +33,24 @@ exports.createUser = (req, res, next) => {
 }
 
 exports.userLogin = (req, res, next) => {
-    let fetchUser
-    User.findOne({ email: req.body.email })
-        .then(user => { //get back the object from the database
-            if (!user) {
-                res.status(401).json({
-                    message: "failed to log in user does not exist"
-                });
-            }
-            else {
+
+    User.findOne({ email: req.body.email, password: req.body.password })
+        .then(documents => { //get back the object from the database
+            if (documents) {
                 res.status(200).json({
-                    user: user,
-                    message: "succeed logging in",
+                    user: documents,
+                    message: "succeed logging in"
                 })
+            }
+            else if (!documents) {
+                res.status(401).json({
+                    message: "failed to login user does not exist"
+                });
             }
         })
         .catch(err => {
             res.status(500).json({
+                error: err,
                 message: 'somthing went wrong!'
             });
         });

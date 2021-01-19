@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import history from '../History';
+
 const Login = () => {
 
     const [formData, setFormData] = useState({
@@ -17,7 +19,11 @@ const Login = () => {
         event.preventDefault();
         axios.post('http://localhost:5000/api/user/login', formData)
             .then(response => {
-                //
+                console.log(response.data.user)
+              if(response.data.user){
+                  alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
+                  history.push("/smartphones");
+              }
             })
     }
     return (

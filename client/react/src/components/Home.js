@@ -1,8 +1,8 @@
 function Home (props) {
     return (
 
-        <div >
-        <img src="/images/cellular.png " style={{width:"80%" , height:"1000px" , marginLeft:"10%" , marginBottom:"50px"}} />
+        <div style= {{backgroundColor:"rgb(100,100,100)" , marginTop:"0" }}>
+        <img src="/images/cellular.png " style={{width:"50%" , height:"800px" , marginLeft:"25%", marginTop:"40px"  , marginBottom:"50px"}} alt="" />
         </div>
 
     )

@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import SearchProduct from './SearchProduct';
 import SearchSmartPhone from './SearchSmartPhone'
-import axios from 'axios';
 function Search (props) {
     const location = useLocation();
     const searchResults = (data) => {

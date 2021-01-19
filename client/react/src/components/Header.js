@@ -6,7 +6,7 @@ function Header (props) {
         props.resetSearch(true)
     }
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
             <div className="container">
                 <Link to='/' className="navbar-brand" onClick={click}>Start Bootstrap</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
