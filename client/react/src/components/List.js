@@ -10,6 +10,7 @@ const List = (props) => {
     const [smartphones, setSmartphones] = useState([]);
     const [smartphoneBuy, setSmartphoneBuy] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [smartphoneId, setSmartphoneId] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/api/product')
             .then(response => {
@@ -36,6 +37,7 @@ const List = (props) => {
     const getId = (data) => {
         console.log(data)
         setSmartphoneBuy([...smartphoneBuy, data]);
+        setSmartphoneId([...smartphoneId, data.id]);
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {
@@ -46,6 +48,7 @@ const List = (props) => {
                 pathname: 'order',
                 smartphoneBuy: { smartphoneBuy },
                 totalPrice: { totalPrice },
+                smartphoneId: { smartphoneId },
                 user: user
             })
         }

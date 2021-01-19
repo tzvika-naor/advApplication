@@ -9,16 +9,18 @@ function Order (props) {
         userId: props.data.location.user._id,
         user: props.data.location.user
     }
-    const [userId, setUserId] = useState([]);
+    const order = {
+        smartphones: props.data.location.smartphoneId.smartphoneId,
+        userId: props.data.location.user._id,  
+    }
     const [smartphone] = useState(props.data.location.smartphoneBuy.smartphoneBuy)
     const [orderId, setOrderId] = useState([]);
 
     useEffect(() => {
-
-        axios.post('http://localhost:5000/api/order', item)
+            console.log(item)
+        axios.post('http://localhost:5000/api/order', order)
             .then(response => {
                 setOrderId(response.data.order.id)
-                setUserId(response.data.order.user)
                 console.log(response)
             })
     }, [])
@@ -26,7 +28,6 @@ function Order (props) {
     return (
         <div >
             <h4> Order Id: {orderId}</h4>
-            <h4> User Id: {userId}</h4>
             <ul className="list-unstyled" >
                 <h4 style={{ marginBottom: "20px", marginTop: "20px", marginLeft: "40px" }}> User Details</h4>
                 <div style={{ marginLeft: "60px", marginBottom: "20px" }}>

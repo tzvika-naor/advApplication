@@ -40,13 +40,10 @@ exports.getOrders = (req, res, next) =>{
 
 exports.createOrder = (req, res, next) =>
 {   console.log(req.body)
-    console.log(req.body.id)
+    console.log(req.body.smartphones)
     const order = new Order({
-        smartphones: req.body.id,
-        numberOfProucts: req.body.totalPrice,
-        userId: req.body.userId,
-        // customerId: req.body.customerId,
-        // totalPrice: req.body.totalPrice
+        smartphones: req.body.smartphones,
+        userId: req.body.userId
     });
     order.save().then(createdOrder =>
     {
@@ -55,13 +52,8 @@ exports.createOrder = (req, res, next) =>
             message: "Order added successfully",
             order: {
                 id: createdOrder._id,
-                date: createdOrder.data,
+                date: createdOrder.date,
                 status: createdOrder.status,
-                user: createdOrder.userId
-                // products: createdOrder.products,
-                // numberOfProucts: createdOrder.numberOfProucts,
-                // customerId: createdOrder.customerId,
-                // totalPrice: createdOrder.totalPrice,
             }
         });
     })
