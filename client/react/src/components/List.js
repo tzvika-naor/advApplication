@@ -60,6 +60,7 @@ const List = (props) => {
                     {
                         products.map((product, index) => {
                             return <Product
+                                key={index}
                                 product={product}
                             />
                         })
@@ -70,8 +71,9 @@ const List = (props) => {
         else {
             return (<div className="row">
                 {
-                    props.searchResults.map((product) => {
+                    props.searchResults.map((product, index) => {
                         return <Product
+                            key={index}
                             product={product}
                         />
                     })
@@ -96,6 +98,7 @@ const List = (props) => {
                         {
                             smartphones.map((smartphone, index) => {
                                 return <Smartphone
+                                    key={index}
                                     smartphone={smartphone}
                                     getId={(data) => getId(data)}
                                 />
@@ -108,8 +111,9 @@ const List = (props) => {
         else {
             return (<div className="row">
                 {
-                    props.searchResults.map((smartphone) => {
+                    props.searchResults.map((smartphone,index) => {
                         return <Smartphone
+                            key={index}
                             smartphone={smartphone}
                         />
                     })

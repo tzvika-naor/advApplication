@@ -3,7 +3,8 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import history from '../History';
 
-const Login = () => {
+const Login = (props) => {
+    console.log(props)
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -21,9 +22,10 @@ const Login = () => {
                 const user = response.data.user;
                 if (response.data.user) {
                     alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
+                    props.setIsLoggedIn(true)
                     history.push({
                         pathname: '/smartphones',
-                        user: { user }
+                        user: { user },
                     })
                 }
             })

@@ -23,7 +23,7 @@ function Order (props) {
                 setOrderId(response.data.order.id)
                 console.log(response)
             })
-    }, [])
+    }, [] )
 
     return (
         <div >
