@@ -12,6 +12,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import SmartphoneEdit from './components/SmartphoneEdit'
 import Order from './components/Order'
+import Home from './components/Home'
 import './App.css'
 function App () {
   const [showQueryRes, setShowQueryRes] = useState('');
@@ -32,6 +33,7 @@ function App () {
     <Router history={history}>
       <Header resetSearch={resetSearch} />
       <Switch>
+         <Route path='/' exact render={(props) => <Home />} />
         <Route path="/product/:id/edit" component={ProductEdit} />
         <Route path="/product/:id" component={ProductDetails} />
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
@@ -46,7 +48,6 @@ function App () {
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
               <Route path='/products' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('products')} />} />
               <Route path='/smartphones' render={(props) => <List searchResults={searchRes} showQueryRes={showQueryRes} activeComponent={('smartphones')} />} />
-              <Route path='/' render={(props) => <List activeComponent={('blabla')} />} />
             </div>
           </div>
         </Fragment>

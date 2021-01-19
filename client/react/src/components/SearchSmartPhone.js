@@ -45,7 +45,6 @@ function SearchSmartPhone (props) {
     const onClick = () => {
         axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
             .then(response => {
-                // console.log(response.data.smartphone)
                 props.searchResults(response.data.smartphone);
             })
     }
