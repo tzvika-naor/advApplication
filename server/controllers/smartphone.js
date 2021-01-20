@@ -16,21 +16,6 @@ exports.searchQuery = (req, res, next) => {
             })
         })
 }
-exports.allSmartphones = (req, res, next) => {
-    const SmartphoneQuery = Smartphone.find();//return all the Smartphone
-    SmartphoneQuery.then(documents => {
-        console.log(documents)
-        fetchedSmartphones = documents;
-        res.status(200).json({
-            smartphones: fetchedSmartphones
-        })
-    }).catch((err) => {
-        res.status(500).json({
-            message: 'something went wrong ',
-            error: err
-        })
-    })
-}
 exports.getSmartphones = (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
