@@ -1,7 +1,20 @@
 
-const user = require('../models/user');
 const User = require('../models/user');
 
+exports.getUsers = (req, res, next) => {
+    const fetchUsers = User.find();
+    fetchUsers.then(documents => {
+        res.status(200).json({
+            message: "users fetch successfuly",
+            user: documents
+        })
+    }).catch(error => {
+        res.status(500).json({
+            message: 'user fetching failed!',
+            error: error
+        })
+    })
+}
 exports.createUser = (req, res, next) => {
     const user = new User({
         email: req.body.email,
@@ -44,7 +57,7 @@ exports.userLogin = (req, res, next) => {
             }
             else if (!documents) {
                 res.status(401).json({
-                    user: documents, 
+                    user: documents,
                     message: "failed to login user does not exist"
                 });
             }
