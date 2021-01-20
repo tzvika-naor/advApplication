@@ -12,7 +12,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import SmartphoneEdit from './components/SmartphoneEdit'
 import Order from './components/Order'
-import Home from './components/Home'
+import Home from './components/Home';
+import Payment from './components/Payment'
 import './App.css'
 function App (props) {
   console.log(props);
@@ -29,7 +30,7 @@ function App (props) {
   }
   useEffect(() => {
     console.log(isLoggedIn)
-  },[isLoggedIn])
+  }, [isLoggedIn])
 
   return (
     <Router history={history}>

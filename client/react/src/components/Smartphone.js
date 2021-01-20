@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from 'react-icons/fi';
+import history from '../History';
 // import credit from '/credit.jpg';
 function Smartphone (props) {
    
     const click = (event, i) => {
+        console.log(history.location)
+        console.log(props)
         alert(`${props.smartphone.phoneModel} added to your order`);
         const addItem = {
             phoneModel: props.smartphone.phoneModel,

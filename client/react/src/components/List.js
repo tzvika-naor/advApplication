@@ -3,9 +3,10 @@ import Smartphone from './Smartphone'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import history from '../History';
+import Payment from './Payment'
 
 const List = (props) => {
-    const user = props.user.history.location.user.user;
+
     const [products, setproducts] = useState([]);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphoneBuy, setSmartphoneBuy] = useState([]);
@@ -41,6 +42,8 @@ const List = (props) => {
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {
+        // console.log(props.history.location)
+         const user = props.user.history.location.user.user;
         if (smartphoneBuy.length === 0)
             alert('your cart is empty')
         else {
@@ -49,9 +52,10 @@ const List = (props) => {
                 smartphoneBuy: { smartphoneBuy },
                 totalPrice: { totalPrice },
                 smartphoneId: { smartphoneId },
-                user: user
+                user: user 
             })
         }
+   
     }
     if (props.activeComponent === 'products') {
         if (!props.showQueryRes) {
@@ -86,14 +90,7 @@ const List = (props) => {
         if (!props.showQueryRes) {
             return (
                 <div>
-                    <div className="row">
-                        <div className="col-lg-3 offset-9" style={{ marginBottom: "20px" }} onClick={goToPayment}>
-                            <h5>Payment:</h5><img src="/images/credit.jpg" alt="" style={{ width: "20%", cursor: "pointer" }} />
-                            {/* <div style={{ border: "2px solid"  , backgroundColor:"rgb(51, 119, 255)" , borderRadius :"10px" ,width:"150px", cursor:"pointer" }}>
-                                <h5 style={{ display: "inline" , marginLeft:"15px" }}>Payment  </h5> <GrCreditCard size={40} style={{marginLeft:"10px"}}></GrCreditCard>
-                            </div> */}
-                        </div>
-                    </div>
+                    <Payment goToPayment={goToPayment} />
                     <div className="row">
                         {
                             smartphones.map((smartphone, index) => {
@@ -109,16 +106,22 @@ const List = (props) => {
             )
         }
         else {
-            return (<div className="row">
-                {
-                    props.searchResults.map((smartphone,index) => {
-                        return <Smartphone
-                            key={index}
-                            smartphone={smartphone}
-                        />
-                    })
-                }
-            </div>)
+            return (
+                <div>
+                    <Payment goToPayment={goToPayment} />
+                    <div className="row">
+                        {
+                            props.searchResults.map((smartphone, index) => {
+                                return <Smartphone
+                                    key={index}
+                                    smartphone={smartphone}
+                                    getId={(data) => getId(data)}
+                                />
+                            })
+                        }
+                    </div>
+                </div>
+            )
         }
     }
     else {
@@ -129,3 +132,10 @@ const List = (props) => {
 }
 
 export default List
+
+
+
+
+{/* <div style={{ border: "2px solid"  , backgroundColor:"rgb(51, 119, 255)" , borderRadius :"10px" ,width:"150px", cursor:"pointer" }}>
+<h5 style={{ display: "inline" , marginLeft:"15px" }}>Payment  </h5> <GrCreditCard size={40} style={{marginLeft:"10px"}}></GrCreditCard>
+</div> */}

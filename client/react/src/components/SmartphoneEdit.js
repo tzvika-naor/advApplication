@@ -5,23 +5,26 @@ import { Button } from 'react-bootstrap';
 import history from '../History';
 
 function SmartphoneEdit (props) {
+    console.log(props)
+
     const [isEdit, setIsEdit] = useState(false);
 
     useEffect((props) => {
+        console.log(props)
         axios.get('http://localhost:5000/api/smartphone').then((response) => {
         });
     }, [])
     const [formData, setFormData] = useState({
-        phoneModel: props.location.smartphone.phoneModel,
-        brand: props.location.smartphone.brand,
-        display: props.location.smartphone.display,
-        frontCamera: props.location.smartphone.frontCamera,
-        rearCamera: props.location.smartphone.rearCamera,
-        processor: props.location.smartphone.processor,
-        batteryCapacity: props.location.smartphone.batteryCapacity,
-        price: props.location.smartphone.price,
-        image: props.location.smartphone.image,
-        id: props.location.smartphone.id
+        phoneModel: props.location.smartphone.smartphone.phoneModel,
+        brand: props.location.smartphone.smartphone.brand,
+        display: props.location.smartphone.smartphone.display,
+        frontCamera: props.location.smartphone.smartphone.frontCamera,
+        rearCamera: props.location.smartphone.smartphone.rearCamera,
+        processor: props.location.smartphone.smartphone.processor,
+        batteryCapacity: props.location.smartphone.smartphone.batteryCapacity,
+        price: props.location.smartphone.smartphone.price,
+        image: props.location.smartphone.smartphone.image,
+        id: props.location.smartphone.smartphone.id
     })
 
     const onSubmit = event => {
