@@ -1,9 +1,15 @@
 <div class="container">
     <h4>Orders</h4>
     <div *ngFor="let order of orders">
-        UserId : <p>{{order.userId}}</p>
-        Order smartphones <p>{{order.smartphones}}</p>
-        Order Date:<p>{{order.date}}</p>
-        Order Status:<p>{{order.status}}</p>
+        <div class="continer" style="display: block; border: 1px solid;">
+            User ID (that made the order) : <p>{{order.userId}}</p>
+            Order ID: <p>{{order._id}}</p>
+            Order Date:<p>{{order.date}}</p>
+            Order Status:<p>{{order.status}}</p>
+            Smartphones ID:
+            <div *ngFor="let smartphones of order.smartphones">
+                <p>{{smartphones}} </p>
+            </div>
+        </div>
     </div>
 </div>
