@@ -23,10 +23,8 @@ const Login = (props) => {
                 if (response.data.user) {
                     alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
                     props.setIsLoggedIn(true)
-                    history.push({
-                        pathname: '/smartphones',
-                        user: { user },
-                    })
+                    props.connectedUser(user)
+                    history.push('./smartphones')
                 }
             })
     }

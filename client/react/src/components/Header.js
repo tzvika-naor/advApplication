@@ -1,22 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import history from '../History';
-
 function Header (props) {
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
     function click () {
         props.resetSearch(true)
     }
-    // const showProducts = () => {
-    //     if (isLoggedIn) {
-    //         return (
-    //             <li className="nav-item">
-    //                 <Link to='/products' onClick={click} className="nav-link">Products</Link>
-    //             </li>
-    //         )
-    //     }
-    // }
     useEffect(() => {
     setIsLoggedIn(props.isLoggedIn)
     }, [props])
@@ -32,7 +21,6 @@ function Header (props) {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
-                    {/* {showProducts} */}
                     {
                     isLoggedIn ?
                         <ul className="navbar-nav mr-auto">

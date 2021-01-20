@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import history from '../History';
+import history from '../client/react/src/History';
 
 function ProuctDetails (props) {
     const product = props.location.product;

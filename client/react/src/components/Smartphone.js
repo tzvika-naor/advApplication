@@ -3,9 +3,8 @@ import { FiShoppingCart } from 'react-icons/fi';
 import history from '../History';
 // import credit from '/credit.jpg';
 function Smartphone (props) {
-   
+    console.log(props)
     const click = (event, i) => {
-        console.log(history.location)
         console.log(props)
         alert(`${props.smartphone.phoneModel} added to your order`);
         const addItem = {
@@ -14,7 +13,6 @@ function Smartphone (props) {
             id: props.smartphone.id,
             image: props.smartphone.image
         }
-
         props.getId(addItem);
     }
     return (
