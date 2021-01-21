@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <div class="container">
   <h4>SMARTPHONES</h4>
@@ -13,3 +14,27 @@
       <p>{{s.price}}</p>   -->
   </div>  
 </div>
+=======
+<div class="container">
+  <h4>SMARTPHONES</h4>
+  <div *ngFor="let s of smartphones">
+      <div class="row">
+          <div class="col-lg-6 offset-lg-2 col-md-6 offset-md-2">
+              <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+                  <div class="card-header">
+                      <h5>Smartphone ID: {{s._id}}</h5>
+                  </div>
+                  <div class="card-body">
+                      <h3>Model: {{s.phoneModel}}</h3>
+                      <h3>Brand: {{s.brand}}</h3>
+                      <h3>Display: {{s.display}}</h3>
+                      <h3>Processor: {{s.processor}}</h3>
+                      <h3>Price: {{s.price}}</h3>
+                  </div>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+>>>>>>> working on dashboard

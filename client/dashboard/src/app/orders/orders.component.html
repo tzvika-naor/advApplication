@@ -1,6 +1,7 @@
 <div class="container">
     <h4>Orders</h4>
     <div *ngFor="let order of orders">
+<<<<<<< HEAD
         <div class="continer" style="display: block; border: 1px solid;">
             User ID (that made the order) : <p>{{order.userId}}</p>
             Order ID: <p>{{order._id}}</p>
@@ -13,3 +14,25 @@
         </div>
     </div>
 </div>
+=======
+        <div class="row">
+            <div class="col-lg-6 offset-lg-2 col-md-6 offset-md-2">
+                <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+                    <div class="card-header">
+                        <h5>Order Number: {{order._id}}  </h5>
+                        <h5>User ID:{{order.userId}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3>Order Date: {{order.date | date:'d/M/yy , h:mm a'}}</h3>
+                        <h3>Order Status: {{order.status}}</h3>
+                        <h3>Smartphones IDs:</h3>
+                        <div *ngFor="let smartphones of order.smartphones">
+                            <p>{{smartphones}} </p>
+                        </div>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> working on dashboard

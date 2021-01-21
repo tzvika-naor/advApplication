@@ -24,6 +24,10 @@
               "src/assets"
             ],
             "styles": [
+<<<<<<< HEAD
+=======
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+>>>>>>> working on dashboard
               "src/styles.css"
             ],
             "scripts": []
@@ -121,4 +125,8 @@
     }
   },
   "defaultProject": "angular"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> working on dashboard
