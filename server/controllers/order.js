@@ -2,8 +2,10 @@ const Order = require('../models/order');
 const Product = require('../models/product')
 exports.getOrders = (req, res, next) =>{
     console.log('i am Order controller')
-    const orderQuery = Order.find();//return all the Orders
-    orderQuery.then(documents =>
+    const orderQuery = Order.find().//return all the Orders
+    populate('smartphones').
+    populate('userId').
+    then(documents =>
     {
         console.log(documents)
         fetchedOrders = documents;

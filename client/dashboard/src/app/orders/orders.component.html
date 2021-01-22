@@ -5,15 +5,22 @@
             <div class="col-lg-6 offset-lg-2 col-md-6 offset-md-2">
                 <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
                     <div class="card-header">
-                        <h5>Order Number: {{order._id}}  </h5>
-                        <h5>User ID:{{order.userId}}</h5>
+                        <h5>Order Number: {{order._id}}</h5>
+                        <h5>User Details: {{order.userId._id}}</h5> 
+                       
+                        <p>email: {{order.userId.email}}</p>
+                        <p>first name: {{order.userId.firstname}}</p>
+                        <p>last name: {{order.userId.lastname}}</p>
+                        <p>password: {{order.userId.password}}</p>
+                        <p>phone: {{order.userId.phone}}</p>
+
                     </div>
                     <div class="card-body">
                         <h3>Order Date: {{order.date | date:'d/M/yy , h:mm a'}}</h3>
                         <h3>Order Status: {{order.status}}</h3>
-                        <h3>Smartphones IDs:</h3>
+                        <h3>Smartphones Details:</h3>
                         <div *ngFor="let smartphones of order.smartphones">
-                            <p>{{smartphones}} </p>
+                            <p>{{smartphones.phoneModel}} | {{smartphones.brand}} | {{smartphones.display}} | {{smartphones.price}}$ </p>
                         </div>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
