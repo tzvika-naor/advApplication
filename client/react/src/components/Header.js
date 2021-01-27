@@ -7,9 +7,9 @@ function Header (props) {
         props.resetSearch(true)
     }
     useEffect(() => {
-    setIsLoggedIn(props.isLoggedIn)
+        setIsLoggedIn(props.isLoggedIn)
     }, [props])
-    
+
     const onLogout = (e) => {
         props.setIsLoggedIn(false)
     }
@@ -22,26 +22,27 @@ function Header (props) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     {
-                    isLoggedIn ?
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link to='/smartphones' onClick={click} className="nav-link">Smartphones</Link>
-                            </li>
-                        </ul> : <div></div>
+                        isLoggedIn ?
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item">
+                                    <Link to='/smartphones' onClick={click} className="nav-link">Smartphones</Link>
+                                </li>
+                            </ul> : <div></div>
                     }
+                    <input type="text" className="form-control" placeholder="search something"></input>
                     {
-                    !isLoggedIn ? <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link to='/register' className="nav-link">Register</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to='/login' className="nav-link">Login</Link>
-                        </li></ul>
-                        : <ul className="navbar-nav ml-auto">
+                        !isLoggedIn ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link to='/' className="nav-link" onClick={onLogout}>Logout</Link>
+                                <Link to='/register' className="nav-link">Register</Link>
                             </li>
-                        </ul>
+                            <li className="nav-item">
+                                <Link to='/login' className="nav-link">Login</Link>
+                            </li></ul>
+                            : <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link to='/' className="nav-link" onClick={onLogout}>Logout</Link>
+                                </li>
+                            </ul>
                     }
                 </div>
             </div>

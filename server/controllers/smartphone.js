@@ -19,6 +19,7 @@ exports.searchQuery = (req, res, next) => {
 exports.getSmartphones = (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
+        console.log(documents)
         fetchedSmartphones = documents;
         brand = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.brand))].sort()
         display = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.display))].sort()
