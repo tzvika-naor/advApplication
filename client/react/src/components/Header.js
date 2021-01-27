@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
+import './Header.css'
 function Header (props) {
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
@@ -16,7 +17,7 @@ function Header (props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
             <div className="container">
-                <Link to='/' className="navbar-brand" onClick={click}>Start Bootstrap</Link>
+                <Link to='/' className="navbar-brand" onClick={click}><h1 className = "header">SmartShop</h1><img className="logoImage" src = "images/logo.png"></img></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>
@@ -29,7 +30,7 @@ function Header (props) {
                                 </li>
                             </ul> : <div></div>
                     }
-                    <input type="text" className="form-control" placeholder="search something"></input>
+
                     {
                         !isLoggedIn ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">

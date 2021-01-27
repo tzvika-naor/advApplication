@@ -14,7 +14,7 @@ import Home from './components/Home';
 import './App.css'
 function App (props) {
 
-  const [showQueryRes, setShowQueryRes] = useState('');
+  const [showQueryRes, setShowQueryRes] = useState(false);
   const [resaults, setResults] = useState([]);
   const [connectedUser, setConnectedUser] = useState(false);
   console.log(connectedUser);
@@ -39,7 +39,8 @@ function App (props) {
         <Route path='/' exact component={Home} />
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
         <Route path="/register" component={Register} />
-        <Route path="/login" render={() => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
+        <Route path="/login" render={
+          () => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
         <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} />} />
         <Fragment>
           <div className="row">
@@ -52,6 +53,7 @@ function App (props) {
           </div>
         </Fragment>
       </Switch>
+      <Home />
       <Footer />
     </Router >
   )
