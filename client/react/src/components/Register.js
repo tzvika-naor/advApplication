@@ -25,8 +25,8 @@ function Register () {
     return (
 
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="d-flex justify-content-center mt-3 mb-5">
-                <div id="box">
+            <div className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "265px" }}>
+                <div id="box" >
                     <div className="d-flex flex-column mt-2" >
                         <h1 className="form-group align-self-center mt-5" style={{ fontWeight: "bold" }}>Signup</h1>
                         <input className="form-control form-control-lg align-self-center w-75 mb-3 mt-4"

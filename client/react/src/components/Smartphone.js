@@ -13,11 +13,12 @@ function Smartphone (props) {
             id: props.smartphone.id,
             image: props.smartphone.image
         }
-        props.getId(addItem);
+        // props.getId(addItem);
+        props.getId(props.smartphone)
     }
     return (
         <div className="col-lg-4 col-md-6 mb-4">
-            <div id="card" style={{ marginBottom: '20px', backgroundColor:"white", marginRight:"50px" , padding:"20px" }}>
+            <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "50px", padding: "20px" }}>
 
                 <h3 className="card-title" style={{ marginLeft: "20px" }} > <span style={{ float: "right", cursor: "pointer", marginRight: "180px" }} ><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
                     <Link to={{

@@ -3,13 +3,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import history from '../History';
 import Payment from './Payment'
-
 const List = (props) => {
 
     const [smartphones, setSmartphones] = useState([]);
-    const [smartphoneBuy, setSmartphoneBuy] = useState([]);
+    const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [smartphoneId, setSmartphoneId] = useState([])
+    const [smartphonesIds, setSmartphonesIds] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
@@ -21,28 +20,26 @@ const List = (props) => {
                 })
                 setSmartphones(obj);
             })
-        // }
     }, []);
-
     const getId = (data) => {
-        setSmartphoneBuy([...smartphoneBuy, data]);
-        setSmartphoneId([...smartphoneId, data.id]);
+        // setSmartphonesInCart([...smartphonesInCart, data]);
+        setSmartphonesIds([...smartphonesIds, data.id])
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {
-        const user =props.connectedUser;
-         if (smartphoneBuy.length === 0)
+        const user = props.connectedUser;
+        if (smartphonesIds.length === 0)
             alert('your cart is empty')
         else {
-            history.push({
-                pathname: 'order',
-                smartphoneBuy: { smartphoneBuy },
-                totalPrice: { totalPrice },
-                smartphoneId: { smartphoneId },
+            history.push('order');
+            const itemsDetails = {
+                // smartphonesInCart: smartphonesInCart,
+                smartphonesIds: smartphonesIds,
+                totalPrice: totalPrice,
                 user: user
-            })
+            }
+            props.setItems(itemsDetails)
         }
-
     }
     if (props.activeComponent === 'smartphones') {
         if (!props.showQueryRes) {

@@ -1,33 +1,22 @@
 // import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useEffect, useState } from "react";
+import Smartphone from './Smartphone';
 function Order (props) {
-    console.log(props)
-    const item = {
-        id: props.data.location.smartphoneBuy.smartphoneBuy.smartphoneId,
-        totalPrice: props.data.location.totalPrice.totalPrice,
-        userId: props.data.location.user._id,
-        user: props.data.location.user
-    }
-    const order = {
-        smartphones: props.data.location.smartphoneId.smartphoneId,
-        userId: props.data.location.user._id,  
-    }
-    const [smartphone] = useState(props.data.location.smartphoneBuy.smartphoneBuy)
-    const [orderId, setOrderId] = useState([]);
+
+    const orderDetails = props.items;
+    const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'completed' })
 
     useEffect(() => {
-            console.log(item)
         axios.post('http://localhost:5000/api/order', order)
             .then(response => {
-                setOrderId(response.data.order.id)
-                console.log(response)
+                console.log(response.data.order.id)
             })
-    }, [] )
+    }, [])
 
     return (
         <div >
-            <h4> Order Id: {orderId}</h4>
+            {/* <h4> Order Id: {orderId}</h4>
             <ul className="list-unstyled" >
                 <h4 style={{ marginBottom: "20px", marginTop: "20px", marginLeft: "40px" }}> User Details</h4>
                 <div style={{ marginLeft: "60px", marginBottom: "20px" }}>
@@ -43,7 +32,7 @@ function Order (props) {
                 </ul>
             ))
             }
-            <h4>Total Price: {props.data.location.totalPrice.totalPrice}</h4>
+            <h4>Total Price: {location.totalPrice.totalPrice}</h4> */}
         </div>
 
     )

@@ -28,14 +28,13 @@ const Login = (props) => {
             })
     }
 
-
     return (
         <div>
             { loading ? <Spinner animation="border" role="status" size="xl" style={{ marginLeft: "45%", marginTop: "10%", marginBottom: "25%", width: "200px", height: "200px" }} >
                 <span className="sr-only">Loading...</span>
             </Spinner > : <div>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "200px" }}>
+                        <div id="wrapper" className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "645px" }}>
                             <div className="box">
                                 <div className="form-group">
                                     <div className="d-flex flex-column mt-5">
