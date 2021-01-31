@@ -24,15 +24,17 @@ function Order (props) {
                     <li><h5>Last Name: {orderDetails.user.lastname} </h5></li>
                     <li><h5>Email: {orderDetails.user.email}</h5></li>
                 </div></ul>
-            {orderDetails.smartphonesInCart.map(el => (
+            {orderDetails.smartphonesInCart.map((el, index) => (
                 <div>
-                    <ul>
+                    <ul className="list-unstyled" style={{ marginLeft: "100px" }}>
                         <div className="row" >
                             <li style={{ height: "120px", width: "500px" }} class="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price} </h4> </li>
-                            <li><input className="form-control input-lg" type="number" style={{marginTop:"50px",marginLeft:"20px", width:"60px"}}></input></li>
-                        </div>
+                            <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
+                                <label>Quantity</label>
+                                <li><input className="form-control input-lg" type="number" value={order.smartphonesIds[index].qnt} ></input></li>
+                            </div></div>
                     </ul>
-                 
+
                 </div>
 
             ))
