@@ -18,13 +18,19 @@ function Order (props) {
                 console.log(response.data.order.id)
             })
     }, [])
-
-
+    
     useEffect(() => {
         console.log(value)
     }, [value])
     const onChange = (index) => {
         console.log(index.target.value)
+    }
+    const setItem = (data) => {
+        console.log(data)
+        const valueCopy = value;
+        valueCopy[data.index] = data.value;
+        setValue(valueCopy)
+        console.log(value)
     }
     return (
         <div >
@@ -48,8 +54,8 @@ function Order (props) {
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
-                                        {/* <Quantity index={value[index]} value={value} onChange={(event,index )=> { setValue(event.target.value,index) }} /> */}
-                                        <li><input className="form-control input-lg" type="number" defaultValue={value[index]} onChange={event => setValue(event.target.value)}></input></li>
+                                        <Quantity index={index} value={value[index]} setItem={(data) => setItem(data)} />
+                                        {/* <li><input className="form-control input-lg" type="number" defaultValue={value[index]} onChange={event => setValue(event.target.value)}></input></li> */}
                                     </div>
                                 </div>
                             </div></div>
