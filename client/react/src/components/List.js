@@ -22,7 +22,7 @@ const List = (props) => {
             })
     }, []);
     const getId = (data) => {
-        // setSmartphonesInCart([...smartphonesInCart, data]);
+        setSmartphonesInCart([...smartphonesInCart, data]);
         setSmartphonesIds([...smartphonesIds, data.id])
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
@@ -33,7 +33,7 @@ const List = (props) => {
         else {
             history.push('order');
             const itemsDetails = {
-                // smartphonesInCart: smartphonesInCart,
+                smartphonesInCart: smartphonesInCart,
                 smartphonesIds: smartphonesIds,
                 totalPrice: totalPrice,
                 user: user

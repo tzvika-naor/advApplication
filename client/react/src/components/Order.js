@@ -16,23 +16,28 @@ function Order (props) {
 
     return (
         <div >
-            {/* <h4> Order Id: {orderId}</h4>
+            {/* <h4> Order Id: {orderId}</h4> */}
             <ul className="list-unstyled" >
                 <h4 style={{ marginBottom: "20px", marginTop: "20px", marginLeft: "40px" }}> User Details</h4>
                 <div style={{ marginLeft: "60px", marginBottom: "20px" }}>
-                    <li><h5>First Name: {item.user.firstname}</h5> </li>
-                    <li><h5>Last Name: {item.user.lastname} </h5></li>
-                    <li><h5>Email: {item.user.email}</h5></li>
+                    <li><h5>First Name: {orderDetails.user.firstname}</h5> </li>
+                    <li><h5>Last Name: {orderDetails.user.lastname} </h5></li>
+                    <li><h5>Email: {orderDetails.user.email}</h5></li>
                 </div></ul>
-            {smartphone.map(el => (
-                <ul>
-                    <div >
-                        <li style={{ height: "120px", width: "500px" }} class="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price} </h4> </li>
-                    </div>
-                </ul>
+            {orderDetails.smartphonesInCart.map(el => (
+                <div>
+                    <ul>
+                        <div className="row" >
+                            <li style={{ height: "120px", width: "500px" }} class="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price} </h4> </li>
+                            <li><input className="form-control input-lg" type="number" style={{marginTop:"50px",marginLeft:"20px", width:"60px"}}></input></li>
+                        </div>
+                    </ul>
+                 
+                </div>
+
             ))
             }
-            <h4>Total Price: {location.totalPrice.totalPrice}</h4> */}
+            <h4>Total Price: {orderDetails.totalPrice}</h4>
         </div>
 
     )
