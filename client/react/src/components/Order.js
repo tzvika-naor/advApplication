@@ -18,7 +18,7 @@ function Order (props) {
                 console.log(response.data.order.id)
             })
     }, [])
-    
+
     useEffect(() => {
         console.log(value)
     }, [value])
@@ -31,6 +31,18 @@ function Order (props) {
         valueCopy[data.index] = data.value;
         setValue(valueCopy)
         console.log(value)
+    }
+    const onCheckout = () => {
+        const orderCopy = order // saving the copy
+        orderCopy.smartphonesIds.map((item, index) => {
+            item.qnt = value[index];
+            // updating the latest quantity
+        })
+        setOrder(orderCopy);
+        axios.post('http://localhost:5000/api/order', orderCopy)
+            .then(response => {
+                console.log(response.data)
+            })
     }
     return (
         <div >
@@ -69,7 +81,7 @@ function Order (props) {
                         <h4>Total Price: {orderDetails.totalPrice}</h4>
                     </div>
                     <div className="col-md-2">
-                        <Button variant="primary" size="lg">
+                        <Button variant="primary" size="lg" onClick={onCheckout}>
                             Checkout
                     </Button>
                     </div>

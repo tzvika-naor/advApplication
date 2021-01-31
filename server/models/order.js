@@ -5,9 +5,12 @@ const Smartphone = require('./smartphone');
 const User = require('./user');
 
 const orderSchema = new Schema({
-    smartphones: [{ type: Schema.Types.ObjectId, ref: "Smartphone", required: true }], // array of products ids
+    smartphones: [{
+        id: { type: Schema.Types.ObjectId, ref: "Smartphone", required: true },
+        quantity: { type: Number, required: true, default: 0 }
+    }],
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    status: { type: String, default: 'completed' },
+    status: { type: String, default: 'in-progress' },
     date: { type: Date, default: Date.now }
 })
 
