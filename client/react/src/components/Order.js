@@ -13,7 +13,6 @@ function Order (props) {
                 console.log(response.data.order.id)
             })
     }, [])
-
     return (
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
@@ -32,11 +31,10 @@ function Order (props) {
                             <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                 <label>Quantity</label>
                                 <li><input className="form-control input-lg" type="number" value={order.smartphonesIds[index].qnt} ></input></li>
-                            </div></div>
+                            </div>
+                        </div>
                     </ul>
-
                 </div>
-
             ))
             }
             <h4>Total Price: {orderDetails.totalPrice}</h4>
