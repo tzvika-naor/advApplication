@@ -21,7 +21,7 @@ const List = (props) => {
                 setSmartphones(obj);
             })
     }, []);
-    const getId = (data) => {
+    const addToOrder = (data) => {
         console.log(data);
         const newData = {
             id: data.id,
@@ -69,7 +69,7 @@ const List = (props) => {
                                 return <Smartphone
                                     key={index}
                                     smartphone={smartphone}
-                                    getId={(data) => getId(data)}
+                                    addToOrder={(data) => addToOrder(data)}
                                 />
                             })
                         }
@@ -87,7 +87,7 @@ const List = (props) => {
                                 return <Smartphone
                                     key={index}
                                     smartphone={smartphone}
-                                    getId={(data) => getId(data)}
+                                    addToOrder={(data) => addToOrder(data)}
                                 />
                             })
                         }
