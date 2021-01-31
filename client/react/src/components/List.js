@@ -22,8 +22,25 @@ const List = (props) => {
             })
     }, []);
     const getId = (data) => {
-        setSmartphonesInCart([...smartphonesInCart, data]);
-        setSmartphonesIds([...smartphonesIds, data.id])
+        console.log(data);
+        const newData = {
+            id: data.id,
+            qnt: 1
+        }
+        const itemIndex = smartphonesIds.findIndex(item => item.id === data.id);
+        var newSmartIds = smartphonesIds.filter(item => item.id !== data.id);
+
+        if (itemIndex > -1) {
+            // the item is already in the cart no need to add into setSmartphonesInCart
+            var newItem = smartphonesIds[itemIndex]
+            newItem.qnt += 1;
+            newSmartIds.push(newItem)
+            setSmartphonesIds(newSmartIds)
+        }
+        else {
+            setSmartphonesInCart([...smartphonesInCart, data]);
+            setSmartphonesIds([...smartphonesIds, newData])
+        }
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
     const goToPayment = () => {

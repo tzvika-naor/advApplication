@@ -3,7 +3,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import history from '../History';
 // import credit from '/credit.jpg';
 function Smartphone (props) {
-    console.log(props)
+    // console.log(props)
     const click = (event, i) => {
         console.log(props)
         alert(`${props.smartphone.phoneModel} added to your order`);

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import Smartphone from './Smartphone';
 function Order (props) {
-
+    console.log(props)
     const orderDetails = props.items;
     const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'completed' })
 
