@@ -8,7 +8,7 @@ function Quantity (props) {
         console.log(index);
         const newItem = {
             index: index,
-            value: event.target.value
+            value: +event.target.value
         }
         props.setItem(newItem)
     }

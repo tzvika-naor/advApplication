@@ -13,7 +13,7 @@ function Order (props) {
     const orderDetails = props.items;
     const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'completed' })
     const [value, setValue] = useState(order.smartphonesIds.map(item => item.qnt))
-
+    const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
     useEffect(() => {
         axios.post('http://localhost:5000/api/order', order)
             .then(response => {
@@ -23,8 +23,11 @@ function Order (props) {
 
     const setItem = (data) => {
         const valueCopy = value;
-        valueCopy[data.index] = data.value;
+        if (+data.value > 0)
+            valueCopy[data.index] = +data.value;
         setValue(valueCopy)
+        const total = valueCopy.reduce((total, current, index) => total + current * (+props.items.smartphonesInCart[index].price), 0)
+        setTotalPrice(total)
     }
     const onCheckout = () => {
         // saving the copy
@@ -76,7 +79,7 @@ function Order (props) {
             <div className="col-md-4" style={{ marginBottom: "30px", marginTop: "30px" }}>
                 <div className="row" >
                     <div className="col-md-6 offset-1">
-                        <h4>Total Price: {orderDetails.totalPrice}</h4>
+                        <h4>Total Price: {totalPrice}</h4>
                     </div>
                     <div className="col-md-1">
                         <Button variant="secondary" size="lg" onClick={goBack}>
