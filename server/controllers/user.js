@@ -93,3 +93,28 @@ exports.updateUser = (req, res, next) => {
             });
         });
 }
+
+exports.deleteUser = (req, res, next) => {
+    console.log(req.body.email)
+    User.findOne({ email: req.body.email, password: req.body.password }).then(document => {
+        console.log(document)
+        if (result.n > 0) {
+            User.deleteOne({ _id: document._id }).then(result => {
+                console.log(result)
+                res.status(200).json({
+                    message: "Deletion successful!"
+                })
+            })
+        } else {
+            res.status(401).json({ message: "Not authorized!" });
+        }
+    })
+        .catch(error => {
+            res.status(500).json({
+                message: "Somthing went wrong!",
+                error: error
+            });
+        });
+}
+
+

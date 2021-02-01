@@ -8,19 +8,16 @@ import './Login.css';
 
 
 const Login = (props) => {
+    const [toDelete, setToDelete] = useState(false)
     const [resetPassword, setResetPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const { errors, register, handleSubmit } = useForm();
 
-    const onSubmit = data => {
-        if (resetPassword === false) {
+    const onSubmit = (data, event) => {
+        console.log(event.target.value)
+        if (resetPassword === false) { // Login !!!!!!!
             axios.post('http://localhost:5000/api/user/login', data)
                 .then(response => {
-                    var temp = false;
-                    if (response) {
-                        temp = true
-                    }
-                    console.log(temp)
                     const user = response.data.user;
                     if (response.data.user) {
                         alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
@@ -38,18 +35,40 @@ const Login = (props) => {
                 })
         }
         else {
-            axios.put('http://localhost:5000/api/user/update', data).then(response => {
-                console.log(response)
+            //update!!! we want to update!!!!!!
+            if (!toDelete) {
+                axios.put('http://localhost:5000/api/user/update', data).then(response => {
+                    alert('user password updated!')
+                })
+                setResetPassword(false)
+            }
+            //delete
+            else { // we want to delete !!!!!
+                console.log('on delete')
 
-            })
-            setResetPassword(false)
+                fetch('http://localhost:5000/api/user/deleteUser', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+                    },
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    response.json()
+                    alert('user has been deleted')
+                }
+                    , error => {
+                        if (error.response.status === 500) {
+                            alert('cannot delete user email and password does not match')
+                        }
+                    })
+            }
         }
     }
     const resetCredentials = () => {
         setResetPassword(!resetPassword)
     }
-    const deleteUser = () => {
-        console.log('blabla')
+    const deleteUser = (e) => {
+        setToDelete(!toDelete)
     }
 
     return (
@@ -86,13 +105,20 @@ const Login = (props) => {
                                         </div>
                                         {!resetPassword ?
                                             <input className="login align-self-center mt-5" type="submit" value="Login" /> :
-                                            <input className="login align-self-center mt-5" type="submit" value="Reset" />
+                                            !toDelete ?
+                                                <input className="login align-self-center mt-5" type="submit" value="Reset" />
+                                                : <input className="delete align-self-center mt-4 mb-4" type="submit" value="Delete"
+                                                />
                                         }
-                                        {resetPassword ? <input className="delete align-self-center mb-4" type="submit" value="Delete" onClick={deleteUser}
-                                        /> : <div></div>}
                                         {!resetPassword ?
                                             <Link className="link align-self-center" onClick={resetCredentials}>Forgot password?</Link> :
-                                            <Link className="link align-self-center" onClick={resetCredentials}>Login?</Link>
+                                            <div className="d-flex justify-content-center">
+                                                <Link className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
+                                                {!toDelete ?
+                                                    <Link className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
+                                                    <Link className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
+                                                }
+                                            </div>
                                         }
                                     </div>
                                 </div>
