@@ -4,13 +4,15 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import Smartphone from './Smartphone';
 import Quantity from './Quantity';
+import history from '../History'
 function Order (props) {
     //set the total price with array reduce
+
+
     console.log(props)
     const orderDetails = props.items;
     const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'completed' })
     const [value, setValue] = useState(order.smartphonesIds.map(item => item.qnt))
-
 
     useEffect(() => {
         axios.post('http://localhost:5000/api/order', order)
@@ -19,30 +21,26 @@ function Order (props) {
             })
     }, [])
 
-    useEffect(() => {
-        console.log(value)
-    }, [value])
-    const onChange = (index) => {
-        console.log(index.target.value)
-    }
     const setItem = (data) => {
-        console.log(data)
         const valueCopy = value;
         valueCopy[data.index] = data.value;
         setValue(valueCopy)
-        console.log(value)
     }
     const onCheckout = () => {
-        const orderCopy = order // saving the copy
+        // saving the copy
+        const orderCopy = order
+        // updating the latest quantity
         orderCopy.smartphonesIds.map((item, index) => {
             item.qnt = value[index];
-            // updating the latest quantity
         })
         setOrder(orderCopy);
         axios.post('http://localhost:5000/api/order', orderCopy)
             .then(response => {
                 console.log(response.data)
             })
+    }
+    const goBack = () => {
+        history.push("/smartphones")
     }
     return (
         <div >
@@ -67,25 +65,31 @@ function Order (props) {
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
                                         <Quantity index={index} value={value[index]} setItem={(data) => setItem(data)} />
-                                        {/* <li><input className="form-control input-lg" type="number" defaultValue={value[index]} onChange={event => setValue(event.target.value)}></input></li> */}
                                     </div>
                                 </div>
-                            </div></div>
+                            </div>
+                        </div>
                     </ul>
                 </div>
             ))
             }
             <div className="col-md-4" style={{ marginBottom: "30px", marginTop: "30px" }}>
                 <div className="row" >
-                    <div className="col-md-7 offset-1">
+                    <div className="col-md-6 offset-1">
                         <h4>Total Price: {orderDetails.totalPrice}</h4>
+                    </div>
+                    <div className="col-md-1">
+                        <Button variant="secondary" size="lg" onClick={goBack}>
+                            Cancel
+                    </Button>
                     </div>
                     <div className="col-md-2">
                         <Button variant="primary" size="lg" onClick={onCheckout}>
                             Checkout
                     </Button>
                     </div>
-                </div></div>
+                </div>
+            </div>
         </div>
 
     )
