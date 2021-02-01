@@ -23,7 +23,7 @@ function Order (props) {
 
     const setItem = (data) => {
         const valueCopy = value;
-        if (+data.value > 0)
+        if (+data.value > -1)
             valueCopy[data.index] = +data.value;
         setValue(valueCopy)
         const total = valueCopy.reduce((total, current, index) => total + current * (+props.items.smartphonesInCart[index].price), 0)

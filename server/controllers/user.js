@@ -1,4 +1,5 @@
 
+const user = require('../models/user');
 const User = require('../models/user');
 
 exports.getUsers = (req, res, next) => {
@@ -62,6 +63,29 @@ exports.userLogin = (req, res, next) => {
                 });
             }
         })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+                message: 'somthing went wrong!'
+            });
+        });
+}
+// update user
+exports.updateUser = (req, res, next) => {
+    console.log(req.body)
+    //get the document by id
+    User.findOne({ email: req.body.email }).then(document => {  //get back the object from the database
+        if (document) {
+            //update the password
+            document.password = req.body.password
+            User.updateOne({ _id: document._id }, document).then(doc => {
+                res.status(200).json({
+                    user: doc,
+                    message: "user password updated"
+                })
+            })
+        }
+    })
         .catch(err => {
             res.status(500).json({
                 error: err,

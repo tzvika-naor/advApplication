@@ -1,5 +1,4 @@
 const Order = require('../models/order');
-const Product = require('../models/product')
 exports.getOrders = (req, res, next) =>{
     console.log('i am Order controller')
     const orderQuery = Order.find().//return all the Orders
