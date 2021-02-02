@@ -53,13 +53,15 @@ const Login = (props) => {
                     },
                     body: JSON.stringify(data)
                 }).then(response => {
-                    response.json()
-                    alert('user has been deleted')
+                    if (response.status === 200)
+                        alert('user has been deleted')
+                    if (response.status === 500)
+                        alert('cannot delete user email and password does not match')
+                    if (response.status === 401)
+                        alert('cannot delete user email and password does not match')
                 }
                     , error => {
-                        if (error.response.status === 500) {
-                            alert('cannot delete user email and password does not match')
-                        }
+                        console.log(error)
                     })
             }
         }
@@ -116,7 +118,7 @@ const Login = (props) => {
                                                 <Link to className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
                                                 {!toDelete ?
                                                     <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
-                                                    <Link to  className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
+                                                    <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
                                                 }
                                             </div>
                                         }

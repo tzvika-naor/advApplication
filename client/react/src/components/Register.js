@@ -19,7 +19,8 @@ function Register () {
     const onSubmit = data => {
         axios.post('http://localhost:5000/api/user/signup', data)
             .then(response => {
-                history.push('/')
+                alert('user created')
+                history.push('/login')
             })
     }
     return (

@@ -97,22 +97,29 @@ exports.updateUser = (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     console.log(req.body.email)
     const user = await User.findOne({ email: req.body.email, password: req.body.password })
-    User.deleteOne({ _id: user._id }).then(result => {
-        if (result.n > 0) {
-            res.status(200).json({
-                message: "Deletion successful!"
-            })
-        }
-        else {
-            res.status(401).json({ message: "Not authorized!" });
-        }
-    })
-        .catch(error => {
-            res.status(500).json({
-                message: "Somthing went wrong!",
-                error: error
+    console.log(user)
+    if (user) {
+        User.deleteOne({ _id: user._id }).then(result => {
+            if (result.n > 0) {
+                res.status(200).json({
+                    message: "Deletion successful!"
+                })
+            }
+            else {
+                res.status(401).json({ message: "Not authorized!" });
+            }
+        })
+            .catch(error => {
+                res.status(500).json({
+                    message: "Somthing went wrong!",
+                    error: error
+                });
             });
-        });
+
+    }
+    else {
+        res.status(401).json({ message: "Not authorized!" });
+    }
 }
 
 
