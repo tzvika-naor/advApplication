@@ -6,13 +6,13 @@
                 <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
                     <div class="card-header">
                         <h5>Order Number: {{order._id}}</h5>
-                        <h5>User Details: {{order.userId._id}}</h5> 
+                        <h5>User Details: {{order.userId?._id}}</h5> 
                        
-                        <p>email: {{order.userId.email}}</p>
-                        <p>first name: {{order.userId.firstname}}</p>
-                        <p>last name: {{order.userId.lastname}}</p>
-                        <p>password: {{order.userId.password}}</p>
-                        <p>phone: {{order.userId.phone}}</p>
+                        <p>email: {{order.userId?.email}}</p>
+                        <p>first name: {{order.userId?.firstname}}</p>
+                        <p>last name: {{order.userId?.lastname}}</p>
+                        <p>password: {{order.userId?.password}}</p>
+                        <p>phone: {{order.userId?.phone}}</p>
 
                     </div>
                     <div class="card-body">
@@ -20,7 +20,9 @@
                         <h3>Order Status: {{order.status}}</h3>
                         <h3>Smartphones Details:</h3>
                         <div *ngFor="let smartphones of order.smartphones">
-                            <p>{{smartphones.phoneModel}} | {{smartphones.brand}} | {{smartphones.display}} | {{smartphones.price}}$ </p>
+                            <!-- <p>{{smartphones.phoneModel}} | {{smartphones.brand}} | {{smartphones.display}} | {{smartphones.price}}$ </p> -->
+                            <p>{{smartphones.id}} | {{smartphones.quantity}} </p>
+                        
                         </div>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>

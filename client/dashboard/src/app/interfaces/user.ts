@@ -1,4 +1,5 @@
 export interface User {
+    isAdmin: Boolean;
     firstname: string;
     lastname: string;
     email: string;

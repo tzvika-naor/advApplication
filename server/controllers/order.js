@@ -1,10 +1,14 @@
 const Order = require('../models/order');
 exports.getOrders = (req, res, next) => {
     console.log('i am Order controller')
-    const orderQuery = Order.find().//return all the Orders
-        populate('smartphones').
-        populate('userId').
-        then(documents => {
+    const orderQuery = Order.find()//return all the Orders
+        .populate('userId')
+        // .populate({
+        //     path: 'smartphones',
+        //     populate: ({ path: 'id', model: 'Smartphone' })
+        // })
+        .populate('smartphones')
+        .then(documents => {
             console.log(documents)
             fetchedOrders = documents;
             return Order.count() // returns all the number of that match query from this database... we made no filtering so we got all 100 Orders
@@ -42,7 +46,7 @@ exports.createOrder = (req, res, next) => {
     const smartphonesIds = req.body.smartphonesIds
     var smartphones = [];
     smartphonesIds.map(s => {
-        smartphones.push( {id: s.id ,quantity: s.qnt})
+        smartphones.push({ id: s.id, quantity: s.qnt })
     })
     console.log(smartphones)
     const order = new Order({

@@ -11,6 +11,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { UsersComponent } from './users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SmartphonesComponent } from './smartphones/smartphones.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import { SmartphonesComponent } from './smartphones/smartphones.component';
     FooterComponent,
     OrdersComponent,
     UsersComponent,
-    SmartphonesComponent
+    SmartphonesComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     AppRoutingModule
   ],

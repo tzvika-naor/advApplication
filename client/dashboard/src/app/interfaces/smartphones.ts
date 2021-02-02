@@ -8,6 +8,4 @@ export interface Smartphone {
     rearCamera?: string;
     image?: string;
     price?: number;
-
-
 }

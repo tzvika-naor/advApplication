@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Smartphone } from '../interfaces/smartphone';
+import { Smartphone } from '../interfaces/smartphones';
 import { SmartphonesService } from './smartphones.service';
 @Component({
   selector: 'app-smartphones',
