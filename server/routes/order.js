@@ -7,7 +7,7 @@ router.get("", orderController.getOrders); //all order ===     axios.get(http://
 // single order   axios.get(http://localhost:5000/api/orders/:id)
 router.post("", orderController.createOrder);
 // add a new order to the database   axios.post(http://localhost:5000/api/orders)
-// router.put("/:id", orderController.updateOrder); //update an existing order    axios.updated(http://localhost:5000/api/orders:/id)
-// router.delete("/:id", orderController.deleteOrder);                           //axios.delete(http://localhost:5000/api/orders/:id)
+router.put("/checkout/:id", orderController.updateOrder); //update an existing order before checkout    axios.updated(http://localhost:5000/api/orders:/id)
+router.delete("/delete/:id", orderController.deleteOrder);                           //axios.delete(http://localhost:5000/api/orders/:id)
 
 module.exports = router;
