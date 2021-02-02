@@ -1,18 +1,26 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
 import history from '../History';
 // import credit from '/credit.jpg';
+
+
+//Item added to Cart
 function Smartphone (props) {
+    var [itemCount, setCount] = useState(1); //Counter fo each smartphone added to order
     console.log(props)
     const click = (event, i) => {
-        console.log(props)
+        console.log("Props on adding item", props)
         alert(`${props.smartphone.phoneModel} added to your order`);
+        setCount(itemCount => itemCount + 1)
         const addItem = {
             phoneModel: props.smartphone.phoneModel,
             price: +props.smartphone.price,
             id: props.smartphone.id,
-            image: props.smartphone.image
+            image: props.smartphone.image,
+            itemCount: itemCount
         }
+        console.log("Props on adding item with itemCount", addItem)
         props.getId(addItem);
     }
     return (

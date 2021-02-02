@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Button } from 'react-bootstrap';
+import axios from 'axios'
+import { useEffect, useState } from "react";
 import history from '../History';
-import axios from 'axios';
-function Register () {
+import { Button } from 'react-bootstrap';
+function Checkout () {
 
 
     const [formData, setFormData] = useState({
@@ -88,4 +88,4 @@ function Register () {
         </div>
     )
 }
-export default Register;
+export default Checkout;

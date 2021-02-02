@@ -9,13 +9,14 @@ import { Fragment } from 'react';
 import Register from './components/Register';
 import Login from './components/Login';
 import SmartphoneEdit from './components/SmartphoneEdit'
-import Order from './components/Order'
+import Order from './components/Order';
+import Checkout from './components/Checkout';
 import Home from './components/Home';
 import './App.css'
 function App (props) {
 
   const [showQueryRes, setShowQueryRes] = useState('');
-  const [resaults, setResults] = useState([]);
+  const [results, setResults] = useState([]);
   const [connectedUser, setConnectedUser] = useState(false);
   console.log(connectedUser);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,13 +42,14 @@ function App (props) {
         <Route path="/register" component={Register} />
         <Route path="/login" render={() => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
         <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} />} />
+        <Route path="/order/checkout" component={Checkout} />
         <Fragment>
           <div className="row">
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
               <Search searchResults={searchResults} />
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
-              <Route path='/smartphones' render={(props) => <List searchResults={resaults} showQueryRes={showQueryRes} connectedUser={connectedUser} activeComponent={('smartphones')} user={props} />} />
+              <Route path='/smartphones' render={(props) => <List searchResults={results} showQueryRes={showQueryRes} connectedUser={connectedUser} activeComponent={('smartphones')} user={props} />} />
             </div>
           </div>
         </Fragment>

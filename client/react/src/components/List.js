@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import history from '../History';
 import Payment from './Payment'
+import { json } from 'body-parser';
 
 const List = (props) => {
 
     const [smartphones, setSmartphones] = useState([]);
-    const [smartphoneBuy, setSmartphoneBuy] = useState([]);
+    const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [smartphoneId, setSmartphoneId] = useState([])
+    //const [smartphonesId, setSmartphonesId] = useState([]);
+    //var [itemCount, setCount] = useState(0); //Counter fo each smartphone added to order
+
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
@@ -24,28 +27,44 @@ const List = (props) => {
         // }
     }, []);
 
+    //Smartphone added to order
     const getId = (data) => {
-        setSmartphoneBuy([...smartphoneBuy, data]);
-        setSmartphoneId([...smartphoneId, data.id]);
+        var result1 = smartphonesInCart.find(el => el.id === data.id) //Check if the item is already added to cart
+        //var result2 = smartphonesId.find(el => el.id === data.id) //Check if the item is already added to order array too
+        console.log("RESULT:" , result1);
+        
+        if(!result1){ //The item not added to cart yet
+        setSmartphonesInCart([...smartphonesInCart, {phoneModel: data.phoneModel, price: data.price, id: data.id, image: data.image, itemCount: data.itemCount }]);
+        //setSmartphonesId([...smartphonesId, {id: data.id, itemCount: data.itemCount}]);
+        }
+        else //The item added to cart, update the count
+        {
+            result1.itemCount++;
+            //result2.itemCount++;
+        }
+        //console.log(smartphonesId);
         setTotalPrice(totalPrice => totalPrice + data.price);
+        //setTotalPrice(totalPrice => totalPrice + (data.price * data.itemCount));
     }
     const goToPayment = () => {
-        const user =props.connectedUser;
-         if (smartphoneBuy.length === 0)
+        const user = props.connectedUser;
+         if (smartphonesInCart.length === 0)
             alert('your cart is empty')
         else {
+           
             history.push({
                 pathname: 'order',
-                smartphoneBuy: { smartphoneBuy },
+                smartphonesInCart: { smartphonesInCart },
                 totalPrice: { totalPrice },
-                smartphoneId: { smartphoneId },
+                //smartphonesId: { smartphonesId },
                 user: user
             })
+            
         }
 
     }
     if (props.activeComponent === 'smartphones') {
-        if (!props.showQueryRes) {
+        if (!props.showQueryRes) { //Else is the same
             return (
                 <div>
                     <Payment goToPayment={goToPayment} />
