@@ -94,18 +94,16 @@ exports.updateUser = (req, res, next) => {
         });
 }
 
-exports.deleteUser = (req, res, next) => {
+exports.deleteUser = async (req, res, next) => {
     console.log(req.body.email)
-    User.findOne({ email: req.body.email, password: req.body.password }).then(document => {
-        console.log(document)
+    const user = await User.findOne({ email: req.body.email, password: req.body.password })
+    User.deleteOne({ _id: user._id }).then(result => {
         if (result.n > 0) {
-            User.deleteOne({ _id: document._id }).then(result => {
-                console.log(result)
-                res.status(200).json({
-                    message: "Deletion successful!"
-                })
+            res.status(200).json({
+                message: "Deletion successful!"
             })
-        } else {
+        }
+        else {
             res.status(401).json({ message: "Not authorized!" });
         }
     })
