@@ -5,6 +5,7 @@ import history from '../History';
 import Payment from './Payment'
 const List = (props) => {
 
+    const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -70,6 +71,7 @@ const List = (props) => {
                                     key={index}
                                     smartphone={smartphone}
                                     addToOrder={(data) => addToOrder(data)}
+                                    isAdmin={isAdmin}
                                 />
                             })
                         }
@@ -88,6 +90,7 @@ const List = (props) => {
                                     key={index}
                                     smartphone={smartphone}
                                     addToOrder={(data) => addToOrder(data)}
+                                    isAdmin={isAdmin}
                                 />
                             })
                         }
