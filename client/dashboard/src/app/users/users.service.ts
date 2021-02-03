@@ -14,4 +14,7 @@ export class UsersService {
   createNewUser(form) {
     return this.http.post('http://localhost:5000/api/user/signup', form);
   }
+  deleteUser(userId) {
+    return this.http.delete(`http://localhost:5000/api/user/deleteUserByAdmin/${userId}`);
+  }
 }

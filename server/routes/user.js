@@ -7,5 +7,5 @@ router.post("/login", UserController.userLogin);
 router.get("", UserController.getUsers);
 router.put("/update",UserController.updateUser);
 router.delete("/deleteUser",UserController.deleteUser);
-
+router.delete("/deleteUserByAdmin/:id",UserController.deleteUserByAdmin);
 module.exports = router;

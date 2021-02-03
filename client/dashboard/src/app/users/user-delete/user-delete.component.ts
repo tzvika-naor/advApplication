@@ -15,10 +15,18 @@ export class UserDeleteComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
   }
-  getUsers() {
+  getUsers(): void {
     this.usersService.getAllUsers().subscribe(
       (response: any) => {
         this.users = response.user;
+      }
+    );
+  }
+  deleteUser(id): void {
+    console.log(id);
+    this.usersService.deleteUser(id).subscribe(
+      (response: any) => {
+        console.log(response);
       }
     );
   }
