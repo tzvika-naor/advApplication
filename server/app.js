@@ -22,6 +22,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', "GET, POST, PATCH, UPDATE, DELETE, PUT , OPTIONS");
     next();
 });
+var cors = require('cors');
+app.use(cors());
 app.use("/api/order", orderRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/smartphone", smartphoneRoutes);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-create',
@@ -16,12 +17,15 @@ export class UserCreateComponent implements OnInit {
     password: '',
     phone: ''
   };
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
 
   }
-  onSubmit(form) {
-    console.log(form)
+  onSubmit(formData): void {
+    console.log(formData.form.value);
+    this.usersService.createNewUser(formData.form.value).subscribe(res => {
+      console.log(res);
+    });
   }
 }

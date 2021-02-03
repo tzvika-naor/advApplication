@@ -17,7 +17,9 @@ exports.getUsers = (req, res, next) => {
     })
 }
 exports.createUser = (req, res, next) => {
+    console.log(req.body)
     const user = new User({
+        isAdmin: req.body.isAdmin,
         email: req.body.email,
         password: req.body.password,
         firstname: req.body.firstname,
@@ -30,6 +32,7 @@ exports.createUser = (req, res, next) => {
             res.status(201).json({
                 message: "user created successfully",
                 user: {
+                    isAdmin: newUser.isAdmin,
                     email: newUser.email,
                     password: newUser.password,
                     firstname: newUser.firstname,

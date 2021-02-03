@@ -1,22 +1,5 @@
-<app-user-create></app-user-create>
-<!-- <div class="container">
-    <h4>USERS</h4>
-    <div *ngFor="let user of users">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-2 col-md-6 offset-md-2">
-                <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
-                    <div class="card-header">
-                        <h5>User ID: {{user._id}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <h3>First Name: {{user.firstname}}</h3>
-                        <h3>Last Name: {{user.lastname}}</h3>
-                        <h3>Email: {{user.email}}</h3>
-                        <h3>Password: {{user.password}}</h3>
-                    </div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" [routerLink]="'create'">Create User</button>
+    <button type="button" class="btn btn-info" [routerLink]="'delete'" style="margin-left:5px">Users List</button>
+</div>
+<router-outlet></router-outlet>

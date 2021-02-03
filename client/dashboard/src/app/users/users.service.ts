@@ -11,4 +11,7 @@ export class UsersService {
   getAllUsers() {
     return this.http.get('http://localhost:5000/api/user');
   }
+  createNewUser(form) {
+    return this.http.post('http://localhost:5000/api/user/signup', form);
+  }
 }

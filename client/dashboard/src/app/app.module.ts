@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SmartphonesComponent } from './smartphones/smartphones.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { FormsModule } from '@angular/forms';
+import { UserDeleteComponent } from './users/user-delete/user-delete.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     OrdersComponent,
     UsersComponent,
     SmartphonesComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserDeleteComponent
   ],
   imports: [
     BrowserModule,
