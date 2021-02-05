@@ -1,7 +1,18 @@
-
-const user = require('../models/user');
 const User = require('../models/user');
 
+exports.getUser = (req, res, next) => {
+    User.findOne({ _id: req.params.id }).then(document => {
+        res.status(200).json({
+            message: "user fetch successfuly",
+            user: document
+        })
+    }).catch(error => {
+        res.status(500).json({
+            message: 'user fetching failed!',
+            error: error
+        })
+    })
+}
 exports.getUsers = (req, res, next) => {
     const fetchUsers = User.find();
     fetchUsers.then(documents => {
@@ -96,7 +107,20 @@ exports.updateUser = (req, res, next) => {
             });
         });
 }
-
+exports.updateByUserId = (req, res, next) => {
+    User.updateOne({ _id: req.body.id }, req.body).then(doc => {
+        res.status(200).json({
+            user: doc,
+            message: "user password updated"
+        })
+    })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+                message: 'somthing went wrong!'
+            });
+        });
+}
 exports.deleteUser = async (req, res, next) => {
     console.log(req.body.email)
     const user = await User.findOne({ email: req.body.email, password: req.body.password })

@@ -15,6 +15,10 @@ const routes: Routes = [
       component: UserCreateComponent, // child route component that the router renders
     },
     {
+      path: 'update/:id', // child route path
+      component: UserCreateComponent // child route component that the router renders
+    },
+    {
       path: 'delete',
       component: UserDeleteComponent,
     },

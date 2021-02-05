@@ -30,4 +30,5 @@ export class UserDeleteComponent implements OnInit {
       }
     );
   }
+
 }

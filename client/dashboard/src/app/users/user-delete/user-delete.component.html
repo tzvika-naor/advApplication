@@ -13,9 +13,9 @@
                     <h3>Email: {{user.email}}</h3>
                     <h3>Password: {{user.password}}</h3>
                 </div>
-                <button type="button" class="btn btn-primary">Update</button>
-                <button type="button" class="btn btn-danger"
-                    style="margin-top:5px" (click)="deleteUser(user._id)">Delete</button>
+                <button type="button" class="btn btn-primary" [routerLink]="['/users/update', user._id]">Update</button>
+                <button type="button" class="btn btn-danger" style="margin-top:5px"
+                    (click)="deleteUser(user._id)">Delete</button>
             </div>
         </div>
     </div>
