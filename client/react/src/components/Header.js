@@ -13,6 +13,9 @@ function Header (props) {
     const onLogout = (e) => {
         props.setIsLoggedIn(false)
     }
+    const searchByText = (event) => {
+        
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
             <div className="container">
@@ -29,7 +32,7 @@ function Header (props) {
                                 </li>
                             </ul> : <div></div>
                     }
-                    <input type="text" className="form-control" placeholder="search something"></input>
+                    <input type="text" className="form-control" placeholder="search something" onKeyUp={searchByText}></input>
                     {
                         !isLoggedIn ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">

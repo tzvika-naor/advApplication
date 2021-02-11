@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RealtimeService } from '../realtime.service';
 
 @Component({
   selector: 'app-header',
@@ -6,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+ 
 
-  constructor() { }
+  constructor() {
+  
+  }
+
 
   ngOnInit(): void {
+
   }
   orders(): void {
-  
+
   }
 }

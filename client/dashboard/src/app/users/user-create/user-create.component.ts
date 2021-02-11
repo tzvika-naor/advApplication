@@ -46,7 +46,6 @@ export class UserCreateComponent implements OnInit {
     }
   }
   getUser() {
-    console.log('get user');
     this.user$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         return this.usersService.getUser(params.get('id'));

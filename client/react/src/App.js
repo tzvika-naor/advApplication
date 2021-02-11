@@ -12,6 +12,9 @@ import SmartphoneEdit from './components/SmartphoneEdit'
 import Order from './components/Order'
 import Home from './components/Home';
 import './App.css'
+import socktIoClient from "socket.io-client";
+
+
 function App (props) {
   const [items, setItems] = useState([])
   const [showQueryRes, setShowQueryRes] = useState('');

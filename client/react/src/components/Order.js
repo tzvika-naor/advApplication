@@ -2,12 +2,10 @@
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { useEffect, useState } from "react";
-import Smartphone from './Smartphone';
 import Quantity from './Quantity';
 import history from '../History'
 function Order (props) {
     //set the total price with array reduce
-
 
     console.log(props)
     const orderDetails = props.items;
@@ -15,10 +13,10 @@ function Order (props) {
     const [value, setValue] = useState(order.smartphonesIds.map(item => item.qnt))
     const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
     useEffect(() => {
-        axios.post('http://localhost:5000/api/order', order)
-            .then(response => {
-                console.log(response.data.order.id)
-            })
+        // axios.post('http://localhost:5000/api/order', order)
+        //     .then(response => {
+        //         console.log(response.data.order.id)
+        //     })
     }, [])
 
     const setItem = (data) => {
@@ -41,6 +39,8 @@ function Order (props) {
             .then(response => {
                 console.log(response.data)
             })
+            //add wbsocket new order
+         
     }
     const goBack = () => {
         history.push("/smartphones")
