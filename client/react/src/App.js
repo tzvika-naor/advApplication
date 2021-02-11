@@ -53,7 +53,6 @@ function App (props) {
           </div>
         </Fragment>
       </Switch>
-      <Home />
       <Footer />
     </Router >
   )

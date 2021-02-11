@@ -1,14 +1,30 @@
 .header{
-    position:fixed;
+    
     left: 45%;
     color: black;
-    margin-top: 0px;
+    margin-top: 20px;
     
-   
+     
 }
 .logoImage{
     width: 50px;
   height: 60px;
-  position: fixed;
-  left:41%;
+
+ 
+}
+
+.fixed-top{
+  height: 10%;
+}
+.search{
+  overflow: hidden;
+  float: right;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 7px 200px;
+  text-decoration: none;
+  font-size: 17px;
+  margin-left: 20px;
+  margin-top: 6px;
 }
