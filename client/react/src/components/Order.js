@@ -9,15 +9,9 @@ function Order (props) {
 
     console.log(props)
     const orderDetails = props.items;
-    const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'completed' })
+    const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'in-progress' })
     const [value, setValue] = useState(order.smartphonesIds.map(item => item.qnt))
     const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
-    useEffect(() => {
-        // axios.post('http://localhost:5000/api/order', order)
-        //     .then(response => {
-        //         console.log(response.data.order.id)
-        //     })
-    }, [])
 
     const setItem = (data) => {
         const valueCopy = value;
@@ -40,7 +34,8 @@ function Order (props) {
                 console.log(response.data)
             })
             //add wbsocket new order
-         
+        alert(`order completed`);
+        history.push('/smartphones')
     }
     const goBack = () => {
         history.push("/smartphones")

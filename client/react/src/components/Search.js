@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import history from '../History'
 function Search (props) {
     const location = useLocation();
     console.log(location);

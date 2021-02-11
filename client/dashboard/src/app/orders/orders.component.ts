@@ -24,7 +24,6 @@ export class OrdersComponent implements OnInit {
         this.orders = response.orders;
         console.log(this.orders);
       });
-
   }
 
   // update
@@ -36,7 +35,8 @@ export class OrdersComponent implements OnInit {
   // delete
   deleteOrder(orderId){
    this.ordersService.deleteOrder(orderId).subscribe(response => {
-     console.log(response);
+    this.router.navigate(['/'], { relativeTo: this.route });
    });
   }
+  
 }

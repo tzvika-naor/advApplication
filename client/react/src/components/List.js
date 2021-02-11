@@ -5,11 +5,14 @@ import history from '../History';
 import Payment from './Payment'
 const List = (props) => {
 
+    // console.log(props)
+
     const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [smartphonesIds, setSmartphonesIds] = useState([])
+
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
@@ -22,6 +25,15 @@ const List = (props) => {
                 setSmartphones(obj);
             })
     }, []);
+
+
+    useEffect(() => {
+        const data =[]
+        console.log(smartphonesInCart)
+        data.push(smartphonesInCart)
+        console.log(data)
+    }, [smartphonesInCart]);
+
     const addToOrder = (data) => {
         console.log(data);
         const newData = {
@@ -43,7 +55,10 @@ const List = (props) => {
             setSmartphonesIds([...smartphonesIds, newData])
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
+        // props.resetSearch(false)
     }
+
+
     const goToPayment = () => {
         const user = props.connectedUser;
         if (smartphonesIds.length === 0)
@@ -59,50 +74,46 @@ const List = (props) => {
             props.setItems(itemsDetails)
         }
     }
-    if (props.activeComponent === 'smartphones') {
-        if (!props.showQueryRes) {
-            return (
-                <div>
-                    <Payment goToPayment={goToPayment} />
-                    <div className="row">
-                        {
-                            smartphones.map((smartphone, index) => {
-                                return <Smartphone
-                                    key={index}
-                                    smartphone={smartphone}
-                                    addToOrder={(data) => addToOrder(data)}
-                                    isAdmin={isAdmin}
-                                />
-                            })
-                        }
-                    </div>
+
+    if (!props.showResults) {
+        return (
+            <div>
+                <Payment goToPayment={goToPayment} />
+                <div className="row">
+                    {
+                        smartphones.map((smartphone, index) => {
+                            return <Smartphone
+                                key={index}
+                                smartphone={smartphone}
+                                addToOrder={(data) => addToOrder(data)}
+                                isAdmin={isAdmin}
+                            />
+                        })
+                    }
                 </div>
-            )
-        }
-        else {
-            return (
-                <div>
-                    <Payment goToPayment={goToPayment} />
-                    <div className="row">
-                        {
-                            props.searchResults.map((smartphone, index) => {
-                                return <Smartphone
-                                    key={index}
-                                    smartphone={smartphone}
-                                    addToOrder={(data) => addToOrder(data)}
-                                    isAdmin={isAdmin}
-                                />
-                            })
-                        }
-                    </div>
-                </div>
-            )
-        }
+            </div>
+        )
     }
+    //has a bug needs to lift up state in order to work!!! would make the code much messi 
     else {
         return (
-            <div><p>Nothing to show...</p></div>
+            <div>
+                <Payment goToPayment={goToPayment} />
+                <div className="row">
+                    {
+                        props.searchResults.map((smartphone, index) => {
+                            return <Smartphone
+                                key={index}
+                                smartphone={smartphone}
+                                addToOrder={(data) => addToOrder(data)}
+                                isAdmin={isAdmin}
+                            />
+                        })
+                    }
+                </div>
+            </div>
         )
     }
 }
+
 export default List

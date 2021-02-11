@@ -28,7 +28,7 @@ var orderCounter = 0;
 var count = 0;
 io.on('connection', (socket) => {
     // console.log(socket.handshake.headers.origin)
-    if (socket.handshake.headers.origin === "http://localhost:4200/") {
+    if (socket.handshake.headers.origin === "http://localhost:3000/") {
         count++;
         socket.broadcast.emit('count', count)
     }

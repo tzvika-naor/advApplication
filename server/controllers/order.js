@@ -1,21 +1,21 @@
 const Order = require('../models/order');
-exports.getOrders = (req, res, next) => {
-    console.log('i am Order controller')
-    const orderQuery = Order.find()//return all the Orders
+exports.getOrders = async (req, res, next) => {
+    const unique = await Order.aggregate( [ { $group : { status : "$status", user: "$userId.email" } } ] )
+    const orderQuery = await Order.find()//return all the Orders
         .populate('userId')
-        .populate({path: 'smartphones', populate: {path: 'id'}})
+        .populate({ path: 'smartphones', populate: { path: 'id' } })
         .then(documents => {
-            console.log(documents)
+            // console.log(documents)
             fetchedOrders = documents;
             return Order.count() // returns all the number of that match query from this database... we made no filtering so we got all 100 Orders
         }).then(count => {
             res.status(200).json({
+                unique: unique,
                 message: 'Orders fetch succesfully!',
                 orders: fetchedOrders,
                 maxOrders: count
             })
         })
-
 }
 // exports.getOrder = (req, res, next) =>
 // {
@@ -84,10 +84,8 @@ exports.createOrder = (req, res, next) => {
 //         }
 //     });
 // }
-exports.deleteOrder = (req, res, next) =>
-{
-    Order.deleteOne({ _id: req.params.id }).then(result =>
-    {
+exports.deleteOrder = (req, res, next) => {
+    Order.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
             res.status(200).json({
                 message: "Deletion successful!"
@@ -96,10 +94,23 @@ exports.deleteOrder = (req, res, next) =>
             res.status(401).json({ message: "Not authorized!" });
         }
     })
-        .catch(error =>
-        {
+        .catch(error => {
             res.status(500).json({
                 message: "Fetching posts failed!"
             });
         });
+}
+
+//
+exports.getTotalAmountByUser = async (req, res, next) => {
+    Order.aggregate(
+        [
+            // First Stage
+            {
+                $group:
+                {
+                    _id: "$userId",
+                    totalSaleAmount: { $sum: { $multiply: ["$smartphones.quantity", "$smartphones.quantity"] } }
+                }
+            },])
 }

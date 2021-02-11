@@ -16,7 +16,8 @@ exports.searchQuery = (req, res, next) => {
             })
         })
 }
-exports.getSmartphones = (req, res, next) => {
+exports.getSmartphones =  (req, res, next) => {
+   
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
         fetchedSmartphones = documents;
@@ -44,7 +45,6 @@ exports.getSmartphones = (req, res, next) => {
             maxSmartphones: count
         })
     })
-
 }
 exports.getSmartphone = (req, res, next) => {
     Smartphone.findById(req.params.id).then(document => {

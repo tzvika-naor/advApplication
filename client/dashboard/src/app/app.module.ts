@@ -36,7 +36,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     SmartphonesCounterComponent,
     UsersCounterComponent,
     OrdersCounterComponent,
-    UpdateOrderComponent
+    UpdateOrderComponent,
+   
   ],
   imports: [
     BrowserModule,
