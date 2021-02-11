@@ -6,13 +6,13 @@
         <div class="form-group">
           <label for="user Id">user Id</label>
           <select class="form-control" id="power" required>
-            <option *ngFor="let order of orders" [value]="pow">{{order.userId.email}}</option>
+            <option *ngFor="let id of userId" [value]="pow">{{id._id}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="status">status</label>
           <select class="form-control" id="power" required>
-            <option *ngFor="let order of orders" [value]="pow">{{order.status}}</option>
+            <option *ngFor="let s of status" [value]="pow">{{s._id}}</option>
           </select>
         </div>
         <div class="form-group">

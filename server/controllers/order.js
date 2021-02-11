@@ -1,6 +1,8 @@
 const Order = require('../models/order');
 exports.getOrders = async (req, res, next) => {
-    const unique = await Order.aggregate( [ { $group : { status : "$status", user: "$userId.email" } } ] )
+    const status = await Order.aggregate([{ $group: { _id: "$status" } }])
+    const dates = await Order.aggregate([{ $group: { _id: "$date" } }])
+    const userId = await Order.aggregate([{ $group: { _id: "$userId" } }])
     const orderQuery = await Order.find()//return all the Orders
         .populate('userId')
         .populate({ path: 'smartphones', populate: { path: 'id' } })
@@ -10,7 +12,9 @@ exports.getOrders = async (req, res, next) => {
             return Order.count() // returns all the number of that match query from this database... we made no filtering so we got all 100 Orders
         }).then(count => {
             res.status(200).json({
-                unique: unique,
+                status: status,
+                dates: dates,
+                userId: userId,
                 message: 'Orders fetch succesfully!',
                 orders: fetchedOrders,
                 maxOrders: count

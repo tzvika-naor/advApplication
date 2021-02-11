@@ -11,6 +11,9 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class OrdersComponent implements OnInit {
   orders: Order[];
   show: false;
+  status: string[];
+  userId: string[];
+  dates: string[];
   constructor(private ordersService: OrdersService, private router: Router,   private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -20,7 +23,9 @@ export class OrdersComponent implements OnInit {
   getOrders(): void {
     this.ordersService.getAllOrders().subscribe(
       (response: any) => {
-        console.log(response);
+        this.status = response.status;
+        this.userId = response.userId;
+        this.dates = response.dates;
         this.orders = response.orders;
         console.log(this.orders);
       });
@@ -30,7 +35,7 @@ export class OrdersComponent implements OnInit {
   updateOrder(order){
     this.ordersService.currentOrder(order);
     this.router.navigate(['update'], { relativeTo: this.route });
-    
+
   }
   // delete
   deleteOrder(orderId){
@@ -38,5 +43,5 @@ export class OrdersComponent implements OnInit {
     this.router.navigate(['/'], { relativeTo: this.route });
    });
   }
-  
+
 }
