@@ -18,7 +18,7 @@ import { SmartphonesCounterComponent } from './header/smartphones-counter/smartp
 import { UsersCounterComponent } from './header/users-counter/users-counter.component';
 import { OrdersCounterComponent } from './header/orders-counter/orders-counter.component';
 import { UpdateOrderComponent } from './orders/update-order/update-order.component';
-
+import {OrderSearchComponent} from './orders/order-search/order-search.component';
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
@@ -37,7 +37,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     UsersCounterComponent,
     OrdersCounterComponent,
     UpdateOrderComponent,
-   
+    OrderSearchComponent
+
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,12 @@ import { Order } from '../interfaces/order';
   providedIn: 'root'
 })
 export class OrdersService {
+  search = {
+    status: '',
+    userId: '',
+    dates: ''
+  };
+
   subjectOrder = new Subject<Order>();
   order: Order;
   constructor(private http: HttpClient) {
@@ -21,7 +27,16 @@ export class OrdersService {
     this.order = order;
     this.subjectOrder.next(this.order);
   }
-  // setOrder(){
-  //   return 
-  // }
+  setSearch(status, userId, dates) {
+    this.search.status = status;
+    this.search.userId = userId;
+    this.search.dates = dates;
+  }
+  getSearchValues() { return this.search; }
+
+
+  searchOrder(form) {
+    console.log(form)
+    return this.http.post('http://localhost:5000/api/order/searchOrders', form).subscribe( res => console.log(res))
+  }
 }

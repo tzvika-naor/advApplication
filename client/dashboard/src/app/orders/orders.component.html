@@ -1,63 +1,43 @@
-
-
 <div class="div" style="margin-left: 300px;">
-  
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="form-group">
-          <label for="user Id">user Id</label>
-          <select class="form-control" id="power" required>
-            <option *ngFor="let id of userId" [value]="pow">{{id._id}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="status">status</label>
-          <select class="form-control" id="power" required>
-            <option *ngFor="let s of status" [value]="pow">{{s._id}}</option>
-          </select>
-        </div>
-        <div class="form-group">
-            <label for="date">date</label>
-            <input type="text" class="form-control">
-          </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+  <div class="container" style="margin-bottom: 20px;">
+    <app-order-search></app-order-search>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-4" *ngFor="let order of orders">
+          <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+            <div class="card-header">
+              <h5>Order Number: {{order._id}}</h5>
+              <h5>User Details: {{order.userId?._id}}</h5>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-4" *ngFor="let order of orders">
-                    <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
-                        <div class="card-header">
-                            <h5>Order Number: {{order._id}}</h5>
-                            <h5>User Details: {{order.userId?._id}}</h5>
+              <p>email: {{order.userId?.email}}</p>
+              <p>first name: {{order.userId?.firstname}}</p>
+              <p>last name: {{order.userId?.lastname}}</p>
+              <p>password: {{order.userId?.password}}</p>
+              <p>phone: {{order.userId?.phone}}</p>
 
-                            <p>email: {{order.userId?.email}}</p>
-                            <p>first name: {{order.userId?.firstname}}</p>
-                            <p>last name: {{order.userId?.lastname}}</p>
-                            <p>password: {{order.userId?.password}}</p>
-                            <p>phone: {{order.userId?.phone}}</p>
-
-                        </div>
-                        <div class="card-body">
-                            <h3>Order Date: {{order.date | date:'d/M/yy , h:mm a'}}</h3>
-                            <h3>Order Status: {{order.status}}</h3>
-                            <h3>Smartphones Details:</h3>
-                            <div *ngFor="let smartphones of order.smartphones">
-                                <p>{{smartphones.id.phoneModel}} | {{smartphones.id.brand}} | {{smartphones.id.display}}
-                                    |
-                                    {{smartphones.id.price}}$ </p>
-                                <p>{{smartphones.id._id}} | {{smartphones.quantity}} </p>
-
-                            </div>
-                            <a class="btn btn-primary" (click)="updateOrder(order)">Update order</a>
-                            <a class="btn btn-danger" (click)="deleteOrder(order._id)">Delete order</a>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <div class="card-body">
+              <h3>Order Date: {{order.date | date:'d/M/yy , h:mm a'}}</h3>
+              <h3>Order Status: {{order.status}}</h3>
+              <h3>Smartphones Details:</h3>
+              <div *ngFor="let smartphones of order.smartphones">
+                <p>{{smartphones.id.phoneModel}} | {{smartphones.id.brand}} | {{smartphones.id.display}}
+                  |
+                  {{smartphones.id.price}}$ </p>
+                <p>{{smartphones.id._id}} | {{smartphones.quantity}} </p>
+
+              </div>
+              <a class="btn btn-primary" (click)="updateOrder(order)">Update order</a>
+              <a class="btn btn-danger" (click)="deleteOrder(order._id)">Delete order</a>
+            </div>
+          </div>
         </div>
-        <!-- <div class="col-lg-4">
+      </div>
+    </div>
+    <!-- <div class="col-lg-4">
             <router-outlet></router-outlet>
         </div> -->
-    </div>
+  </div>
 </div>

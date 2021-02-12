@@ -23,11 +23,12 @@ export class OrdersComponent implements OnInit {
   getOrders(): void {
     this.ordersService.getAllOrders().subscribe(
       (response: any) => {
+        console.log(response.dates);
         this.status = response.status;
         this.userId = response.userId;
         this.dates = response.dates;
         this.orders = response.orders;
-        console.log(this.orders);
+        this.ordersService.setSearch(this.status, this.userId, this.dates);
       });
   }
 

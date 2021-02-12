@@ -1,8 +1,31 @@
 const Order = require('../models/order');
+
+exports.searchOrders = async (req, res, next) => {
+    console.log(req.body.date)
+   result = await Order.find({
+        status: req.body.status, userId: req.body.userId 
+    });
+    console.log(result)
+}
 exports.getOrders = async (req, res, next) => {
     const status = await Order.aggregate([{ $group: { _id: "$status" } }])
-    const dates = await Order.aggregate([{ $group: { _id: "$date" } }])
+    const dates = await Order.aggregate([{
+
+        $project: {
+            daymonthYear: {
+                $dateToString: { format: "%d-%m-%Y", date: "$date" }
+            }
+        }
+    }
+    ])
+    var newDate = [];
+    dates.map(date => {
+        if (!newDate.includes(date.daymonthYear)) {
+            newDate.push(date.daymonthYear)
+        }
+    })
     const userId = await Order.aggregate([{ $group: { _id: "$userId" } }])
+    console.log(newDate)
     const orderQuery = await Order.find()//return all the Orders
         .populate('userId')
         .populate({ path: 'smartphones', populate: { path: 'id' } })
@@ -13,7 +36,7 @@ exports.getOrders = async (req, res, next) => {
         }).then(count => {
             res.status(200).json({
                 status: status,
-                dates: dates,
+                dates: newDate,
                 userId: userId,
                 message: 'Orders fetch succesfully!',
                 orders: fetchedOrders,
