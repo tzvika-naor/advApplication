@@ -9,6 +9,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  results: number;
   orders: Order[];
   show: false;
   status: string[];
@@ -18,12 +19,13 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.ordersService.searchOrders.subscribe((response: any) => {
-      console.log(response.dates);
+      console.log(response);
       this.status = response.status;
       this.userId = response.userId;
       this.dates = response.dates;
       this.orders = response.orders;
-    })
+      this.results = response.results;
+    });
     this.getOrders();
   }
 
@@ -35,6 +37,8 @@ export class OrdersComponent implements OnInit {
         this.userId = response.userId;
         this.dates = response.dates;
         this.orders = response.orders;
+        this.results = (response.orders).length;
+
         this.ordersService.setSearch(this.status, this.userId, this.dates);
       });
   }

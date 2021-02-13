@@ -26,10 +26,9 @@ export class OrderSearchComponent implements OnInit {
   onSubmit(formData) {
     console.log(formData.form.value);
     this.orderService.searchOrder(formData.form.value).subscribe(response => {
-      // console.log(response)
-      // this.fetchOrders = response.order;
-      console.log(this.fetchOrders);
       this.orderService.SetSearchResults(response.order);
+     
+
     });
   }
 }
