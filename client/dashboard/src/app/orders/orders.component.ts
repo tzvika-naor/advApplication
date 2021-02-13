@@ -14,9 +14,16 @@ export class OrdersComponent implements OnInit {
   status: string[];
   userId: string[];
   dates: string[];
-  constructor(private ordersService: OrdersService, private router: Router,   private route: ActivatedRoute) { }
+  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.ordersService.searchOrders.subscribe((response: any) => {
+      console.log(response.dates);
+      this.status = response.status;
+      this.userId = response.userId;
+      this.dates = response.dates;
+      this.orders = response.orders;
+    })
     this.getOrders();
   }
 
@@ -33,16 +40,16 @@ export class OrdersComponent implements OnInit {
   }
 
   // update
-  updateOrder(order){
+  updateOrder(order) {
     this.ordersService.currentOrder(order);
     this.router.navigate(['update'], { relativeTo: this.route });
 
   }
   // delete
-  deleteOrder(orderId){
-   this.ordersService.deleteOrder(orderId).subscribe(response => {
-    this.router.navigate(['/'], { relativeTo: this.route });
-   });
+  deleteOrder(orderId) {
+    this.ordersService.deleteOrder(orderId).subscribe(response => {
+      this.router.navigate(['/'], { relativeTo: this.route });
+    });
   }
 
 }

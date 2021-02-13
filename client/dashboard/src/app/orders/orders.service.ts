@@ -11,9 +11,10 @@ export class OrdersService {
     userId: '',
     dates: ''
   };
-
+  searchOrders = new Subject<Order[]>();
   subjectOrder = new Subject<Order>();
   order: Order;
+  searchOrderResults: Order[];
   constructor(private http: HttpClient) {
   }
 
@@ -35,8 +36,14 @@ export class OrdersService {
   getSearchValues() { return this.search; }
 
 
-  searchOrder(form) {
-    console.log(form)
-    return this.http.post('http://localhost:5000/api/order/searchOrders', form).subscribe( res => console.log(res))
+  searchOrder(form): Observable<any>  {
+    console.log(form);
+    return this.http.post('http://localhost:5000/api/order/searchOrders', form);
+  }
+  SetSearchResults(orderResults) {
+   console.log(orderResults);
+   this.searchOrderResults = orderResults;
+   this.searchOrders.next(this.searchOrderResults);
+   
   }
 }

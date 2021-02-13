@@ -1,12 +1,40 @@
 const Order = require('../models/order');
 
 exports.searchOrders = async (req, res, next) => {
-    console.log(req.body.date)
-   result = await Order.find({
-        status: req.body.status, userId: req.body.userId 
+
+    console.log(req.body)
+    const from_day = req.body.from_date.substring(0, 2)
+    console.log(JSON.parse(from_day))
+    const from_month = req.body.from_date.substring(3, 5)
+    const from_year = req.body.from_date.substring(6, 10)
+    const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day)+1 )
+
+    console.log(from_date);
+
+    const to_day = req.body.to_date.substring(0, 2)
+    const to_month = req.body.to_date.substring(3, 5)
+    const to_year = req.body.to_date.substring(6, 10)
+    const to_date = new Date(to_year, to_month - 1,  JSON.parse(to_day)+1  )
+
+    console.log(to_date);
+
+
+    fetchOrders = await Order.find({
+        "status": req.body.status,
+        "userId": req.body.userId,
+        "date": { $gte: from_date, $lt: to_date }
+    }).populate('userId')
+    .populate({ path: 'smartphones', populate: { path: 'id' } })
+   
+    res.status(201).json({
+        message: "Order added successfully",
+        order: {
+            orders: fetchOrders
+        }
     });
-    console.log(result)
 }
+
+
 exports.getOrders = async (req, res, next) => {
     const status = await Order.aggregate([{ $group: { _id: "$status" } }])
     const dates = await Order.aggregate([{
