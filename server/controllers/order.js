@@ -26,7 +26,8 @@ exports.searchOrders = async (req, res, next) => {
         "date": { $gte: from_date, $lte: to_date }
     }).populate('userId')
     .populate({ path: 'smartphones', populate: { path: 'id' } })
-   
+    
+    console.log(fetchOrders.length)
     res.status(201).json({
         message: "Order added successfully",
         order: {
