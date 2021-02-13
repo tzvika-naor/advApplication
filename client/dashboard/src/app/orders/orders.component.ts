@@ -24,7 +24,7 @@ export class OrdersComponent implements OnInit {
       this.userId = response.userId;
       this.dates = response.dates;
       this.orders = response.orders;
-      this.results = response.results;
+      this.results = (response.orders).length;
     });
     this.getOrders();
   }
@@ -32,7 +32,7 @@ export class OrdersComponent implements OnInit {
   getOrders(): void {
     this.ordersService.getAllOrders().subscribe(
       (response: any) => {
-        console.log(response.dates);
+        console.log(response);
         this.status = response.status;
         this.userId = response.userId;
         this.dates = response.dates;
