@@ -30,7 +30,8 @@ exports.searchOrders = async (req, res, next) => {
     res.status(201).json({
         message: "Order added successfully",
         order: {
-            orders: fetchOrders
+            orders: fetchOrders,
+            results: fetchOrders.length
         }
     });
 }
