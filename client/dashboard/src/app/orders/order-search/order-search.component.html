@@ -1,19 +1,19 @@
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="form-group">
         <label for="user Id">User Id</label>
-        <select class="form-control" id="userId" name="userId" [(ngModel)]="orderForm.userId">
+        <select class="form-control" id="userId" name="userId" [(ngModel)]="orderForm.userId" required>
             <option *ngFor="let id of search.userId" [value]="id._id">{{id._id}}</option>
         </select>
     </div>
     <div class="form-group">
         <label for="status">Status</label>
-        <select class="form-control" id="status" name="status" [(ngModel)]="orderForm.status">
+        <select class="form-control" id="status" name="status" [(ngModel)]="orderForm.status" required>
             <option *ngFor="let s of search.status" [value]="s._id">{{s._id}}</option>
         </select>
     </div>
     <div class="form-group">
         <label for="date">From date</label>
-        <select class="form-control" id="from_date" name="from_date" [(ngModel)]="orderForm.from_date">
+        <select class="form-control" id="from_date" name="from_date" [(ngModel)]="orderForm.from_date" required>
             <option *ngFor="let date of search.dates" [value]="date">{{date}}</option>
         </select>
     </div>

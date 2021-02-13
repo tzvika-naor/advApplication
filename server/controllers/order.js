@@ -7,14 +7,14 @@ exports.searchOrders = async (req, res, next) => {
     console.log(JSON.parse(from_day))
     const from_month = req.body.from_date.substring(3, 5)
     const from_year = req.body.from_date.substring(6, 10)
-    const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day)+1 )
+    const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day) )
 
     console.log(from_date);
 
     const to_day = req.body.to_date.substring(0, 2)
     const to_month = req.body.to_date.substring(3, 5)
     const to_year = req.body.to_date.substring(6, 10)
-    const to_date = new Date(to_year, to_month - 1,  JSON.parse(to_day)+1  )
+    const to_date = new Date(to_year, to_month - 1,  JSON.parse(to_day) +1 )
 
     console.log(to_date);
 
@@ -22,7 +22,7 @@ exports.searchOrders = async (req, res, next) => {
     fetchOrders = await Order.find({
         "status": req.body.status,
         "userId": req.body.userId,
-        "date": { $gte: from_date, $lt: to_date }
+        "date": { $gte: from_date, $lte: to_date }
     }).populate('userId')
     .populate({ path: 'smartphones', populate: { path: 'id' } })
    
