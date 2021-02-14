@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from './orders.service';
 import { Order } from '../interfaces/order';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -8,19 +10,46 @@ import { Order } from '../interfaces/order';
 })
 export class OrdersComponent implements OnInit {
   orders: Order[];
-  constructor(private ordersService: OrdersService) { }
+  show: false;
+  status: string[];
+  userId: string[];
+  dates: string[];
+  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.ordersService.searchOrders.subscribe((response: any) => {
+      console.log(response.dates);
+      this.status = response.status;
+      this.userId = response.userId;
+      this.dates = response.dates;
+      this.orders = response.orders;
+    })
     this.getOrders();
   }
 
   getOrders(): void {
     this.ordersService.getAllOrders().subscribe(
-      (response:any) => {
-        console.log(response);
+      (response: any) => {
+        console.log(response.dates);
+        this.status = response.status;
+        this.userId = response.userId;
+        this.dates = response.dates;
         this.orders = response.orders;
-        console.log(this.orders)
+        this.ordersService.setSearch(this.status, this.userId, this.dates);
       });
+  }
+
+  // update
+  updateOrder(order) {
+    this.ordersService.currentOrder(order);
+    this.router.navigate(['update'], { relativeTo: this.route });
 
   }
+  // delete
+  deleteOrder(orderId) {
+    this.ordersService.deleteOrder(orderId).subscribe(response => {
+      this.router.navigate(['/'], { relativeTo: this.route });
+    });
+  }
+
 }

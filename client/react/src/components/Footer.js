@@ -1,10 +1,14 @@
+import './Footer.css'
+
 function Footer () {
     return (
-        <footer className="py-5 bg-dark">
+       
+        <footer className="footer">
             <div className="container">
-                <p className="m-0 text-center text-white">Copyright © Your Website 2020</p>
+                <span className="text-muted">Copyright © Your Website 2020</span>
             </div>
         </footer>
+
     )
 }
 export default Footer;
