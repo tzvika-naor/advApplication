@@ -11,7 +11,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class OrdersComponent implements OnInit {
   results: number;
   orders: Order[];
-  show: false;
+  show: boolean = false;
   status: string[];
   userId: string[];
   dates: string[];
@@ -46,8 +46,9 @@ export class OrdersComponent implements OnInit {
   // update
   updateOrder(order) {
     this.ordersService.currentOrder(order);
-    this.router.navigate(['update'], { relativeTo: this.route });
-
+    this.show = true;
+    console.log(this.show)
+  
   }
   // delete
   deleteOrder(orderId) {

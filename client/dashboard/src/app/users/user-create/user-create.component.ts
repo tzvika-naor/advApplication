@@ -23,7 +23,7 @@ export class UserCreateComponent implements OnInit {
     password: '',
     phone: ''
   };
-  constructor(private usersService: UsersService, private route: ActivatedRoute) { }
+  constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router ) { }
 
   ngOnInit(): void {
     this.isParam = this.route.snapshot.paramMap.get('id');
@@ -44,6 +44,7 @@ export class UserCreateComponent implements OnInit {
         console.log(res);
       });
     }
+    this.router.navigate(['/users/delete'], {relativeTo: this.route});
   }
   getUser() {
     this.user$ = this.route.paramMap.pipe(

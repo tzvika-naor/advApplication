@@ -5,8 +5,6 @@ import history from '../History';
 import Payment from './Payment'
 const List = (props) => {
 
-    // console.log(props)
-
     const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
@@ -55,7 +53,6 @@ const List = (props) => {
             setSmartphonesIds([...smartphonesIds, newData])
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
-        // props.resetSearch(false)
     }
 
 

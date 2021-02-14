@@ -12,8 +12,8 @@ const routes: Routes = [
     path: 'orders', component: OrdersComponent,
     children: [
       {
-        path: 'update', // child route path
-        component: UpdateOrderComponent, // child route component that the router renders
+        path: 'update/:id', // child route path
+        component: UpdateOrderComponent
       }]
   },
   {

@@ -4,10 +4,10 @@ exports.searchOrders = async (req, res, next) => {
 
     console.log(req.body)
     const from_day = req.body.from_date.substring(0, 2)
-    console.log(JSON.parse(from_day))
     const from_month = req.body.from_date.substring(3, 5)
     const from_year = req.body.from_date.substring(6, 10)
-    console.log(typeof(from_day));
+     
+
     const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day) )
 
     console.log(from_date);
