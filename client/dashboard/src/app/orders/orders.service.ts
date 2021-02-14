@@ -26,7 +26,10 @@ export class OrdersService {
   }
   currentOrder(order) {
     this.order = order;
-    this.subjectOrder.next(this.order);
+  }
+
+  getOrder() {
+    return this.order;
   }
   setSearch(status, userId, dates) {
     this.search.status = status;
@@ -42,9 +45,9 @@ export class OrdersService {
   }
   SetSearchResults(orderResults) {
    console.log(orderResults.orders);
-   console.log(orderResults.results)
+   console.log(orderResults.results);
    this.searchOrderResults = orderResults;
    this.searchOrders.next(this.searchOrderResults);
-   
+
   }
 }
