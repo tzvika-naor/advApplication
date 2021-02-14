@@ -9,4 +9,5 @@ router.post("/searchquery", SmartphoneController.searchQuery); //all Smartphone
 router.put("/:id", SmartphoneController.updateSmartphone); //update an existing Smartphone
 router.delete("/:id", SmartphoneController.deleteSmartphone);
 
+
 module.exports = router;

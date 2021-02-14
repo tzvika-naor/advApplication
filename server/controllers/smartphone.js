@@ -16,7 +16,8 @@ exports.searchQuery = (req, res, next) => {
             })
         })
 }
-exports.getSmartphones = (req, res, next) => {
+exports.getSmartphones =  (req, res, next) => {
+   
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
         fetchedSmartphones = documents;
@@ -44,7 +45,6 @@ exports.getSmartphones = (req, res, next) => {
             maxSmartphones: count
         })
     })
-
 }
 exports.getSmartphone = (req, res, next) => {
     Smartphone.findById(req.params.id).then(document => {
@@ -141,7 +141,6 @@ exports.deleteSmartphone = (req, res, next) => {
         });
 }
     // exports.searchQuery = (req, res, next) => {
-    //     console.log(req.body);
     //     var minPrice = '';
     //     var reviews = parseInt(req.body.reviews.substring(1,2));
     //     const tmpMinPrice = req.body.minPrice;
@@ -179,7 +178,7 @@ exports.deleteSmartphone = (req, res, next) => {
     //         uniqCategories = [...new Set(categories)]; //this is the same as group by
     //         return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     //     }).then(count => {
-    //         // console.log(count)
+
     //         res.status(200).json({
     //             message: 'Smartphone fetch succesfully!',
     //             category: uniqCategories

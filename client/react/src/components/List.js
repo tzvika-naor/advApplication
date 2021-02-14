@@ -1,24 +1,17 @@
-import Product from './Product'
 import Smartphone from './Smartphone'
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import history from '../History';
+import Payment from './Payment'
 const List = (props) => {
-    const [products, setproducts] = useState([]);
+
+    const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
+    const [smartphonesInCart, setSmartphonesInCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [smartphonesIds, setSmartphonesIds] = useState([])
 
     useEffect(() => {
-
-        axios.get('http://localhost:5000/api/product')
-            .then(response => {
-                const data = response.data.products;
-                let obj = data.map(product => {
-                    product.id = product._id
-                    delete product._id
-                    return product;
-                })
-                setproducts(obj);
-            })
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.smartphones;
@@ -29,104 +22,93 @@ const List = (props) => {
                 })
                 setSmartphones(obj);
             })
-        // }
     }, []);
 
-    if (props.activeComponent === 'products') {
-        if (!props.showQueryRes) {
-            return (
-                <div className="row">
-                    {
-                        products.map((product, index) => {
-                            return <Product
-                                price={product.price}
-                                category={product.category}
-                                image={product.image}
-                                description={product.description}
-                                title={product.title}
-                                review={product.reviews}
-                                id={product.id}
-                                key={product.id}
-                                index={index}
 
-                            />
-                        })
-                    }
-                </div>
+    useEffect(() => {
+        const data =[]
+        console.log(smartphonesInCart)
+        data.push(smartphonesInCart)
+        console.log(data)
+    }, [smartphonesInCart]);
 
-            )
+    const addToOrder = (data) => {
+        console.log(data);
+        const newData = {
+            id: data.id,
+            qnt: 1
+        }
+        const itemIndex = smartphonesIds.findIndex(item => item.id === data.id);
+        var newSmartIds = smartphonesIds.filter(item => item.id !== data.id);
+
+        if (itemIndex > -1) {
+            // the item is already in the cart no need to add into setSmartphonesInCart
+            var newItem = smartphonesIds[itemIndex]
+            newItem.qnt += 1;
+            newSmartIds.push(newItem)
+            setSmartphonesIds(newSmartIds)
         }
         else {
-            return (<div className="row">
-                {
-                    props.searchResults.map((product) => {
-                        return <Product
-                            price={product.price}
-                            category={product.category}
-                            image={product.image}
-                            description={product.description}
-                            title={product.title}
-                            review={product.reviews}
-                            id={product._id}
-                            key={product.id}
-                        />
-                    })
-                }
-            </div>)
+            setSmartphonesInCart([...smartphonesInCart, data]);
+            setSmartphonesIds([...smartphonesIds, newData])
+        }
+        setTotalPrice(totalPrice => totalPrice + data.price);
+    }
+
+
+    const goToPayment = () => {
+        const user = props.connectedUser;
+        if (smartphonesIds.length === 0)
+            alert('your cart is empty')
+        else {
+            history.push('order');
+            const itemsDetails = {
+                smartphonesInCart: smartphonesInCart,
+                smartphonesIds: smartphonesIds,
+                totalPrice: totalPrice,
+                user: user
+            }
+            props.setItems(itemsDetails)
         }
     }
-    else if (props.activeComponent === 'smartphones') {
-        if (!props.showQueryRes) {
-            return (
+
+    if (!props.showResults) {
+        return (
+            <div>
+                <Payment goToPayment={goToPayment} />
                 <div className="row">
                     {
                         smartphones.map((smartphone, index) => {
                             return <Smartphone
-                                phoneModel={smartphone.phoneModel}
-                                brand={smartphone.brand}
-                                display={smartphone.display}
-                                frontCamera={smartphone.frontCamera}
-                                rearCamera={smartphone.rearCamera}
-                                processor={smartphone.processor}
-                                batteryCapacity={smartphone.batteryCapacity}
-                                price={smartphone.price}
-                                image={smartphone.image}
-                                id={smartphone.id}
-                                key={smartphone.id}
-                                index={index}
-                            // smartphone={smartphones}
+                                key={index}
+                                smartphone={smartphone}
+                                addToOrder={(data) => addToOrder(data)}
+                                isAdmin={isAdmin}
                             />
                         })
                     }
                 </div>
-
-            )
-        }
-        else {
-            return (<div className="row">
-                {
-                    props.searchResults.map((smartphone) => {
-                        return <Smartphone
-                            phoneModel={smartphone.phoneModel}
-                            brand={smartphone.brand}
-                            display={smartphone.display}
-                            frontCamera={smartphone.frontCamera}
-                            rearCamera={smartphone.rearCamera}
-                            processor={smartphone.rearCamera}
-                            batteryCapacity={smartphone.batteryCapacity}
-                            price={smartphone.price}
-                            image={smartphone.image}
-                            id={smartphone.id}
-                            key={smartphone.id}
-                        />
-                    })
-                }
-            </div>)
-        }
+            </div>
+        )
     }
+    //has a bug needs to lift up state in order to work!!! would make the code much messi 
     else {
         return (
-            <div><p>Nothing to show...</p></div>
+            <div>
+                <Payment goToPayment={goToPayment} />
+                <div className="row">
+                    {
+                        props.searchResults.map((smartphone, index) => {
+                            return <Smartphone
+                                key={index}
+                                smartphone={smartphone}
+                                addToOrder={(data) => addToOrder(data)}
+                                isAdmin={isAdmin}
+                            />
+                        })
+                    }
+                </div>
+            </div>
         )
     }
 }
