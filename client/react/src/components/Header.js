@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import './Header.css'
 function Header (props) {
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
@@ -13,6 +12,9 @@ function Header (props) {
 
     const onLogout = (e) => {
         props.setIsLoggedIn(false)
+    }
+    const searchByText = (event) => {
+        
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
@@ -30,7 +32,7 @@ function Header (props) {
                                 </li>
                             </ul> : <div></div>
                     }
-
+                    <input type="text" className="form-control" placeholder="search something" onKeyUp={searchByText}></input>
                     {
                         !isLoggedIn ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
