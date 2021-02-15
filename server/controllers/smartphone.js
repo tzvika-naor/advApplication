@@ -35,8 +35,6 @@ exports.searchByProcessor = (req, res, next) => {
         })
 }
 
-
-
 exports.getSmartphones = async (req, res, next) => {
     const brand = []
     const display = []
