@@ -1,0 +1,20 @@
+<div class="div" style="margin-left: 300px;">
+    <h4>SMARTPHONES</h4>
+    <div class="row">
+        <div class="col-lg-4" *ngFor="let s of smartphones">
+            <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+                <div class="card-header">
+                    <h5>Smartphone ID: {{s._id}}</h5>
+                </div>
+                <div class="card-body">
+                    <h3>Model: {{s.phoneModel}}</h3>
+                    <h3>Brand: {{s.brand}}</h3>
+                    <h3>Display: {{s.display}}</h3>
+                    <h3>Processor: {{s.processor}}</h3>
+                    <h3>Price: {{s.price}}</h3>
+                </div>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
