@@ -4,20 +4,11 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import history from '../History'
 function Search (props) {
-<<<<<<< HEAD
-=======
-
->>>>>>> u123456
     const location = useLocation();
     console.log(location);
     const searchResults = (data) => {
         props.searchResults(data);
     }
-<<<<<<< HEAD
-    const [brands, setBrands] = useState([]);
-    const [batteryCapacity, setBatteryCapacity] = useState([]);
-    const [display, setDisplay] = useState([])
-=======
     const [searchBy, setSearchBy] = useState(true)
     const [brands, setBrands] = useState([]);
     const [batteryCapacity, setBatteryCapacity] = useState([]);
@@ -25,7 +16,6 @@ function Search (props) {
     const [rearCamera, setRearCamera] = useState([]);
     const [frontCamera, setFrontCamera] = useState([]);
     const [processor, setProcessor] = useState([])
->>>>>>> u123456
     useEffect((props) => {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
@@ -33,13 +23,10 @@ function Search (props) {
                 setBrands(data.brand)
                 setBatteryCapacity(data.batteryCapacity)
                 setDisplay(data.display)
-<<<<<<< HEAD
-=======
                 //
                 setRearCamera(data.rearCamera)
                 setFrontCamera(data.frontCamera)
                 setProcessor(data.processor)
->>>>>>> u123456
             })
     }, []);
     const [searchForm, setSearchForm] = useState({
@@ -57,57 +44,11 @@ function Search (props) {
         setSearchForm({ ...searchForm, [event.target.name]: event.target.value })
     }
     const onClick = () => {
-<<<<<<< HEAD
-=======
         if(searchBy) {
->>>>>>> u123456
         axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
             .then(response => {
                 props.searchResults(response.data.smartphone);
             })
-<<<<<<< HEAD
-    }
-    return (
-        <div style={{ border: "1px black solid", padding: "150px 40px", marginLeft: "20px" }}>
-            <h1 className="my-4" style={{ position: "absolute", top: "20px" }}>Search Product</h1>
-            <div className="row">
-                <div className="col-lg-12">
-                    <label>Brand</label>
-                    <select
-                        name='brand'
-                        value={searchForm.brand}
-                        onChange={onChange}
-                        style={{ width: "100%", marginBottom: "50px" }}
-                    >
-                        {brands.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                    </select>
-                </div>
-                <div className="col-lg-12">
-                    <label>Battery Capacity</label>
-                    <select
-                        name='batteryCapacity'
-                        value={searchForm.batteryCapacity}
-                        onChange={onChange}
-                        style={{ width: "100%", marginBottom: "50px" }}
-                    >
-                        {batteryCapacity.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                    </select>
-                </div>
-                <div className="col-lg-12">
-                    <label>Display</label>
-                    <select
-                        name='display'
-                        value={searchForm.display}
-                        onChange={onChange}
-                        style={{ width: "100%", marginBottom: "50px" }}
-                    >
-                        {display.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                    </select>
-                </div>
-                <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Submit</Button>
-            </div>
-        </div >
-=======
         }
         else {
             axios.post('http://localhost:5000/api/smartphone/searchByProcessor', searchForm)
@@ -209,7 +150,6 @@ function Search (props) {
                 </div>
             }
         </div>
->>>>>>> u123456
     )
 
 

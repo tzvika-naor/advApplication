@@ -8,11 +8,8 @@ router.post("", SmartphoneController.createSmartphone); // add a new Smartphone 
 router.post("/searchquery", SmartphoneController.searchQuery); //all Smartphone
 router.put("/:id", SmartphoneController.updateSmartphone); //update an existing Smartphone
 router.delete("/:id", SmartphoneController.deleteSmartphone);
-<<<<<<< HEAD
-=======
 router.post("/searchByProcessor", SmartphoneController.searchByProcessor); //all Smartphone
 
->>>>>>> u123456
 
 
 module.exports = router;

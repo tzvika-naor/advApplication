@@ -16,20 +16,6 @@ exports.searchQuery = (req, res, next) => {
             })
         })
 }
-<<<<<<< HEAD
-exports.getSmartphones =  (req, res, next) => {
-   
-    const SmartphoneQuery = Smartphone.find();//return all the Smartphone
-    SmartphoneQuery.then(documents => {
-        fetchedSmartphones = documents;
-        brand = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.brand))].sort()
-        display = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.display))].sort()
-        batteryCapacity = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.batteryCapacity))].sort()
-        processor = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.processor))].sort()
-        frontCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.frontCamera))].sort()
-        rearCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.rearCamera))].sort()
-        phoneModel = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.phoneModel))].sort()
-=======
 
 exports.searchByProcessor = (req, res, next) => {
     console.log((req.body))
@@ -74,7 +60,6 @@ exports.getSmartphones = async (req, res, next) => {
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
     SmartphoneQuery.then(documents => {
         fetchedSmartphones = documents;
->>>>>>> u123456
         return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
         res.status(200).json({
