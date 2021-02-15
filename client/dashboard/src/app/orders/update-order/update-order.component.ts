@@ -10,23 +10,17 @@ import { OrdersService } from '../orders.service';
 })
 export class UpdateOrderComponent implements OnInit {
   order: Order;
-  smartphoneId: SmartphoneId;
-  smartphoneId1: SmartphoneId;
+  orderId: any;
+  orderDetails: any[];
 
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
-    console.log('hiiii');
-    // this.ordersService.subjectOrder.subscribe((order: Order) => {
-    //   console.log(order);
-    //   this.order = order;
-      // order.smartphones.map((smartphone, i) => {
-      //   console.log(smartphone);
-      //   this.smartphoneId.id = smartphone[i].id._id;
-      //   this.smartphoneId.quantity = smartphone[i].quantity;
-      // });
-    // });
-    console.log(this.ordersService.getOrder());
+    this.orderId = this.ordersService.getOrder();
+
+    (this.orderId.smartphones).map((item, i) => {
+
+    });
   }
 
 }
