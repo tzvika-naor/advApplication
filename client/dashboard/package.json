@@ -14,12 +14,20 @@
     "@angular/animations": "~11.0.9",
     "@angular/common": "~11.0.9",
     "@angular/compiler": "~11.0.9",
+<<<<<<< HEAD
     "@angular/core": "^11.2.0",
+=======
+    "@angular/core": "~11.0.9",
+>>>>>>> u123456
     "@angular/forms": "~11.0.9",
     "@angular/platform-browser": "~11.0.9",
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
     "bootstrap": "^4.6.0",
+<<<<<<< HEAD
+=======
+    "d3": "^6.5.0",
+>>>>>>> u123456
     "ngx-socket-io": "^3.2.0",
     "rxjs": "~6.6.0",
     "socket.io": "^2.4.1",
@@ -30,6 +38,10 @@
     "@angular-devkit/build-angular": "~0.1100.7",
     "@angular/cli": "~11.0.7",
     "@angular/compiler-cli": "~11.0.9",
+<<<<<<< HEAD
+=======
+    "@types/d3": "^6.3.0",
+>>>>>>> u123456
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",

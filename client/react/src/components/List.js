@@ -24,6 +24,7 @@ const List = (props) => {
             })
     }, []);
 
+<<<<<<< HEAD
 
     useEffect(() => {
         const data =[]
@@ -32,6 +33,8 @@ const List = (props) => {
         console.log(data)
     }, [smartphonesInCart]);
 
+=======
+>>>>>>> u123456
     const addToOrder = (data) => {
         console.log(data);
         const newData = {
@@ -55,7 +58,10 @@ const List = (props) => {
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> u123456
     const goToPayment = () => {
         const user = props.connectedUser;
         if (smartphonesIds.length === 0)

@@ -16,6 +16,7 @@ exports.searchQuery = (req, res, next) => {
             })
         })
 }
+<<<<<<< HEAD
 exports.getSmartphones =  (req, res, next) => {
    
     const SmartphoneQuery = Smartphone.find();//return all the Smartphone
@@ -28,6 +29,52 @@ exports.getSmartphones =  (req, res, next) => {
         frontCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.frontCamera))].sort()
         rearCamera = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.rearCamera))].sort()
         phoneModel = [...new Set(fetchedSmartphones.map(Smartphone => Smartphone.phoneModel))].sort()
+=======
+
+exports.searchByProcessor = (req, res, next) => {
+    console.log((req.body))
+    Smartphone.find({
+        $or: [{ rearCamera: req.body.rearCamera }, { processors: req.body.processor }, { frontCamera: req.body.frontCamera }]
+    }).then(documents => {
+        res.status(200).json({
+            message: 'query succeeded',
+            smartphone: documents
+        })
+    })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'something went wrong ',
+                error: err
+            })
+        })
+}
+
+exports.getSmartphones = async (req, res, next) => {
+    const brand = []
+    const display = []
+    const batteryCapacity = []
+    const processor = []
+    const frontCamera = []
+    const rearCamera = []
+    const phoneModel = []
+    const brands = await Smartphone.aggregate([{ $group: { _id: "$brand" } }])
+    brands.map(item => brand.push(item._id))
+    const displays = await Smartphone.aggregate([{ $group: { _id: "$display" } }])
+    displays.map(item => display.push(item._id))
+    const batteryCapacities = await Smartphone.aggregate([{ $group: { _id: "$batteryCapacity" } }])
+    batteryCapacities.map(item => batteryCapacity.push(item._id))
+    const processors = await Smartphone.aggregate([{ $group: { _id: "$processor" } }])
+    processors.map(item => processor.push(item._id))
+    const frontCameras = await Smartphone.aggregate([{ $group: { _id: "$frontCamera" } }])
+    frontCameras.map(item => frontCamera.push(item._id))
+    const rearCameras = await Smartphone.aggregate([{ $group: { _id: "$rearCamera" } }])
+    rearCameras.map(item => rearCamera.push(item._id))
+    const phoneModels = await Smartphone.aggregate([{ $group: { _id: "$phoneModel" } }])
+    phoneModels.map(item => phoneModel.push(item._id))
+    const SmartphoneQuery = Smartphone.find();//return all the Smartphone
+    SmartphoneQuery.then(documents => {
+        fetchedSmartphones = documents;
+>>>>>>> u123456
         return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
     }).then(count => {
         res.status(200).json({

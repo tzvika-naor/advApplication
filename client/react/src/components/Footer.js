@@ -2,7 +2,8 @@ import './Footer.css'
 
 function Footer () {
     return (
-        <footer className="py-5 bg-dark" style={{position:"sticky", bottom:"0"}} >
+       
+        <footer className="footer">
             <div className="container">
                 <span className="text-muted">Copyright © Your Website 2020</span>
             </div>
@@ -11,5 +12,3 @@ function Footer () {
     )
 }
 export default Footer;
-
-// 

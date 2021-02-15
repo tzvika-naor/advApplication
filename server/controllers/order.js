@@ -1,6 +1,7 @@
 const Order = require('../models/order');
 
 exports.searchOrders = async (req, res, next) => {
+<<<<<<< HEAD
 
     console.log(req.body)
     const from_day = req.body.from_date.substring(0, 2)
@@ -11,22 +12,39 @@ exports.searchOrders = async (req, res, next) => {
     const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day) )
 
     console.log(from_date);
+=======
+    const from_day = req.body.from_date.substring(0, 2)
+    const from_month = req.body.from_date.substring(3, 5)
+    const from_year = req.body.from_date.substring(6, 10)
+
+    const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day))
+>>>>>>> u123456
 
     const to_day = req.body.to_date.substring(0, 2)
     const to_month = req.body.to_date.substring(3, 5)
     const to_year = req.body.to_date.substring(6, 10)
+<<<<<<< HEAD
     const to_date = new Date(to_year, to_month - 1,  JSON.parse(to_day) +1 )
 
     console.log(to_date);
 
+=======
+
+    const to_date = new Date(to_year, to_month - 1, JSON.parse(to_day) + 1)
+>>>>>>> u123456
 
     fetchOrders = await Order.find({
         "status": req.body.status,
         "userId": req.body.userId,
         "date": { $gte: from_date, $lte: to_date }
     }).populate('userId')
+<<<<<<< HEAD
     .populate({ path: 'smartphones', populate: { path: 'id' } })
     
+=======
+        .populate({ path: 'smartphones', populate: { path: 'id' } })
+
+>>>>>>> u123456
     res.status(201).json({
         message: "Order added successfully",
         order: {
@@ -73,6 +91,7 @@ exports.getOrders = async (req, res, next) => {
             })
         })
 }
+<<<<<<< HEAD
 // exports.getOrder = (req, res, next) =>
 // {
 //     console.log(req.params.id)
@@ -91,6 +110,40 @@ exports.getOrders = async (req, res, next) => {
 //         });
 //     });
 // };
+=======
+exports.getOrderByUserId = async (req, res, next) => {
+    const status = await Order.aggregate([{ $group: { _id: "$status" } }])
+
+    const dates = await Order.aggregate([{
+
+        $project: {
+            daymonthYear: {
+                $dateToString: { format: "%d-%m-%Y", date: "$date" }
+            }
+        }
+    }
+    ])
+    var newDate = [];
+    dates.map(date => {
+        if (!newDate.includes(date.daymonthYear)) {
+            newDate.push(date.daymonthYear)
+        }
+    })
+
+    console.log(status);
+    console.log(newDate);
+
+    const orders = await Order.find({ "userId": req.params.userId }).populate('userId')
+    .populate({ path: 'smartphones', populate: { path: 'id' } })
+    console.log(orders)
+
+    res.status(200).json({
+        status: status,
+        dates: newDate,
+        orders: orders
+    })
+}
+>>>>>>> u123456
 
 exports.createOrder = (req, res, next) => {
     const smartphonesIds = req.body.smartphonesIds
@@ -119,6 +172,7 @@ exports.createOrder = (req, res, next) => {
             });
         });
 };
+<<<<<<< HEAD
 // exports.updateOrder = (req, res, next) =>
 // {
 
@@ -140,6 +194,30 @@ exports.createOrder = (req, res, next) => {
 //         }
 //     });
 // }
+=======
+exports.updateOrder = (req, res, next) => {
+    console.log(req.body.quantity)
+    console.log(req.params.id)
+
+    //     console.log(req.body)
+    //     const Order = new Order({
+    //         products: req.body.products,
+    //         numberOfProucts: req.body.numberOfProucts,
+    //         customerId: req.body.customerId,
+    //         totalPrice: req.body.totalPrice,
+    //     });
+    //     Order.updateOne({ _id: req.params.id }, Order).then(result =>
+    //     {
+    //         if (result.n > 0) {
+    //             res.status(200).json({
+    //                 message: "update successful!"
+    //             })
+    //         } else {
+    //             res.status(401).json({ message: "Not authorized!" });
+    //         }
+    //     });
+}
+>>>>>>> u123456
 exports.deleteOrder = (req, res, next) => {
     Order.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
@@ -157,11 +235,17 @@ exports.deleteOrder = (req, res, next) => {
         });
 }
 
+<<<<<<< HEAD
 //
 exports.getTotalAmountByUser = async (req, res, next) => {
     Order.aggregate(
         [
             // First Stage
+=======
+exports.getTotalAmountByUser = async (req, res, next) => {
+    Order.aggregate(
+        [
+>>>>>>> u123456
             {
                 $group:
                 {
