@@ -36,7 +36,7 @@ function OrdersHistory (props) {
     return (
 
 
-        <div style={{ marginTop: "60px", marginLeft: "50px" }}>
+        <div style={{ marginTop: "60px", marginLeft: "130px" }}>
             User Details
             <h4>Name: {user.firstname} {user.lastname}</h4>
             <h4>Email: {user.email}</h4>
@@ -46,7 +46,7 @@ function OrdersHistory (props) {
                 {
                     orders.map((order, index) => {
                         return (
-                            <CardItem className="col-lg-4" order={order} key={index} />
+                            <CardItem  order={order} key={index} />
                         )
                     })
                 }

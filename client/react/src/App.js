@@ -47,8 +47,8 @@ function App (props) {
         <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} items={items} />} />
         <Fragment>
           <div className="row">
-            <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "60px" }}>
-              <Search searchResults={searchResults} />
+            <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "9%" }}>
+              <Search searchResults={searchResults}  />
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
               <Route path='/smartphones' render={(props) => <List
