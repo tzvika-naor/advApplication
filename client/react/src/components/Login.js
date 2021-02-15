@@ -113,12 +113,12 @@ const Login = (props) => {
                                                 />
                                         }
                                         {!resetPassword ?
-                                            <Link to className="link align-self-center" onClick={resetCredentials}>Forgot password?</Link> :
+                                            <Link  to="#" className="link align-self-center" onClick={resetCredentials}>Forgot password?</Link> :
                                             <div className="d-flex justify-content-center">
-                                                <Link to className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
+                                                <Link  to="#" className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
                                                 {!toDelete ?
-                                                    <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
-                                                    <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
+                                                    <Link  to="#" className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
+                                                    <Link  to="#" className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
                                                 }
                                             </div>
                                         }

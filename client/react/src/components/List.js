@@ -24,14 +24,6 @@ const List = (props) => {
             })
     }, []);
 
-
-    useEffect(() => {
-        const data =[]
-        console.log(smartphonesInCart)
-        data.push(smartphonesInCart)
-        console.log(data)
-    }, [smartphonesInCart]);
-
     const addToOrder = (data) => {
         console.log(data);
         const newData = {
@@ -54,7 +46,6 @@ const List = (props) => {
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
-
 
     const goToPayment = () => {
         const user = props.connectedUser;
