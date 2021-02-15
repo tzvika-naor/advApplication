@@ -8,12 +8,7 @@ function CardItem (props) {
         console.log(item.quantity)
     }))
     return (
-        <div style={{ marginLeft: "5px" }} >
-            {/* User Details:
-                    <p>Email: {order.userId.email}</p>
-                    <p>First name: {order.userId.firstname}</p>
-                    <p>Last Name: {order.userId.lastname}</p>
-                    <p>Phone: {order.userId.phone}</p> */}
+        <div style={{ marginLeft: "5px" }} >      
             <Card>
                 <Card.Header><h4>Status: {order.status}</h4>   <h4> Date: {order.date.substring(0, 10)}</h4>
                 </Card.Header>
