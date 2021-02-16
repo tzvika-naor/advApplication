@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as d3 from 'd3';
+import { Order } from '../interfaces/order';
+import { OrdersService } from '../orders/orders.service';
 
 @Component({
   selector: 'app-d3',
@@ -7,9 +10,81 @@ import { Component, OnInit } from '@angular/core';
 })
 export class D3Component implements OnInit {
 
-  constructor() { }
+  private svg;
+  private margin = 100;
+  private width = 750 - (this.margin * 2);
+  private height = 400 - (this.margin * 2);
+  private months = [ "January", "February", "March", "April", "May", "June", 
+  "July", "August", "September", "October", "November", "December" ];
+  private orderByMonth: {month: string, count: number}[]=[];
+
+  constructor(private os:OrdersService) { }
+
+  private createSvg(): void {
+    this.svg = d3.select("figure#bar")
+    .append("svg")
+    .attr("width", this.width + (this.margin * 2))
+    .attr("height", this.height + (this.margin * 2))
+    .append("g")
+    .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
+}
+private drawBars(data: any[]): void {
+  // Create the X-axis band scale
+  const x = d3.scaleBand()
+  .range([0, this.width])
+  .domain(this.months)
+  .padding(0.2);
+
+  // Draw the X-axis on the DOM
+  this.svg.append("g")
+  .attr("transform", "translate(0," + this.height + ")")
+  .call(d3.axisBottom(x))
+  .selectAll("text")
+  .attr("transform", "translate(-10,0)rotate(-45)")
+  .style("text-anchor", "end");
+
+  // Create the Y-axis band scale
+  const y = d3.scaleLinear()
+  .domain([0, 200])
+  .range([this.height, 0]);
+
+  // Draw the Y-axis on the DOM
+  this.svg.append("g")
+  .call(d3.axisLeft(y));
+
+  // Create and fill the bars
+  this.svg.selectAll("bars")
+  .data(this.orderByMonth)
+  .enter()
+  .append("rect")
+  .attr("x", d => x(d.month))
+  .attr("y", d => y(d.count))
+  .attr("width", x.bandwidth())
+  .attr("height", (d) => this.height - y(d.count))
+  .attr("fill", "#d04a35");
+}
+
+  handelOrdersComplete = (response :{orders:Order[]})=>{
+    
+    for (let i=1;i<13;i++){
+      const currentMonth =response.orders.filter((item: Order)=>{
+        return item.date.getMonth()==i;
+      })
+      this.orderByMonth.push({month: this.months[i-1],count: currentMonth.length})
+    }
+  }
 
   ngOnInit(): void {
+
+    this.os.getAllOrders().subscribe({
+      next: this.handelOrdersComplete,
+      error: (error)=>console.log(error)
+    })
+    this.createSvg();
+    this.drawBars(this.orderByMonth);
+     
+
   }
+
 
 }
