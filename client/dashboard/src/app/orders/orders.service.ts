@@ -26,7 +26,10 @@ export class OrdersService {
   }
   currentOrder(order) {
     this.order = order;
-    this.subjectOrder.next(this.order);
+  }
+
+  getOrder() {
+    return this.order;
   }
   setSearch(status, userId, dates) {
     this.search.status = status;
@@ -41,9 +44,10 @@ export class OrdersService {
     return this.http.post('http://localhost:5000/api/order/searchOrders', form);
   }
   SetSearchResults(orderResults) {
-   console.log(orderResults);
+   console.log(orderResults.orders);
+   console.log(orderResults.results);
    this.searchOrderResults = orderResults;
    this.searchOrders.next(this.searchOrderResults);
-   
+
   }
 }

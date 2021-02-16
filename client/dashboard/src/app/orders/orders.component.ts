@@ -9,8 +9,9 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  results: number;
   orders: Order[];
-  show: false;
+  show: boolean = false;
   status: string[];
   userId: string[];
   dates: string[];
@@ -18,23 +19,26 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.ordersService.searchOrders.subscribe((response: any) => {
-      console.log(response.dates);
+      console.log(response);
       this.status = response.status;
       this.userId = response.userId;
       this.dates = response.dates;
       this.orders = response.orders;
-    })
+      this.results = (response.orders).length;
+    });
     this.getOrders();
   }
 
   getOrders(): void {
     this.ordersService.getAllOrders().subscribe(
       (response: any) => {
-        console.log(response.dates);
+        console.log(response);
         this.status = response.status;
         this.userId = response.userId;
         this.dates = response.dates;
         this.orders = response.orders;
+        this.results = (response.orders).length;
+
         this.ordersService.setSearch(this.status, this.userId, this.dates);
       });
   }
@@ -42,8 +46,9 @@ export class OrdersComponent implements OnInit {
   // update
   updateOrder(order) {
     this.ordersService.currentOrder(order);
-    this.router.navigate(['update'], { relativeTo: this.route });
-
+    this.show = true;
+    console.log(this.show)
+  
   }
   // delete
   deleteOrder(orderId) {

@@ -74,60 +74,61 @@ const Login = (props) => {
     }
 
     return (
+        // <div>
+        //     { loading ? <Spinner animation="border" role="status" size="xl" style={{ marginLeft: "45%", marginTop: "10%", marginBottom: "25%", width: "200px", height: "200px" }} >
+        //         <span className="sr-only">Loading...</span>
+        //     </Spinner > : 
         <div>
-            { loading ? <Spinner animation="border" role="status" size="xl" style={{ marginLeft: "45%", marginTop: "10%", marginBottom: "25%", width: "200px", height: "200px" }} >
-                <span className="sr-only">Loading...</span>
-            </Spinner > : <div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div id="wrapper" className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "645px" }}>
-                            <div className="box">
-                                <div className="form-group">
-                                    <div className="d-flex flex-column mt-5">
-                                        {!resetPassword ? <h1 className="align-self-center" style={{ fontWeight: "bold" }}>Login</h1> :
-                                            <h1 className="align-self-center" style={{ fontWeight: "bold" }}>Reset Password</h1>}
-                                        <input className="form-control form-control-lg align-self-center w-75 mb-3 mt-2"
-                                            type="text"
-                                            placeholder="Email"
-                                            name="email"
-                                            ref={register({ required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ })}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div id="wrapper" className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "645px" }}>
+                    <div className="box">
+                        <div className="form-group">
+                            <div className="d-flex flex-column mt-5">
+                                {!resetPassword ? <h1 className="align-self-center" style={{ fontWeight: "bold" }}>Login</h1> :
+                                    <h1 className="align-self-center" style={{ fontWeight: "bold" }}>Reset Password</h1>}
+                                <input className="form-control form-control-lg align-self-center w-75 mb-3 mt-2"
+                                    type="text"
+                                    placeholder="Email"
+                                    name="email"
+                                    ref={register({ required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ })}
+                                />
+                                <div className="validations-error">
+                                    {errors.email && errors.email.type === "required" && (<h5>Email is required</h5>)}
+                                    {errors.email && errors.email.type === "pattern" && (<h5>Must be Type of an Email</h5>)}
+                                </div>
+                                <input className="form-control form-control-lg align-self-center w-75 mb-3 mt-2"
+                                    type="text"
+                                    placeholder="Password"
+                                    name="password"
+                                    ref={register({ required: true, minLength: 4 })}
+                                />
+                                <div className="validations-error">
+                                    {errors.password && errors.password.type === "required" && (<h5>Password is required</h5>)}
+                                    {errors.password && errors.password.type === "minLength" && (<h5>Min Lenght of 4</h5>)}
+                                </div>
+                                {!resetPassword ?
+                                    <input className="login align-self-center mt-5" type="submit" value="Login" /> :
+                                    !toDelete ?
+                                        <input className="login align-self-center mt-5" type="submit" value="Reset" />
+                                        : <input className="delete align-self-center mt-4 mb-4" type="submit" value="Delete"
                                         />
-                                        <div className="validations-error">
-                                            {errors.email && errors.email.type === "required" && (<h5>Email is required</h5>)}
-                                            {errors.email && errors.email.type === "pattern" && (<h5>Must be Type of an Email</h5>)}
-                                        </div>
-                                        <input className="form-control form-control-lg align-self-center w-75 mb-3 mt-2"
-                                            type="text"
-                                            placeholder="Password"
-                                            name="password"
-                                            ref={register({ required: true, minLength: 4 })}
-                                        />
-                                        <div className="validations-error">
-                                            {errors.password && errors.password.type === "required" && (<h5>Password is required</h5>)}
-                                            {errors.password && errors.password.type === "minLength" && (<h5>Min Lenght of 4</h5>)}
-                                        </div>
-                                        {!resetPassword ?
-                                            <input className="login align-self-center mt-5" type="submit" value="Login" /> :
-                                            !toDelete ?
-                                                <input className="login align-self-center mt-5" type="submit" value="Reset" />
-                                                : <input className="delete align-self-center mt-4 mb-4" type="submit" value="Delete"
-                                                />
-                                        }
-                                        {!resetPassword ?
-                                            <Link to className="link align-self-center" onClick={resetCredentials}>Forgot password?</Link> :
-                                            <div className="d-flex justify-content-center">
-                                                <Link to className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
-                                                {!toDelete ?
-                                                    <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
-                                                    <Link to className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
-                                                }
-                                            </div>
+                                }
+                                {!resetPassword ?
+                                    <Link to="#" className="link align-self-center" onClick={resetCredentials}>Forgot password?</Link> :
+                                    <div className="d-flex justify-content-center">
+                                        <Link to="#" className="link" onClick={resetCredentials} style={{ marginRight: "20px" }}>Login?</Link>
+                                        {!toDelete ?
+                                            <Link to="#" className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Delete User</Link> :
+                                            <Link to="#" className="link" onClick={deleteUser} style={{ marginLeft: "20px" }}>Reset</Link>
                                         }
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
-                    </form>
-                </div>}
+                    </div>
+                </div>
+            </form>
+            {/* </div>} */}
         </div >
     )
 }

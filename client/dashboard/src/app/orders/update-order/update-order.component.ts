@@ -17,14 +17,16 @@ export class UpdateOrderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('hiiii');
-    this.ordersService.subjectOrder.subscribe((order: Order) => {
-      console.log(this.order);
+    // this.ordersService.subjectOrder.subscribe((order: Order) => {
+    //   console.log(order);
+    //   this.order = order;
       // order.smartphones.map((smartphone, i) => {
       //   console.log(smartphone);
       //   this.smartphoneId.id = smartphone[i].id._id;
       //   this.smartphoneId.quantity = smartphone[i].quantity;
       // });
-    });  
+    // });
+    console.log(this.ordersService.getOrder());
   }
 
 }
