@@ -18,7 +18,11 @@ function Header (props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
             <div className="container">
+<<<<<<< HEAD
                 <Link to='/' className="navbar-brand" onClick={click}><img className="logoImage" src="images/logo.png"></img>SmartShop</Link>
+=======
+                <Link to='/' className="navbar-brand" onClick={click}><h1 className = "header"><img className="logoImage" src = "images/logo.png"></img>SmartShop</h1></Link>
+>>>>>>> d3-new
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>
