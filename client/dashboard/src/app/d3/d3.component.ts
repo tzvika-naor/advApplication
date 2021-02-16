@@ -12,7 +12,7 @@ export class D3Component implements OnInit {
 
   order: Order[];
   private svg;
-  private margin = 100;
+  private margin = 50;
   private width = 750 - (this.margin * 2);
   private height = 400 - (this.margin * 2);
   private months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -29,7 +29,7 @@ export class D3Component implements OnInit {
       .append('g')
       .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
   }
-  private drawBars(data: any[]): void {
+  private drawBars(data): void {
     // Create the X-axis band scale
     const x = d3.scaleBand()
       .range([0, this.width])
@@ -55,7 +55,7 @@ export class D3Component implements OnInit {
 
     // Create and fill the bars
     this.svg.selectAll('bars')
-      .data(this.orderByMonth)
+      .data(data)
       .enter()
       .append('rect')
       .attr('x', d => x(d.month))
@@ -67,15 +67,18 @@ export class D3Component implements OnInit {
 
   handelOrdersComplete = (response) => {
 
-    const dates = response.orders.map(item => item.date);
-    console.log(dates)
+    const arr = Array<number>(12).fill(0);
 
-    for (let i = 1;i < 13;i++) {
-      const currentMonth = response.orders.filter((item: Order) => {
-        return item.date.getMonth() === i;
-      });
-      this.orderByMonth.push({ month: this.months[i - 1], count: currentMonth.length });
+    const getMonth = response.orders.map(item => new Date(item.date).getMonth());
+
+    getMonth.map(month => arr[month] += 1);
+
+    console.log(arr);
+
+    for (let i = 1; i < 13; i++) {
+      this.orderByMonth.push({ month: this.months[i - 1], count: arr[i - 1] });
     }
+    this.drawBars(this.orderByMonth);
   }
 
   ngOnInit(): void {
@@ -85,7 +88,7 @@ export class D3Component implements OnInit {
       error: (error) => console.log(error)
     });
     this.createSvg();
-    this.drawBars(this.orderByMonth);
+
 
 
   }
