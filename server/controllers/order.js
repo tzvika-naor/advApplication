@@ -11,7 +11,9 @@ exports.searchOrders = async (req, res, next) => {
     const to_day = req.body.to_date.substring(0, 2)
     const to_month = req.body.to_date.substring(3, 5)
     const to_year = req.body.to_date.substring(6, 10)
-    const to_date = new Date(to_year, to_month - 1, JSON.parse(to_day) + 1)
+
+
+    const to_date = new Date(to_year, to_month - 1, to_day)
 
     console.log(to_date);
 
