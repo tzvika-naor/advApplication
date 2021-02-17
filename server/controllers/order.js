@@ -4,28 +4,42 @@ exports.searchOrders = async (req, res, next) => {
     const from_day = req.body.from_date.substring(0, 2)
     const from_month = req.body.from_date.substring(3, 5)
     const from_year = req.body.from_date.substring(6, 10)
-
-    const from_date = new Date(from_year, from_month - 1, JSON.parse(from_day))
+    console.log(typeof (from_day));
+    
+    const from_date = new Date(from_year, from_month - 1, from_day)
 
     const to_day = req.body.to_date.substring(0, 2)
     const to_month = req.body.to_date.substring(3, 5)
     const to_year = req.body.to_date.substring(6, 10)
 
-    const to_date = new Date(to_year, to_month - 1, JSON.parse(to_day) + 1)
+
+    const to_date = new Date(to_year, to_month - 1, to_day)
+
+    console.log(to_date);
+
+    // aggregateMonth = await Order.aggregate(
+    //     {
+    //         $group: {
+    //             _id: {
+    //                 month: { $month: "$date" }
+    //             }
+    //         }
+    //     })
+    //     console.log(aggregateMonth) ;
 
     fetchOrders = await Order.find({
-        "status": req.body.status,
-        "userId": req.body.userId,
-        "date": { $gte: from_date, $lte: to_date }
-    }).populate('userId')
-        .populate({ path: 'smartphones', populate: { path: 'id' } })
-
+            "status": req.body.status,
+            "userId": req.body.userId,
+            "date": { $gte: from_date, $lte: to_date }
+        }).populate('userId')
+            .populate({ path: 'smartphones', populate: { path: 'id' } })
+   
     res.status(201).json({
-        message: "Order added successfully",
-        order: {
-            orders: fetchOrders,
-        }
-    });
+                message: "Order added successfully",
+                order: {
+                    orders: fetchOrders
+                }
+            });
 }
 
 

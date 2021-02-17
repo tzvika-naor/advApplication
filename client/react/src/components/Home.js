@@ -2,7 +2,7 @@ import './Home.css'
 import Carousel from 'react-bootstrap/Carousel'
 function Home (props) {
     return (
-        <div style={{ backgroundColor: "rgb(100,100,100)", marginTop: "0" }}>
+        <div style={{position:"relative", top:"0"}}>
             { 
                 <Carousel>
                 <Carousel.Item>
@@ -10,6 +10,8 @@ function Home (props) {
                     className="d-block w-100"
                     src="images/1.jpg"
                     alt="First slide"
+                    style={{height:"1000px"}}
+
                   />
                   <Carousel.Caption>
                     <h3>First slide label</h3>
@@ -21,6 +23,7 @@ function Home (props) {
                     className="d-block w-100"
                     src="images/2.jpg"
                     alt="Third slide"
+                    style={{height:"1000px"}}
                   />
               
                   <Carousel.Caption>
@@ -33,6 +36,8 @@ function Home (props) {
                     className="d-block w-100"
                     src="images/3.jpg"
                     alt="Third slide"
+                    style={{height:"1000px"}}
+
                   />
               
                   <Carousel.Caption>

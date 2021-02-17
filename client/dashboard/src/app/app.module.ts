@@ -19,6 +19,8 @@ import { UsersCounterComponent } from './header/users-counter/users-counter.comp
 import { OrdersCounterComponent } from './header/orders-counter/orders-counter.component';
 import { UpdateOrderComponent } from './orders/update-order/update-order.component';
 import {OrderSearchComponent} from './orders/order-search/order-search.component';
+import { D3Component } from './d3/d3.component';
+import { OrdersService } from './orders/orders.service';
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
@@ -37,7 +39,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     UsersCounterComponent,
     OrdersCounterComponent,
     UpdateOrderComponent,
-    OrderSearchComponent
+    OrderSearchComponent,
+    D3Component
 
   ],
   imports: [
@@ -47,7 +50,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     AppRoutingModule,
     SocketIoModule.forRoot(config)
   ],
-  providers: [],
+  providers: [OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

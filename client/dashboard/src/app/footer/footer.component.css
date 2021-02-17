@@ -1,0 +1,10 @@
+.w3-padding-16{
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+.w3-light-grey{
+    text-align: center;
+}
