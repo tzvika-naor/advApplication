@@ -10,15 +10,17 @@ import { UsersService } from '../users.service';
 export class UserDeleteComponent implements OnInit {
 
   users: User[];
+
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
   getUsers(): void {
-    this.usersService.getAllUsers().subscribe(
+    this.usersService.filteredUsers.subscribe(
       (response: any) => {
-        this.users = response.user;
+        this.users = response;
+
       }
     );
   }
@@ -30,5 +32,7 @@ export class UserDeleteComponent implements OnInit {
       }
     );
   }
+
+  
 
 }

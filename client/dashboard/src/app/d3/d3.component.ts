@@ -46,7 +46,7 @@ export class D3Component implements OnInit {
 
     // Create the Y-axis band scale
     const y = d3.scaleLinear()
-      .domain([0, 200])
+      .domain([0, 300])
       .range([this.height, 0]);
 
     // Draw the Y-axis on the DOM
