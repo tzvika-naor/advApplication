@@ -40,21 +40,16 @@ const List = (props) => {
             newSmartIds.push(newItem)
             setSmartphonesIds(newSmartIds)
         }
-        ///////////////////////////////////////////////////////////
         else {
             setSmartphonesInCart([...smartphonesInCart, data]);
             setSmartphonesIds([...smartphonesIds, newData])
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
-        ///////////////////////////////////////////////////////////
     }
-
     const goToPayment = () => {
         const user = props.connectedUser;
-        /////////////////////////////////////////
         if (smartphonesIds.length === 0)
             alert('your cart is empty')
-            /////////////////////////////////////
         else {
             history.push('order');
             const itemsDetails = {
@@ -66,7 +61,7 @@ const List = (props) => {
             props.setItems(itemsDetails)
         }
     }
-////////////////////////////////////////////////
+
     if (!props.showResults) {
         return (
             <div>

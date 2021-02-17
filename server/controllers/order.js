@@ -117,7 +117,7 @@ exports.createOrder = (req, res, next) => {
     const smartphonesIds = req.body.smartphonesIds
     var smartphones = [];
     smartphonesIds.map(s => {
-        smartphones.push({ id: s.id, quantity: s.qnt })
+        smartphones.push({ id: s.id, quantity: s.quantity })
     })
     const order = new Order({
         smartphones: smartphones,
