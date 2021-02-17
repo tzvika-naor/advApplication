@@ -1,188 +1,93 @@
 // import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { useEffect, useState } from "react";
-import history from '../History';
-//import { Button } from 'react-bootstrap';
-
+import Quantity from './Quantity';
+import history from '../History'
 function Order (props) {
-    var [smartphonesInCart, setSmartphonesInCart] = useState(props.data.location.smartphonesInCart.smartphonesInCart)
-    const [orderId, setOrderId] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(props.data.location.totalPrice.totalPrice);
-    // this.costumer = {
-    //     firstname: "Omer"
-    // }
-    console.log("Order props",props)
-    var order = {
-        //smartphones: props.data.location.smartphonesId.smartphonesId,
-        // smartphones: props.data.location.smartphonesInCart.smartphonesInCart.map((el)=>{
-        //     return {
-        //         id: el.id,
-        //         itemCount: el.itemCount
-        //     }
-        // }),
-        smartphones: props.data.location.smartphonesInCart.smartphonesInCart,
-        userId: props.data.location.user._id,  
-        totalPrice: props.data.location.totalPrice.totalPrice,
-        user: props.data.location.user//Don't send to create order post
+    //set the total price with array reduce
+
+    console.log(props)
+    const orderDetails = props.items;
+    const [order, setOrder] = useState({ smartphonesIds: orderDetails.smartphonesIds, userId: orderDetails.user._id, status: 'in-progress' })
+    const [value, setValue] = useState(order.smartphonesIds.map(item => item.qnt))
+    const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
+
+    const setItem = (data) => {
+        const valueCopy = value;
+        if (+data.value > -1)
+            valueCopy[data.index] = +data.value;
+        setValue(valueCopy)
+        const total = valueCopy.reduce((total, current, index) => total + current * (+props.items.smartphonesInCart[index].price), 0)
+        setTotalPrice(total)
     }
-
-
-
-    useEffect(() => {
-        order.smartphones = order.smartphones.map(obj => {
-        return {
-            id: obj.id,
-            itemCount: obj.itemCount
-        }});
-        axios.post('http://localhost:5000/api/order', order)
-        .then(response => {
-            setOrderId(response.data.order.id)
-            console.log(response)
+    const onCheckout = () => {
+        // saving the copy
+        const orderCopy = order
+        // updating the latest quantity
+        orderCopy.smartphonesIds.map((item, index) => {
+            item.qnt = value[index];
         })
-    }, [] )
-
-    const calculateTotalPrice = smartphones => {
-        var newTotalPrice = 0;
-        console.log(smartphones)
-        smartphones.map(item =>  
-        {
-            console.log("Item",item);
-            newTotalPrice += item.itemCount * item.price;
-        });
-
-        setTotalPrice(newTotalPrice);
+        setOrder(orderCopy);
+        axios.post('http://localhost:5000/api/order', orderCopy)
+            .then(response => {
+                console.log(response.data)
+            })
+            //add wbsocket new order
+        alert(`order completed`);
+        history.push('/smartphones')
     }
-
-    const removeItem = (id) => {
-        const user = props.connectedUser;
-        var result = smartphonesInCart.find(el => el.id === id) // find the smartphone in the cart array by id
-                if (result.itemCount > 1) {
-            result.itemCount--;
-
-            console.log(result)
-        }
-        else {
-            smartphonesInCart = smartphonesInCart.filter(item => item.id !== id) //Remove the smartphone from the cart array
-            setSmartphonesInCart(smartphonesInCart);
-            console.log("Result after count 0",smartphonesInCart)
-        }
-        //   history.push({
-        //        pathname: 'order',
-        //        smartphonesInCart: { smartphonesInCart },
-        //        totalPrice: { totalPrice },
-        //        smartphonesId: { smartphonesId },
-        //        user: user
-        //    })
-        calculateTotalPrice(smartphonesInCart);
+    const goBack = () => {
+        history.push("/smartphones")
     }
-
-    const addItem = id =>{
-        axios.post('http://localhost:5000/api/order/smartphone/add', {
-            id : id
-        })
-        .then(response => {
-            [smartphonesInCart] = response.data.smartphones// to fix
-            //setCount(count + 1)
-        })
-        .err( (err,log,xhr) =>{
-            console.error(err);
-            console.error(log);
-            console.error(xhr);
-        });
-    }
-
-    const deleteOrder = id => {
-        axios.delete(`http://localhost:5000/api/order/delete/${id}`, {
-            id : id
-        })
-        .then(response => {
-            console.log(id);
-            console.log(response);
-            console.log(response.data);
-            alert(`Order Deleted ! `);
-            history.push('./smartphones');
-
-        })
-        // .err( (err,log,xhr) =>{
-        //     console.error(err);
-        //     console.error(log);
-        //     console.error(xhr);
-        // });
-    }
-
-    const updateOrderBeforeCheckout = (id) => {
-        
-        let smartphonesAfterUpdate = smartphonesInCart.map((el)=>{
-            return {
-                id: el.id,
-                itemCount: el.itemCount
-            }
-        });
-        const updatedOrder = {
-            id : id,
-            smartphones : smartphonesAfterUpdate,
-            totalPrice : totalPrice,
-            userId: order.userId
-        }
-        axios.put(`http://localhost:5000/api/order/checkout/${id}`, updatedOrder)
-        .then(response => {
-            console.log(id);
-            console.log(response);
-            console.log(response.data);
-            console.log(response.data.order);
-            //alert(`Checkout ! `);
-            history.push('./order/checkout');
-            // history.push({
-            //     pathname: 'order',
-            //     smartphonesInCart: { smartphonesInCart },
-            //     totalPrice: { totalPrice },
-            //     smartphoneId: { smartphoneId },
-            //     user: user
-            // })
-
-        })
-        // .err( (err,log,xhr) =>{
-        //     console.error(err);
-        //     console.error(log);
-        //     console.error(xhr);
-        //     alert(`Error ${err}`);
-        // });
-    }
-
-    const SmartPhone = (data) => {
-        console.log(data);
-        return (<li style={{ height: "120px", width: "500px" }} class="list-group-item">
-                    <img style={{ width: "50px", height: "100px", float: "right" }} src={data.data.image} alt="" />
-                    <h4>Model: {data.data.phoneModel}</h4>
-                    <h4>ID: {data.data.id}</h4>
-                    <h4>Price: {data.data.price}  ,  Count: {data.data.itemCount}</h4>
-                    <button style={{ 'position': 'absolute', 'top': '0', 'right': '0' }} onClick={()=>removeItem(data.data.id)}>X</button>
-                    <button style={{ 'position': 'absolute', 'bottom': '0', 'right': '0' }} onClick={()=>addItem(data.data.id)}>+</button>
-                </li>);
-    }
-
-
-
     return (
         <div >
-            <h4> Order Id: {orderId}</h4>
+            {/* <h4> Order Id: {orderId}</h4> */}
             <ul className="list-unstyled" >
                 <h4 style={{ marginBottom: "20px", marginTop: "20px", marginLeft: "40px" }}> User Details</h4>
                 <div style={{ marginLeft: "60px", marginBottom: "20px" }}>
-                    <li><h5>First Name: {order.user.firstname}</h5> </li>
-                    <li><h5>Last Name: {order.user.lastname} </h5></li>
-                    <li><h5>Email: {order.user.email}</h5></li>
+                    <li><h5>First Name: {orderDetails.user.firstname}</h5> </li>
+                    <li><h5>Last Name: {orderDetails.user.lastname} </h5></li>
+                    <li><h5>Email: {orderDetails.user.email}</h5></li>
+                </div></ul>
+            {orderDetails.smartphonesInCart.map((el, index) => (
+                <div>
+                    <ul className="list-unstyled">
+
+                        <div className="col-md-4">
+                            <div className="row" >
+                                <div className="col-md-9 offset-1">
+                                    <li style={{ height: "120px" }} className="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price} </h4> </li>
+                                </div>
+                                <div className="col-md-2">
+                                    <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
+                                        <label>Quantity</label>
+                                        <Quantity index={index} value={value[index]} setItem={(data) => setItem(data)} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
                 </div>
-            </ul>
-            <ul>
-            {smartphonesInCart.map(el => (
-                <SmartPhone data={el}/>
             ))
             }
-            </ul>
-            <button onClick={()=>deleteOrder(orderId)}>Delete Order</button>
-            <button onClick={()=>updateOrderBeforeCheckout(orderId)}>Checkout</button>
-            <h4>Total Price: {totalPrice}</h4>
+            <div className="col-md-4" style={{ marginBottom: "30px", marginTop: "30px" }}>
+                <div className="row" >
+                    <div className="col-md-5 offset-1">
+                        <h4>Total Price: {totalPrice}</h4>
+                    </div>
+                    <div className="col-md-2">
+                        <Button variant="secondary" size="lg" onClick={goBack}>
+                            Cancel
+                    </Button>
+                    </div>
+                    <div className="col-md-2">
+                        <Button variant="primary" size="lg" onClick={onCheckout}>
+                            Checkout
+                    </Button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     )

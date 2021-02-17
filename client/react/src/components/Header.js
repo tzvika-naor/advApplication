@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import './Header.css'
 function Header (props) {
-       const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
+    console.log(props)
+    const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
     function click () {
         props.resetSearch(true)
     }

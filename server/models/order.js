@@ -10,7 +10,7 @@ const orderSchema = new Schema({
         quantity: { type: Number, required: true, default: 0 }
     }],
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    status: { type: String, default: 'in_progress' },
+    status: { type: String, default: 'in-progress' },
     date: { type: Date, default: Date.now }
 })
 

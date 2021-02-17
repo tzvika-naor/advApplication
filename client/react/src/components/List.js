@@ -46,6 +46,7 @@ const List = (props) => {
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
+
     const goToPayment = () => {
         const user = props.connectedUser;
         if (smartphonesIds.length === 0)
