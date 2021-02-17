@@ -9,7 +9,7 @@ const List = (props) => {
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [smartphonesIds, setSmartphonesIds] = useState([])
+    //const [smartphonesIds, setSmartphonesIds] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
@@ -25,37 +25,39 @@ const List = (props) => {
     }, []);
 
     const addToOrder = (data) => {
-        console.log(data);
-        const newData = {
-            id: data.id,
-            qnt: 1
-        }
-        const itemIndex = smartphonesIds.findIndex(item => item.id === data.id);
-        var newSmartIds = smartphonesIds.filter(item => item.id !== data.id);
+        // console.log(data);
+        // const newData = {
+        //     id: data.id,
+        //     quantity: 1
+        // }
+        //const itemIndex = smartphonesInCart.findIndex(item => item.id === data.id);
+        const itemToAdd = smartphonesInCart.find(item => item.id === data.id);
+        //var newSmartIds = smartphonesIds.filter(item => item.id !== data.id);
 
-        if (itemIndex > -1) {
-            // the item is already in the cart no need to add into setSmartphonesInCart
-            var newItem = smartphonesIds[itemIndex]
-            newItem.qnt += 1;
-            newSmartIds.push(newItem)
-            setSmartphonesIds(newSmartIds)
+        if (itemToAdd) { // the item is already in the cart no need to add into setSmartphonesInCart
+            
+            // var newItem = smartphonesIds[itemIndex]
+            // newItem.quantity += 1;
+            // newSmartIds.push(newItem)
+            // setSmartphonesIds(newSmartIds)
+            itemToAdd.quantity +=1;
         }
-        else {
-            setSmartphonesInCart([...smartphonesInCart, data]);
-            setSmartphonesIds([...smartphonesIds, newData])
+        else { //The item is not in the cart yet
+            setSmartphonesInCart([...smartphonesInCart, {phoneModel: data.phoneModel, price: data.price, id: data.id, image: data.image, quantity: 1 }]);
+            //setSmartphonesIds([...smartphonesIds, newData])
         }
         setTotalPrice(totalPrice => totalPrice + data.price);
     }
 
     const goToPayment = () => {
         const user = props.connectedUser;
-        if (smartphonesIds.length === 0)
+        if (smartphonesInCart.length === 0)
             alert('your cart is empty')
         else {
             history.push('order');
             const itemsDetails = {
                 smartphonesInCart: smartphonesInCart,
-                smartphonesIds: smartphonesIds,
+                //smartphonesIds: smartphonesIds,
                 totalPrice: totalPrice,
                 user: user
             }
