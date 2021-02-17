@@ -9,7 +9,7 @@ import { OrdersService } from '../orders/orders.service';
   styleUrls: ['./d3.component.css']
 })
 export class D3Component implements OnInit {
-
+  data: any;
   order: Order[];
   private svg;
   private margin = 50;
@@ -65,7 +65,7 @@ export class D3Component implements OnInit {
       .attr('fill', '#d04a35');
   }
 
-  handelOrdersComplete = (response) => {
+  handelOrdersComplete = (response: any) => {
 
     const arr = Array<number>(12).fill(0);
 
@@ -78,20 +78,20 @@ export class D3Component implements OnInit {
     for (let i = 1; i < 13; i++) {
       this.orderByMonth.push({ month: this.months[i - 1], count: arr[i - 1] });
     }
-    this.drawBars(this.orderByMonth);
   }
 
   ngOnInit(): void {
-
-    this.os.getAllOrders().subscribe({
-      next: this.handelOrdersComplete,
-      error: (error) => console.log(error)
-    });
     this.createSvg();
-
-
-
+    this.os.getAllOrders().subscribe(response => {
+      this.handelOrdersComplete(response);
+      this.drawBars(this.orderByMonth);
+    },
+      error => {
+        console.log(error);
+      }
+    );
   }
-
-
 }
+
+
+
