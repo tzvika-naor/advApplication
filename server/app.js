@@ -1,4 +1,4 @@
-// const scrapingData = require('./scrapingData')
+const scrapingData = require('./scrapingData');
 const express = require('express');
 const bodyParser = require('body-parser');
 const socketIo = require('socket.io');

@@ -67,6 +67,7 @@ async function getMobiles () {
             price.push(priceinRupee)
         })
         phoneModels.forEach((val, i) => {
+            let flag = false;
             var obj = {}
             var temp = val.split(' ');
             obj.phoneModel = val;
@@ -78,9 +79,12 @@ async function getMobiles () {
             obj.frontCamera = frontCamera[i];
             obj.rearCamera = rearCamera[i];
             obj.batteryCapacity = batteryCapacity[i];
-            // var indexEnd = (price[i]).length
-            // obj.price = Math.floor((price[i].substr(2, indexEnd)).replace(',', '') / 73.1411);
-            obj.price = JSON.stringify(price[i]);
+            if (price[i]) {
+                flag = true;
+                var indexEnd = (price[i]).length
+                obj.price = Math.floor((price[i].substr(2, indexEnd)).replace(',', '') / 73.1411);
+            }
+            // obj.price = JSON.stringify(price[i]);
 
             obj.brand = temp[0];
             if (obj.phoneModel === 'Infinix Smart 4')
@@ -103,7 +107,8 @@ async function getMobiles () {
                 obj.image = "https://i.gadgets360cdn.com/products/large/realme-c15-370x800-1597735244.jpg"
             if (obj.phoneModel === "Realme C3 (4GB RAM, 64GB)")
                 obj.image = "https://i.gadgets360cdn.com/products/large/realme-c3-368x800-1580975894.jpg"
-            arr.push(obj)
+            if (flag)
+                arr.push(obj)
         },
             // getData(arr)
         )
