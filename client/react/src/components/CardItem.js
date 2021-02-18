@@ -8,8 +8,8 @@ function CardItem (props) {
         console.log(item.quantity)
     }))
     return (
-        <div style={{ width: "400px" , marginLeft:"20px" , marginTop:"20px"}} >      
-            <Card>
+        <div>      
+            <Card >
                 <Card.Header><h4>Status: {order.status}</h4>   <h4> Date: {order.date.substring(0, 10)}</h4>
                 </Card.Header>
                 <Card.Body>

@@ -43,13 +43,15 @@ function OrdersHistory (props) {
             <h4>Phone: {user.phone}</h4>
 
             <div className="row" >
-                {
-                    orders.map((order, index) => {
-                        return (
-                            <CardItem  order={order} key={index} />
-                        )
-                    })
-                }
+                
+                    {
+                        orders.map((order, index) => {
+                            return (
+                                <CardItem order={order} key={index} />
+                            )
+                        })
+                    }
+                
             </div>
         </div >)
 }

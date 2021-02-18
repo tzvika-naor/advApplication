@@ -1,9 +1,8 @@
+// const scrapingData = require('./scrapingData')
 const express = require('express');
 const bodyParser = require('body-parser');
 const socketIo = require('socket.io');
 const cors = require('cors')
-
-
 const mongoose = require('mongoose');
 const orderRoutes = require('./routes/order');
 const userRoutes = require('./routes/user');
