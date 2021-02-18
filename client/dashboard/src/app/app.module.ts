@@ -21,6 +21,7 @@ import { UpdateOrderComponent } from './orders/update-order/update-order.compone
 import {OrderSearchComponent} from './orders/order-search/order-search.component';
 import { D3Component } from './d3/d3.component';
 import { OrdersService } from './orders/orders.service';
+import { LoginComponent } from './login/login.component';
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
@@ -40,7 +41,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     OrdersCounterComponent,
     UpdateOrderComponent,
     OrderSearchComponent,
-    D3Component
+    D3Component,
+    LoginComponent
 
   ],
   imports: [

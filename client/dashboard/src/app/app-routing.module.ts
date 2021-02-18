@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { D3Component } from './d3/d3.component';
+import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UpdateOrderComponent } from './orders/update-order/update-order.component';
 import { SmartphonesComponent } from './smartphones/smartphones.component';
@@ -9,7 +10,8 @@ import { UserDeleteComponent } from './users/user-delete/user-delete.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  {path: 'd3', component: D3Component},
+  { path: 'login', component: LoginComponent },
+  { path: 'd3', component: D3Component },
   {
     path: 'orders', component: OrdersComponent,
     children: [
@@ -37,7 +39,7 @@ const routes: Routes = [
   },
   { path: 'smartphones', component: SmartphonesComponent },
 
- 
+
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-container',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-
-  constructor() { }
+  private isLogin: boolean;
+  constructor(private ls: LoginService) { }
 
   ngOnInit(): void {
+    this.ls.isLogin.subscribe(res => this.isLogin = res);
   }
-
+  logout() {
+    this.ls.setIsLogin(false);
+  }
 }
