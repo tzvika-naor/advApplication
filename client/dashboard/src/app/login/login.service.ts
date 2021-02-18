@@ -13,7 +13,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
   error;
   onLogin(data) {
-    console.log(data);
     return this.http.post('http://localhost:5000/api/user/adminLogin', data);
   }
   onUpdate(data) {

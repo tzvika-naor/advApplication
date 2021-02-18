@@ -11,10 +11,15 @@ export class ContainerComponent implements OnInit {
   constructor(private ls: LoginService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('token')){
+      this.isLogin = true;
+      this.ls.setIsLogin(true);
+    }
     this.ls.isLogin.subscribe(res => this.isLogin = res);
   }
   logout() {
+    this.isLogin = false;
+    localStorage.removeItem('token');
     this.ls.setIsLogin(false);
-  
   }
 }

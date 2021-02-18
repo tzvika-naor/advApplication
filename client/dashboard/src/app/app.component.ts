@@ -8,7 +8,10 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   private show = false;
-  constructor(private ls: LoginService){
+  constructor(private ls: LoginService) {
+    // if (localStorage.getItem('token')) {
+      // this.show = true;
+    // }
     this.ls.isLogin.subscribe(val => this.show = val);
   }
 }
