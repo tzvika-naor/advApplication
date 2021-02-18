@@ -11,7 +11,8 @@ import Login from './components/Login';
 import SmartphoneEdit from './components/SmartphoneEdit'
 import Order from './components/Order'
 import Home from './components/Home';
-import OrdersHistory from './components/OrdersHistory'
+import OrdersHistory from './components/OrdersHistory';
+import SmartphoneDetails from './components/SmartphoneDetails'
 import './App.css';
 
 function App (props) {
@@ -41,6 +42,7 @@ function App (props) {
         <Route path='/' exact component={Home} />
         <Route path='/ordersHistory' render={(props) => <OrdersHistory connectedUser={connectedUser} />} />
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
+        <Route path="/smartphone-details/:id" component={SmartphoneDetails} />
         <Route path="/register" component={Register} />
         <Route path="/login" render={() => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
         <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} items={items} />} />

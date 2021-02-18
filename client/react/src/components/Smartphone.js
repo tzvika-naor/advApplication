@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from 'react-icons/fi';
-import { ImPencil2 } from 'react-icons/im';
+import { BiDetail } from 'react-icons/bi';
 import history from '../History';
 function Smartphone (props) {
     // console.log(props);
@@ -11,16 +11,14 @@ function Smartphone (props) {
     }
   
     const edit = () => {
-        history.push({ pathname: `/smartphone/${props.smartphone.id}/edit`, smartphone: props });
+        history.push({ pathname: `/smartphone-details/${props.smartphone.id}`, smartphone: props });
     }
   
     return (
         <div className="col-lg-4 col-md-6 mb-4">
             <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "50px", padding: "20px" }}>
                 <h3 className="card-title" style={{ marginLeft: "20px" }} >
-                  <span style={{ float: "right", cursor: "pointer" }} ><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
-                    {props.isAdmin[0] ? <div> <span style={{ float: "right", cursor: "pointer", marginRight: "5px" }} ><ImPencil2 onClick={(event, i) => edit(event, i)} /></span>
-                    {props.smartphone.phoneModel} </div> : <div>{props.smartphone.phoneModel}</div>}
+                  <span style={{ float: "right", cursor: "pointer" }} ><BiDetail onClick={(event, i) => edit(event, i)} /><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
                 </h3>
                 <img id="card-img-top" src={props.smartphone.image} alt={props.smartphone.phoneModel} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '30%', height: '300px' }} />
                 <div id="card-body">

@@ -7,9 +7,9 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent implements OnInit {
 
-  firstNameSearch: string = "";
-  lastNameSearch: string = "";
-  emailSearch: string = "";
+  firstNameSearch = '';
+  lastNameSearch = '';
+  emailSearch = '';
 
 
   constructor(private usersService: UsersService) { }
