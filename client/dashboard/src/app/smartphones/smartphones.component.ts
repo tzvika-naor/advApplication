@@ -8,17 +8,28 @@ import { SmartphonesService } from './smartphones.service';
 })
 export class SmartphonesComponent implements OnInit {
   smartphones: Smartphone[];
-  constructor(private smartphonesService: SmartphonesService) { }
+  private showChildrens = false;
+  constructor(private sm: SmartphonesService) { }
 
   ngOnInit(): void {
     this.getSmartphones();
   }
   getSmartphones(): void {
-    this.smartphonesService.getAllSmartphones().subscribe(
+    this.sm.getAllSmartphones().subscribe(
       (response: any) => {
         this.smartphones = response.smartphones;
         console.log(this.smartphones);
       }
     );
+  }
+  removeSmartphone(id) {
+    this.sm.removeSmartphone(id).subscribe(res => console.log(res), error => console.log(error));
+  }
+  updateSmartphone(smartphone) {
+    this.showChildrens = true;
+    this.sm.smartphoneClicked(smartphone);
+  }
+  createSmartphone(){
+    this.showChildrens = true;
   }
 }

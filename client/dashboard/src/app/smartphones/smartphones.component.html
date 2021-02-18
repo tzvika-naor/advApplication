@@ -1,4 +1,4 @@
-<div class="div" style="margin-left: 300px;">
+<div class="div" style="margin-left: 300px;" *ngIf="!showChildrens">
     <h4>SMARTPHONES</h4>
     <div class="row">
         <div class="col-lg-4" *ngFor="let s of smartphones">
@@ -13,8 +13,17 @@
                     <h3>Processor: {{s.processor}}</h3>
                     <h3>Price: {{s.price}}</h3>
                 </div>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button [routerLink]="'create'"  (click)="createSmartphone()" type="button"  class="btn btn-outline-success">Add</button>
+                    <button  [routerLink]="['update' , s._id]" type="button" class="btn btn-outline-warning"
+                        (click)="updateSmartphone(s)">Edit</button>
+                    <button type="button" class="btn btn-outline-danger"
+                        (click)="removeSmartphone(s._id)">Remove</button>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="showChildrens">
+<router-outlet></router-outlet>
 </div>

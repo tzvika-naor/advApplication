@@ -132,6 +132,7 @@ exports.createSmartphone = (req, res, next) => {
         });
 };
 exports.updateSmartphone = (req, res, next) => {
+    console.log(req.boy)
     const smartphone = new Smartphone({
         phoneModel: req.body.phoneModel,
         brand: req.body.brand,
