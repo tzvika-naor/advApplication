@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
     if (this.login) {
       this.ls.onLogin(formData.form.value).subscribe(
         (res: any) => {
-          localStorage.setItem('token', JSON.stringify(res.sessionToken));
+          localStorage.setItem('token', res.sessionToken);
+          this.ls.setToken(res.sessionToken);
           this.ls.setIsLogin(true);
           this.router.navigate(['/'], { relativeTo: this.route });
         }, (error: any) => {

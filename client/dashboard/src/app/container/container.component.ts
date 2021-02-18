@@ -15,5 +15,6 @@ export class ContainerComponent implements OnInit {
   }
   logout() {
     this.ls.setIsLogin(false);
+  
   }
 }
