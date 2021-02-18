@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
-import { User } from '../interfaces/user';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users: User[];
+
+  firstNameSearch: string = "";
+  lastNameSearch: string = "";
+  emailSearch: string = "";
 
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.getUsers();
-  }
-  getUsers() {
-    this.usersService.getAllUsers().subscribe(
-      (response: any) => {
-        this.users = response.user;
-      }
-    );
   }
 
+  onClickSearch(){
+
+    this.usersService.filterUsers({
+      firstname: this.firstNameSearch,
+      lastname: this.lastNameSearch,
+      email: this.emailSearch,
+    });
+    console.log(this.firstNameSearch);
+  }
 }

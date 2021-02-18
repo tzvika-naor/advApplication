@@ -28,7 +28,7 @@ export class SmartphoneUpdateComponent implements OnInit {
   ngOnInit(): void {
 
     this.ss.subject.subscribe((smartphone: any) => {
-      this.form.brand = smartphone.brand;
+      this.form = smartphone;
     },
       error => {
         console.log(error);
@@ -37,11 +37,11 @@ export class SmartphoneUpdateComponent implements OnInit {
   onSubmit(formData) {
     const data = formData.form.value;
     const id = this.route.snapshot.paramMap.get('id');
-    if (id){
-    this.ss.updateSmartphone(data, id).subscribe(res => console.log(res), err => console.log(err));
+    if (id) {
+      this.ss.updateSmartphone(data, id).subscribe(res => console.log(res), err => console.log(err));
+    }
+    else {
+      this.ss.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
+    }
   }
-  else{
-    this.ss.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
-  }
-}
 }
