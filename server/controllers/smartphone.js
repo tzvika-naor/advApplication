@@ -44,6 +44,7 @@ exports.getSmartphones = async (req, res, next) => {
     const rearCamera = []
     const phoneModel = []
     const brands = await Smartphone.aggregate([{ $group: { _id: "$brand" } }])
+    console.log(brands)
     brands.map(item => brand.push(item._id))
     const displays = await Smartphone.aggregate([{ $group: { _id: "$display" } }])
     displays.map(item => display.push(item._id))
@@ -57,14 +58,11 @@ exports.getSmartphones = async (req, res, next) => {
     rearCameras.map(item => rearCamera.push(item._id))
     const phoneModels = await Smartphone.aggregate([{ $group: { _id: "$phoneModel" } }])
     phoneModels.map(item => phoneModel.push(item._id))
-    const SmartphoneQuery = Smartphone.find();//return all the Smartphone
-    SmartphoneQuery.then(documents => {
-        fetchedSmartphones = documents;
-        return Smartphone.countDocuments() // returns all the number of that match query from this database... we made no filtering so we got all 100 cars
-    }).then(count => {
+    const SmartphoneQuery = await Smartphone.find();//return all the Smartphon
+
         res.status(200).json({
             message: 'Smartphone fetch succesfully!',
-            smartphones: fetchedSmartphones,
+            smartphones: SmartphoneQuery,
             unique: {
                 brand: brand,
                 display: display,
@@ -76,7 +74,12 @@ exports.getSmartphones = async (req, res, next) => {
             },
             smartphonesCount: count
         })
-    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'Fetching posts failed!',
+            error: error
+        });
+    });
 }
 exports.getSmartphone = (req, res, next) => {
     Smartphone.findById(req.params.id).then(document => {
