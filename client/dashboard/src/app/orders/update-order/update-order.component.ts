@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/interfaces/order';
-import { SmartphoneId } from 'src/app/interfaces/smartphoneId';
+import { SmartphonesId } from 'src/app/interfaces/smartphonesId';
 import { OrdersService } from '../orders.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { OrdersService } from '../orders.service';
 })
 export class UpdateOrderComponent implements OnInit {
   order: Order;
-  smartphoneId: SmartphoneId;
-  smartphoneId1: SmartphoneId;
+  smartphonesId: SmartphonesId;
+  smartphonesId1: SmartphonesId;
 
   constructor(private ordersService: OrdersService) { }
 

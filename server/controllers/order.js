@@ -1,4 +1,7 @@
+//const { response } = require('../app');
 const Order = require('../models/order');
+const io = require('socket.io-client');
+const socket = io.connect("http://localhost:5000");
 
 exports.searchOrders = async (req, res, next) => {
     const from_day = req.body.from_date.substring(0, 2)
@@ -42,8 +45,8 @@ exports.searchOrders = async (req, res, next) => {
             });
 }
 
-
 exports.getOrders = async (req, res, next) => {
+    console.log("getOrders");
     const status = await Order.aggregate([{ $group: { _id: "$status" } }])
     const dates = await Order.aggregate([{
 
@@ -76,11 +79,13 @@ exports.getOrders = async (req, res, next) => {
                 userId: userId,
                 message: 'Orders fetch succesfully!',
                 orders: fetchedOrders,
-                maxOrders: count
+                ordersCount: count
             })
         })
 }
+
 exports.getOrderByUserId = async (req, res, next) => {
+    console.log("getOrderByUserId");
     const status = await Order.aggregate([{ $group: { _id: "$status" } }])
 
     const dates = await Order.aggregate([{
@@ -114,13 +119,9 @@ exports.getOrderByUserId = async (req, res, next) => {
 }
 
 exports.createOrder = (req, res, next) => {
-    const smartphonesIds = req.body.smartphonesIds
-    var smartphones = [];
-    smartphonesIds.map(s => {
-        smartphones.push({ id: s.id, quantity: s.qnt })
-    })
     const order = new Order({
-        smartphones: smartphones,
+        smartphones: req.body.smartphones,
+        totalPrice: req.body.totalPrice,
         userId: req.body.userId,
         status: req.body.status
     });
@@ -133,16 +134,29 @@ exports.createOrder = (req, res, next) => {
                 status: createdOrder.status,
             }
         });
+        socket.emit('changeOrdersCount'); //WebSocket
     })
-        .catch(error => {
+    .catch(error => {
             res.status(500).json({
                 message: 'Creating a Order failed!'
             });
         });
 };
+
 exports.updateOrder = (req, res, next) => {
-    console.log(req.body.quantity)
-    console.log(req.params.id)
+    Order.updateOne({ _id: req.body.id }, req.body).then(doc => {
+        res.status(200).json({
+            user: doc,
+            message: "user password updated"
+        })
+    })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+                message: 'somthing went wrong!'
+            });
+        });
+
 
     //     console.log(req.body)
     //     const Order = new Order({
@@ -162,6 +176,7 @@ exports.updateOrder = (req, res, next) => {
     //         }
     //     });
 }
+
 exports.deleteOrder = (req, res, next) => {
     Order.deleteOne({ _id: req.params.id }).then(result => {
         if (result.n > 0) {
@@ -171,6 +186,7 @@ exports.deleteOrder = (req, res, next) => {
         } else {
             res.status(401).json({ message: "Not authorized!" });
         }
+        socket.emit('changeOrdersCount'); //WebSocket
     })
         .catch(error => {
             res.status(500).json({
@@ -190,3 +206,54 @@ exports.getTotalAmountByUser = async (req, res, next) => {
                 }
             },])
 }
+
+exports.getOrdersCount = (req, res, cb) => {
+    console.log("getOrdersCount");
+    
+    
+    //await res.send("ok");
+    
+    // await Order.find()//return all the Orders
+    //     .then(documents => {
+    //         // console.log(documents)
+    //         fetchedOrders = documents;
+    //         return Order.count() 
+    //     }).then(count => {
+    //         console.log('Orders count on server', count);
+    //         response1 = {
+    //             ordersCount: count
+    //         };
+    //         res.send(response1);
+    //     })
+        //console.log("Orders Count", Order.countDocuments());
+        
+        //let x =  await Order.count();
+        //res.send("Ok");
+
+        // console.log('start');
+
+        Order.count({
+        },(err, count)=>{
+            if (err)
+                return res ? res.status(404).json({
+                    "err": err,
+                    count: -1
+                }) : cb(-1);
+
+            return res ? res.status(200).json({
+                ordersCount: count
+            }) : cb(count);
+        });
+
+        // res.status(201).json({
+        //     message: "Order added successfully",
+        //     order: {
+        //         orders: fetchOrders,
+        //     }
+        // });
+        
+
+        // console.log("Orders Count");
+        //res.send('1');
+}
+

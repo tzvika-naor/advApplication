@@ -69,6 +69,7 @@ exports.userLogin = (req, res, next) => {
                     user: documents,
                     message: "succeed logging in"
                 })
+                loggedUsersCounter++;
             }
             else if (!documents) {
                 res.status(401).json({
@@ -177,6 +178,7 @@ exports.updateByUserId = (req, res, next) => {
             });
         });
 }
+
 exports.deleteUser = async (req, res, next) => {
     console.log(req.body.email)
     const user = await User.findOne({ email: req.body.email, password: req.body.password })

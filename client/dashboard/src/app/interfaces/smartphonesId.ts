@@ -1,4 +1,4 @@
-export interface SmartphoneId {
+export interface SmartphonesId {
     id: string;
     quantity: number;
 }

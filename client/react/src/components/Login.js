@@ -5,7 +5,8 @@ import Spinner from 'react-bootstrap/Spinner'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom';
 import './Login.css';
-
+import io from "socket.io-client";
+//const socket = io.connect("http://localhost:5000");
 
 const Login = (props) => {
     const [toDelete, setToDelete] = useState(false)
@@ -27,6 +28,8 @@ const Login = (props) => {
                         setTimeout(() => {
                             history.push('./smartphones')
                         }, 200);
+                        //Send event to socket after login
+                        //socket.emit('newUserLoggedIn');
                     }
                 }, error => {
                     if (error.response.status === 401) {

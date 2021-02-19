@@ -27,8 +27,9 @@
                   <p>{{smartphones.id.phoneModel}} | {{smartphones.id.brand}} | {{smartphones.id.display}}
                     |
                     {{smartphones.id.price}}$ </p>
-                  <p>{{smartphones.id._id}} | {{smartphones.quantity}} </p>
+                  <p>ID: {{smartphones.id._id}} | Quantity: {{smartphones.quantity}} </p>
                 </div>
+                <h3>Total Price: {{order.totalPrice}}$</h3>
                 <a class="btn btn-primary" (click)="updateOrder(order)"  [routerLink]="['update' , order._id]" >Update order</a>
                 <a class="btn btn-danger" (click)="deleteOrder(order._id)">Delete order</a>
               </div>

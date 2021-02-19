@@ -14,6 +14,9 @@ import Home from './components/Home';
 import OrdersHistory from './components/OrdersHistory';
 import SmartphoneDetails from './components/SmartphoneDetails'
 import './App.css';
+import io from "socket.io-client";
+//const server = "https://localhost:5000";
+//const socket = io.connect("http://localhost:5000"); //Connect to webSocket for event 'connection'
 
 function App (props) {
   const [items, setItems] = useState([])
@@ -54,7 +57,7 @@ function App (props) {
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
               <Route path='/smartphones' render={(props) => <List
                 searchResults={searchResaults} showResults={showResults}
-                connectedUser={connectedUser}
+                connectedUser={connectedUser} isLoggedIn={isLoggedIn}
                 user={props} setItems={data => setItems(data)} resetSearch={resetSearch}
               />} />
             </div>
