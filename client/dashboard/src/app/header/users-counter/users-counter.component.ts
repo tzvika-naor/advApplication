@@ -9,7 +9,7 @@ import { RealtimeService } from 'src/app/realtime.service';
 export class UsersCounterComponent implements OnInit {
   usersCounter : Number = 0;
   constructor(private realtimeService: RealtimeService) { 
-    realtimeService.currentUsersCounter.subscribe(counter => this.usersCounter = counter)
+    this.realtimeService.currentUsersCounter.subscribe(counter => this.usersCounter = counter)
   }
 
   ngOnInit(): void {
