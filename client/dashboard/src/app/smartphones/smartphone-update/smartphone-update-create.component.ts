@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Smartphone } from 'src/app/interfaces/smartphones';
 import { SmartphonesService } from '../smartphones.service';
 
 @Component({
-  selector: 'app-smartphone-update',
-  templateUrl: './smartphone-update.component.html',
-  styleUrls: ['./smartphone-update.component.css']
+  selector: 'app-smartphone-update-create',
+  templateUrl: './smartphone-update-create.component.html',
+  styleUrls: ['./smartphone-update-create.component.css']
 })
-export class SmartphoneUpdateComponent implements OnInit {
+export class SmartphoneUpdateCreate implements OnInit {
 
   // form: any;
 
@@ -23,7 +23,7 @@ export class SmartphoneUpdateComponent implements OnInit {
     image: '',
     price: 0
   };
-  constructor(private ss: SmartphonesService, private route: ActivatedRoute) { }
+  constructor(private ss: SmartphonesService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -35,6 +35,7 @@ export class SmartphoneUpdateComponent implements OnInit {
       });
   }
   onSubmit(formData) {
+    console.log(formData.form.value);
     const data = formData.form.value;
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -43,5 +44,8 @@ export class SmartphoneUpdateComponent implements OnInit {
     else {
       this.ss.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
     }
+    // this.ss.RenderParent();
+    this.router.navigate(['/'], { relativeTo: this.route });
+
   }
 }

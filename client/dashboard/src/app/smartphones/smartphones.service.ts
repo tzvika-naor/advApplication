@@ -6,8 +6,8 @@ import { Smartphone } from '../interfaces/smartphones';
   providedIn: 'root'
 })
 export class SmartphonesService {
-
-  subject = new Subject<any>();
+  smartphones: any;
+  subject = new Subject<any[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +26,13 @@ export class SmartphonesService {
   }
   addSmartphone(data) {
     return this.http.post(`http://localhost:5000/api/smartphone/`, data);
+  }
+  RenderParent() {
+    // return this.getAllSmartphones().subscribe((res: any) => {
+    //   console.log(res);
+    //   this.smartphones = res;
+    //   this.subject.next(res.smartphones);
+    // });
 
   }
 }

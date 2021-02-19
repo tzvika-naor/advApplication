@@ -13,10 +13,15 @@ export class SmartphonesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSmartphones();
+    this.sm.subject.subscribe(res => {
+      this.smartphones = res;
+      console.log(res);
+    });
   }
   getSmartphones(): void {
     this.sm.getAllSmartphones().subscribe(
       (response: any) => {
+        console.log(response);
         this.smartphones = response.smartphones;
         console.log(this.smartphones);
       }
@@ -29,7 +34,7 @@ export class SmartphonesComponent implements OnInit {
     this.showChildrens = true;
     this.sm.smartphoneClicked(smartphone);
   }
-  createSmartphone(){
+  createSmartphone() {
     this.showChildrens = true;
   }
 }

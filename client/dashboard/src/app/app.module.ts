@@ -22,7 +22,7 @@ import {OrderSearchComponent} from './orders/order-search/order-search.component
 import { D3Component } from './d3/d3.component';
 import { OrdersService } from './orders/orders.service';
 import { LoginComponent } from './login/login.component';
-import { SmartphoneUpdateComponent } from './smartphones/smartphone-update/smartphone-update.component';
+import { SmartphoneUpdateCreate } from './smartphones/smartphone-update/smartphone-update-create.component';
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
@@ -44,7 +44,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     OrderSearchComponent,
     D3Component,
     LoginComponent,
-    SmartphoneUpdateComponent
+    SmartphoneUpdateCreate
 
   ],
   imports: [
