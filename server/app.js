@@ -1,4 +1,4 @@
-const scrapingData = require('./scrapingData');
+// const scrapingData = require('./scrapingData');
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -26,13 +26,13 @@ app.use("/api/smartphone", smartphoneRoutes);
 
 const server = http.createServer(app);
 
-const io = socketIo(server/*, {
+const io = socketIo(server, {
     cors: {
         origins: ["http://localhost:4200", "http://localhost:3000"],
         methods: ["GET", "POST"],
         credentials: false
     }
-}*/);
+});
 
 var ordersCounter = 0;
 var usersCounter = 0;
