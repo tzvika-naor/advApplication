@@ -1,9 +1,8 @@
+const scrapingData = require('./scrapingData');
 const express = require('express');
 const bodyParser = require('body-parser');
 const socketIo = require('socket.io');
 const cors = require('cors')
-
-
 const mongoose = require('mongoose');
 const orderRoutes = require('./routes/order');
 const userRoutes = require('./routes/user');
@@ -28,7 +27,7 @@ var orderCounter = 0;
 var count = 0;
 
 io.on('connection', (socket) => {
-    console.log(socket.handshake.headers.origin)
+    // console.log(socket.handshake.headers.origin)
     if (socket.handshake.headers.origin === "http://localhost:3000/") {
         count++;
         socket.broadcast.emit('count', count)

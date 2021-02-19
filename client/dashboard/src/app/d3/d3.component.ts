@@ -9,7 +9,7 @@ import { OrdersService } from '../orders/orders.service';
   styleUrls: ['./d3.component.css']
 })
 export class D3Component implements OnInit {
-  data: any;
+
   order: Order[];
   private svg;
   private margin = 50;
@@ -46,7 +46,7 @@ export class D3Component implements OnInit {
 
     // Create the Y-axis band scale
     const y = d3.scaleLinear()
-      .domain([0, 200])
+      .domain([0, 300])
       .range([this.height, 0]);
 
     // Draw the Y-axis on the DOM

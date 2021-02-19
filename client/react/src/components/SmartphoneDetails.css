@@ -1,0 +1,10 @@
+.card{
+    width: 1000px;
+    height: 500px;
+    background: linear-gradient(to right bottom,#9ba1b8,#627394, #47556f,  #997b94);
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    border-radius: 25px 25px 25px 25px;
+    margin-bottom:"200px"
+}

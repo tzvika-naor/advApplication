@@ -1,12 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { User } from '../interfaces/user';
+import { filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  users: User[];
+  filteredUsers: Subject<User[]> = new Subject<User[]>();
+  
+  constructor(private http: HttpClient) { 
+    this.getAllUsers().subscribe(
+      {next: (response: any) => {
+        (this.users = response.user);
+       (this.filteredUsers.next(response.user)) },
+        error: (error) => console.log(error)});
+  }
+
+  filterUsers( filters: Partial<User>){
+    let tempFilter=this.users.filter((user)=>{
+      let flag = true;
+      Object.keys(filters).forEach((key)=>{
+        if(!(user[key].toLowerCase().includes(filters[key].toLowerCase())))
+          return flag = false;
+      });
+      
+        return flag;
+        
+    });
+    this.filteredUsers.next(tempFilter);
+
+  }
 
   getAllUsers() {
     return this.http.get('http://localhost:5000/api/user');

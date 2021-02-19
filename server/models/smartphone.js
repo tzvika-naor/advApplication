@@ -9,9 +9,9 @@ const smartPhoneSchema = new Schema({
     processor: { type: String, required: true },
     frontCamera: { type: String, required: true },
     rearCamera: { type: String, required: true },
-    batteryCapacity: { type: String, required: true },
+    batteryCapacity: { type: String },
     image: { type: String, required: true },
-    price: { type: Number , required: true  }
+    price: { type: Number  }
     
 })
 // Apply the uniqueValidator plugin to userSchema.
