@@ -3,30 +3,17 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import Quantity from './Quantity';
-import history from '../History'
+import history from '../History';
+import io from "socket.io-client";
+
+//const socket = io.connect("http://localhost:5000");
 function Order (props) {
     //set the total price with array reduce
 
     console.log(props)
     const orderDetails = props.items;
     var [smartphonesInCart, setSmartphonesInCart] = useState(orderDetails.smartphonesInCart);
-    const [order, setOrder] = useState({ smartphonesIds: smartphonesInCart.map(item => {
-        return {
-            id: item.id,
-            qunatity: item.qunatity
-        }}), userId: orderDetails.user._id, status: 'in_progress' });
-
-    const [quantityArray, setQuantityArray] = useState(smartphonesInCart.map(item => item.quantity));
     const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
-
-    const setItem = (data) => {
-        const quantityArrayCopy = quantityArray;
-        if (+data.quantity > -1)
-        quantityArrayCopy[data.index] = +data.quantity;
-        setQuantityArray(quantityArrayCopy)
-        const total = quantityArrayCopy.reduce((total, current, index) => total + current * (+smartphonesInCart[index].price), 0)
-        setTotalPrice(total)
-    }
 
     const setQuantity = (id,quantity) => {
         const item = smartphonesInCart.find(item => item.id === id);
@@ -36,28 +23,36 @@ function Order (props) {
         calculateTotalPrice(smartphonesInCart);
     }
     const onCheckout = () => {
-        // saving the copy
-        const orderCopy = order;
-        // updating the latest quantity
-        orderCopy.smartphonesIds.map((item, index) => {
-            item.quantity = quantityArray[index];
-        })
+        // create a new order copy
+        console.log("ARRAY BEFORE CHECKOUT",smartphonesInCart);
+        var smartphonesForOrder = smartphonesInCart.map(item => {
+            return {
+                id: item.id,
+                quantity: item.quantity
+            }});
 
-        // orderCopy.smartphonesIds = smartphonesInCart.map(item => {
-        //     return {
-        //         id: item.id,
-        //         qunatity: item.qunatity
-        //     }});
+        console.log("ORDER BEFORE CHECKOUT",smartphonesForOrder);
 
-        setOrder(orderCopy);
-        axios.post('http://localhost:5000/api/order', orderCopy)
+        var newOrder = {
+            smartphones: smartphonesForOrder,
+            totalPrice: totalPrice,  
+            userId: orderDetails.user._id, 
+            status: 'completed' 
+        };
+
+        axios.post('http://localhost:5000/api/order', newOrder)
             .then(response => {
-                console.log(response.data)
+                console.log("ORDER COMPLETED", response.data)
             })
             //add websocket new order
-        alert(`order completed`);
+            //socket.emit('newOrder');
+        alert(`Order completed`);
+
+        
         history.push('/smartphones')
     }
+
+
     const goBack = () => {
         history.push("/smartphones")
     }
@@ -75,16 +70,16 @@ function Order (props) {
     }
 
     const removeItem = (id) => {
+
         smartphonesInCart = smartphonesInCart.filter(item => item.id !== id); //Remove the smartphone from the cart array
         setSmartphonesInCart(smartphonesInCart);
-        //setSmartphonesInCart(smartphonesInCart => smartphonesInCart.filter(item => item.id !== id));
-        //order.smartphonesIds = order.smartphonesIds.filter(item => item.id !== id);
-
-        //setSmartphonesInCart(smartphonesInCart);
-        console.log("Result after count 0", smartphonesInCart)
-        //const total = quantityArray.reduce((total, current, index) => total + current * (+smartphonesInCart[index].price), 0)
-        //setTotalPrice(total);
         calculateTotalPrice(smartphonesInCart);
+
+        //If there is no more items in cart
+        if (!(Array.isArray(smartphonesInCart) && smartphonesInCart.length)){
+            alert('your cart is empty');
+            history.push('/smartphones');
+        }
     }
 
     return (
@@ -108,8 +103,7 @@ function Order (props) {
                                 </div>
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
-                                        <label>Quantity</label>
-                                        {/* <Quantity index={index} quantity={quantityArray[index]} setItem={(data) => setItem(data)} /> */}
+                                        <label>Quantity</label>                                    
                                         <Quantity index={index} id={el.id} quantity={el.quantity} setQuantity={(id,quantity) => setQuantity(id,quantity)} />
                                         <Button onClick={()=>removeItem(el.id)}>Remove</Button>
                                     </div>

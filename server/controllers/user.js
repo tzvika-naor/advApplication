@@ -61,7 +61,7 @@ exports.createUser = (req, res, next) => {
 }
 
 exports.userLogin = (req, res, next) => {
-
+    var loggedUsersCounter = 0;
     User.findOne({ email: req.body.email, password: req.body.password })
         .then(documents => { //get back the object from the database
             if (documents) {
@@ -69,6 +69,7 @@ exports.userLogin = (req, res, next) => {
                     user: documents,
                     message: "succeed logging in"
                 })
+                loggedUsersCounter++;
             }
             else if (!documents) {
                 res.status(401).json({
@@ -107,6 +108,7 @@ exports.updateUser = (req, res, next) => {
             });
         });
 }
+
 exports.updateByUserId = (req, res, next) => {
     User.updateOne({ _id: req.body.id }, req.body).then(doc => {
         res.status(200).json({
@@ -121,6 +123,7 @@ exports.updateByUserId = (req, res, next) => {
             });
         });
 }
+
 exports.deleteUser = async (req, res, next) => {
     console.log(req.body.email)
     const user = await User.findOne({ email: req.body.email, password: req.body.password })

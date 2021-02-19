@@ -4,7 +4,7 @@ import axios from 'axios';
 import history from '../History';
 import Payment from './Payment'
 const List = (props) => {
-
+    
     const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
@@ -50,18 +50,23 @@ const List = (props) => {
     }
 
     const goToPayment = () => {
-        const user = props.connectedUser;
-        if (smartphonesInCart.length === 0)
-            alert('your cart is empty')
+        if (!props.isLoggedIn) {
+            alert(`Please login before checkout`);
+        }
         else {
-            history.push('order');
-            const itemsDetails = {
-                smartphonesInCart: smartphonesInCart,
-                //smartphonesIds: smartphonesIds,
-                totalPrice: totalPrice,
-                user: user
+            const user = props.connectedUser;
+            if (smartphonesInCart.length === 0)
+                alert('your cart is empty')
+            else {
+                history.push('order');
+                const itemsDetails = {
+                    smartphonesInCart: smartphonesInCart,
+                    //smartphonesIds: smartphonesIds,
+                    totalPrice: totalPrice,
+                    user: user
+                }
+                props.setItems(itemsDetails)
             }
-            props.setItems(itemsDetails)
         }
     }
 

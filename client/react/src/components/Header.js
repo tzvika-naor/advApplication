@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import './Header.css'
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:5000");
 function Header (props) {
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
@@ -14,6 +16,7 @@ function Header (props) {
     const onLogout = (e) => {
         props.setIsLoggedIn(false)
         props.resetSearch(true)
+        //socket.emit('UserLoggedOut');
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >

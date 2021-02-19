@@ -74,7 +74,7 @@ exports.getSmartphones = async (req, res, next) => {
                 rearCamera: rearCamera,
                 phoneModel: phoneModel
             },
-            maxSmartphones: count
+            smartphonesCount: count
         })
     })
 }

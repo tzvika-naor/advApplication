@@ -10,9 +10,9 @@ function OrdersHistory (props) {
     useEffect(() => {
         console.log(props.connectedUser)
         const id = props.connectedUser._id
-        axios.get(`http://localhost:5000/api/order/${id}`).then(
+        axios.get(`http://localhost:5000/api/order/user/${id}`).then(
             res => {
-                console.log(res.data.orders)
+                //console.log(res.data.orders)
                 setOrders(res.data.orders);
                 if (res.data.orders)
                     SetStatus(res.data.status);

@@ -1,7 +1,8 @@
-import { SmartphoneId } from './smartphoneId';
+import { SmartphonesId } from './smartphonesId';
 export interface Order {
     user: string;
-    smartphones: SmartphoneId[];
+    smartphones: SmartphonesId[];
+    totalPrice: Number;
     date?: string;
     status?: string;
 }
