@@ -7,19 +7,17 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-  private isLogin: boolean;
+  private isLogin: any;
   constructor(private ls: LoginService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')){
-      this.isLogin = true;
-      this.ls.setIsLogin(true);
+    if (localStorage.getItem('user')) {
+      this.ls.setIsLogin(true, JSON.parse(localStorage.getItem('user')));
     }
     this.ls.isLogin.subscribe(res => this.isLogin = res);
   }
   logout() {
-    this.isLogin = false;
-    localStorage.removeItem('token');
-    this.ls.setIsLogin(false);
+    localStorage.removeItem('user');
+    this.ls.setIsLogin(false, null);
   }
 }

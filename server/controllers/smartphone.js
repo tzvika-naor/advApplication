@@ -100,6 +100,7 @@ exports.getSmartphone = (req, res, next) => {
 };
 
 exports.createSmartphone = (req, res, next) => {
+    console.log(req.body)
     const smartphone = new Smartphone({
         phoneModel: req.body.phoneModel,
         brand: req.body.brand,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Smartphone } from '../interfaces/smartphones';
 import { SmartphonesService } from './smartphones.service';
 @Component({
@@ -8,13 +9,17 @@ import { SmartphonesService } from './smartphones.service';
 })
 export class SmartphonesComponent implements OnInit {
   smartphones: Smartphone[];
+  private firstLoad = true;
   private showChildrens = false;
   constructor(private sm: SmartphonesService) { }
-
+  private subscriptionName: Subscription;
   ngOnInit(): void {
-    this.getSmartphones();
-    this.sm.subject.subscribe(res => {
-      this.smartphones = res;
+    if (this.firstLoad) {
+      this.getSmartphones();
+      this.firstLoad = false;
+    }
+    this.subscriptionName = this.sm.subject.subscribe((res: any) => {
+      this.smartphones = res.smartphones;
       console.log(res);
     });
   }
@@ -32,6 +37,7 @@ export class SmartphonesComponent implements OnInit {
   }
   updateSmartphone(smartphone) {
     this.showChildrens = true;
+    console.log(smartphone);
     this.sm.smartphoneClicked(smartphone);
   }
   createSmartphone() {

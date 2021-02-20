@@ -44,8 +44,8 @@ export class SmartphoneUpdateCreate implements OnInit {
     else {
       this.ss.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
     }
-    // this.ss.RenderParent();
-    this.router.navigate(['/'], { relativeTo: this.route });
+    this.ss.RenderParent();
+    this.router.navigate(['/smartphones'], { relativeTo: this.route });
 
   }
 }

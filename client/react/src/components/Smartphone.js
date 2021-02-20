@@ -10,7 +10,7 @@ function Smartphone (props) {
         props.addToCart(props.smartphone)
     }
   
-    const edit = () => {
+    const details = () => {
         history.push({ pathname: `/smartphoneDetails/${props.smartphone.id}`, smartphone: props });
     }
   
@@ -18,7 +18,7 @@ function Smartphone (props) {
         <div className="col-lg-4 col-md-6 mb-4">
             <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "50px", padding: "20px" }}>
                 <h3 className="card-title" style={{ marginLeft: "20px" }} >{props.smartphone.phoneModel}
-                  <span style={{ float: "right", cursor: "pointer" }} ><BiDetail onClick={(event, i) => edit(event, i)} /><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
+                  <span style={{ float: "right", cursor: "pointer" }} ><BiDetail onClick={(event, i) => details(event, i)} /><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
                 </h3>
                 <img id="card-img-top" src={props.smartphone.image} alt={props.smartphone.phoneModel} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '30%', height: '300px' }} />
                 <div id="card-body">

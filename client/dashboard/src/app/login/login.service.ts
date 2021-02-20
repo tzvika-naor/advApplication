@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LoginService {
   private token = '';
   public isLogin = new BehaviorSubject(false);
+  public loginUserDetails = new Subject<User>();
+  private connectedUser: User;
 
   constructor(private http: HttpClient) { }
   error;
@@ -18,13 +21,17 @@ export class LoginService {
   onUpdate(data) {
     return this.http.put('http://localhost:5000/api/user/updateAdmin', data);
   }
-  setIsLogin(data) {
-    this.isLogin.next(data);
-    if (data === false) {
-      localStorage.removeItem('token');
+  setIsLogin(isLoggedIn , userDetails) {
+    console.log(userDetails);
+    this.connectedUser = userDetails;
+    this.isLogin.next(isLoggedIn);
+    if (isLoggedIn === false) {
+      // localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
+    this.loginUserDetails.next(userDetails);
   }
-  setToken(token) {
-    this.token = token;
+  getConnectedUser() {
+    return this.connectedUser;
   }
 }
