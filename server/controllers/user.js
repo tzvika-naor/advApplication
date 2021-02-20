@@ -61,8 +61,8 @@ exports.createUser = (req, res, next) => {
 }
 
 exports.userLogin = (req, res, next) => {
-    var loggedUsersCounter = 0;
-    User.findOne({ email: req.body.email, password: req.body.password })
+
+    User.findOne({ email: req.body.email, password: req.body.password, isAdmin: false })
         .then(documents => { //get back the object from the database
             if (documents) {
                 res.status(200).json({
@@ -70,6 +70,41 @@ exports.userLogin = (req, res, next) => {
                     message: "succeed logging in"
                 })
                 loggedUsersCounter++;
+            }
+            else if (!documents) {
+                res.status(401).json({
+                    user: documents,
+                    message: "failed to login user does not exist"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+                message: 'somthing went wrong!'
+            });
+        });
+}
+exports.adminLogin = (req, res, next) => {
+    User.findOne({ email: req.body.email, password: req.body.password, isAdmin: true })
+        .then(documents => { //get back the object from the database
+            if (documents) {
+                function create_UUID () {
+                    var dt = new Date().getTime();
+                    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                        var r = (dt + Math.random() * 16) % 16 | 0;
+                        dt = Math.floor(dt / 16);
+                        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                    });
+                    return uuid;
+                }
+                const token = create_UUID();
+                console.log(token);
+                res.status(200).json({
+                    user: documents,
+                    message: "succeed logging in",
+                    sessionToken: token
+                })
             }
             else if (!documents) {
                 res.status(401).json({
@@ -108,7 +143,27 @@ exports.updateUser = (req, res, next) => {
             });
         });
 }
-
+exports.updateAdmin = (req, res, next) => {
+    //get the document by id
+    User.findOne({ email: req.body.email, isAdmin: true }).then(document => {  //get back the object from the database
+        if (document) {
+            //update the password
+            document.password = req.body.password
+            User.updateOne({ _id: document._id }, document).then(doc => {
+                res.status(200).json({
+                    user: doc,
+                    message: "user password updated"
+                })
+            })
+        }
+    })
+        .catch(err => {
+            res.status(500).json({
+                error: err,
+                message: 'somthing went wrong!'
+            });
+        });
+}
 exports.updateByUserId = (req, res, next) => {
     User.updateOne({ _id: req.body.id }, req.body).then(doc => {
         res.status(200).json({
