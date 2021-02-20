@@ -1,8 +1,19 @@
+import { Button } from "react-bootstrap";
 import "./SmartphoneDetails.css"
-function SmartphoneDetails (props) {
+import history from '../History';
+
+function SmartphoneDetails(props) {
     console.log(props.history.location.smartphone.smartphone);
     // const [smartphone, setSmartphone] = props.history.location.smartphone.smartphone
 
+    const goBack = (event) => {
+        history.push('/smartphones');
+    }
+
+    const addToCart = (event, i) => {
+        alert(`${props.history.location.smartphone.smartphone.phoneModel} added to your order`);
+        props.history.location.smartphone.addToCart(props.history.location.smartphone.smartphone)
+    }
 
     return (
         <div id="wrapper" classNameNameName="d-flex justify-content-center" style={{ marginLeft: "35%", marginTop: "10%", marginBottom: "10%" }} >
@@ -23,10 +34,11 @@ function SmartphoneDetails (props) {
                             <img className="card-img-top" src={props.history.location.smartphone.smartphone.image} alt="Card image cap" style={{ height: "450px", width: "100%" }} />
                         </div>
                     </div>
-
                 </div >
             </div>
-        </div>
+            <Button onClick={(event, i) => addToCart(event, i)}>Add to cart</Button>
+            <Button type="button" id="goBack" variant="primary" style={{ position: 'absolute' }} onClick={(event) => goBack(event)}>Back</Button>
+        </div >
 
     )
 }

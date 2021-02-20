@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "server": "cd server && npm start",
-    "front": "cd client\\dashboard && npm start",
-    "dash": "cd client\\react && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run front\" \"npm run dash\""
+    "react": "cd client\\react && npm start",
+    "angular": "cd client\\dashboard && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\""
   },
   "keywords": [],
   "author": "",

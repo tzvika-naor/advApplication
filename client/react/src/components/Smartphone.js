@@ -7,11 +7,11 @@ function Smartphone (props) {
   
     const click = (event, i) => {
         alert(`${props.smartphone.phoneModel} added to your order`);
-        props.addToOrder(props.smartphone)
+        props.addToCart(props.smartphone)
     }
   
     const edit = () => {
-        history.push({ pathname: `/smartphone-details/${props.smartphone.id}`, smartphone: props });
+        history.push({ pathname: `/smartphoneDetails/${props.smartphone.id}`, smartphone: props });
     }
   
     return (

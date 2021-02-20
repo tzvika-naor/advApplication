@@ -14,6 +14,9 @@ export class SmartphonesService {
   getAllSmartphones() {
     return this.http.get('http://localhost:5000/api/smartphone');
   }
+  getSmartphonesCount() {
+    return this.http.get('http://localhost:5000/api/smartphone/count/smartphonesCount');
+  }
   removeSmartphone(id) {
     return this.http.delete(`http://localhost:5000/api/smartphone/${id}`);
   }

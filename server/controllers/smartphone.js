@@ -1,4 +1,7 @@
 const Smartphone = require('../models/smartphone');
+const io = require('socket.io-client');
+const socket = io.connect("http://localhost:5000");
+
 exports.searchQuery = (req, res, next) => {
     console.log(req.body)
     Smartphone.find({
@@ -74,7 +77,7 @@ exports.getSmartphones = async (req, res, next) => {
                 rearCamera: rearCamera,
                 phoneModel: phoneModel
             },
-            maxSmartphones: count
+            smartphonesCount: count
         })
     })
 }
@@ -123,6 +126,7 @@ exports.createSmartphone = (req, res, next) => {
                 image: newSmartphone.image
             }
         });
+        socket.emit('changeSmartphonesCount'); //WebSocket
     })
         .catch(error => {
             res.status(500).json({
@@ -163,6 +167,7 @@ exports.deleteSmartphone = (req, res, next) => {
             res.status(200).json({
                 message: "Deletion successful!"
             })
+        socket.emit('changeSmartphonesCount'); //WebSocket
         } else {
             res.status(401).json({ message: "Not authorized!" });
         }
@@ -172,6 +177,24 @@ exports.deleteSmartphone = (req, res, next) => {
                 message: "Fetching posts failed!"
             });
         });
+}
+
+exports.getSmartphonesCount = (req, res, callBack) => {
+    console.log("getSmartphonesCount");
+
+        Smartphone.count({
+        },(err, count)=>{
+            if (err)
+                return res ? res.status(404).json({
+                    "err": err,
+                    count: -1
+                }) : callBack(-1);
+
+            return res ? res.status(200).json({
+                smartphonesCount: count
+            }) : callBack(count);
+        });
+
 }
     // exports.searchQuery = (req, res, next) => {
     //     var minPrice = '';

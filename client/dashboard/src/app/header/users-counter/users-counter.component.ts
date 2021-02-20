@@ -7,8 +7,10 @@ import { RealtimeService } from 'src/app/realtime.service';
   styleUrls: ['./users-counter.component.css']
 })
 export class UsersCounterComponent implements OnInit {
-
-  constructor(private realimeService: RealtimeService) { }
+  usersCounter : Number = 0;
+  constructor(private realtimeService: RealtimeService) { 
+    this.realtimeService.currentUsersCounter.subscribe(counter => this.usersCounter = counter)
+  }
 
   ngOnInit(): void {
   }

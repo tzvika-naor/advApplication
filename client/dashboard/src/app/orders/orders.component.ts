@@ -53,7 +53,7 @@ export class OrdersComponent implements OnInit {
   // delete
   deleteOrder(orderId) {
     this.ordersService.deleteOrder(orderId).subscribe(response => {
-      this.router.navigate(['/'], { relativeTo: this.route });
+      this.router.navigate(['/orders'], { relativeTo: this.route });
     });
   }
 

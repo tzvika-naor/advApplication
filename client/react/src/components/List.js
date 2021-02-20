@@ -9,7 +9,6 @@ const List = (props) => {
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [smartphonesIds, setSmartphonesIds] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
@@ -24,42 +23,34 @@ const List = (props) => {
             })
     }, []);
 
-    const addToOrder = (data) => {
-        console.log(data);
-        const newData = {
-            id: data.id,
-            qnt: 1
+    const addToCart = (smartphone) => {
+        const itemToAdd = smartphonesInCart.find(item => item.id === smartphone.id);
+        if (itemToAdd) { // the item is already in the cart no need to add into setSmartphonesInCart
+            itemToAdd.quantity += 1;
         }
-        const itemIndex = smartphonesIds.findIndex(item => item.id === data.id);
-        var newSmartIds = smartphonesIds.filter(item => item.id !== data.id);
-
-        if (itemIndex > -1) {
-            // the item is already in the cart no need to add into setSmartphonesInCart
-            var newItem = smartphonesIds[itemIndex]
-            newItem.qnt += 1;
-            newSmartIds.push(newItem)
-            setSmartphonesIds(newSmartIds)
+        else { //The item is not in the cart yet
+            setSmartphonesInCart([...smartphonesInCart, { phoneModel: smartphone.phoneModel, price: smartphone.price, id: smartphone.id, image: smartphone.image, quantity: 1 }]);
         }
-        else {
-            setSmartphonesInCart([...smartphonesInCart, data]);
-            setSmartphonesIds([...smartphonesIds, newData])
-        }
-        setTotalPrice(totalPrice => totalPrice + data.price);
+        setTotalPrice(totalPrice => totalPrice + smartphone.price);
     }
 
     const goToPayment = () => {
-        const user = props.connectedUser;
-        if (smartphonesIds.length === 0)
-            alert('your cart is empty')
+        if (!props.isLoggedIn) {
+            alert(`Please login before checkout`);
+        }
         else {
-            history.push('order');
-            const itemsDetails = {
-                smartphonesInCart: smartphonesInCart,
-                smartphonesIds: smartphonesIds,
-                totalPrice: totalPrice,
-                user: user
+            const user = props.connectedUser;
+            if (smartphonesInCart.length === 0)
+                alert('your cart is empty')
+            else {
+                history.push('order');
+                const itemsDetails = {
+                    smartphonesInCart: smartphonesInCart,
+                    totalPrice: totalPrice,
+                    user: user
+                }
+                props.setItems(itemsDetails)
             }
-            props.setItems(itemsDetails)
         }
     }
 
@@ -73,7 +64,7 @@ const List = (props) => {
                             return <Smartphone
                                 key={index}
                                 smartphone={smartphone}
-                                addToOrder={(data) => addToOrder(data)}
+                                addToCart={(data) => addToCart(data)}
                                 isAdmin={isAdmin}
                             />
                         })
@@ -93,7 +84,7 @@ const List = (props) => {
                             return <Smartphone
                                 key={index}
                                 smartphone={smartphone}
-                                addToOrder={(data) => addToOrder(data)}
+                                addToCart={(data) => addToCart(data)}
                                 isAdmin={isAdmin}
                             />
                         })

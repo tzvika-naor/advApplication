@@ -21,6 +21,17 @@ export class OrdersService {
   getAllOrders() {
     return this.http.get('http://localhost:5000/api/order');
   }
+  getOrdersCount() {
+    console.log('Orders count on client')
+    return this.http.get('http://localhost:5000/api/order/ordersCount');
+
+  }
+
+  // updateOrder(order) {
+  //   //console.log(typeof(user));
+  //   return this.http.put(`http://localhost:5000/api/order/`, order);
+  // }
+
   deleteOrder(orderId) {
     return this.http.delete(`http://localhost:5000/api/order/${orderId}`);
   }
