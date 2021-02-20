@@ -76,13 +76,7 @@ exports.getSmartphones = async (req, res, next) => {
             },
             smartphonesCount: count
         })
-    }).catch(error => {
-        console.log(error)
-        res.status(500).json({
-            message: 'Fetching posts failed!',
-            error: error
-        });
-    });
+    })
 }
 exports.getSmartphone = (req, res, next) => {
     Smartphone.findById(req.params.id).then(document => {

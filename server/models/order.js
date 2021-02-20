@@ -11,7 +11,7 @@ const orderSchema = new Schema({
     }],
     totalPrice: { type: Number, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    status: { type: String, default: 'completed' },
+    status: { type: String, default: 'in_progress' },
     date: { type: Date, default: Date.now }
 })
 

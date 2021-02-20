@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const smartPhoneSchema = new Schema({
-    phoneModel: { type: String },
-    brand: { type: String },
-    display: { type: String },
-    processor: { type: String },
-    frontCamera: { type: String },
-    rearCamera: { type: String },
-    batteryCapacity: { type: String },
-    image: { type: String },
-    price: { type: Number }
-
+    phoneModel: { type: String, required: true },
+    brand: { type: String, required: true },
+    display: { type: String, required: true },
+    processor: { type: String, required: true },
+    frontCamera: { type: String, required: true },
+    rearCamera: { type: String, required: true },
+    batteryCapacity: { type: String, required: true },
+    image: { type: String, required: true },
+    price: { type: Number , required: true  }
+    
 })
 // Apply the uniqueValidator plugin to userSchema.
 // smartPhoneSchema.plugin(uniqueValidator);
