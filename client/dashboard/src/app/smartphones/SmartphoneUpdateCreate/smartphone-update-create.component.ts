@@ -10,8 +10,6 @@ import { SmartphonesService } from '../smartphones.service';
 })
 export class SmartphoneUpdateCreate implements OnInit {
 
-  // form: any;
-
   form: Smartphone = {
     phoneModel: 'blabla',
     brand: '',
@@ -23,11 +21,12 @@ export class SmartphoneUpdateCreate implements OnInit {
     image: '',
     price: 0
   };
-  constructor(private ss: SmartphonesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private smartphoneService: SmartphonesService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
-    this.ss.subject.subscribe((smartphone: any) => {
+    this.smartphoneService.subject.subscribe((smartphone: any) => {
+      console.log(smartphone);
       this.form = smartphone;
     },
       error => {
@@ -39,12 +38,12 @@ export class SmartphoneUpdateCreate implements OnInit {
     const data = formData.form.value;
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.ss.updateSmartphone(data, id).subscribe(res => console.log(res), err => console.log(err));
+      this.smartphoneService.updateSmartphone(data, id).subscribe(res => console.log(res), err => console.log(err));
     }
     else {
-      this.ss.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
+      this.smartphoneService.addSmartphone(data).subscribe(res => console.log(res), err => console.log(err));
     }
-    this.ss.RenderParent();
+    this.smartphoneService.getAllSmartphones();
     this.router.navigate(['/smartphones'], { relativeTo: this.route });
 
   }

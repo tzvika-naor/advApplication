@@ -8,37 +8,23 @@ import { SmartphonesService } from './smartphones.service';
   styleUrls: ['./smartphones.component.css']
 })
 export class SmartphonesComponent implements OnInit {
+  showChildrens = false;
   smartphones: Smartphone[];
-  private firstLoad = true;
-  private showChildrens = false;
-  constructor(private sm: SmartphonesService) { }
-  private subscriptionName: Subscription;
+  constructor(private smartphonesService: SmartphonesService) { }
   ngOnInit(): void {
-    if (this.firstLoad) {
-      this.getSmartphones();
-      this.firstLoad = false;
-    }
-    this.subscriptionName = this.sm.subject.subscribe((res: any) => {
-      this.smartphones = res.smartphones;
-      console.log(res);
+    this.smartphonesService.getAllSmartphones();
+    this.smartphonesService.showchildren.subscribe(showChildrens => this.showChildrens = showChildrens);
+    this.smartphonesService.subject.subscribe((res: any) => {
+      this.smartphones = res;
     });
   }
-  getSmartphones(): void {
-    this.sm.getAllSmartphones().subscribe(
-      (response: any) => {
-        console.log(response);
-        this.smartphones = response.smartphones;
-        console.log(this.smartphones);
-      }
-    );
-  }
+
   removeSmartphone(id) {
-    this.sm.removeSmartphone(id).subscribe(res => console.log(res), error => console.log(error));
+    this.smartphonesService.removeSmartphone(id).subscribe(res => console.log(res), error => console.log(error));
+    this.smartphonesService.getAllSmartphones();
   }
   updateSmartphone(smartphone) {
     this.showChildrens = true;
-    console.log(smartphone);
-    this.sm.smartphoneClicked(smartphone);
   }
   createSmartphone() {
     this.showChildrens = true;
