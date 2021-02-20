@@ -106,7 +106,7 @@ function Search (props) {
                             {display.map((item, i) => <option value={item} key={i} >{item}</option>)}
                         </select>
                     </div>
-                    <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Submit</Button>
+                    <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Search</Button>
                 </div>
             </div> :
                 <div>
@@ -145,7 +145,7 @@ function Search (props) {
                                 {frontCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
                             </select>
                         </div>
-                        <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Submit</Button>
+                        <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Search</Button>
                     </div>
                 </div>
             }

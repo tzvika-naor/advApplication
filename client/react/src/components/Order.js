@@ -129,7 +129,7 @@ function Order(props) {
                     </div>
                     <div className="col-md-2">
                         <Button variant="primary" size="lg" onClick={onCheckout}>
-                            Checkout
+                            Payment
                     </Button>
                     </div>
                 </div>
