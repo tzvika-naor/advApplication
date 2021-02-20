@@ -4,7 +4,7 @@ import { D3Component } from './d3/d3.component';
 import { LoginComponent } from './login/login.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UpdateOrderComponent } from './orders/update-order/update-order.component';
-import { SmartphoneUpdateCreate } from './smartphones/smartphone-update/smartphone-update-create.component';
+import { SmartphoneUpdateCreate } from './smartphones/SmartphoneUpdateCreate/smartphone-update-create.component';
 import { SmartphonesComponent } from './smartphones/smartphones.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDeleteComponent } from './users/user-delete/user-delete.component';

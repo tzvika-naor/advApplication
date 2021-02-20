@@ -48,8 +48,10 @@ export class LoginComponent implements OnInit {
           console.log(res);
           localStorage.setItem('token', res.sessionToken);
           localStorage.setItem('user', JSON.stringify(res.user));
-          this.ls.setToken(res.sessionToken);
-          this.ls.setIsLogin(true);
+         // this.ls.setToken(res.sessionToken);
+          // this.ls.setIsLogin(true);
+          this.ls.setIsLogin(true, res.user);
+
           this.router.navigate(['/'], { relativeTo: this.route });
         }, (error: any) => {
           console.log(error);

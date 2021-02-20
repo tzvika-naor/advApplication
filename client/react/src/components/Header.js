@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import './Header.css'
-function Header (props) {
+function Header(props) {
+
+
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
-    function click () {
+    function click() {
         props.resetSearch(true)
     }
     useEffect(() => {
@@ -14,6 +16,14 @@ function Header (props) {
     const onLogout = (e) => {
         props.setIsLoggedIn(false)
         props.resetSearch(true)
+        localStorage.setItem("IsLoggedIn", false);
+        let localUser = localStorage.getItem("localConnectedUser");
+        localUser = JSON.parse(localUser);
+        let localCart = localStorage.getItem("smartphonesInCart");
+        localStorage.setItem("localCart." + localUser._id, localCart);//Saving the local cart of the user
+        localStorage.removeItem("smartphonesInCart");
+        localStorage.removeItem("localConnectedUser");
+
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >

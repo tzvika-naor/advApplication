@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../interfaces/user';
+import { LoginService } from '../login/login.service';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,10 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
-  constructor(private router: Router) {}
+  loggedUser: User;
+  constructor(private router: Router, private login: LoginService) { }
 
   ngOnInit(): void {
+    this.loggedUser = this.login.getConnectedUser();
+    console.log(this.loggedUser)
   }
 
 }

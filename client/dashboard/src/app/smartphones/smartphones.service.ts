@@ -6,8 +6,9 @@ import { Smartphone } from '../interfaces/smartphones';
   providedIn: 'root'
 })
 export class SmartphonesService {
-  smartphones: any;
-  subject = new Subject<any[]>();
+  public smartphones: any[];
+  public dataSub = new Subject();
+  public subject = new Subject();
 
   constructor(private http: HttpClient) { }
 
@@ -21,21 +22,22 @@ export class SmartphonesService {
     return this.http.delete(`http://localhost:5000/api/smartphone/${id}`);
   }
   smartphoneClicked(smartphone) {
-    this.subject.next(smartphone);
+   this.smartphones = smartphone;
+   return this.subject.next(this.smartphones);
   }
   updateSmartphone(data, id) {
-    console.log(id);
     return this.http.put(`http://localhost:5000/api/smartphone/${id}`, data);
   }
   addSmartphone(data) {
+    console.log(data);
     return this.http.post(`http://localhost:5000/api/smartphone/`, data);
   }
   RenderParent() {
-    // return this.getAllSmartphones().subscribe((res: any) => {
-    //   console.log(res);
-    //   this.smartphones = res;
-    //   this.subject.next(res.smartphones);
-    // });
+    return this.getAllSmartphones().subscribe((res: any) => {
+      console.log(res);
+      this.subject.next(res.smartphones);
+    });
 
   }
+  
 }

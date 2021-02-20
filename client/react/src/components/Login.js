@@ -12,6 +12,8 @@ const Login = (props) => {
     const [resetPassword, setResetPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const { errors, register, handleSubmit } = useForm();
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
+    
 
     const onSubmit = (data, event) => {
         console.log(event.target.value)
@@ -23,7 +25,14 @@ const Login = (props) => {
                         alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
                         setLoading(true);
                         props.setIsLoggedIn(true)
+                        localStorage.setItem("IsLoggedIn", true);
                         props.connectedUser(user)
+                        let StringUser = JSON.stringify(user);
+                        localStorage.setItem("localConnectedUser", StringUser);
+                        let localCart = localStorage.getItem("localCart." + response.data.user._id);
+                        if (localCart){//If there is local cart already for this user
+                            localStorage.setItem("smartphonesInCart", localCart);
+                        }
                         setTimeout(() => {
                             history.push('./smartphones')
                         }, 200);

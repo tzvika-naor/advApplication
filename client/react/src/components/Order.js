@@ -9,17 +9,66 @@ import io from "socket.io-client";
 //const socket = io.connect("http://localhost:5000");
 function Order(props) {
     //set the total price with array reduce
-
-    console.log(props)
+    //console.log(props)
     const orderDetails = props.items;
-    var [smartphonesInCart, setSmartphonesInCart] = useState(orderDetails.smartphonesInCart);
-    const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice)
+    var [smartphonesInCart, setSmartphonesInCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice);
+
+    let localUser = localStorage.getItem("localConnectedUser");
+    localUser = JSON.parse(localUser);
+    let localCart = localStorage.getItem("smartphonesInCart");
+
+    //this is called on component mount
+    useEffect(() => {
+        //turn it into js
+        localCart = JSON.parse(localCart);
+        //load persisted cart into state if it exists
+        if (localCart)
+            setSmartphonesInCart(localCart)
+
+        calculateTotalPrice(smartphonesInCart);
+    }, []) //the empty array ensures useEffect only runs once
+
+    const removeFromCart = (id) => {//Remove the smartphone from the cart
+        let smartphonesInCartCopy = [...smartphonesInCart];
+
+        smartphonesInCartCopy = smartphonesInCartCopy.filter(item => item.id !== id);
+
+        setSmartphonesInCart(smartphonesInCartCopy);
+        calculateTotalPrice(smartphonesInCartCopy);
+
+        //make cart a string and store in local space
+        let stringCart = JSON.stringify(smartphonesInCartCopy);
+        localStorage.setItem("smartphonesInCart", stringCart);
+
+        //If there is no more items in cart
+        if (!(Array.isArray(smartphonesInCart) && smartphonesInCart.length)) {
+            alert('your cart is empty');
+            history.push('/smartphones');
+        }
+    }
 
     const setQuantity = (id, quantity) => {
-        const item = smartphonesInCart.find(item => item.id === id);
-        item.quantity = +quantity;
-        calculateTotalPrice(smartphonesInCart);
+        let smartphonesInCartCopy = [...smartphonesInCart];
+
+        //find if item exists, just in case
+        let existentItem = smartphonesInCartCopy.find(item => item.id === id);
+
+        // //if it doesnt exist simply return
+        // if (!existentItem) return
+
+
+        existentItem.quantity = +quantity;
+
+        setSmartphonesInCart(smartphonesInCartCopy);
+        calculateTotalPrice(smartphonesInCartCopy);
+
+        //make cart a string and store in local space
+        let stringCart = JSON.stringify(smartphonesInCartCopy);
+        localStorage.setItem("smartphonesInCart", stringCart);
     }
+
+
     const onCheckout = () => {
         // create a new order copy
         console.log("ARRAY BEFORE CHECKOUT", smartphonesInCart);
@@ -35,7 +84,7 @@ function Order(props) {
         var newOrder = {
             smartphones: smartphonesForOrder,
             totalPrice: totalPrice,
-            userId: orderDetails.user._id,
+            userId: localUser._id,
             status: 'completed'
         };
 
@@ -50,9 +99,11 @@ function Order(props) {
                     alert('Error creating order')
                 }
             })
-        
+
         //add websocket new order
         //socket.emit('changeOrdersCount');
+        localStorage.removeItem("smartphonesInCart");
+        localStorage.removeItem("localCart." + localUser._id);
         history.push('/smartphones')
     }
 
@@ -72,19 +123,8 @@ function Order(props) {
         setTotalPrice(newTotalPrice);
     }
 
-    const removeFromCart = (id) => {//Remove the smartphone from the cart
 
-        smartphonesInCart = smartphonesInCart.filter(item => item.id !== id); 
-        setSmartphonesInCart(smartphonesInCart);
-        calculateTotalPrice(smartphonesInCart);
-
-        //If there is no more items in cart
-        if (!(Array.isArray(smartphonesInCart) && smartphonesInCart.length)) {
-            alert('your cart is empty');
-            history.push('/smartphones');
-        }
-    }
-
+    console.log("smartphonesInCart !!",smartphonesInCart)
     return (
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
