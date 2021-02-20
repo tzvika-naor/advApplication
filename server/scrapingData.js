@@ -3,11 +3,11 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 // const page_url = 'https://gadgets.ndtv.com/mobiles/smartphones'
 const page_url = ['https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Samsung&sort=popularity_score&order=desc', 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Oppo&sort=popularity_score&order=desc'
-    , 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Xiaomi&sort=popularity_score&order=desc',
-    'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Vivo&sort=popularity_score&order=desc', 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Apple&sort=popularity_score&order=desc']
+    , 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Xiaomi&sort=popularity_score&order=desc']
+// 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Vivo&sort=popularity_score&order=desc', 'https://gadgets.ndtv.com/mobiles/smartphones?facet[brand]=Apple&sort=popularity_score&order=desc']
 const Smartphone = require('./models/smartphone');
 
-async function getMobiles () {
+async function getMobiles() {
     let allData = {};
     const phoneModels = []
     const imageUrl = []
@@ -19,7 +19,7 @@ async function getMobiles () {
     const price = []
     arr = []
 
-    for (i = 0;i < 5;i++) {
+    for (i = 0; i < 3; i++) {
         let { data } = await axios.get(page_url[i]);
         let $ = cheerio.load(data);
         let table = $('#allplist');

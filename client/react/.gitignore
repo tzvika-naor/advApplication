@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+/server/node_modules
+/client/react/node_modules
+/client/dashboard/node_modules
+
 /.pnp
 .pnp.js
 
