@@ -1,0 +1,72 @@
+<div class="container">
+    <h4 id="headline" *ngIf="isParam; else create">Update User</h4>
+    <h4 id="headline" *ngIf="!isParam">Create User</h4>
+
+    <!-- <div *ngIf="isParam | async"> -->
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="card w-50" style="background-color: green; margin-left: 270px;">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="user.isAdmin" name="isAdmin"
+                                id="user.isAdmin">
+                            <label class="form-check-label" for="is Admin">
+                                Is Admin (ON for admin OFF for not admin)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>first name</label>
+                        <input type="text" class="form-control" [(ngModel)]="user.firstname" name="firstname" required
+                            placeholder="First name" #firstname="ngModel"
+                            [ngClass]="{'is-invalid': firstname.errors && firstname.touched}" minlength="2">
+                        <div [hidden]="!firstname.errors?.required" class="invalid-feedback">manufacture name required
+                        </div>
+                        <div [hidden]="!firstname.errors?.minlength" class="invalid-feedback">Must be at least 2
+                            charecters
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>lastname</label>
+                        <input type="text" class="form-control" [(ngModel)]="user.lastname" name="lastname"
+                            placeholder="Last name" #lastname="ngModel"
+                            [ngClass]="{'is-invalid': lastname.errors && lastname.touched}" required>
+                        <div [hidden]="!lastname.errors?.required" class="invalid-feedback">manufacture name required
+                        </div>
+                        <div [hidden]="!lastname.errors?.minlength" class="invalid-feedback">Must be at least 2
+                            charecters
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="user.email" name="email"
+                                #email="ngModel" placeholder="Email" required minlength="4"
+                                [ngClass]="{'is-invalid': email.errors && email.touched}">
+                            <div [hidden]="!email.errors?.required" class="invalid-feedback">car year required</div>
+                            <div [hidden]="!email.errors?.minlength" class="invalid-feedback">Must be exact 4 digits
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>password</label>
+                            <input type="text" class="form-control" [(ngModel)]="user.password" name="password"
+                                placeholder="Password" #password="ngModel" required minlength="4"
+                                [ngClass]="{'is-invalid': password.errors && password.touched}">
+                            <div [hidden]="!password.errors?.required" class="invalid-feedback">car year required</div>
+                            <div [hidden]="!password.errors?.minlength" class="invalid-feedback">Must be exact 4 digits
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>phone</label>
+                            <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone"
+                                #phone="ngModel" placeholder="Phone" minlength="4"
+                                [ngClass]="{'is-invalid': phone.errors && phone.touched}">
+                            <div [hidden]="!phone.errors?.required" class="invalid-feedback">car year required</div>
+                            <div [hidden]="!phone.errors?.minlength" class="invalid-feedback">Must be exact 4 digits
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<!-- </div> -->

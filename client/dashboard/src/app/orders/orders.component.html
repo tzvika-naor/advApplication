@@ -1,0 +1,49 @@
+<div *ngIf="!show">
+<div class="div" style="margin-left: 300px;">
+  <div class="container" style="margin-bottom: 20px;">
+    <app-order-search></app-order-search>
+  </div>
+    <h1>Results: {{results}}</h1>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-4" *ngFor="let order of orders">
+            <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+              <div class="card-header">
+                <h5>Order Number: {{order._id}}</h5>
+                <h5>User Details: {{order.userId?._id}}</h5>
+
+                <p>email: {{order.userId?.email}}</p>
+                <p>first name: {{order.userId?.firstname}}</p>
+                <p>last name: {{order.userId?.lastname}}</p>
+                <p>password: {{order.userId?.password}}</p>
+                <p>phone: {{order.userId?.phone}}</p>
+              </div>
+              <div class="card-body">
+                <h3>Order Date: {{order.date | date:'d/M/yy , h:mm a'}}</h3>
+                <h3>Order Status: {{order.status}}</h3>
+                <h3>Smartphones Details:</h3>
+                <div *ngFor="let smartphones of order.smartphones">
+                  <p>{{smartphones.id.phoneModel}} | {{smartphones.id.brand}} | {{smartphones.id.display}}
+                    |
+                    {{smartphones.id.price}}$ </p>
+                    <p>ID: {{smartphones.id._id}} | Quantity: {{smartphones.quantity}} </p>
+                </div>
+                <h3>Total Price: {{order.totalPrice}}$</h3>
+                <a class="btn btn-primary" (click)="updateOrder(order)"  [routerLink]="['update' , order._id]" >Update order</a>
+                <a class="btn btn-danger" (click)="deleteOrder(order._id)">Delete order</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="show" style="margin-left: 300px;">
+  <div class="col-lg-12">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div id="wrapper" class="d-flex justify-content-center" style="margin-top: 100px ; margin-bottom: 645px">
+        <div class="box">
+            <div class="form-group">
+                <div class="d-flex flex-column mt-5">
+
+
+                    <h1 *ngIf="login" class="align-self-center" style="font-weight: bold">Login</h1>
+                    <h1 *ngIf="!login" class="align-self-center" style="font-weight: bold">Reset Password</h1>
+
+                    <input class="form-control form-control-lg align-self-center w-75 mb-3 mt-2" type="text"
+                        placeholder="Email" name="email" required [(ngModel)]="form.email" />
+                  
+                    <input class="form-control form-control-lg align-self-center w-75 mb-3 mt-2" type="text"
+                        placeholder="Password" name="password" required minlength="4" #password  [(ngModel)]="form.password" />
+
+                    <button class="login align-self-center mt-5" type="submit">{{btnLogin}}</button>
+        
+                    <!-- <button  class="delete align-self-center mb-3" type="submit" >Delete</button> -->
+
+                    <a class="link align-self-center" (click)="toggle()">{{toggleLink}}</a>
+
+                    <div *ngIf="!login">
+                        <div class="d-flex justify-content-center">
+
+                            <a *ngIf="login" style="margin-right:20px">Login?
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
