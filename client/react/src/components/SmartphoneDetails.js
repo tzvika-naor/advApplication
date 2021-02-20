@@ -1,8 +1,10 @@
 import { Button } from "react-bootstrap";
+import { useState } from 'react';
 import "./SmartphoneDetails.css"
 import history from '../History';
 
 function SmartphoneDetails(props) {
+    const [itemProps, setProps] = useState(props);
     console.log(props.history.location.smartphone.smartphone);
     // const [smartphone, setSmartphone] = props.history.location.smartphone.smartphone
 

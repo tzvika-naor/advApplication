@@ -7,9 +7,11 @@ function OrdersHistory (props) {
     const [dates, setDates] = useState([])
     const [user, setUser] = useState(props.connectedUser)
 
+    let localConnectedUser = localStorage.getItem("connectedUser");
+
     useEffect(() => {
-        console.log(props.connectedUser)
-        const id = props.connectedUser._id
+        console.log(localConnectedUser)
+        const id = localConnectedUser._id
         axios.get(`http://localhost:5000/api/order/user/${id}`).then(
             res => {
                 //console.log(res.data.orders)

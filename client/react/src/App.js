@@ -18,12 +18,32 @@ import io from "socket.io-client";
 const server = "http://localhost:5000";
 const socket = io.connect(server); //Connect to webSocket for event 'connection'
 
-function App (props) {
+function App(props) {
   const [items, setItems] = useState([])
   const [showResults, setShowResults] = useState(false);
   const [searchResaults, setSearchResults] = useState([]);
   const [connectedUser, setConnectedUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  let localLoginState = localStorage.getItem("IsLoggedIn");
+  let localConnectedUser = localStorage.getItem("connectedUser");
+
+  //this is called on component mount
+  useEffect(() => {
+    //turn it into js
+    localLoginState = JSON.parse(localLoginState);
+    //load persisted cart into state if it exists
+    if (localLoginState)
+      setIsLoggedIn(localLoginState)
+
+    //turn it into js
+    localConnectedUser = JSON.parse(localConnectedUser);
+    //load persisted cart into state if it exists
+    if (localConnectedUser)
+    setConnectedUser(localConnectedUser)
+
+  }, []) //the empty array ensures useEffect only runs once
+
   const searchResults = (data) => {
     console.log(data)
     setSearchResults(data);
@@ -52,7 +72,7 @@ function App (props) {
         <Fragment>
           <div className="row">
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "9%" }}>
-              <Search searchResults={searchResults}  />
+              <Search searchResults={searchResults} />
             </div>
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
               <Route path='/smartphones' render={(props) => <List
