@@ -1,9 +1,3 @@
-.card{
-    margin-right: 400px;
-    width: 80%;
-
-}
-
 .addToCart {
     border: none;
     outline: 0;
@@ -17,4 +11,8 @@
     margin-bottom: 10px;
    
     
+  }
+
+  .payment{
+    margin-top: 40px;
   }

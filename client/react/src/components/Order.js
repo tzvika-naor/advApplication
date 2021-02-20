@@ -89,8 +89,8 @@ function Order(props) {
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
             <ul className="list-unstyled" >
-                <h4 style={{ marginBottom: "20px", marginTop: "20px", marginLeft: "40px" }}> User Details</h4>
-                <div style={{ marginLeft: "60px", marginBottom: "20px" }}>
+                <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px" , color: "white"}}> Your Cart </h4>
+                <div style={{ marginLeft: "60px", marginBottom: "20px" ,color: "white"}}>
                     <li><h5>First Name: {orderDetails.user.firstname}</h5> </li>
                     <li><h5>Last Name: {orderDetails.user.lastname} </h5></li>
                     <li><h5>Email: {orderDetails.user.email}</h5></li>
@@ -102,7 +102,7 @@ function Order(props) {
                         <div className="col-md-4">
                             <div className="row" >
                                 <div className="col-md-9 offset-1">
-                                    <li style={{ height: "120px" }} className="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4> <h4>ID: {el.id}</h4>  <h4>Price: {el.price}$ </h4> </li>
+                                    <li style={{ height: "120px" }} className="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4>  <h4>Price: {el.price}$ </h4> </li>
                                 </div>
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>

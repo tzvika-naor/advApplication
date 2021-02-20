@@ -16,8 +16,8 @@ function SmartphoneDetails(props) {
     }
 
     return (
-        <div id="wrapper" classNameNameName="d-flex justify-content-center" style={{ marginLeft: "35%", marginTop: "10%", marginBottom: "10%" }} >
-            <div className="card" >
+        <div id="wrapper" classNameNameName="d-flex justify-content-center" style={{ marginLeft: "20%", marginTop: "50px", marginBottom: "50px" }} >
+                 <div className="card" >
                 <div className="card-body">
                     <div className="row">
                         <div className="col-9">
