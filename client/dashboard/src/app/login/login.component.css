@@ -1,0 +1,61 @@
+#email-icon{
+    display: inline-block;
+}
+.link{
+    color: white;
+    align-self: flex-end;
+}
+.box{
+    width: 600px;
+    height: 500px;
+    background: linear-gradient(to right bottom,#1f45cc,#8592ae, #3f547b,  #a7699b);
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    border-radius: 15px;
+    margin-bottom:"200px"
+}
+.login{
+    display: block;
+box-sizing: border-box;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+font-weight: bold;
+width: 80%;
+background: #19b9cc;
+border: none;
+outline: none;
+letter-spacing: 1px;
+color: #fff;
+text-transform: uppercase;
+-webkit-transition: .5s ease-in;
+cursor: pointer;
+margin: 2em 0 1.3em;
+font-size: 14px;
+padding: 13px 0;
+justify-content: center;
+}
+.delete{
+     display: flex;
+box-sizing: border-box;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+font-weight: bold;
+width: 80%;
+background: #cc1946;
+border: none;
+outline: none;
+letter-spacing: 1px;
+color: #fff;
+text-transform: uppercase;
+-webkit-transition: .5s ease-in;
+cursor: pointer;
+margin:0 1.3em;
+font-size: 14px;
+padding: 13px 0;
+justify-content: center;
+}
+
+.validations-error{
+    margin-left: 100px;
+    font-weight: normal;
+    color:red;
+}

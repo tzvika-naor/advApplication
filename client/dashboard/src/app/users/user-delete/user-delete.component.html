@@ -1,0 +1,21 @@
+<div class="wrap" style="margin-left: 300px">
+    <h4>USERS</h4>
+    <div class="row">
+        <div class="col-lg-4" *ngFor="let user of users">
+            <div class="card" style="border: 1px solid black; margin-bottom: 10px;">
+                <div class="card-header">
+                    <h5>User ID: {{user._id}}</h5>
+                </div>
+                <div class="card-body">
+                    <h3>is Admin: {{user.isAdmin}}</h3>
+                    <h3>First Name: {{user.firstname}}</h3>
+                    <h3>Last Name: {{user.lastname}}</h3>
+                    <h3>Email: {{user.email}}</h3>
+                    <h3>Password: {{user.password}}</h3>
+                </div>
+                <button type="button" class="btn btn-primary" [routerLink]="['/users/update', user._id]">Update</button>
+                <button type="button" class="btn btn-danger" (click)="set">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

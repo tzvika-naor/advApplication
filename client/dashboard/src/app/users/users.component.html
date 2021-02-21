@@ -1,0 +1,12 @@
+<div class="btn-group" role="group" aria-label="Basic example" style="margin-left: 300px;">
+    <button type="button" class="btn btn-info" [routerLink]="''" >Back</button>
+    <button type="button" class="btn btn-secondary" [routerLink]="'create'" style="margin-left:5px">Create User</button>
+    <button type="button" class="btn btn-info" [routerLink]="'delete'" style="margin-left:5px">Users List</button>
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="first name" aria-label="first name" [(ngModel)]="firstNameSearch" name = "firstname">
+        <input class="form-control me-2" type="search" placeholder="last name" aria-label="last name" [(ngModel)]="lastNameSearch" name = "firstname">
+        <input class="form-control me-2" type="search" placeholder="email" aria-label="email" [(ngModel)]="emailSearch" name = "firstname">
+        <button class="btn btn-outline-success btn-search" type="submit" (click) = "onClickSearch()">Search</button>
+      </form>
+</div>
+<router-outlet></router-outlet>
