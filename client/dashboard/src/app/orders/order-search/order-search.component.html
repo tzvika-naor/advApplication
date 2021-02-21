@@ -2,37 +2,43 @@
     <div class="form-group">
         <label for="user Id">User Id</label>
         <select class="form-control" id="userId" name="userId" [(ngModel)]="orderForm.userId" #userId="ngModel" required
-            [ngClass]="{'is-invalid': userId.errors}">
+            [ngClass]="{'is-invalid': userId.errors}" [ngClass]="{'is-valid': userId.dirty}">
             <option *ngFor="let id of search.userId" [value]="id._id">{{id._id}}</option>
         </select>
-        <div [hidden]="!userId.errors?.required" class="invalid-feedback">this field is required</div>
+        <div [hidden]="!userId.errors?.required" class="invalid-feedback" >this field is required</div>
+        <div [hidden]="userId.errors?.required" class="valid-feedback">checked</div>
+
     </div>
     <div class="form-group">
         <label for="status">Status</label>
         <select class="form-control" id="status" name="status" [(ngModel)]="orderForm.status" #status="ngModel" required
-            [ngClass]="{'is-invalid': status.errors}">
+            [ngClass]="{'is-invalid': status.errors}" [ngClass]="{'is-valid': status.dirty}" >
             <option *ngFor="let s of search.status" [value]="s._id">{{s._id}}</option>
         </select>
-        <div [hidden]="!userId.errors?.required" class="invalid-feedback" >this field is required</div>
+        <div [hidden]="!status.errors?.required" class="invalid-feedback" >this field is required</div>
+        <div [hidden]="status.errors?.required" class="valid-feedback">checked</div>
+
     </div>
     <div class="form-group">
         <label for="date">From date</label>
         <select class="form-control" id="from_date" name="from_date" [(ngModel)]="orderForm.from_date"
-            #from_date="ngModel" required [ngClass]="{'is-invalid': from_date.errors}">
+            #from_date="ngModel" required [ngClass]="{'is-invalid': from_date.errors}" [ngClass]="{'is-valid': from_date.dirty}">
             <option *ngFor="let date of search.dates" [value]="date">{{date}}</option>
         </select>
-        <div [hidden]="!from_date.errors?.required" class="invalid-feedback">this field is required</div>
+        <div [hidden]="!from_date.errors?.required" class="invalid-feedback" >this field is required</div>
+        <div [hidden]="from_date.errors?.required" class="valid-feedback">checked</div>
+
     </div>
     <div class="form-group">
 
         <label for="to_date">To date</label>
         <select class="form-control" id="to_date" name="to_date" [(ngModel)]="orderForm.to_date"
-            #to_date="ngModel" required [ngClass]="{'is-invalid': to_date.errors}">
+            #to_date="ngModel" required [ngClass]="{'is-invalid': to_date.errors}" [ngClass]="{'is-valid': to_date.dirty}">
             <option *ngFor="let date of search.dates" [value]="date">{{date}}</option>
         </select>
         <div [hidden]="!to_date.errors?.required" class="invalid-feedback">this field is required</div>
-        
+        <div [hidden]="to_date.errors?.required" class="valid-feedback">checked</div>
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
+    
 </form>
