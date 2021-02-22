@@ -1,59 +1,75 @@
-<!-- <div style="margin-left: 300px">
-    <button [routerLink]="['/smartphones']" type="submit" class="btn btn-primary">Back</button>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<button [routerLink]="['/smartphones']" type="button" class="btn btn-primary" style="margin-left: 35%; margin-bottom: 20px;">Back</button>
+<div class="d-flex justify-content-center">
+    <form class="w-25" #f="ngForm" (ngSubmit)="onSubmit(f)"
+        style="border: rgb(81, 106, 162) 5px solid ; padding: 20px 20px ;  border-radius: 25px;">
         <div class="form-group">
-            <label for="phoneModel">Phone Model {{form.brand}}
+            <label for="phoneModel">Phone Model
             </label>
-            <input type="text" class="form-control w-50" id="phoneModel" name="phoneModel" [(ngModel)]="form.phoneModel"
-                #phoneModel="ngModel" required>
+            <input type="text" class="form-control" id="phoneModel" name="phoneModel" [(ngModel)]="form.phoneModel"
+                #phoneModel="ngModel" required [ngClass]="{'is-invalid': phoneModel.errors}">
+            <div [hidden]="!phoneModel.errors?.required" class="invalid-feedback">phoneModel required
+            </div>
+
         </div>
         <div class="form-group">
             <label for="brand">Brand</label>
-            <input type="text" class="form-control w-50" id="brand" name="brand" [(ngModel)]="form.brand" required>
+            <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="form.brand" #brand="ngModel"
+                required [ngClass]="{'is-invalid': brand.errors}">
+            <div [hidden]="!brand.errors?.required" class="invalid-feedback">brand required
+            </div>
         </div>
         <div class="form-group">
             <label for="display">Display</label>
-            <input type="text" class="form-control w-50" id="display" name="display" [(ngModel)]="form.display"
-                required>
+            <input type="text" class="form-control" id="display" name="display" [(ngModel)]="form.display" required
+                #display="ngModel" required [ngClass]="{'is-invalid': display.errors}">
+            <div [hidden]="!display.errors?.required" class="invalid-feedback">display required
+            </div>
         </div>
         <div class="form-group">
             <label for="processor">Processor</label>
-            <input type="text" class="form-control w-50" id="processor" name="processor" [(ngModel)]="form.processor"
-                required>
+            <input type="text" class="form-control" id="processor" name="processor" [(ngModel)]="form.processor"
+                #processor="ngModel" required [ngClass]="{'is-invalid': processor.errors}">
+            <div [hidden]="!processor.errors?.required" class="invalid-feedback">processor required
+            </div>
         </div>
         <div class="form-group">
             <label for="batteryCapacity">BatteryCapacity</label>
-            <input type="text" class="form-control w-50" id="batteryCapacity" name="batteryCapacity"
-                [(ngModel)]="form.batteryCapacity" required>
+            <input type="text" class="form-control" id="batteryCapacity" name="batteryCapacity"
+                #batteryCapacity="ngModel" required [(ngModel)]="form.batteryCapacity"
+                [ngClass]="{'is-invalid': batteryCapacity.errors}">
+            <div [hidden]="!batteryCapacity.errors?.required" class="invalid-feedback">battery capacity required
+            </div>
         </div>
         <div class="form-group">
             <label for="frontCamera">FrontCamera</label>
-            <input type="text" class="form-control w-50" id="frontCamera" name="frontCamera"
-                [(ngModel)]="form.frontCamera" required>
+            <input type="text" class="form-control" id="frontCamera" name="frontCamera" #frontCamera="ngModel"
+                #frontCamera="ngModel" required [(ngModel)]="form.frontCamera"
+                [ngClass]="{'is-invalid': frontCamera.errors}">
+            <div [hidden]="!frontCamera.errors?.required" class="invalid-feedback">frontCamera required
+            </div>
         </div>
         <div class="form-group">
-            <label for="rearCamera">FearCamera</label>
-            <input type="text" class="form-control w-50" id="rearCamera" name="rearCamera" [(ngModel)]="form.rearCamera"
-                required>
+            <label for="rearCamera">RearCamera</label>
+            <input type="text" class="form-control" id="rearCamera" name="rearCamera" [(ngModel)]="form.rearCamera"
+                #rearCamera="ngModel" required [ngClass]="{'is-invalid': rearCamera.errors}">
+            <div [hidden]="!rearCamera.errors?.required" class="invalid-feedback">rearCamera required
+            </div>
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="text" class="form-control w-50" id="image" name="image" [(ngModel)]="form.image" required>
+            <input type="text" class="form-control" id="image" name="image" [(ngModel)]="form.image" #image="ngModel"
+                required [ngClass]="{'is-invalid': image.errors}">
+            <div [hidden]="!image.errors?.required" class="invalid-feedback">image required
+            </div>
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" class="form-control w-50" id="price" name="price" [(ngModel)]="form.price"
-                #price="ngModel" required>
+            <input type="text" class="form-control" id="price" name="price" [(ngModel)]="form.price" #price="ngModel"
+                required [ngClass]="{'is-invalid': price.errors}">
+            <div [hidden]="!price.errors?.required" class="invalid-feedback">price required
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="clear()">Clear</button>
+        <button [disabled]="!f.valid" type="submit" class="btn btn-success" style="margin-left: 10px;">Submit</button>
     </form>
-</div>
- -->
- <div style="margin-left: 300px">
-
- <div class="form-group">
-    <label for="price">Price</label>
-    <input type="text" class="form-control w-50" id="price" name="price" [(ngModel)]="form.price"
-        #price="ngModel" required>
-</div>
 </div>

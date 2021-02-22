@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Smartphone } from 'src/app/interfaces/smartphones';
 import { SmartphonesService } from '../smartphones.service';
-
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-smartphone-update-create',
   templateUrl: './smartphone-update-create.component.html',
@@ -10,33 +10,31 @@ import { SmartphonesService } from '../smartphones.service';
 })
 export class SmartphoneUpdateCreate implements OnInit {
 
-  data: Smartphone;
   form: Smartphone;
+
   constructor(private smartphoneService: SmartphonesService, private route: ActivatedRoute, private router: Router) { }
-
   ngOnInit(): void {
-    // this.form = this.smartphoneService.getSmartphone();
-    // console.log(this.form);
-    this.smartphoneService.showchildren.subscribe((res: Smartphone) =>
-    {console.log(res);
-     this.form = res;
+    this.smartphoneService.showchildren.subscribe((res: Smartphone) => {
+      this.form = res;
     });
-    console.log(this.form);
+  }
+  clear() {
 
+    this.form = {
+      phoneModel: '',
+      brand: '',
+      display: '',
+      processor: '',
+      batteryCapacity: '',
+      frontCamera: '',
+      rearCamera: '',
+      image: '',
+      price: 0
+    };
 
-
-    // this.smartphoneService.dataSub.subscribe((res: any) => console.log(res) );
-    // this.smartphoneService.subject.subscribe((smartphone: Smartphone) => {
-    //   console.log(smartphone);
-    //   this.data = smartphone;
-    // this.form = this.data;
-    // },
-    //   error => {
-    //     console.log(error);
-    //   });
   }
   onSubmit(formData) {
-    console.log(formData.form.value);
+    console.log(formData);
     const data = formData.form.value;
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

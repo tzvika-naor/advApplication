@@ -2,8 +2,7 @@
     <h4 id="headline" *ngIf="isParam; else create">Update User</h4>
     <h4 id="headline" *ngIf="!isParam">Create User</h4>
 
-    <!-- <div *ngIf="isParam | async"> -->
-        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
             <div class="card w-50" style="background-color: green; margin-left: 270px;">
                 <div class="card-body">
                     <div class="form-group">
@@ -63,9 +62,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </div>
         </form>
     </div>
-<!-- </div> -->
