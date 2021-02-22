@@ -47,4 +47,7 @@ export class SmartphoneUpdateCreate implements OnInit {
     this.router.navigate(['/smartphones'], { relativeTo: this.route });
 
   }
+  reloadParent(){
+  this.smartphoneService.getAllSmartphones();
+  }
 }

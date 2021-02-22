@@ -12,7 +12,9 @@ export class SmartphonesComponent implements OnInit {
   showChildrens = false;
   smartphones: Smartphone[];
   constructor(private smartphonesService: SmartphonesService, private router: Router, private route: ActivatedRoute) { }
+
   ngOnInit(): void {
+    
     this.smartphonesService.getAllSmartphones();
     this.smartphonesService.showchildren.subscribe(showChildrens => this.showChildrens = showChildrens);
     this.smartphonesService.subject.subscribe((res: any) => {

@@ -29,4 +29,7 @@ export class OrderSearchComponent implements OnInit {
       this.orderService.SetSearchResults(response.order);
     });
   }
+  resetResults(){
+    this.orderService.getAllOrders();
+    }
 }

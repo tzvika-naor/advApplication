@@ -1,4 +1,4 @@
-<button  [routerLink]="''"  class="btn btn-primary" style="margin-bottom: 15px;">back</button>
+<button  [routerLink]="'/orders'" (click)="resetResults()"  class="btn btn-primary" style="margin-bottom: 15px;">Reset Results</button>
 <form #form="ngForm" (ngSubmit)="onSubmit(form)" style="border: rgb(81, 110, 172) 1px solid ; padding: 20px 20px ;  border-radius: 25px;">
     <div class="form-group">
         <label for="user Id">User Id</label>
