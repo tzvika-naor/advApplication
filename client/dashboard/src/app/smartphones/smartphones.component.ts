@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Smartphone } from '../interfaces/smartphones';
 import { SmartphonesService } from './smartphones.service';
@@ -10,7 +11,7 @@ import { SmartphonesService } from './smartphones.service';
 export class SmartphonesComponent implements OnInit {
   showChildrens = false;
   smartphones: Smartphone[];
-  constructor(private smartphonesService: SmartphonesService) { }
+  constructor(private smartphonesService: SmartphonesService, private router: Router, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.smartphonesService.getAllSmartphones();
     this.smartphonesService.showchildren.subscribe(showChildrens => this.showChildrens = showChildrens);
@@ -23,8 +24,11 @@ export class SmartphonesComponent implements OnInit {
     this.smartphonesService.removeSmartphone(id).subscribe(res => console.log(res), error => console.log(error));
     this.smartphonesService.getAllSmartphones();
   }
-  updateSmartphone(smartphone) {
+  updateSmartphone(id: string , smartphone: Smartphone) {
+    this.smartphonesService.editSmartphone(smartphone);
     this.showChildrens = true;
+    this.router.navigate(['update/' + id], { relativeTo: this.route });
+
   }
   createSmartphone() {
     this.showChildrens = true;

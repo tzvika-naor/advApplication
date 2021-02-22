@@ -10,28 +10,30 @@ import { SmartphonesService } from '../smartphones.service';
 })
 export class SmartphoneUpdateCreate implements OnInit {
 
-  form: Smartphone = {
-    phoneModel: 'blabla',
-    brand: '',
-    display: '',
-    processor: '',
-    batteryCapacity: '',
-    frontCamera: '',
-    rearCamera: '',
-    image: '',
-    price: 0
-  };
+  data: Smartphone;
+  form: Smartphone;
   constructor(private smartphoneService: SmartphonesService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    // this.form = this.smartphoneService.getSmartphone();
+    // console.log(this.form);
+    this.smartphoneService.showchildren.subscribe((res: Smartphone) =>
+    {console.log(res);
+     this.form = res;
+    });
+    console.log(this.form);
 
-    this.smartphoneService.subject.subscribe((smartphone: any) => {
-      console.log(smartphone);
-      this.form = smartphone;
-    },
-      error => {
-        console.log(error);
-      });
+
+
+    // this.smartphoneService.dataSub.subscribe((res: any) => console.log(res) );
+    // this.smartphoneService.subject.subscribe((smartphone: Smartphone) => {
+    //   console.log(smartphone);
+    //   this.data = smartphone;
+    // this.form = this.data;
+    // },
+    //   error => {
+    //     console.log(error);
+    //   });
   }
   onSubmit(formData) {
     console.log(formData.form.value);

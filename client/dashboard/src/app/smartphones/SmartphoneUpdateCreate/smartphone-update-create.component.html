@@ -1,10 +1,11 @@
-<div style="margin-left: 300px">
+<!-- <div style="margin-left: 300px">
     <button [routerLink]="['/smartphones']" type="submit" class="btn btn-primary">Back</button>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <div class="form-group">
-            <label for="phoneModel">Phone Model</label>
+            <label for="phoneModel">Phone Model {{form.brand}}
+            </label>
             <input type="text" class="form-control w-50" id="phoneModel" name="phoneModel" [(ngModel)]="form.phoneModel"
-                required>
+                #phoneModel="ngModel" required>
         </div>
         <div class="form-group">
             <label for="brand">Brand</label>
@@ -46,4 +47,13 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
+ -->
+ <div style="margin-left: 300px">
+
+ <div class="form-group">
+    <label for="price">Price</label>
+    <input type="text" class="form-control w-50" id="price" name="price" [(ngModel)]="form.price"
+        #price="ngModel" required>
+</div>
 </div>
