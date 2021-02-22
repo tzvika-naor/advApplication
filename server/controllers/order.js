@@ -143,10 +143,10 @@ exports.createOrder = (req, res, next) => {
 
 exports.updateOrder = (req, res, next) => {
     console.log('updateOrder');
-    Order.updateOne({ _id: req.body.id }, req.body).then(doc => {
+    Order.updateOne({ _id: req.params.id }, req.body).then(doc => {
         res.status(200).json({
             user: doc,
-            message: "user password updated"
+            message: "your order has been updated"
         })
     })
         .catch(err => {
@@ -156,24 +156,6 @@ exports.updateOrder = (req, res, next) => {
             });
         });
 
-
-    //     console.log(req.body)
-    //     const Order = new Order({
-    //         products: req.body.products,
-    //         numberOfProucts: req.body.numberOfProucts,
-    //         customerId: req.body.customerId,
-    //         totalPrice: req.body.totalPrice,
-    //     });
-    //     Order.updateOne({ _id: req.params.id }, Order).then(result =>
-    //     {
-    //         if (result.n > 0) {
-    //             res.status(200).json({
-    //                 message: "update successful!"
-    //             })
-    //         } else {
-    //             res.status(401).json({ message: "Not authorized!" });
-    //         }
-    //     });
 }
 exports.deleteOrder = (req, res, next) => {
     Order.deleteOne({ _id: req.params.id }).then(result => {

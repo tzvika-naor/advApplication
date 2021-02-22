@@ -1,19 +1,105 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <div class="card w-100" style="background-color: rgb(146, 145, 171);">
+    <div class="card w-50" style="background-color: rgb(146, 145, 171);">
         <div class="card-body">
-            <div *ngFor="let o of  order; let i = index">
-                <div class="form-group">
-                    <label for="id">id</label>
-                    <input type="text" class="form-control" id="id" required [(ngModel)]="o.id._id" name="id">
+            <h4 for="id">Order Id : {{order._id}}</h4>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" required [(ngModel)]="order.status">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="text" class="form-control" id="date" name="date" required [(ngModel)]="order.date">
+            </div>
+            <h2>User Details</h2>
+            <div class="form-group">
+                <label for="userId.email">User Email</label>
+                <input type="text" class="form-control" id="userId.email" name="userId.email" required
+                    [(ngModel)]="order.userId.email">
+            </div>
+            <div class="form-group">
+                <label for="userId.firstname">User first name</label>
+                <input type="text" class="form-control" id="userId.firstname" name="userId.firstname" required
+                    [(ngModel)]="order.userId.firstname">
+            </div>
+            <div class="form-group">
+                <label for="userId.lastname">User last name</label>
+                <input type="text" class="form-control" id="userId.lastname" name="userId.lastname" required
+                    [(ngModel)]="order.userId.lastname">
+            </div>
+            <div class="form-group">
+                <lable for="userId.lastname">User phone</lable>
+                <input type="text" class="form-control" id="userId.phone" name="userId.phone" required
+                    [(ngModel)]="order.userId.phone">
+            </div>
+            <h2>Smartphones Details</h2>
+            <hr>
+            <div *ngFor="let sm of order.smartphones; let i = index">
+                <div class="row">
+                    <div class="col-lg-6 md-8">
+                        <label for="smartphone">Smartphone no.{{i + 1}}</label>
+                        <div class="card" style="border: 2px black solid; background-color: cornflowerblue;">
+                            <p class="ml-2 mt-2" style="font-weight:bold">ID: {{sm.id._id}} </p>
+                            <div class="card" style="border: 2px black solid;">
+                                <div class="row ml-2 mt-2">
+                                    <p style="font-weight: 700;">Brand: </p>
+                                    <p style="margin-left: 3px;"> {{sm.id.brand}}</p>
+                                </div>
+
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Model:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.phoneModel}}</p>
+                                </div>
+
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Display:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.display}}</p>
+                                </div>
+
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Battery Capacity:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.batteryCapacity}}</p>
+                                </div>
+
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Front Camera:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.frontCamera}}</p>
+                                </div>
+
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Rear Camera:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.rearCamera}}</p>
+                                </div>
+                                <div class="row ml-2 ">
+                                    <p style="font-weight: 700;"> Price:</p>
+                                    <p style="margin-left: 3px;"> {{sm.id.price}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 md-4">
+                        <div class="form-group">
+                            <label for="Quantity[i]">Quantity</label>
+                            <input type="number" class="form-control" min="1" id="{{ 'quantity' + i }}"
+                                name="{{'quantity' + i}}" required [(ngModel)]="sm.quantity"
+                                style="border: 2px black solid;">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 offset-lg-1 md-4">
+                        <label for="remove">Remove</label>
+                        <div class="box" (click)="removeItem(i)"
+                            style="width: 60%; height: 35px; background-color: rgb(75, 160, 213); border: black 3px solid; border-radius: 5px; cursor: pointer;">
+                            <span class="align-center"><i class="fas fa-times fa-2x d-flex justify-content-center"
+                                    style="color:red"></i></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="quantity">quantity</label>
-                    <input type="text" class="form-control" id="quantity" required [(ngModel)]="o.quantity"
-                        name="quantity">
-                </div>
+                <hr>
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px">Submit</button>
 </form>
 
 <p>order update component</p>
+{{order | json}}

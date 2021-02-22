@@ -15,24 +15,18 @@ export class OrdersComponent implements OnInit {
   constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getOrders();
-  }
-
-  getOrders(): void {
     this.ordersService.getAllOrders();
     this.ordersService.subjectOrder.subscribe((res: any) => {
-     // they orders!!!
-     this.orders = res.orders;
-     this.results = res.ordersCount;
+      this.show = this.ordersService.getShow()
+      this.orders = res.orders;
+      this.results = res.ordersCount;
     });
   }
-
   // update
   updateOrder(order) {
-    this.ordersService.currentOrder(order);
+    this.ordersService.setSelectedOrder(order);
     this.show = true;
     console.log(this.show);
-
   }
   // delete
   deleteOrder(orderId) {

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/order';
 import { SmartphonesId } from 'src/app/interfaces/smartphonesId';
 import { OrdersService } from '../orders.service';
@@ -9,26 +10,34 @@ import { OrdersService } from '../orders.service';
   styleUrls: ['./update-order.component.css']
 })
 export class UpdateOrderComponent implements OnInit {
-
-  @Input() order: any;
-
+  order: Order;
   smartphonesId: SmartphonesId;
   smartphonesId1: SmartphonesId;
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersService: OrdersService , private router: Router , private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.order);
-    console.log('hiiii');
-    // this.ordersService.subjectOrder.subscribe((order: Order) => {
-    //   console.log(order);
-    //   this.order = order;
-      // order.smartphones.map((smartphone, i) => {
-      //   console.log(smartphone);
-      //   this.smartphoneId.id = smartphone[i].id._id;
-      //   this.smartphoneId.quantity = smartphone[i].quantity;
-      // });
-    // });
+    this.order = this.ordersService.getOrder();
   }
-
+  removeItem(i) {
+    const temp = this.order;
+    temp.smartphones.splice(i, 1);
+    this.order = temp;
+  }
+  onSubmit(f) {
+    console.log(f);
+    console.log(f.form.value);
+    let i = 0;
+    for (i; i < this.order.smartphones.length; i++) {
+      const index = `quantity${i}`;
+      this.order.smartphones[i].quantity = f.form.value[index];
+    }
+    this.order.status = f.form.value.status;
+    this.order.date = f.form.value.date;
+    console.log(this.order);
+    this.ordersService.updateOrder(this.order);
+    this.router.navigate(['/orders'], { relativeTo: this.route });
+    this.ordersService.getAllOrders(); // we will also get parent show
+  }
 }
+

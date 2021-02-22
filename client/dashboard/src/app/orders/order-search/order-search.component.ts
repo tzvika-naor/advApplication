@@ -27,17 +27,18 @@ export class OrderSearchComponent implements OnInit {
     this.orderService.searchOrder(formData.form.value).subscribe(response => {
       console.log(response);
       this.orderService.SetSearchResults(response.order);
+  
     });
   }
   resetResults() {
     this.orderService.getAllOrders();
   }
-  resetFields() {
-    this.orderForm = {
-      userId: '',
-      status: '',
-      from_date: '',
-      to_date: ''
-    };
-  }
+  resetFields(){
+  this.orderForm = {
+    userId: '',
+    status: '',
+    from_date: '',
+    to_date: ''
+  };
+}
 }
