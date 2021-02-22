@@ -29,7 +29,15 @@ export class OrderSearchComponent implements OnInit {
       this.orderService.SetSearchResults(response.order);
     });
   }
-  resetResults(){
+  resetResults() {
     this.orderService.getAllOrders();
-    }
+  }
+  resetFields() {
+    this.orderForm = {
+      userId: '',
+      status: '',
+      from_date: '',
+      to_date: ''
+    };
+  }
 }
