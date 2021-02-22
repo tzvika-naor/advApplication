@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Order } from 'src/app/interfaces/order';
 import { SmartphonesId } from 'src/app/interfaces/smartphonesId';
 import { OrdersService } from '../orders.service';
@@ -9,13 +9,16 @@ import { OrdersService } from '../orders.service';
   styleUrls: ['./update-order.component.css']
 })
 export class UpdateOrderComponent implements OnInit {
-  order: Order;
+
+  @Input() order: any;
+
   smartphonesId: SmartphonesId;
   smartphonesId1: SmartphonesId;
 
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
+    console.log(this.order);
     console.log('hiiii');
     // this.ordersService.subjectOrder.subscribe((order: Order) => {
     //   console.log(order);
@@ -26,7 +29,6 @@ export class UpdateOrderComponent implements OnInit {
       //   this.smartphoneId.quantity = smartphone[i].quantity;
       // });
     // });
-    console.log(this.ordersService.getOrder());
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrdersService } from './orders.service';
 import { Order } from '../interfaces/order';
 import { ActivatedRoute, Route, Router } from '@angular/router';

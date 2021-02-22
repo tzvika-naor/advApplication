@@ -12,15 +12,19 @@ export class SmartphonesCounterComponent implements OnInit {
   onFirstLoad = true;
 
   constructor(private realtimeService: RealtimeService, private smartphonesService: SmartphonesService) {
-    this.smartphonesService.getSmartphonesCount().subscribe(
-      (response: any) => {
-        console.log('Response on angular', response);
-        this.smartphonesCounter = response.smartphonesCount;
-      }
-    );
+    if (this.onFirstLoad) {
+      this.smartphonesService.getSmartphonesCount().subscribe(
+        (response: any) => {
+          console.log('this is response via Rest Api', response);
+          this.smartphonesCounter = response.smartphonesCount;
+          this.onFirstLoad = false;
+        }
+      );
+    }
     this.realtimeService.currentSmartphonesCounter.subscribe((counter: any) => {
-      console.log(counter);
+      console.log('this is response via webSocket', counter);
       this.smartphonesCounter = counter;
+      // this.smartphonesService.getAllSmartphones();
     });
   }
   ngOnInit(): void {
