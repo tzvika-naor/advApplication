@@ -11,11 +11,15 @@ import { UsersService } from '../users/users.service';
 })
 export class SidebarComponent implements OnInit {
   loggedUser: User;
+  hidden = true;
   constructor(private router: Router, private login: LoginService) { }
 
   ngOnInit(): void {
     this.loggedUser = this.login.getConnectedUser();
-    console.log(this.loggedUser)
+    console.log(this.loggedUser);
   }
-
+  toggle() {
+    this.hidden = !this.hidden;
+    console.log(this.hidden);
+  }
 }

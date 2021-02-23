@@ -19,6 +19,7 @@ const server = "http://localhost:5000";
 const socket = io.connect(server); //Connect to webSocket for event 'connection'
 
 function App(props) {
+
   const [items, setItems] = useState([])
   const [showResults, setShowResults] = useState(false);
   const [searchResaults, setSearchResults] = useState([]);
@@ -98,7 +99,8 @@ function App(props) {
                 searchResults={searchResaults} showResults={showResults}
                 connectedUser={connectedUser} isLoggedIn={isLoggedIn}
                 user={props} setItems={data => setItems(data)} resetSearch={resetSearch}
-              />} />
+           
+           />} />
               
             </div>
 
