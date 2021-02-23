@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardItem from './CardItem'
 function OrdersHistory (props) {
+
     const [status, SetStatus] = useState([])
     const [orders, setOrders] = useState([])
     const [dates, setDates] = useState([])
@@ -10,6 +11,7 @@ function OrdersHistory (props) {
     let localUser = localStorage.getItem("localConnectedUser");
     localUser = JSON.parse(localUser);
 
+   
     useEffect(() => {
         var id = localUser._id
         axios.get(`http://localhost:5000/api/order/user/${id}`).then(
@@ -39,7 +41,6 @@ function OrdersHistory (props) {
     }
 
     return (
-
 
         <div style={{ marginTop: "60px", marginLeft: "130px" }}>
             User Details

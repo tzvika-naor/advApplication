@@ -8,31 +8,29 @@ import './Login.css';
 
 
 const Login = (props) => {
+   
     const [toDelete, setToDelete] = useState(false)
     const [resetPassword, setResetPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
     const { errors, register, handleSubmit } = useForm();
-    const [IsLoggedIn, setIsLoggedIn] = useState(false);
-    
 
     const onSubmit = (data, event) => {
+     
         console.log(event.target.value)
+      
         if (resetPassword === false) { // Login !!!!!!!
+         
             axios.post('http://localhost:5000/api/user/login', data)
-                .then(response => {
+             
+            .then(response => {
+                   
                     const user = response.data.user;
+                   
                     if (response.data.user) {
-                        alert(`${response.data.user.firstname} ${response.data.user.lastname} is logged in `)
-                        setLoading(true);
-                        props.setIsLoggedIn(true)
-                        localStorage.setItem("IsLoggedIn", true);
-                        props.connectedUser(user)
-                        let StringUser = JSON.stringify(user);
-                        localStorage.setItem("localConnectedUser", StringUser);
-                        let localCart = localStorage.getItem("localCart." + response.data.user._id);
-                        if (localCart){//If there is local cart already for this user
-                            localStorage.setItem("smartphonesInCart", localCart);
-                        }
+                       
+                        props.setConnectedUser(user)    
+                       
+                        localStorage.setItem("user", JSON.stringify(user));
+
                         setTimeout(() => {
                             history.push('./smartphones')
                         }, 200);
@@ -83,10 +81,7 @@ const Login = (props) => {
     }
 
     return (
-        // <div>
-        //     { loading ? <Spinner animation="border" role="status" size="xl" style={{ marginLeft: "45%", marginTop: "10%", marginBottom: "25%", width: "200px", height: "200px" }} >
-        //         <span className="sr-only">Loading...</span>
-        //     </Spinner > : 
+       
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div id="wrapper" className="d-flex justify-content-center" style={{ marginTop: "100px", marginBottom: "645px" }}>
@@ -137,7 +132,6 @@ const Login = (props) => {
                     </div>
                 </div>
             </form>
-            {/* </div>} */}
         </div >
     )
 }

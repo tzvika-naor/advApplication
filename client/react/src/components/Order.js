@@ -7,39 +7,36 @@ import history from '../History';
 import io from "socket.io-client";
 
 //const socket = io.connect("http://localhost:5000");
-function Order(props) {
+function Order (props) {
     //set the total price with array reduce
     //console.log(props)
     const orderDetails = props.items;
     var [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice);
 
-    let localUser = localStorage.getItem("localConnectedUser");
-    localUser = JSON.parse(localUser);
-    let localCart = localStorage.getItem("smartphonesInCart");
+    let localUser = JSON.parse(localStorage.getItem("user"))
+    let localCart = JSON.parse(localStorage.getItem("cart"))
 
-    //this is called on component mount
+    //this is called on component didmount
     useEffect(() => {
-        //turn it into js
-        localCart = JSON.parse(localCart);
+
         //load persisted cart into state if it exists
-        if (localCart)
+        if (localCart) {
             setSmartphonesInCart(localCart)
             calculateTotalPrice(localCart);
-                 
+        }
     }, []) //the empty array ensures useEffect only runs once
 
-    const removeFromCart = (id) => {//Remove the smartphone from the cart
-        let smartphonesInCartCopy = [...smartphonesInCart];
+    const removeFromCart = (id) => {
 
-        smartphonesInCartCopy = smartphonesInCartCopy.filter(item => item.id !== id);
+        let smartphonesInCartCopy = [...smartphonesInCart];
+        smartphonesInCartCopy = smartphonesInCartCopy.filter(item => item.id !== id); 
 
         setSmartphonesInCart(smartphonesInCartCopy);
         calculateTotalPrice(smartphonesInCartCopy);
 
         //make cart a string and store in local space
-        let stringCart = JSON.stringify(smartphonesInCartCopy);
-        localStorage.setItem("smartphonesInCart", stringCart);
+        localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
 
         //If there is no more items in cart
         if (!(Array.isArray(smartphonesInCart) && smartphonesInCart.length)) {
@@ -64,8 +61,7 @@ function Order(props) {
         calculateTotalPrice(smartphonesInCartCopy);
 
         //make cart a string and store in local space
-        let stringCart = JSON.stringify(smartphonesInCartCopy);
-        localStorage.setItem("smartphonesInCart", stringCart);
+        localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
     }
 
 
@@ -124,13 +120,13 @@ function Order(props) {
     }
 
 
-    console.log("smartphonesInCart !!",smartphonesInCart)
+    console.log("smartphonesInCart !!", smartphonesInCart)
     return (
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
             <ul className="list-unstyled" >
-                <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px" , color: "white"}}> Your Cart </h4>
-                <div style={{ marginLeft: "60px", marginBottom: "20px" ,color: "white"}}>
+                <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px", color: "white" }}> Your Cart </h4>
+                <div style={{ marginLeft: "60px", marginBottom: "20px", color: "white" }}>
                     <li><h5>First Name: {localUser.firstname}</h5> </li>
                     <li><h5>Last Name: {localUser.lastname} </h5></li>
                     <li><h5>Email: {localUser.email}</h5></li>

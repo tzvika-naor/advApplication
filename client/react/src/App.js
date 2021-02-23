@@ -16,92 +16,89 @@ import SmartphoneDetails from './components/SmartphoneDetails'
 import './App.css';
 import io from "socket.io-client";
 const server = "http://localhost:5000";
-const socket = io.connect(server); //Connect to webSocket for event 'connection'
+const socket = io.connect(server);
 
-function App(props) {
+function App (props) {
 
   const [items, setItems] = useState([])
+
   const [showResults, setShowResults] = useState(false);
+
   const [searchResaults, setSearchResults] = useState([]);
-  const [connectedUser, setConnectedUser] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let localLoginState = localStorage.getItem("IsLoggedIn");
-  let localConnectedUser = localStorage.getItem("connectedUser");
+  // if the user was logged in we will 
+  // get his details from the localStorage
+  // else we will get set this connectedUser
+  // var with a callback function from login Component
+  const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("user")))
 
-  //this is called on component mount
   useEffect(() => {
-    
-    //turn it into js
-    localLoginState = JSON.parse(localLoginState);
 
-    //load persisted cart into state if it exists
-    if (localLoginState)
+    console.log(connectedUser)
 
-      setIsLoggedIn(localLoginState)
+  }, [])
 
-    //turn it into js
-    localConnectedUser = JSON.parse(localConnectedUser);
+  useEffect(() => {
 
-    //load persisted cart into state if it exists
+    console.log(connectedUser)
+    // console.log(localConnectedUser)
 
-    if (localConnectedUser)
-
-    setConnectedUser(localConnectedUser)
-
-  }, []) //the empty array ensures useEffect only runs once
+  }, [connectedUser])
 
   const searchResults = (data) => {
-    console.log(data)
+
     setSearchResults(data);
+
     setShowResults(true);
+
   }
 
   const resetSearch = (data) => {
+
     setShowResults(false);
   }
-
-  useEffect(() => {
-    console.log(isLoggedIn)
-  }, [isLoggedIn])
 
   return (
     <Router history={history}>
 
-      <Header resetSearch={resetSearch} isLoggedIn={isLoggedIn} setIsLoggedIn={(data) => setIsLoggedIn(data)} />
-     
+      <Header resetSearch={resetSearch} connectedUser={connectedUser} />
+
       <Switch>
         {/* good! */}
         <Route path='/' exact component={Home} />
-        
-        <Route path='/ordersHistory' render={(props) => <OrdersHistory connectedUser={connectedUser} />} />
-
+        {/* good! */}
+        <Route path='/ordersHistory' component={OrdersHistory} connectedUser={connectedUser} />
+        {/* good! */}
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
-        
+        {/* good! */}
         <Route path="/smartphoneDetails/:id" component={SmartphoneDetails} />
-        
+        {/* good! */}
         <Route path="/register" component={Register} />
-        
-        <Route path="/login" render={() => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
-        
-        <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} items={items} />} />
-        
+        {/* good! */}
+        <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
+
+        <Route path='/order' component={Order} data={props} items={items} />
+
         <Fragment>
           <div className="row">
-            
+
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "9%" }}>
               <Search searchResults={searchResults} />
             </div>
-           
+
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
-            
+
               <Route path='/smartphones' render={(props) => <List
+
                 searchResults={searchResaults} showResults={showResults}
-                connectedUser={connectedUser} isLoggedIn={isLoggedIn}
+
+
+                connectedUser={connectedUser}
+
                 user={props} setItems={data => setItems(data)} resetSearch={resetSearch}
-           
-           />} />
-              
+
+              />} />
+
             </div>
 
           </div>
