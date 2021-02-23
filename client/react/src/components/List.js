@@ -6,20 +6,18 @@ import Payment from './Payment';
 
 const List = (props) => {
 
-    const isAdmin = useState(props.connectedUser.isAdmin);
     const [smartphones, setSmartphones] = useState([]);
     const [smartphonesInCart, setSmartphonesInCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    let localCart = localStorage.getItem("smartphonesInCart");
-
+    const [totalPrice, setTotalPrice] = useState([]);
 
     const addToCart = (smartphone) => {
+
         let smartphonesInCartCopy = [...smartphonesInCart];
-            
+
         let itemToAdd = smartphonesInCartCopy.find(item => item.id === smartphone.id);
 
         if (itemToAdd) { // the item is already in the cart no need to add into setSmartphonesInCart
+
             itemToAdd.quantity += 1;
         }
         else { //The item is not in the cart yet
@@ -27,27 +25,26 @@ const List = (props) => {
         }
 
         setSmartphonesInCart(smartphonesInCartCopy);
-
         setTotalPrice(totalPrice => totalPrice + smartphone.price);
-
+    
         //make cart a string and store in local space
-        let stringCart = JSON.stringify(smartphonesInCartCopy);
-        localStorage.setItem("smartphonesInCart", stringCart);
+        localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
+        //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons
+        // props.
     }
 
-    //this is called on component mount
     useEffect(() => {
-        //turn it into js
-        localCart = JSON.parse(localCart);
-        //load persisted cart into state if it exists
-        if (localCart) 
-        setSmartphonesInCart(localCart)
-    }, []) //the empty array ensures useEffect only runs once
+        if (!JSON.parse(localStorage.getItem('user'))) {
+            history.push('/')
+        }
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
+        if (cart && totalPrice) {
+            setSmartphonesInCart(cart)
+            setTotalPrice(totalPrice)
+        }
 
 
-
-
-    useEffect(() => {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.smartphones;
@@ -62,22 +59,16 @@ const List = (props) => {
 
 
     const goToPayment = () => {
-        if (!props.isLoggedIn) {
-            alert(`Please login before checkout`);
-        }
+
+        if (smartphonesInCart.length === 0)
+            alert('your cart is empty')
         else {
-            const user = props.connectedUser;
-            if (smartphonesInCart.length === 0)
-                alert('your cart is empty')
-            else {
-                history.push('order');
-                const itemsDetails = {
-                    smartphonesInCart: smartphonesInCart,
-                    totalPrice: totalPrice,
-                    user: user
-                }
-                props.setItems(itemsDetails)
+            history.push('order');
+            const itemsDetails = {
+                smartphonesInCart: smartphonesInCart,
+                totalPrice: totalPrice,
             }
+            props.setItems(itemsDetails)
         }
     }
 
@@ -92,7 +83,6 @@ const List = (props) => {
                                 key={index}
                                 smartphone={smartphone}
                                 addToCart={(data) => addToCart(data)}
-                                isAdmin={isAdmin}
                             />
                         })
                     }
@@ -112,7 +102,6 @@ const List = (props) => {
                                 key={index}
                                 smartphone={smartphone}
                                 addToCart={(data) => addToCart(data)}
-                                isAdmin={isAdmin}
                             />
                         })
                     }

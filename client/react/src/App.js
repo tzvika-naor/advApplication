@@ -75,9 +75,8 @@ function App (props) {
         <Route path="/register" component={Register} />
         {/* good! */}
         <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
-
-
-        <Route path='/order' component={Order} data={props} items={items} />
+        {/* good */}
+        <Route path='/order' component={Order} />
 
         <Fragment>
           <div className="row">
@@ -88,10 +87,7 @@ function App (props) {
 
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
 
-              <Route path='/smartphones' render={(props) => <List
-
-                searchResults={searchResaults} showResults={showResults}
-
+              <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
 
                 connectedUser={connectedUser}
 

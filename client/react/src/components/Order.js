@@ -8,29 +8,32 @@ import io from "socket.io-client";
 
 //const socket = io.connect("http://localhost:5000");
 function Order (props) {
-    //set the total price with array reduce
-    //console.log(props)
-    const orderDetails = props.items;
+
+    console.log(props)
+
     var [smartphonesInCart, setSmartphonesInCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(orderDetails.totalPrice);
+    const [totalPrice, setTotalPrice] = useState([]);
+    const [user, setUser] = useState([])
 
     let localUser = JSON.parse(localStorage.getItem("user"))
     let localCart = JSON.parse(localStorage.getItem("cart"))
-
     //this is called on component didmount
     useEffect(() => {
 
-        //load persisted cart into state if it exists
         if (localCart) {
-            setSmartphonesInCart(localCart)
+            setSmartphonesInCart(localCart);
             calculateTotalPrice(localCart);
+            setUser(localUser);
         }
-    }, []) //the empty array ensures useEffect only runs once
+        else {
+            history.push('');
+        }
+    }, [])
 
     const removeFromCart = (id) => {
 
         let smartphonesInCartCopy = [...smartphonesInCart];
-        smartphonesInCartCopy = smartphonesInCartCopy.filter(item => item.id !== id); 
+        smartphonesInCartCopy = smartphonesInCartCopy.filter(item => item.id !== id);
 
         setSmartphonesInCart(smartphonesInCartCopy);
         calculateTotalPrice(smartphonesInCartCopy);
@@ -39,7 +42,10 @@ function Order (props) {
         localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
 
         //If there is no more items in cart
-        if (!(Array.isArray(smartphonesInCart) && smartphonesInCart.length)) {
+        //the smartphonesInCart.length becomes 0 after the setState 
+        if (smartphonesInCart.length === 1) {
+            localStorage.removeItem("cart");
+            localStorage.removeItem("totalPrice");
             alert('your cart is empty');
             history.push('/smartphones');
         }
@@ -54,10 +60,10 @@ function Order (props) {
         // //if it doesnt exist simply return
         // if (!existentItem) return
 
-
         existentItem.quantity = +quantity;
 
         setSmartphonesInCart(smartphonesInCartCopy);
+        //set Totalprice in this function
         calculateTotalPrice(smartphonesInCartCopy);
 
         //make cart a string and store in local space
@@ -86,20 +92,18 @@ function Order (props) {
 
         axios.post('http://localhost:5000/api/order', newOrder)
             .then(response => {
-                if (response.data.status === 201)
-                    console.log("ORDER COMPLETED", response.data)
-                alert(`Order completed`);
+                if (response.status === 201)
+                    alert(`Order completed`);
             }, error => {
+                console.log(error)
                 if (error.response.status === 500) {
                     console.log("Error creating order")
                     alert('Error creating order')
                 }
             })
 
-        //add websocket new order
-        //socket.emit('changeOrdersCount');
-        localStorage.removeItem("smartphonesInCart");
-        localStorage.removeItem("localCart." + localUser._id);
+        localStorage.removeItem("cart");
+        localStorage.removeItem("totalPrice");
         history.push('/smartphones')
     }
 
@@ -117,6 +121,7 @@ function Order (props) {
         });
 
         setTotalPrice(newTotalPrice);
+        localStorage.setItem("totalPrice", newTotalPrice)
     }
 
 
@@ -127,9 +132,9 @@ function Order (props) {
             <ul className="list-unstyled" >
                 <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px", color: "white" }}> Your Cart </h4>
                 <div style={{ marginLeft: "60px", marginBottom: "20px", color: "white" }}>
-                    <li><h5>First Name: {localUser.firstname}</h5> </li>
-                    <li><h5>Last Name: {localUser.lastname} </h5></li>
-                    <li><h5>Email: {localUser.email}</h5></li>
+                    <li><h5>First Name: {localUser?.firstname}</h5> </li>
+                    <li><h5>Last Name: {localUser?.lastname} </h5></li>
+                    <li><h5>Email: {localUser?.email}</h5></li>
                 </div></ul>
             {smartphonesInCart.map((el, index) => (
                 <div>
@@ -143,7 +148,7 @@ function Order (props) {
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
-                                        <Quantity index={index} id={el.id} quantity={el.quantity} setQuantity={(id, quantity) => setQuantity(id, quantity)} />
+                                        <Quantity key={index} index={index} id={el.id} quantity={el.quantity} setQuantity={(id, quantity) => setQuantity(id, quantity)} />
                                         <Button onClick={() => removeFromCart(el.id)}>Remove</Button>
                                     </div>
                                 </div>
