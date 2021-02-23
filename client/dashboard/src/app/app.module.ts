@@ -18,12 +18,15 @@ import { SmartphonesCounterComponent } from './header/smartphones-counter/smartp
 import { UsersCounterComponent } from './header/users-counter/users-counter.component';
 import { OrdersCounterComponent } from './header/orders-counter/orders-counter.component';
 import { UpdateOrderComponent } from './orders/update-order/update-order.component';
-import {OrderSearchComponent} from './orders/order-search/order-search.component';
-import { D3Component } from './d3/d3.component';
+import { OrderSearchComponent } from './orders/order-search/order-search.component';
+import { BarChartComponent } from './d3/bar-chart/bar-chart.component';
 import { OrdersService } from './orders/orders.service';
 import { LoginComponent } from './login/login.component';
 import { SmartphoneUpdateCreate } from './smartphones/SmartphoneUpdateCreate/smartphone-update-create.component';
 import { ConnectionCounterComponent } from './header/connection-counter/connection-counter.component';
+import { D3Component } from './d3/d3.component';
+import { PieChartComponent } from './d3/pie-chart/pie-chart.component';
+import { ScatterPlotComponent } from './d3/scatter-plot/scatter-plot.component';
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
@@ -43,10 +46,13 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     OrdersCounterComponent,
     UpdateOrderComponent,
     OrderSearchComponent,
-    D3Component,
+    BarChartComponent,
     LoginComponent,
     SmartphoneUpdateCreate,
-    ConnectionCounterComponent
+    ConnectionCounterComponent,
+    D3Component,
+    PieChartComponent,
+    ScatterPlotComponent
 
   ],
   imports: [

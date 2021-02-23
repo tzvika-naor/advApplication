@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import './Header.css'
-function Header(props) {
-
-
+function Header (props) {
     console.log(props)
     const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
-    function click() {
+    function click () {
         props.resetSearch(true)
     }
     useEffect(() => {
@@ -23,7 +21,6 @@ function Header(props) {
         localStorage.setItem("localCart." + localUser._id, localCart);//Saving the local cart of the user
         localStorage.removeItem("smartphonesInCart");
         localStorage.removeItem("localConnectedUser");
-
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
@@ -44,7 +41,6 @@ function Header(props) {
                                 </li>
                             </ul> : <div></div>
                     }
-
                     {
                         !isLoggedIn ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
@@ -57,11 +53,14 @@ function Header(props) {
                                 <li className="nav-item">
                                     <Link to='/' className="nav-link" onClick={onLogout}>Logout</Link>
                                 </li>
+                                <li>
+                                    <Link to='/' className="nav-link"><i class="fas fa-shopping-cart"></i></Link>
+                                </li>
                             </ul>
                     }
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 }
 export default Header;

@@ -30,16 +30,22 @@ function App(props) {
 
   //this is called on component mount
   useEffect(() => {
+    
     //turn it into js
     localLoginState = JSON.parse(localLoginState);
+
     //load persisted cart into state if it exists
     if (localLoginState)
+
       setIsLoggedIn(localLoginState)
 
     //turn it into js
     localConnectedUser = JSON.parse(localConnectedUser);
+
     //load persisted cart into state if it exists
+
     if (localConnectedUser)
+
     setConnectedUser(localConnectedUser)
 
   }, []) //the empty array ensures useEffect only runs once
@@ -60,30 +66,48 @@ function App(props) {
 
   return (
     <Router history={history}>
+
       <Header resetSearch={resetSearch} isLoggedIn={isLoggedIn} setIsLoggedIn={(data) => setIsLoggedIn(data)} />
+     
       <Switch>
+        {/* good! */}
         <Route path='/' exact component={Home} />
+        
         <Route path='/ordersHistory' render={(props) => <OrdersHistory connectedUser={connectedUser} />} />
+
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
+        
         <Route path="/smartphoneDetails/:id" component={SmartphoneDetails} />
+        
         <Route path="/register" component={Register} />
+        
         <Route path="/login" render={() => <Login setIsLoggedIn={(data) => setIsLoggedIn(data)} connectedUser={(user) => setConnectedUser(user)} />} />
+        
         <Route path='/order' render={(props) => <Order activeComponent={('order')} data={props} items={items} />} />
+        
         <Fragment>
           <div className="row">
+            
             <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "9%" }}>
               <Search searchResults={searchResults} />
             </div>
+           
             <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
+            
               <Route path='/smartphones' render={(props) => <List
                 searchResults={searchResaults} showResults={showResults}
                 connectedUser={connectedUser} isLoggedIn={isLoggedIn}
                 user={props} setItems={data => setItems(data)} resetSearch={resetSearch}
               />} />
+              
             </div>
+
           </div>
+
         </Fragment>
+
       </Switch>
+
       <Footer />
     </Router >
   )
