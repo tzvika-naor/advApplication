@@ -3,25 +3,17 @@ import axios from 'axios';
 import CardItem from './CardItem'
 function OrdersHistory (props) {
 
+
     const [status, SetStatus] = useState([])
     const [orders, setOrders] = useState([])
     const [dates, setDates] = useState([])
     const [user, setUser] = useState(props.connectedUser)
 
-    let localUser = localStorage.getItem("localConnectedUser");
-    localUser = JSON.parse(localUser);
-
-   
     useEffect(() => {
-        var id = localUser._id
-        axios.get(`http://localhost:5000/api/order/user/${id}`).then(
-            res => {
-                //console.log(res.data.orders)
-                setOrders(res.data.orders);
-                if (res.data.orders)
-                    SetStatus(res.data.status);
-                setDates(res.data.dates);
-            }
+        axios.get(`http://localhost:5000/api/order/user/${user._id}`).then(res => {
+
+            setOrders(res.data.orders);
+        }
         )
     }, [])
 
@@ -32,10 +24,6 @@ function OrdersHistory (props) {
         date_to: ''
     })
 
-    // const GetTotalOrdersAmountByUser(){
-
-    // }
-
     const onChange = (event) => {
         setSearchForm({ ...searchForm, [event.target.name]: event.target.value })
     }
@@ -44,20 +32,22 @@ function OrdersHistory (props) {
 
         <div style={{ marginTop: "60px", marginLeft: "130px" }}>
             User Details
-            <h4>Name: {localUser.firstname} {localUser.lastname}</h4>
-            <h4>Email: {localUser.email}</h4>
-            <h4>Phone: {localUser.phone}</h4>
+            <h4>Name: {user.firstname} {user.lastname}</h4>
+            <h4>Email: {user.email}</h4>
+            <h4>Phone: {user.phone}</h4>
 
             <div className="row" >
-                
-                    {
-                        orders.map((order, index) => {
-                            return (
+
+                {
+                    orders.map((order, index) => {
+                        return (
+                            <div className="col-lg-4">
                                 <CardItem order={order} key={index} />
-                            )
-                        })
-                    }
-                
+                            </div>
+                        )
+                    })
+                }
+
             </div>
         </div >)
 }

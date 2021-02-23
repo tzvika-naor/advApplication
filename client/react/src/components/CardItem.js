@@ -1,10 +1,11 @@
 import { Card } from 'react-bootstrap';
 import { useState } from 'react';
 
-function CardItem(props) {
+function CardItem (props) {
+    
     return (
-        <div style={{ width: "400px", marginLeft: "20px", marginTop: "20px" }} >
-            <Card>
+        <div style={{marginBottom:"20px", marginRight:"30px"}} >
+            <Card style={{width:"100%",  paddingLeft:"10px" , backgroundColor:"#ECD5BC" ,border:" 3px black solid" ,borderRadius:"15px"}}>
                 <Card.Header><h4>Status: {props.order.status}</h4>   <h4> Date: {props.order.date.substring(0, 10)}</h4>
                 </Card.Header>
                 <Card.Body>

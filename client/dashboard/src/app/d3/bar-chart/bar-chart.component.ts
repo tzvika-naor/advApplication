@@ -62,7 +62,7 @@ export class BarChartComponent implements OnInit {
       .attr('y', d => y(d.count))
       .attr('width', x.bandwidth())
       .attr('height', (d) => this.height - y(d.count))
-      .attr('fill', '#d04a35');
+      .attr('fill', '#879cc4');
   }
 
   handelOrdersComplete = (response: any) => {

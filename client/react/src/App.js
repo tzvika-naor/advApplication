@@ -54,7 +54,6 @@ function App (props) {
   }
 
   const resetSearch = (data) => {
-
     setShowResults(false);
   }
 
@@ -67,7 +66,7 @@ function App (props) {
         {/* good! */}
         <Route path='/' exact component={Home} />
         {/* good! */}
-        <Route path='/ordersHistory' component={OrdersHistory} connectedUser={connectedUser} />
+        <Route path='/ordersHistory' render={() => <OrdersHistory connectedUser={connectedUser} />} />
         {/* good! */}
         <Route path="/smartphone/:id/edit" component={SmartphoneEdit} />
         {/* good! */}
@@ -76,6 +75,7 @@ function App (props) {
         <Route path="/register" component={Register} />
         {/* good! */}
         <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
+
 
         <Route path='/order' component={Order} data={props} items={items} />
 

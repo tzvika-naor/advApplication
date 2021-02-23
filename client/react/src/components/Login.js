@@ -35,7 +35,7 @@ const Login = (props) => {
                             history.push('./smartphones')
                         }, 200);
                     }
-                }, error => {
+                }, error => { console.log(error)
                     if (error.response.status === 401) {
                         alert('wrong password or email. click forgot password for reset')
                     }
