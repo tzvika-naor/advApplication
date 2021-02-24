@@ -3,13 +3,17 @@ const io = require('socket.io-client');
 const socket = io.connect("http://localhost:5000");
 
 exports.searchQuery = (req, res, next) => {
-    //there are 7! possible AND queries so i decieded to go with OR
-    //i can define a number for each combinashion and send the api for the currect value 
-    //maybe i will do it with 2 params which resolve into 6*7/2 combinations = 21 possible 
+    //                         brand   display  frontCamera  rearCamera batteryCapacity price
+    //brand             21         
+    //display           31      651     
+    //frontCamera       41      861     1271            
+    //rearCamera        51      1071    1581       2091              
+    //batteryCapacity   61      1281    1891       2501       3111                       
+    //price             71      1491    2201       2911       3621         4331                 
     console.log(req.body)
     Smartphone.find({
         $or: [{ brand: req.body.brand }, { display: req.body.display }, { frontCamera: req.body.frontCamera }, { rearCamera: req.body.rearCamera },
-        { display: req.body.display }, { batteryCapacity: req.body.batteryCapacity }, { price: { $gt: req.body.price } }]
+         { batteryCapacity: req.body.batteryCapacity }, { price: { $gt: req.body.price } }]
     }).then(documents => {
         console.log(documents)
         res.status(200).json({
