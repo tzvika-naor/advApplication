@@ -15,7 +15,7 @@ function Smartphone (props) {
     }
   
     return (
-        <div className="col-lg-2 col-md-6 mb-4">
+        <div className="col-xl-2 col-lg-3 col-md-4 sm-6 mb-4" >
             <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "5px", marginLeft: "5px", padding: "20px"  ,height:"100%"}}>
                 <h3 className="card-title" style={{ marginLeft: "10px" , marginBottom:"20px" }} >{props.smartphone.phoneModel}
                   <span style={{ float: "right", cursor: "pointer" }} ><BiDetail onClick={(event, i) => details(event, i)} /><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>

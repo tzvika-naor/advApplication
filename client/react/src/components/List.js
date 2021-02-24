@@ -10,7 +10,7 @@ const List = (props) => {
     const [totalPrice, setTotalPrice] = useState([]);
 
     const addToCart = (smartphone) => {
-
+        props.setItems(smartphone)
         let smartphonesInCartCopy = [...smartphonesInCart];
 
         let itemToAdd = smartphonesInCartCopy.find(item => item.id === smartphone.id);
@@ -25,17 +25,17 @@ const List = (props) => {
 
         setSmartphonesInCart(smartphonesInCartCopy);
         setTotalPrice(totalPrice => totalPrice + smartphone.price);
-    
+
         //make cart a string and store in local space
         localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
         //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons
-        
+
         const itemsDetails = {
             smartphonesInCart: smartphonesInCart,
             totalPrice: totalPrice,
         }
-        props.setItems(itemsDetails)
     }
+   
 
     useEffect(() => {
         if (!JSON.parse(localStorage.getItem('user'))) {
@@ -61,35 +61,35 @@ const List = (props) => {
 
     if (!props.showResults) {
         return (
-            
-                <div className="row" style={{width:"98%", marginLeft:"1%" , marginTop:"2%", marginBottom:"2%"}}>
-                    {
-                        smartphones.map((smartphone, index) => {
-                            return <Smartphone
-                                key={index}
-                                smartphone={smartphone}
-                                addToCart={(data) => addToCart(data)}
-                            />
-                        })
-                    }
-                </div>
+
+            <div className="row" style={{ width: "98%", marginLeft: "1%", marginTop: "2%", marginBottom: "2%" }}>
+                {
+                    smartphones.map((smartphone, index) => {
+                        return <Smartphone
+                            key={index}
+                            smartphone={smartphone}
+                            addToCart={(data) => addToCart(data)}
+                        />
+                    })
+                }
+            </div>
         )
     }
     //has a bug needs to lift up state in order to work!!! would make the code much messi 
     else {
         return (
-           
-                <div className="row" style={{width:"98%", marginLeft:"1%" }}>
-                    {
-                        props.searchResults.map((smartphone, index) => {
-                            return <Smartphone
-                                key={index}
-                                smartphone={smartphone}
-                                addToCart={(data) => addToCart(data)}
-                            />
-                        })
-                    }
-                </div>
+
+            <div className="row" style={{ width: "98%", marginLeft: "1%" }}>
+                {
+                    props.searchResults.map((smartphone, index) => {
+                        return <Smartphone
+                            key={index}
+                            smartphone={smartphone}
+                            addToCart={(data) => addToCart(data)}
+                        />
+                    })
+                }
+            </div>
         )
     }
 }

@@ -34,9 +34,9 @@ function App (props) {
 
   useEffect(() => {
 
-    console.log(connectedUser)
+    console.log(items)
 
-  }, [])
+  }, [items])
 
   useEffect(() => {
 
@@ -76,26 +76,26 @@ function App (props) {
         {/* good! */}
         <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
         {/* good */}
-        <Route path='/order' component={Order} />
+        <Route path='/order' render={() => <Order items={items} />} />
 
         <Fragment>
-        
+
           {/* good */}
-              <div className="d-flex justify-content-center" style={{ width: "100%", marginTop:"20px" , marginBottom:"20px"  }}>
-                <Search searchResults={searchResults} />
-              </div>
-           
-            <div >
+          <div className="d-flex justify-content-center" style={{ width: "100%", marginTop: "20px", marginBottom: "20px" }}>
+            <Search searchResults={searchResults} />
+          </div>
 
-              <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
+          <div >
 
-                connectedUser={connectedUser}
+            <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
 
-                user={props} setItems={data => setItems(data)} resetSearch={resetSearch}
+              connectedUser={connectedUser}
 
-              />} />
+              user={props} setItems={data => setItems([...items,data])} resetSearch={resetSearch}
 
-            </div>
+            />} />
+
+          </div>
 
 
         </Fragment>

@@ -9,7 +9,7 @@ import io from "socket.io-client";
 //const socket = io.connect("http://localhost:5000");
 function Order (props) {
 
-    console.log(props)
+    console.log(props.items)
 
     var [smartphonesInCart, setSmartphonesInCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
