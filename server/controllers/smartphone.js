@@ -3,10 +3,15 @@ const io = require('socket.io-client');
 const socket = io.connect("http://localhost:5000");
 
 exports.searchQuery = (req, res, next) => {
+    //there are 7! possible AND queries so i decieded to go with OR
+    //i can define a number for each combinashion and send the api for the currect value 
+    //maybe i will do it with 2 params which resolve into 6*7/2 combinations = 21 possible 
     console.log(req.body)
     Smartphone.find({
-        brand: req.body.brand, $or: [{ display: { $gt: req.body.display } }, { batteryCapacity: { $gt: req.body.batteryCapacity } }],
+        $or: [{ brand: req.body.brand }, { display: req.body.display }, { frontCamera: req.body.frontCamera }, { rearCamera: req.body.rearCamera },
+        { display: req.body.display }, { batteryCapacity: req.body.batteryCapacity }, { price: { $gt: req.body.price } }]
     }).then(documents => {
+        console.log(documents)
         res.status(200).json({
             message: 'query succeeded',
             smartphone: documents
@@ -168,7 +173,7 @@ exports.deleteSmartphone = (req, res, next) => {
             res.status(200).json({
                 message: "Deletion successful!"
             })
-        socket.emit('changeSmartphonesCount'); //WebSocket
+            socket.emit('changeSmartphonesCount'); //WebSocket
         } else {
             res.status(401).json({ message: "Not authorized!" });
         }
@@ -183,18 +188,18 @@ exports.deleteSmartphone = (req, res, next) => {
 exports.getSmartphonesCount = (req, res, callBack) => {
     console.log("getSmartphonesCount");
 
-        Smartphone.count({
-        },(err, count)=>{
-            if (err)
-                return res ? res.status(404).json({
-                    "err": err,
-                    count: -1
-                }) : callBack(-1);
+    Smartphone.count({
+    }, (err, count) => {
+        if (err)
+            return res ? res.status(404).json({
+                "err": err,
+                count: -1
+            }) : callBack(-1);
 
-            return res ? res.status(200).json({
-                smartphonesCount: count
-            }) : callBack(count);
-        });
+        return res ? res.status(200).json({
+            smartphonesCount: count
+        }) : callBack(count);
+    });
 
 }
 

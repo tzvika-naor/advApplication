@@ -18,7 +18,7 @@ function Search (props) {
     const [priceButton, setPriceButton] = useState(false)
 
 
-    const [minPrice, setMinPrice] = useState(['0', '20', '40', '60', '100', '200', '400', '800'])
+    const [price, setPrice] = useState(['0', '20', '40', '60', '100', '200', '400', '800'])
     const [brands, setBrands] = useState([]);
     const [batteryCapacity, setBatteryCapacity] = useState([]);
     const [display, setDisplay] = useState([])
@@ -54,7 +54,7 @@ function Search (props) {
     }
     const onClick = () => {
         console.log(searchForm)
-        
+
             axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
                 .then(response => {
                     props.searchResults(response.data.smartphone);
@@ -83,7 +83,7 @@ function Search (props) {
 
                 <Button type="button" className="ml-2" size="lg" onClick={() => {
                     setDisplayButton(!displayButton)
-                    if (batteryButton) { setSearchForm({ ...searchForm, "display": undefined }) }
+                    if (displayButton) { setSearchForm({ ...searchForm, "display": undefined }) }
                 }}>Display</Button>
 
                 <Button type="button" className="ml-2" size="lg" onClick={() => {
@@ -193,7 +193,7 @@ function Search (props) {
                         onChange={onChange}
                         style={{ width: "100%", marginBottom: "30px" }}
                     >
-                        {minPrice.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                        {price.map((item, i) => <option value={item} key={i} >{item}</option>)}
                     </select>
                 </div>}
             </div>
