@@ -55,11 +55,11 @@ function Search (props) {
     const onClick = () => {
         console.log(searchForm)
 
-            axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
-                .then(response => {
-                    props.searchResults(response.data.smartphone);
-                })
-        
+        axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
+            .then(response => {
+                props.searchResults(response.data.smartphone);
+            })
+
     }
     useEffect(() => {
         console.log(searchForm)
@@ -67,47 +67,46 @@ function Search (props) {
         , [searchForm])
 
     return (
+        <div>
+            <div class="d-flex justify-content-center" style={{marginTop:"20px"}} >
+                <div class="btn-toolbar " >
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: brandButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setBrandButton(!brandButton)
+                        if (brandButton) { setSearchForm({ ...searchForm, "brand": undefined }) }
+                    }}>Brand</Button>
 
-        <div style={{ width: "90%" }}>
+                    <Button type="button " className="ml-2" size="lg" style={{ backgroundColor: batteryButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setBatteryButton(!batteryButton)
+                        if (batteryButton) { setSearchForm({ ...searchForm, "batteryCapacity": undefined }) }
+                    }}>Battery</Button>
 
-            <div class="btn-toolbar " >
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setBrandButton(!brandButton)
-                    if (brandButton) { setSearchForm({ ...searchForm, "brand": undefined }) }
-                }}>Brand</Button>
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: displayButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setDisplayButton(!displayButton)
+                        if (displayButton) { setSearchForm({ ...searchForm, "display": undefined }) }
+                    }}>Display</Button>
 
-                <Button type="button " className="ml-2" size="lg" onClick={() => {
-                    setBatteryButton(!batteryButton)
-                    if (batteryButton) { setSearchForm({ ...searchForm, "batteryCapacity": undefined }) }
-                }}>Battery</Button>
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: rearCameraButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setRearCameraButton(!rearCameraButton)
+                        if (rearCameraButton) { setSearchForm({ ...searchForm, "rearCamera": undefined }) }
+                    }}>Rear Camera</Button>
 
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setDisplayButton(!displayButton)
-                    if (displayButton) { setSearchForm({ ...searchForm, "display": undefined }) }
-                }}>Display</Button>
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: processorButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setProcessorButton(!processorButton)
+                        if (processorButton) { setSearchForm({ ...searchForm, "processor": undefined }) }
+                    }}>Processor</Button>
 
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setRearCameraButton(!rearCameraButton)
-                    if (rearCameraButton) { setSearchForm({ ...searchForm, "rearCamera": undefined }) }
-                }}>Rear Camera</Button>
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: frontCameraButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setFrontCameraButton(!frontCameraButton)
+                        if (frontCameraButton) { setSearchForm({ ...searchForm, "frontCamera": undefined }) }
+                    }}>FrontCamera</Button>
 
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setProcessorButton(!processorButton)
-                    if (processorButton) { setSearchForm({ ...searchForm, "processor": undefined }) }
-                }}>Processor</Button>
+                    <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: priceButton ? 'purple' : '#007bff' }} onClick={() => {
+                        setPriceButton(!priceButton)
+                        if (priceButton) { setSearchForm({ ...searchForm, "price": undefined }) }
+                    }}>Price</Button>
 
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setFrontCameraButton(!frontCameraButton)
-                    if (frontCameraButton) { setSearchForm({ ...searchForm, "frontCamera": undefined }) }
-                }}>FrontCamera</Button>
-
-                <Button type="button" className="ml-2" size="lg" onClick={() => {
-                    setPriceButton(!priceButton)
-                    if (priceButton) { setSearchForm({ ...searchForm, "price": undefined }) }
-                }}>Price</Button>
-
-                <Button type="button" className="ml-2" size="lg" variant="success" onClick={onClick} >Search</Button>
-
+                    <Button type="button" className="ml-2" size="lg" variant="success" onClick={onClick} >Search</Button>
+                </div>
             </div>
 
             <div className="row">

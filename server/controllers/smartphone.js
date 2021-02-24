@@ -3,13 +3,7 @@ const io = require('socket.io-client');
 const socket = io.connect("http://localhost:5000");
 
 exports.searchQuery = (req, res, next) => {
-    //                         brand   display  frontCamera  rearCamera batteryCapacity price
-    //brand             21         
-    //display           31      651     
-    //frontCamera       41      861     1271            
-    //rearCamera        51      1071    1581       2091              
-    //batteryCapacity   61      1281    1891       2501       3111                       
-    //price             71      1491    2201       2911       3621         4331                 
+                  
     console.log(req.body)
     Smartphone.find({
         $or: [{ brand: req.body.brand }, { display: req.body.display }, { frontCamera: req.body.frontCamera }, { rearCamera: req.body.rearCamera },
@@ -207,13 +201,13 @@ exports.getSmartphonesCount = (req, res, callBack) => {
 
 }
 
-
-
-
-
-
-
-
+  //                         brand   display  frontCamera  rearCamera batteryCapacity price
+    //brand             21         
+    //display           31      651     
+    //frontCamera       41      861     1271            
+    //rearCamera        51      1071    1581       2091              
+    //batteryCapacity   61      1281    1891       2501       3111                       
+    //price             71      1491    2201       2911       3621         4331 
 
     // exports.searchQuery = (req, res, next) => {
     //     var minPrice = '';

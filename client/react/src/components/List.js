@@ -30,14 +30,11 @@ const List = (props) => {
         localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
         //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons
         
-        
         const itemsDetails = {
             smartphonesInCart: smartphonesInCart,
             totalPrice: totalPrice,
         }
         props.setItems(itemsDetails)
-   
-   
     }
 
     useEffect(() => {
@@ -50,8 +47,6 @@ const List = (props) => {
             setSmartphonesInCart(cart)
             setTotalPrice(totalPrice)
         }
-
-
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.smartphones;
@@ -64,11 +59,10 @@ const List = (props) => {
             })
     }, []);
 
-
     if (!props.showResults) {
         return (
             
-                <div className="row" style={{marginLeft:"20px"}}>
+                <div className="row" style={{width:"98%", marginLeft:"1%" , marginTop:"2%", marginBottom:"2%"}}>
                     {
                         smartphones.map((smartphone, index) => {
                             return <Smartphone
@@ -85,7 +79,7 @@ const List = (props) => {
     else {
         return (
            
-                <div className="row">
+                <div className="row" style={{width:"98%", marginLeft:"1%" }}>
                     {
                         props.searchResults.map((smartphone, index) => {
                             return <Smartphone

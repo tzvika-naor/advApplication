@@ -124,7 +124,6 @@ function Order (props) {
         localStorage.setItem("totalPrice", newTotalPrice)
     }
 
-
     console.log("smartphonesInCart !!", smartphonesInCart)
     return (
         <div >
@@ -139,7 +138,6 @@ function Order (props) {
             {smartphonesInCart.map((el, index) => (
                 <div>
                     <ul className="list-unstyled">
-
                         <div className="col-md-4">
                             <div className="row" >
                                 <div className="col-md-9 offset-1">
