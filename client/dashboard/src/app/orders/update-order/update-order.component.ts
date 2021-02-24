@@ -14,7 +14,7 @@ export class UpdateOrderComponent implements OnInit {
   smartphonesId: SmartphonesId;
   smartphonesId1: SmartphonesId;
 
-  constructor(private ordersService: OrdersService , private router: Router , private route: ActivatedRoute) { }
+  constructor(private ordersService: OrdersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.order = this.ordersService.getOrder();
@@ -28,7 +28,7 @@ export class UpdateOrderComponent implements OnInit {
     console.log(f);
     console.log(f.form.value);
     let i = 0;
-    for (i; i < this.order.smartphones.length; i++) {
+    for (i;i < this.order.smartphones.length;i++) {
       const index = `quantity${i}`;
       this.order.smartphones[i].quantity = f.form.value[index];
     }
@@ -39,5 +39,10 @@ export class UpdateOrderComponent implements OnInit {
     this.router.navigate(['/orders'], { relativeTo: this.route });
     this.ordersService.getAllOrders(); // we will also get parent show
   }
-}
 
+  onCancel() {
+    //navigate out and reload orders
+    this.router.navigate(['/orders'], { relativeTo: this.route });
+    this.ordersService.getAllOrders();
+  }
+}

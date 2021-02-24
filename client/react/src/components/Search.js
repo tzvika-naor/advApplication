@@ -18,13 +18,7 @@ function Search (props) {
     const [priceButton, setPriceButton] = useState(false)
 
 
-
-
-
-
-
     const [minPrice, setMinPrice] = useState(['0', '20', '40', '60', '100', '200', '400', '800'])
-
     const [brands, setBrands] = useState([]);
     const [batteryCapacity, setBatteryCapacity] = useState([]);
     const [display, setDisplay] = useState([])
@@ -38,54 +32,80 @@ function Search (props) {
                 setBrands(data.brand)
                 setBatteryCapacity(data.batteryCapacity)
                 setDisplay(data.display)
-                //
                 setRearCamera(data.rearCamera)
                 setFrontCamera(data.frontCamera)
                 setProcessor(data.processor)
             })
     }, []);
     const [searchForm, setSearchForm] = useState({
-        batteryCapacity: '',
-        brand: '',
-        display: '',
-        frontCamera: '',
-        image: '',
-        phoneModel: '',
-        price: '',
-        processor: '',
-        rearCamera: ''
+        brand: undefined,
+        batteryCapacity: undefined,
+        display: undefined,
+        frontCamera: undefined,
+        image: undefined,
+        phoneModel: undefined,
+        price: undefined,
+        processor: undefined,
+        rearCamera: undefined
     })
     const onChange = (event) => {
+        console.log([event.target.name])
         setSearchForm({ ...searchForm, [event.target.name]: event.target.value })
     }
     const onClick = () => {
-        // if (searchBy) {
-        //     axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
-        //         .then(response => {
-        //             props.searchResults(response.data.smartphone);
-        //         })
-        // }
-        // else {
-        //     axios.post('http://localhost:5000/api/smartphone/searchByProcessor', searchForm)
-        //         .then(response => {
-        //             props.searchResults(response.data.smartphone);
-        //         })
-        // }
+        console.log(searchForm)
+        
+            axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
+                .then(response => {
+                    props.searchResults(response.data.smartphone);
+                })
+        
     }
-
+    useEffect(() => {
+        console.log(searchForm)
+    }
+        , [searchForm])
 
     return (
 
         <div style={{ width: "90%" }}>
 
             <div class="btn-toolbar " >
-                <Button type="button" className="ml-2" size="lg" onClick={() => setBrandButton(!brandButton)}>Brand</Button>
-                <Button type="button " className="ml-2" size="lg" onClick={() => setBatteryButton(!batteryButton)}>Battery</Button>
-                <Button type="button" className="ml-2" size="lg" onClick={() => setDisplayButton(!displayButton)}>Display</Button>
-                <Button type="button" className="ml-2" size="lg" onClick={() => setRearCameraButton(!rearCameraButton)}>Rear Camera</Button>
-                <Button type="button" className="ml-2" size="lg" onClick={() => setProcessorButton(!processorButton)}>Processor</Button>
-                <Button type="button" className="ml-2" size="lg" onClick={() => setFrontCameraButton(!frontCameraButton)}>FrontCamera</Button>
-                <Button type="button" className="ml-2" size="lg" onClick={() => setPriceButton(!priceButton)}>Price</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setBrandButton(!brandButton)
+                    if (brandButton) { setSearchForm({ ...searchForm, "brand": undefined }) }
+                }}>Brand</Button>
+
+                <Button type="button " className="ml-2" size="lg" onClick={() => {
+                    setBatteryButton(!batteryButton)
+                    if (batteryButton) { setSearchForm({ ...searchForm, "batteryCapacity": undefined }) }
+                }}>Battery</Button>
+
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setDisplayButton(!displayButton)
+                    if (batteryButton) { setSearchForm({ ...searchForm, "display": undefined }) }
+                }}>Display</Button>
+
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setRearCameraButton(!rearCameraButton)
+                    if (rearCameraButton) { setSearchForm({ ...searchForm, "rearCamera": undefined }) }
+                }}>Rear Camera</Button>
+
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setProcessorButton(!processorButton)
+                    if (processorButton) { setSearchForm({ ...searchForm, "processor": undefined }) }
+                }}>Processor</Button>
+
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setFrontCameraButton(!frontCameraButton)
+                    if (frontCameraButton) { setSearchForm({ ...searchForm, "frontCamera": undefined }) }
+                }}>FrontCamera</Button>
+
+                <Button type="button" className="ml-2" size="lg" onClick={() => {
+                    setPriceButton(!priceButton)
+                    if (priceButton) { setSearchForm({ ...searchForm, "price": undefined }) }
+                }}>Price</Button>
+
                 <Button type="button" className="ml-2" size="lg" variant="success" onClick={onClick} >Search</Button>
 
             </div>

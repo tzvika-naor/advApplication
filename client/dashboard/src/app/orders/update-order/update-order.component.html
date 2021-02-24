@@ -98,7 +98,8 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px">Submit</button>
+    <button  [routerLink]="['/orders']" (click)="onCancel()" type="button" class="btn btn-secondary" style="margin-top:20px; margin-bottom:20px">Cancel</button>
+    <button type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px; margin-left:20px">Submit</button>
 </form>
 
 <p>order update component</p>
