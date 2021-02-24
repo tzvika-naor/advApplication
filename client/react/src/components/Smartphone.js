@@ -15,12 +15,12 @@ function Smartphone (props) {
     }
   
     return (
-        <div className="col-lg-4 col-md-6 mb-4">
-            <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "50px", padding: "20px" }}>
-                <h3 className="card-title" style={{ marginLeft: "20px" }} >{props.smartphone.phoneModel}
+        <div className="col-lg-2 col-md-6 mb-4">
+            <div id="card" style={{ marginBottom: '20px', backgroundColor: "white", marginRight: "50px", padding: "20px"  ,height:"100%"}}>
+                <h3 className="card-title" style={{ marginLeft: "20px" , marginBottom:"20px" }} >{props.smartphone.phoneModel}
                   <span style={{ float: "right", cursor: "pointer" }} ><BiDetail onClick={(event, i) => details(event, i)} /><FiShoppingCart onClick={(event, i) => click(event, i)} /></span>
                 </h3>
-                <img id="card-img-top" src={props.smartphone.image} alt={props.smartphone.phoneModel} style={{ marginLeft: '20%', marginRight: '20%', marginBottom: '10px%', width: '30%', height: '300px' }} />
+                <img id="card-img-top" src={props.smartphone.image} alt={props.smartphone.phoneModel} style={{height:"100px" , marginLeft:"50px", marginBottom:"20px"}} />
                 <div id="card-body">
                     <small><p className="card-text">Brand: {props.smartphone.brand}</p></small>
                     <small><p className="card-text">Display: {props.smartphone.display}</p></small>

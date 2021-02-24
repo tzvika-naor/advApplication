@@ -60,7 +60,7 @@ function App (props) {
   return (
     <Router history={history}>
 
-      <Header resetSearch={resetSearch} connectedUser={connectedUser} />
+      <Header resetSearch={resetSearch} connectedUser={connectedUser} items={items} />
 
       <Switch>
         {/* good! */}
@@ -79,13 +79,13 @@ function App (props) {
         <Route path='/order' component={Order} />
 
         <Fragment>
-          <div className="row">
-
-            <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6" style={{ marginTop: "9%" }}>
-              <Search searchResults={searchResults} />
-            </div>
-
-            <div className="col-xl-9 col-lg-9 col-md-8 col-sm-6">
+        
+          {/* good */}
+              <div className="d-flex justify-content-center" style={{ width: "100%", marginTop:"20px" , marginBottom:"20px"  }}>
+                <Search searchResults={searchResults} />
+              </div>
+           
+            <div >
 
               <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
 
@@ -97,7 +97,6 @@ function App (props) {
 
             </div>
 
-          </div>
 
         </Fragment>
 

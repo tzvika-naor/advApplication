@@ -2,7 +2,6 @@ import Smartphone from './Smartphone'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import history from '../History';
-import Payment from './Payment';
 
 const List = (props) => {
 
@@ -30,7 +29,15 @@ const List = (props) => {
         //make cart a string and store in local space
         localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
         //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons
-        // props.
+        
+        
+        const itemsDetails = {
+            smartphonesInCart: smartphonesInCart,
+            totalPrice: totalPrice,
+        }
+        props.setItems(itemsDetails)
+   
+   
     }
 
     useEffect(() => {
@@ -58,25 +65,10 @@ const List = (props) => {
     }, []);
 
 
-    const goToPayment = () => {
-
-        if (smartphonesInCart.length === 0)
-            alert('your cart is empty')
-        else {
-            history.push('order');
-            const itemsDetails = {
-                smartphonesInCart: smartphonesInCart,
-                totalPrice: totalPrice,
-            }
-            props.setItems(itemsDetails)
-        }
-    }
-
     if (!props.showResults) {
         return (
-            <div>
-                <Payment goToPayment={goToPayment} />
-                <div className="row">
+            
+                <div className="row" style={{marginLeft:"20px"}}>
                     {
                         smartphones.map((smartphone, index) => {
                             return <Smartphone
@@ -87,14 +79,12 @@ const List = (props) => {
                         })
                     }
                 </div>
-            </div>
         )
     }
     //has a bug needs to lift up state in order to work!!! would make the code much messi 
     else {
         return (
-            <div>
-                <Payment goToPayment={goToPayment} />
+           
                 <div className="row">
                     {
                         props.searchResults.map((smartphone, index) => {
@@ -106,7 +96,6 @@ const List = (props) => {
                         })
                     }
                 </div>
-            </div>
         )
     }
 }

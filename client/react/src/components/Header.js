@@ -54,7 +54,7 @@ function Header (props) {
                                     <Link to='/' className="nav-link" onClick={onLogout}>Logout</Link>
                                 </li>
                                 <li>
-                                    <Link to='/' className="nav-link"><i class="fas fa-shopping-cart"></i></Link>
+                                    <Link to='/order' className="nav-link"><i class="fas fa-shopping-cart"></i></Link>
                                 </li>
                             </ul>
                     }

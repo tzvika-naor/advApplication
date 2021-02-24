@@ -17,7 +17,7 @@ function Order (props) {
 
     let localUser = JSON.parse(localStorage.getItem("user"))
     let localCart = JSON.parse(localStorage.getItem("cart"))
-    //this is called on component didmount
+    // this is called on component didmount
     useEffect(() => {
 
         if (localCart) {

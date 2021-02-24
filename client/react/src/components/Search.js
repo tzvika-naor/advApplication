@@ -9,7 +9,22 @@ function Search (props) {
     const searchResults = (data) => {
         props.searchResults(data);
     }
-    const [searchBy, setSearchBy] = useState(true)
+    const [brandButton, setBrandButton] = useState(false);
+    const [batteryButton, setBatteryButton] = useState(false);
+    const [displayButton, setDisplayButton] = useState(false);
+    const [rearCameraButton, setRearCameraButton] = useState(false);
+    const [processorButton, setProcessorButton] = useState(false);
+    const [frontCameraButton, setFrontCameraButton] = useState(false);
+    const [priceButton, setPriceButton] = useState(false)
+
+
+
+
+
+
+
+    const [minPrice, setMinPrice] = useState(['0', '20', '40', '60', '100', '200', '400', '800'])
+
     const [brands, setBrands] = useState([]);
     const [batteryCapacity, setBatteryCapacity] = useState([]);
     const [display, setDisplay] = useState([])
@@ -36,7 +51,7 @@ function Search (props) {
         frontCamera: '',
         image: '',
         phoneModel: '',
-        price: 0,
+        price: '',
         processor: '',
         rearCamera: ''
     })
@@ -44,116 +59,125 @@ function Search (props) {
         setSearchForm({ ...searchForm, [event.target.name]: event.target.value })
     }
     const onClick = () => {
-        if(searchBy) {
-        axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
-            .then(response => {
-                props.searchResults(response.data.smartphone);
-            })
-        }
-        else {
-            axios.post('http://localhost:5000/api/smartphone/searchByProcessor', searchForm)
-                .then(response => {
-                    props.searchResults(response.data.smartphone);
-                })
-            }
+        // if (searchBy) {
+        //     axios.post('http://localhost:5000/api/smartphone/searchquery', searchForm)
+        //         .then(response => {
+        //             props.searchResults(response.data.smartphone);
+        //         })
+        // }
+        // else {
+        //     axios.post('http://localhost:5000/api/smartphone/searchByProcessor', searchForm)
+        //         .then(response => {
+        //             props.searchResults(response.data.smartphone);
+        //         })
+        // }
     }
 
-    useEffect(() => {
-        console.log(searchBy)
-    }, [searchBy])
+
     return (
 
-        <div style={{ border: "1px black solid", padding: "100px 40px", marginLeft: "20px" }}>
-           
-            <div style={{marginBottom:"50px"}}>
-            <label htmlFor="">Search By</label>
-            <Button type="button" onClick={() => setSearchBy(true)} style={{ marginTop: "10px", marginLeft: "20px" }}>Brand/Battery/Display</Button>
-            <Button type="button" onClick={() => setSearchBy(false)} style={{ marginTop: "10px", marginLeft: "20px" }}>Rear Camera/Processor/FrontCamera</Button>
+        <div style={{ width: "90%" }}>
+
+            <div class="btn-toolbar " >
+                <Button type="button" className="ml-2" size="lg" onClick={() => setBrandButton(!brandButton)}>Brand</Button>
+                <Button type="button " className="ml-2" size="lg" onClick={() => setBatteryButton(!batteryButton)}>Battery</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => setDisplayButton(!displayButton)}>Display</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => setRearCameraButton(!rearCameraButton)}>Rear Camera</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => setProcessorButton(!processorButton)}>Processor</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => setFrontCameraButton(!frontCameraButton)}>FrontCamera</Button>
+                <Button type="button" className="ml-2" size="lg" onClick={() => setPriceButton(!priceButton)}>Price</Button>
+                <Button type="button" className="ml-2" size="lg" variant="success" onClick={onClick} >Search</Button>
+
             </div>
-            { searchBy ? <div>
-                <h1 className="my-4" style={{ position: "absolute", top: "20px" }}>Search Product</h1>
-                <div className="row">
-                    <div className="col-lg-12">
+
+            <div className="row">
+                {brandButton &&
+                    <div className="col-lg-2">
                         <label>Brand</label>
                         <select
                             name='brand'
                             value={searchForm.brand}
                             onChange={onChange}
-                            style={{ width: "100%", marginBottom: "50px" }}
+                            style={{ width: "100%", marginBottom: "30px" }}
                         >
                             {brands.map((item, i) => <option value={item} key={i} >{item}</option>)}
                         </select>
                     </div>
-                    <div className="col-lg-12">
-                        <label>Battery Capacity</label>
-                        <select
-                            name='batteryCapacity'
-                            value={searchForm.batteryCapacity}
-                            onChange={onChange}
-                            style={{ width: "100%", marginBottom: "50px" }}
-                        >
-                            {batteryCapacity.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                        </select>
-                    </div>
-                    <div className="col-lg-12">
-                        <label>Display</label>
-                        <select
-                            name='display'
-                            value={searchForm.display}
-                            onChange={onChange}
-                            style={{ width: "100%", marginBottom: "50px" }}
-                        >
-                            {display.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                        </select>
-                    </div>
-                    <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Search</Button>
+                }
+                {batteryButton && <div className="col-lg-2">
+                    <label>Battery Capacity</label>
+                    <select
+                        name='batteryCapacity'
+                        value={searchForm.batteryCapacity}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {batteryCapacity.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
                 </div>
-            </div> :
-                <div>
-                    <h1 className="my-4" style={{ position: "absolute", top: "20px" }}>Search Product</h1>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <label>Rear Camera</label>
-                            <select
-                                name='rearCamera'
-                                value={searchForm.rearCamera}
-                                onChange={onChange}
-                                style={{ width: "100%", marginBottom: "50px" }}
-                            >
-                                {rearCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                            </select>
-                        </div>
-                        <div className="col-lg-12">
-                            <label>Processor</label>
-                            <select
-                                name='processor'
-                                value={searchForm.Processor}
-                                onChange={onChange}
-                                style={{ width: "100%", marginBottom: "50px" }}
-                            >
-                                {processor.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                            </select>
-                        </div>
-                        <div className="col-lg-12">
-                            <label>FrontCamera</label>
-                            <select
-                                name='frontCamera'
-                                value={searchForm.frontCamera}
-                                onChange={onChange}
-                                style={{ width: "100%", marginBottom: "50px" }}
-                            >
-                                {frontCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
-                            </select>
-                        </div>
-                        <Button type="button" onClick={onClick} style={{ marginTop: "50px", marginLeft: "100px" }}>Search</Button>
-                    </div>
+                }
+                {displayButton && <div className="col-lg-2">
+                    <label>Display</label>
+                    <select
+                        name='display'
+                        value={searchForm.display}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {display.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
                 </div>
-            }
+                }
+
+                {rearCameraButton && <div className="col-lg-2">
+                    <label>Rear Camera</label>
+                    <select
+                        name='rearCamera'
+                        value={searchForm.rearCamera}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {rearCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
+                </div>
+                }
+
+                {processorButton && <div className="col-lg-2">
+                    <label>Processor</label>
+                    <select
+                        name='processor'
+                        value={searchForm.Processor}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {processor.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
+                </div>
+                }
+                {frontCameraButton && <div className="col-lg-2">
+                    <label>FrontCamera</label>
+                    <select
+                        name='frontCamera'
+                        value={searchForm.frontCamera}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {frontCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
+                </div>}
+                {priceButton && <div className="col-lg-2">
+                    <label>Price</label>
+                    <select
+                        name='price'
+                        value={searchForm.price}
+                        onChange={onChange}
+                        style={{ width: "100%", marginBottom: "30px" }}
+                    >
+                        {minPrice.map((item, i) => <option value={item} key={i} >{item}</option>)}
+                    </select>
+                </div>}
+            </div>
         </div>
     )
-
-
-
-
 }
 export default Search;
