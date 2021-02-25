@@ -16,11 +16,10 @@ function Header (props) {
     }
 
     const onLogout = (e) => {
+        localStorage.removeItem("user")
+        localStorage.removeItem("cart")
+        localStorage.removeItem("totalPrice")
 
-        setIsLoggedIn(false)
-        localStorage.removeItem("totalPrice");
-        localStorage.removeItem("cart");
-        localStorage.removeItem("user");
 
     }
     return (

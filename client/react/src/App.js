@@ -30,19 +30,10 @@ function App (props) {
 
   const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("user")))
 
-  
   useEffect(() => {
-    // we can also take it stright from the setSmartphones under total value
-    localStorage.setItem("totalPrice", JSON.parse(totalPrice));
-
-  }, [totalPrice])
-  
-  useEffect(() => {
-      
     //this has to go after the setItems() because the placing a hook is an async task and 
     //has to preform after the cycle ended or we will end up losing the last value
     localStorage.setItem("cart",JSON.stringify(items));
-
   }, [items])
 
 
@@ -62,6 +53,8 @@ function App (props) {
     if (!items.includes(data)) {
       setItems(items.concat(data))
       setTotalPrice(total)
+    localStorage.setItem("totalPrice", JSON.parse(total));
+
     }
   }
 

@@ -15,23 +15,11 @@ function Order (props) {
     const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState(props.connectedUser)
 
-    let localUser = JSON.parse(localStorage.getItem("user"))
-    let localCart = JSON.parse(localStorage.getItem("cart"))
 
+    
     // this is called on component didmount
     useEffect(() => {
-        setTotalPrice(props.totalPrice)
-        console.log(smartphonesInCart)
-        console.log(totalPrice)
-        console.log(user)
-        if (localCart) {
-            setSmartphonesInCart(localCart);
-            calculateTotalPrice(localCart);
-            setUser(localUser);
-        }
-        else {
-            history.push('/smartphones');
-        }
+       
     }, [])
 
     const removeFromCart = (id) => {
