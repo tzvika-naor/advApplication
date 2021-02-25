@@ -18,6 +18,7 @@ function Header (props) {
     const onLogout = (e) => {
 
         setIsLoggedIn(false)
+        localStorage.removeItem("totalPrice");
         localStorage.removeItem("cart");
         localStorage.removeItem("user");
 

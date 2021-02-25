@@ -44,11 +44,13 @@ function Order (props) {
         //If there is no more items in cart
         //the smartphonesInCart.length becomes 0 after the setState 
         if (smartphonesInCart.length === 1) {
+            props.setItems(smartphonesInCart)
             localStorage.removeItem("cart");
             localStorage.removeItem("totalPrice");
             alert('your cart is empty');
             history.push('/smartphones');
         }
+        props.setItems(smartphonesInCart)
     }
 
     const setQuantity = (id, quantity) => {
@@ -109,6 +111,7 @@ function Order (props) {
 
 
     const goBack = () => {
+        props.setItems(smartphonesInCart)
         history.push("/smartphones")
     }
 

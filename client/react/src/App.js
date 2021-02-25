@@ -20,6 +20,8 @@ const socket = io.connect(server);
 
 function App (props) {
 
+  const [totalPrice, setTotalPrice] = useState([])
+
   const [items, setItems] = useState([])
 
   const [showResults, setShowResults] = useState(false);
@@ -34,9 +36,14 @@ function App (props) {
 
   useEffect(() => {
 
-    console.log(items)
+    localStorage.setItem("cart", JSON.stringify(items))
 
   }, [items])
+  useEffect(() => {
+
+    console.log(totalPrice)
+
+  }, [totalPrice])
 
   useEffect(() => {
 
@@ -76,22 +83,23 @@ function App (props) {
         {/* good! */}
         <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
         {/* good */}
-        <Route path='/order' render={() => <Order items={items} />} />
+        <Route path='/order' render={() => <Order items={items} setItems={data => setItems(data)} />} />
 
         <Fragment>
 
           {/* good */}
           <div className="d-flex justify-content-center" style={{ width: "100%", marginTop: "20px", marginBottom: "20px" }}>
+
             <Search searchResults={searchResults} />
+
           </div>
 
           <div >
+            {/* good */}
 
             <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
 
-              connectedUser={connectedUser}
-
-              user={props} setItems={data => setItems([...items,data])} resetSearch={resetSearch}
+              setItems={data => setItems([...items, data])} setTotalPrice={data => setTotalPrice(...totalPrice, data)}
 
             />} />
 

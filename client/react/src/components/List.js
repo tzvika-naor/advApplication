@@ -10,8 +10,8 @@ const List = (props) => {
     const [totalPrice, setTotalPrice] = useState([]);
 
     const addToCart = (smartphone) => {
-        props.setItems(smartphone)
-        let smartphonesInCartCopy = [...smartphonesInCart];
+            console.log(smartphone)
+        // let smartphonesInCartCopy = [...smartphonesInCart];
 
         let itemToAdd = smartphonesInCartCopy.find(item => item.id === smartphone.id);
 
@@ -25,24 +25,29 @@ const List = (props) => {
 
         setSmartphonesInCart(smartphonesInCartCopy);
         setTotalPrice(totalPrice => totalPrice + smartphone.price);
-
         //make cart a string and store in local space
-        localStorage.setItem("cart", JSON.stringify(smartphonesInCartCopy));
-        //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons
+       
+        //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons 
+        props.setItems(smartphone); 
+        props.setTotalPrice(totalPrice)
 
-        const itemsDetails = {
-            smartphonesInCart: smartphonesInCart,
-            totalPrice: totalPrice,
-        }
     }
-   
+  
 
     useEffect(() => {
+        console.log(smartphonesInCart)
+    },[smartphonesInCart])
+
+
+    useEffect(() => {
+
         if (!JSON.parse(localStorage.getItem('user'))) {
             history.push('/')
         }
+
         let cart = JSON.parse(localStorage.getItem('cart'))
         let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
+
         if (cart && totalPrice) {
             setSmartphonesInCart(cart)
             setTotalPrice(totalPrice)
