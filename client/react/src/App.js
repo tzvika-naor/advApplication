@@ -20,6 +20,8 @@ const socket = io.connect(server);
 
 function App (props) {
 
+  const [onLogout, setOnLogOut] = useState(false)
+
   const [totalPrice, setTotalPrice] = useState(localStorage.getItem("totalPrice"))
 
   const [items, setItems] = useState([]);
@@ -28,13 +30,35 @@ function App (props) {
 
   const [searchResaults, setSearchResults] = useState([]);
 
-  const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("user")))
+  const [connectedUser, setConnectedUser] = useState([])
 
   useEffect(() => {
     //this has to go after the setItems() because the placing a hook is an async task and 
     //has to preform after the cycle ended or we will end up losing the last value
-    localStorage.setItem("cart",JSON.stringify(items));
+    if (!onLogout) {
+      localStorage.setItem("cart", JSON.stringify(items));
+    }
+    else {
+      // setOnLogOut(false)
+    }
   }, [items])
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user")))
+      setConnectedUser(JSON.parse(localStorage.getItem("user")))
+    if (JSON.parse(localStorage.getItem("cart")))
+      setItems(JSON.parse(localStorage.getItem("cart")))
+      if (JSON.parse(localStorage.getItem("totalPrice")))
+      setTotalPrice(JSON.parse(localStorage.getItem("totalPrice")))
+  }, [])
+
+  useEffect(() => {
+    // setOnLogOut(false)
+    // localStorage.setItem("cart", []);
+    // localStorage.setItem("totalPrice", 0)
+  //   localStorage.removeItem("cart");
+  //   localStorage.removeItem("totalPrice");
+  }, [onLogout])
 
 
   const searchResults = (data) => {
@@ -49,11 +73,11 @@ function App (props) {
     setShowResults(false);
   }
   const setSmartphones = (data, total) => {
-        console.log(items)
+    console.log(items)
     if (!items.includes(data)) {
       setItems(items.concat(data))
       setTotalPrice(total)
-    localStorage.setItem("totalPrice", JSON.parse(total));
+      localStorage.setItem("totalPrice", JSON.parse(total));
 
     }
   }
@@ -61,7 +85,7 @@ function App (props) {
   return (
     <Router history={history}>
 
-      <Header resetSearch={resetSearch} connectedUser={connectedUser} items={items} />
+      <Header resetSearch={resetSearch} connectedUser={connectedUser} setOnLogOut={(data) => setOnLogOut(data)} />
 
       <Switch>
         {/* good! */}
