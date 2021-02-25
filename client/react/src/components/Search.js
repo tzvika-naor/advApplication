@@ -5,7 +5,7 @@ import axios from 'axios';
 import history from '../History'
 function Search (props) {
     const location = useLocation();
-    console.log(location);
+
     const searchResults = (data) => {
         props.searchResults(data);
     }
@@ -16,7 +16,7 @@ function Search (props) {
     const [processorButton, setProcessorButton] = useState(false);
     const [frontCameraButton, setFrontCameraButton] = useState(false);
     const [priceButton, setPriceButton] = useState(false)
-
+    const [initials, setInitials] = useState([]);
 
     const [price, setPrice] = useState(['0', '20', '40', '60', '100', '200', '400', '800'])
     const [brands, setBrands] = useState([]);
@@ -29,12 +29,14 @@ function Search (props) {
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.unique;
-                setBrands(data.brand)
-                setBatteryCapacity(data.batteryCapacity)
-                setDisplay(data.display)
-                setRearCamera(data.rearCamera)
-                setFrontCamera(data.frontCamera)
-                setProcessor(data.processor)
+                setBrands(data.brand);
+                setBatteryCapacity(data.batteryCapacity);
+                setDisplay(data.display);
+                setRearCamera(data.rearCamera);
+                setFrontCamera(data.frontCamera);
+                setProcessor(data.processor);
+                setInitials([data.brand[0], data.batteryCapacity[0], data.display[0], data.rearCamera[0], data.rearCamera[0],
+                data.frontCamera[0], data.processor[0], price[0]]);
             })
     }, []);
     const [searchForm, setSearchForm] = useState({
@@ -68,41 +70,50 @@ function Search (props) {
 
     return (
         <div>
-            <div class="d-flex justify-content-center" style={{marginTop:"20px"}} >
+            <div class="d-flex justify-content-center" style={{ marginTop: "20px" }} >
                 <div class="btn-toolbar " >
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: brandButton ? 'purple' : '#007bff' }} onClick={() => {
                         setBrandButton(!brandButton)
                         if (brandButton) { setSearchForm({ ...searchForm, "brand": undefined }) }
+                        else { setSearchForm({ ...searchForm, "brand": initials[0] }) }
                     }}>Brand</Button>
 
                     <Button type="button " className="ml-2" size="lg" style={{ backgroundColor: batteryButton ? 'purple' : '#007bff' }} onClick={() => {
                         setBatteryButton(!batteryButton)
                         if (batteryButton) { setSearchForm({ ...searchForm, "batteryCapacity": undefined }) }
+                        else { setSearchForm({ ...searchForm, "batteryCapacity": initials[1] }) }
+
                     }}>Battery</Button>
 
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: displayButton ? 'purple' : '#007bff' }} onClick={() => {
                         setDisplayButton(!displayButton)
                         if (displayButton) { setSearchForm({ ...searchForm, "display": undefined }) }
+                        else { setSearchForm({ ...searchForm, "display": initials[2] }) }
                     }}>Display</Button>
 
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: rearCameraButton ? 'purple' : '#007bff' }} onClick={() => {
                         setRearCameraButton(!rearCameraButton)
                         if (rearCameraButton) { setSearchForm({ ...searchForm, "rearCamera": undefined }) }
+                        else { setSearchForm({ ...searchForm, "rearCamera": initials[3] }) }
                     }}>Rear Camera</Button>
 
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: processorButton ? 'purple' : '#007bff' }} onClick={() => {
                         setProcessorButton(!processorButton)
                         if (processorButton) { setSearchForm({ ...searchForm, "processor": undefined }) }
+                        else { setSearchForm({ ...searchForm, "processor": initials[4] }) }
+
                     }}>Processor</Button>
 
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: frontCameraButton ? 'purple' : '#007bff' }} onClick={() => {
                         setFrontCameraButton(!frontCameraButton)
                         if (frontCameraButton) { setSearchForm({ ...searchForm, "frontCamera": undefined }) }
+                        else { setSearchForm({ ...searchForm, "frontCamera": initials[5] }) }
                     }}>FrontCamera</Button>
 
                     <Button type="button" className="ml-2" size="lg" style={{ backgroundColor: priceButton ? 'purple' : '#007bff' }} onClick={() => {
                         setPriceButton(!priceButton)
                         if (priceButton) { setSearchForm({ ...searchForm, "price": undefined }) }
+                        else { setSearchForm({ ...searchForm, "price": initials[6] }) }
                     }}>Price</Button>
 
                     <Button type="button" className="ml-2" size="lg" variant="success" onClick={onClick} >Search</Button>
@@ -111,7 +122,7 @@ function Search (props) {
 
             <div className="row">
                 {brandButton &&
-                    <div className="col-lg-2">
+                    <div className="col-lg-3">
                         <label>Brand</label>
                         <select
                             name='brand'
@@ -123,7 +134,7 @@ function Search (props) {
                         </select>
                     </div>
                 }
-                {batteryButton && <div className="col-lg-2">
+                {batteryButton && <div className="col-lg-3">
                     <label>Battery Capacity</label>
                     <select
                         name='batteryCapacity'
@@ -135,7 +146,7 @@ function Search (props) {
                     </select>
                 </div>
                 }
-                {displayButton && <div className="col-lg-2">
+                {displayButton && <div className="col-lg-3">
                     <label>Display</label>
                     <select
                         name='display'
@@ -148,7 +159,7 @@ function Search (props) {
                 </div>
                 }
 
-                {rearCameraButton && <div className="col-lg-2">
+                {rearCameraButton && <div className="col-lg-3">
                     <label>Rear Camera</label>
                     <select
                         name='rearCamera'
@@ -161,7 +172,7 @@ function Search (props) {
                 </div>
                 }
 
-                {processorButton && <div className="col-lg-2">
+                {processorButton && <div className="col-lg-3">
                     <label>Processor</label>
                     <select
                         name='processor'
@@ -173,7 +184,7 @@ function Search (props) {
                     </select>
                 </div>
                 }
-                {frontCameraButton && <div className="col-lg-2">
+                {frontCameraButton && <div className="col-lg-3">
                     <label>FrontCamera</label>
                     <select
                         name='frontCamera'
@@ -184,7 +195,7 @@ function Search (props) {
                         {frontCamera.map((item, i) => <option value={item} key={i} >{item}</option>)}
                     </select>
                 </div>}
-                {priceButton && <div className="col-lg-2">
+                {priceButton && <div className="col-lg-3">
                     <label>Price</label>
                     <select
                         name='price'

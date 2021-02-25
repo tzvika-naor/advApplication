@@ -9,24 +9,28 @@ import io from "socket.io-client";
 //const socket = io.connect("http://localhost:5000");
 function Order (props) {
 
-    console.log(props.items)
+    console.log(props)
 
-    var [smartphonesInCart, setSmartphonesInCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState([]);
-    const [user, setUser] = useState([])
+    var [smartphonesInCart, setSmartphonesInCart] = useState(props.items);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [user, setUser] = useState(props.connectedUser)
 
     let localUser = JSON.parse(localStorage.getItem("user"))
     let localCart = JSON.parse(localStorage.getItem("cart"))
+
     // this is called on component didmount
     useEffect(() => {
-
+        setTotalPrice(props.totalPrice)
+        console.log(smartphonesInCart)
+        console.log(totalPrice)
+        console.log(user)
         if (localCart) {
             setSmartphonesInCart(localCart);
             calculateTotalPrice(localCart);
             setUser(localUser);
         }
         else {
-            history.push('');
+            history.push('/smartphones');
         }
     }, [])
 

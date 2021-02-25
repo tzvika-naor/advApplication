@@ -6,38 +6,22 @@ import history from '../History';
 const List = (props) => {
 
     const [smartphones, setSmartphones] = useState([]);
-    const [smartphonesInCart, setSmartphonesInCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState([]);
-
-    const addToCart = (smartphone) => {
-            console.log(smartphone)
-        // let smartphonesInCartCopy = [...smartphonesInCart];
-
-        let itemToAdd = smartphonesInCartCopy.find(item => item.id === smartphone.id);
-
-        if (itemToAdd) { // the item is already in the cart no need to add into setSmartphonesInCart
-
-            itemToAdd.quantity += 1;
-        }
-        else { //The item is not in the cart yet
-            smartphonesInCartCopy = [...smartphonesInCartCopy, { phoneModel: smartphone.phoneModel, price: smartphone.price, id: smartphone.id, image: smartphone.image, quantity: 1 }]
-        }
-
-        setSmartphonesInCart(smartphonesInCartCopy);
-        setTotalPrice(totalPrice => totalPrice + smartphone.price);
-        //make cart a string and store in local space
-       
-        //lifting up the items that are in the cart. the user will be able to access it from the shopping-cart-icons 
-        props.setItems(smartphone); 
-        props.setTotalPrice(totalPrice)
-
-    }
-  
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [smartphoneItem,setSmartphoneItem] = useState([])
 
     useEffect(() => {
-        console.log(smartphonesInCart)
-    },[smartphonesInCart])
+        props.setSmartphones(smartphoneItem, totalPrice);
+    },[totalPrice])
+    
+    const addToCart = (smartphone) => {
 
+        setSmartphoneItem(smartphone)
+        setTotalPrice(totalPrice => totalPrice + smartphone.price);
+       
+    }
+
+    useEffect(() => {
+    }, [totalPrice])
 
     useEffect(() => {
 
@@ -45,13 +29,7 @@ const List = (props) => {
             history.push('/')
         }
 
-        let cart = JSON.parse(localStorage.getItem('cart'))
-        let totalPrice = JSON.parse(localStorage.getItem('totalPrice'))
-
-        if (cart && totalPrice) {
-            setSmartphonesInCart(cart)
-            setTotalPrice(totalPrice)
-        }
+       
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.smartphones;

@@ -20,37 +20,31 @@ const socket = io.connect(server);
 
 function App (props) {
 
-  const [totalPrice, setTotalPrice] = useState([])
+  const [totalPrice, setTotalPrice] = useState(localStorage.getItem("totalPrice"))
 
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([]);
 
   const [showResults, setShowResults] = useState(false);
 
   const [searchResaults, setSearchResults] = useState([]);
 
-  // if the user was logged in we will 
-  // get his details from the localStorage
-  // else we will get set this connectedUser
-  // var with a callback function from login Component
   const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("user")))
 
+  
   useEffect(() => {
-
-    localStorage.setItem("cart", JSON.stringify(items))
-
-  }, [items])
-  useEffect(() => {
-
-    console.log(totalPrice)
+    // we can also take it stright from the setSmartphones under total value
+    localStorage.setItem("totalPrice", JSON.parse(totalPrice));
 
   }, [totalPrice])
-
+  
   useEffect(() => {
+      
+    //this has to go after the setItems() because the placing a hook is an async task and 
+    //has to preform after the cycle ended or we will end up losing the last value
+    localStorage.setItem("cart",JSON.stringify(items));
 
-    console.log(connectedUser)
-    // console.log(localConnectedUser)
+  }, [items])
 
-  }, [connectedUser])
 
   const searchResults = (data) => {
 
@@ -62,6 +56,13 @@ function App (props) {
 
   const resetSearch = (data) => {
     setShowResults(false);
+  }
+  const setSmartphones = (data, total) => {
+        console.log(items)
+    if (!items.includes(data)) {
+      setItems(items.concat(data))
+      setTotalPrice(total)
+    }
   }
 
   return (
@@ -83,7 +84,9 @@ function App (props) {
         {/* good! */}
         <Route path="/login" render={() => <Login setConnectedUser={(user) => setConnectedUser(user)} />} />
         {/* good */}
-        <Route path='/order' render={() => <Order items={items} setItems={data => setItems(data)} />} />
+        <Route path='/order' render={() => <Order items={items} setItems={data => setItems(data)}
+
+          connectedUser={connectedUser} totalPrice={totalPrice} />} />
 
         <Fragment>
 
@@ -99,7 +102,8 @@ function App (props) {
 
             <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
 
-              setItems={data => setItems([...items, data])} setTotalPrice={data => setTotalPrice(...totalPrice, data)}
+              setSmartphones={(data, totalPrice) => setSmartphones(data, totalPrice)}
+
 
             />} />
 
