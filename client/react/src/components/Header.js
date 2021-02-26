@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import './Header.css'
 function Header (props) {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(localStorage.getItem('user'))) // it was null at firstload 
+    const [isLoggedIn, setIsLoggedIn] = useState([]) // it was null at firstload 
 
     useEffect(() => {
         if (props) {
@@ -16,12 +16,11 @@ function Header (props) {
     }
 
     const onLogout = (e) => {
-        localStorage.removeItem("totalPrice")
+        setIsLoggedIn(false);
         localStorage.removeItem("cart")
         localStorage.removeItem('user')
-        setIsLoggedIn(false);
-        props.setOnLogOut(true);
-
+        // props.setItems([])
+        // props.setOnLogOut(true);
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >

@@ -22,9 +22,9 @@ function App (props) {
 
   const [onLogout, setOnLogOut] = useState(false)
 
-  const [totalPrice, setTotalPrice] = useState(localStorage.getItem("totalPrice"))
+  const [totalPrice, setTotalPrice] = useState(0)
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem("cart")));
 
   const [showResults, setShowResults] = useState(false);
 
@@ -35,30 +35,31 @@ function App (props) {
   useEffect(() => {
     //this has to go after the setItems() because the placing a hook is an async task and 
     //has to preform after the cycle ended or we will end up losing the last value
-    if (!onLogout) {
-      localStorage.setItem("cart", JSON.stringify(items));
-    }
-    else {
-      // setOnLogOut(false)
-    }
+
+    localStorage.setItem("cart", JSON.stringify(items));
+
   }, [items])
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user")))
-      setConnectedUser(JSON.parse(localStorage.getItem("user")))
+
     if (JSON.parse(localStorage.getItem("cart")))
       setItems(JSON.parse(localStorage.getItem("cart")))
-      if (JSON.parse(localStorage.getItem("totalPrice")))
+    else {
+      setItems([])
+    }
+    if (JSON.parse(localStorage.getItem("totalPrice")))
       setTotalPrice(JSON.parse(localStorage.getItem("totalPrice")))
+    else {
+      setTotalPrice(0)
+    }
   }, [])
 
   useEffect(() => {
-    // setOnLogOut(false)
-    // localStorage.setItem("cart", []);
-    // localStorage.setItem("totalPrice", 0)
-  //   localStorage.removeItem("cart");
-  //   localStorage.removeItem("totalPrice");
-  }, [onLogout])
+    //this has to go after the setItems() because the placing a hook is an async task and 
+    //has to preform after the cycle ended or we will end up losing the last value
+
+    console.log(totalPrice)
+  }, [totalPrice])
 
 
   const searchResults = (data) => {
@@ -74,18 +75,20 @@ function App (props) {
   }
   const setSmartphones = (data, total) => {
     console.log(items)
-    if (!items.includes(data)) {
-      setItems(items.concat(data))
-      setTotalPrice(total)
-      localStorage.setItem("totalPrice", JSON.parse(total));
+    if (items) {
+      if (!items.includes(data)) {
+        setItems(items.concat(data))
+        setTotalPrice(total)
+        localStorage.setItem("totalPrice", total)
 
+      }
     }
   }
 
   return (
     <Router history={history}>
 
-      <Header resetSearch={resetSearch} connectedUser={connectedUser} setOnLogOut={(data) => setOnLogOut(data)} />
+      <Header resetSearch={resetSearch} connectedUser={connectedUser} setItems={(data) => setItems(data)} />
 
       <Switch>
         {/* good! */}
