@@ -19,8 +19,6 @@ function Header (props) {
         setIsLoggedIn(false);
         localStorage.removeItem("cart")
         localStorage.removeItem('user')
-        // props.setItems([])
-        // props.setOnLogOut(true);
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >

@@ -22,7 +22,7 @@ function App (props) {
 
   const [onLogout, setOnLogOut] = useState(false)
 
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(JSON.parse(localStorage.getItem("totalPrice")))
 
   const [items, setItems] = useState(JSON.parse(localStorage.getItem("cart")));
 
@@ -30,7 +30,7 @@ function App (props) {
 
   const [searchResaults, setSearchResults] = useState([]);
 
-  const [connectedUser, setConnectedUser] = useState([])
+  const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("totalPrice")))
 
   useEffect(() => {
     //this has to go after the setItems() because the placing a hook is an async task and 
@@ -39,6 +39,14 @@ function App (props) {
     localStorage.setItem("cart", JSON.stringify(items));
 
   }, [items])
+
+  useEffect(() => {
+    //this has to go after the setItems() because the placing a hook is an async task and 
+    //has to preform after the cycle ended or we will end up losing the last value
+
+    console.log(totalPrice)
+  }, [totalPrice])
+
 
   useEffect(() => {
 

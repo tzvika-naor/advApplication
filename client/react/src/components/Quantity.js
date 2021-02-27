@@ -18,7 +18,7 @@ function Quantity (props) {
 
     return (
         <div>
-            <li><input ref={inputRef} id="quantityInput" className="form-control input-lg" type="number" min="1" value={props.quantity} onChange={onChange}></input></li>
+            <li><input ref={inputRef} id="quantityInput"  className="form-control input-lg" type="number" min="1" value={props.quantity} onChange={onChange}></input></li>
         </div>
     )
 }

@@ -5,49 +5,60 @@ import { useEffect, useState } from "react";
 import Quantity from './Quantity';
 import history from '../History';
 import io from "socket.io-client";
+import { get } from 'react-hook-form';
 
 //const socket = io.connect("http://localhost:5000");
 function Order (props) {
 
     console.log(props)
 
-    var [smartphonesInCart, setSmartphonesInCart] = useState(props.items);
+    const [items, setItems] = useState(props.items);
     const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState(props.connectedUser)
 
     useEffect(() => {
-       
-        calculateTotalPrice(props.items)
+
+        calculateTotalPrice(items)
 
     }, [])
 
-    useEffect(() => {
-       
-        console.log(totalPrice)
+    // useEffect(() => {
 
-    }, [calculateTotalPrice])
+    //     console.log(totalPrice)
+
+    // }, [calculateTotalPrice])
 
     const goBack = () => {
-        props.setItems(smartphonesInCart)
+        props.setItems(items)
         history.push("/smartphones")
     }
 
     const calculateTotalPrice = smartphones => {
-      
-    
-    }
 
+        const getPrice = smartphones.map(smartphone => smartphone.price)
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        const total = getPrice.reduce(reducer)
+        setTotalPrice(total)
+
+    }
+    const onCheckout = () => {
+
+    }
     return (
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
-            <ul className="list-unstyled" >
-                <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px", color: "white" }}> Your Cart </h4>
-                <div style={{ marginLeft: "60px", marginBottom: "20px", color: "white" }}>
-                    <li><h5>First Name: {user?.firstname}</h5> </li>
-                    <li><h5>Last Name: {user?.lastname} </h5></li>
-                    <li><h5>Email: {user?.email}</h5></li>
-                </div></ul>
-            {smartphonesInCart.map((el, index) => (
+            <div className="col-4" >
+                <ul className="list-unstyled" >
+                    <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px", color: "white" }}> Your Cart </h4>
+                    <div style={{ marginLeft: "60px", marginBottom: "20px", color: "black" }}>
+                        <li><h3>First Name: {user?.firstname}</h3> </li>
+                        <li><h3>Last Name: {user?.lastname} </h3></li>
+                        <li><h3>Email: {user?.email}</h3></li>
+                    </div>
+                </ul>
+            </div>
+
+            {items.map((el, index) => (
                 <div>
                     <ul className="list-unstyled">
                         <div className="col-md-4">
@@ -58,8 +69,8 @@ function Order (props) {
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
-                                        <Quantity key={index} index={index} id={el.id} quantity={el.quantity} setQuantity={(id, quantity) => setQuantity(id, quantity)} />
-                                        <Button onClick={() => removeFromCart(el.id)}>Remove</Button>
+                                        <Quantity key={index} index={index} id={el.id} quantity={el.quantity} />
+                                        {/* <Button onClick={() => removeFromCart(el.id)}>Remove</Button> */}
                                     </div>
                                 </div>
                             </div>
