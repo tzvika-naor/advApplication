@@ -11,6 +11,4 @@ router.put("/:id", SmartphoneController.updateSmartphone); //update an existing 
 router.delete("/:id", SmartphoneController.deleteSmartphone);
 router.post("/searchByProcessor", SmartphoneController.searchByProcessor); //all Smartphone
 
-
-
 module.exports = router;
