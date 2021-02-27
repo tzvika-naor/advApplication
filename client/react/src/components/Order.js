@@ -61,6 +61,7 @@ function Order (props) {
         let itemsCopy = [...items]
         itemsCopy[index].quantity = +quantity;
         setItems(itemsCopy)
+        props.setItems(itemsCopy)
         calculateTotalPrice(itemsCopy)
         localStorage.setItem("cart", JSON.stringify(itemsCopy))
     }
@@ -74,7 +75,7 @@ function Order (props) {
         calculateTotalPrice(filterItem)
         setItems(filterItem)
         localStorage.setItem("cart", JSON.stringify(filterItem))
-
+        props.setItems(filterItem)
     }
 
 
