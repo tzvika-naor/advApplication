@@ -12,15 +12,23 @@ function Order (props) {
 
     console.log(props)
 
+    let quantity = props.items;
     const [items, setItems] = useState(props.items);
     const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState(props.connectedUser)
 
     useEffect(() => {
 
-        calculateTotalPrice(items)
+        if ((props.items).length > 0)
+            calculateTotalPrice(props.items)
+        else {
+            alert('your cart is empty')
+            history.push("/smartphones")
+        }
 
     }, [])
+
+
 
     // useEffect(() => {
 
@@ -35,7 +43,7 @@ function Order (props) {
 
     const calculateTotalPrice = smartphones => {
 
-        const getPrice = smartphones.map(smartphone => smartphone.price)
+        const getPrice = smartphones.map(item => item.smartphone.price)
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         const total = getPrice.reduce(reducer)
         setTotalPrice(total)
@@ -44,6 +52,24 @@ function Order (props) {
     const onCheckout = () => {
 
     }
+    const removeFromCart = () => {
+
+    }
+    const setQuantity = (index, quantity) => {
+        console.log(quantity)
+        console.log(index)
+        let itemsCopy = [...items];
+        console.log(itemsCopy[index]);
+        itemsCopy[index].quantity = +quantity;
+        setItems(itemsCopy)
+    }
+    useEffect(() => {
+        console.log(items)
+    }, [items])
+
+
+
+
     return (
         <div >
             {/* <h4> Order Id: {orderId}</h4> */}
@@ -58,19 +84,19 @@ function Order (props) {
                 </ul>
             </div>
 
-            {items.map((el, index) => (
+            {items.map((smartphone, index) => (
                 <div>
                     <ul className="list-unstyled">
                         <div className="col-md-4">
                             <div className="row" >
                                 <div className="col-md-9 offset-1">
-                                    <li style={{ height: "120px" }} className="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={el.image} alt="" />  <h4>Model: {el.phoneModel}</h4>  <h4>Price: {el.price}$ </h4> </li>
+                                    <li style={{ height: "120px" }} className="list-group-item">  <img style={{ width: "50px", height: "100px", float: "right" }} src={smartphone.smartphone.image} alt="" />  <h4>Model: {smartphone.smartphone.phoneModel}</h4>  <h4>Price: {smartphone.smartphone.price}$ </h4> </li>
                                 </div>
                                 <div className="col-md-2">
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
-                                        <Quantity key={index} index={index} id={el.id} quantity={el.quantity} />
-                                        {/* <Button onClick={() => removeFromCart(el.id)}>Remove</Button> */}
+                                        <Quantity key={index} index={index} smartphone={smartphone} setQuantity={(index, data) => setQuantity(index, data)} />
+                                        <Button onClick={() => removeFromCart(index)}>Remove</Button>
                                     </div>
                                 </div>
                             </div>

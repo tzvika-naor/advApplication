@@ -20,6 +20,9 @@ function Header (props) {
         localStorage.removeItem("cart")
         localStorage.removeItem('user')
     }
+    // const checkCart = () = {
+
+    // }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
             <div className="container">

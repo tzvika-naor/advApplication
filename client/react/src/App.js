@@ -22,15 +22,13 @@ function App (props) {
 
   const [onLogout, setOnLogOut] = useState(false)
 
-  const [totalPrice, setTotalPrice] = useState(JSON.parse(localStorage.getItem("totalPrice")))
-
   const [items, setItems] = useState(JSON.parse(localStorage.getItem("cart")));
 
   const [showResults, setShowResults] = useState(false);
 
   const [searchResaults, setSearchResults] = useState([]);
 
-  const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("totalPrice")))
+  const [connectedUser, setConnectedUser] = useState(JSON.parse(localStorage.getItem("user")))
 
   useEffect(() => {
     //this has to go after the setItems() because the placing a hook is an async task and 
@@ -40,12 +38,7 @@ function App (props) {
 
   }, [items])
 
-  useEffect(() => {
-    //this has to go after the setItems() because the placing a hook is an async task and 
-    //has to preform after the cycle ended or we will end up losing the last value
-
-    console.log(totalPrice)
-  }, [totalPrice])
+ 
 
 
   useEffect(() => {
@@ -55,19 +48,10 @@ function App (props) {
     else {
       setItems([])
     }
-    if (JSON.parse(localStorage.getItem("totalPrice")))
-      setTotalPrice(JSON.parse(localStorage.getItem("totalPrice")))
-    else {
-      setTotalPrice(0)
-    }
+
   }, [])
 
-  useEffect(() => {
-    //this has to go after the setItems() because the placing a hook is an async task and 
-    //has to preform after the cycle ended or we will end up losing the last value
-
-    console.log(totalPrice)
-  }, [totalPrice])
+ 
 
 
   const searchResults = (data) => {
@@ -81,14 +65,11 @@ function App (props) {
   const resetSearch = (data) => {
     setShowResults(false);
   }
-  const setSmartphones = (data, total) => {
+  const setSmartphones = (data) => {
     console.log(items)
     if (items) {
       if (!items.includes(data)) {
         setItems(items.concat(data))
-        setTotalPrice(total)
-        localStorage.setItem("totalPrice", total)
-
       }
     }
   }
@@ -114,7 +95,7 @@ function App (props) {
         {/* good */}
         <Route path='/order' render={() => <Order items={items} setItems={data => setItems(data)}
 
-          connectedUser={connectedUser} totalPrice={totalPrice} />} />
+          connectedUser={connectedUser}  />} />
 
         <Fragment>
 
@@ -128,9 +109,9 @@ function App (props) {
           <div >
             {/* good */}
 
-            <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults}
+            <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults} setSmartphones={(data) => setSmartphones(data)}
 
-              setSmartphones={(data, totalPrice) => setSmartphones(data, totalPrice)}
+            
 
 
             />} />

@@ -7,17 +7,17 @@ const List = (props) => {
 
     const [smartphones, setSmartphones] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [smartphoneItem,setSmartphoneItem] = useState([])
+    const [smartphoneItem, setSmartphoneItem] = useState([])
 
     useEffect(() => {
-        props.setSmartphones(smartphoneItem, totalPrice);
-    },[totalPrice])
-    
+        props.setSmartphones(smartphoneItem);
+    }, [totalPrice])
+
     const addToCart = (smartphone) => {
 
-        setSmartphoneItem(smartphone)
+        setSmartphoneItem({ smartphone, quantity: 1 })
         setTotalPrice(totalPrice => totalPrice + smartphone.price);
-       
+
     }
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const List = (props) => {
             history.push('/')
         }
 
-       
+
         axios.get('http://localhost:5000/api/smartphone')
             .then(response => {
                 const data = response.data.smartphones;
