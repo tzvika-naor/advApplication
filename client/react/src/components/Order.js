@@ -30,11 +30,11 @@ function Order (props) {
 
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     console.log(totalPrice)
+        console.log(items)
 
-    // }, [calculateTotalPrice])
+    }, [items])
 
     const goBack = () => {
         props.setItems(items)
@@ -43,31 +43,39 @@ function Order (props) {
 
     const calculateTotalPrice = smartphones => {
 
-        const getPrice = smartphones.map(item => item.smartphone.price)
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        const total = getPrice.reduce(reducer)
-        setTotalPrice(total)
+        if (smartphones.length > 0) {
+            const getPrice = smartphones.map(item => (item.smartphone.price) * item.quantity)
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            const total = getPrice.reduce(reducer)
+            setTotalPrice(total)
+        }
+        else
+            setTotalPrice(0)
 
     }
     const onCheckout = () => {
 
     }
-    const removeFromCart = () => {
 
-    }
     const setQuantity = (index, quantity) => {
-        console.log(quantity)
-        console.log(index)
-        let itemsCopy = [...items];
-        console.log(itemsCopy[index]);
+        let itemsCopy = [...items]
         itemsCopy[index].quantity = +quantity;
         setItems(itemsCopy)
+        calculateTotalPrice(itemsCopy)
+        localStorage.setItem("cart", JSON.stringify(itemsCopy))
     }
     useEffect(() => {
         console.log(items)
     }, [items])
 
+    const removeFromCart = (item) => {
 
+        const filterItem = items.filter(itemEl => itemEl.smartphone.id !== item.smartphone.id)
+        calculateTotalPrice(filterItem)
+        setItems(filterItem)
+        localStorage.setItem("cart", JSON.stringify(filterItem))
+
+    }
 
 
     return (
@@ -96,7 +104,7 @@ function Order (props) {
                                     <div style={{ marginTop: "30px", marginLeft: "20px", width: "60px" }}>
                                         <label>Quantity</label>
                                         <Quantity key={index} index={index} smartphone={smartphone} setQuantity={(index, data) => setQuantity(index, data)} />
-                                        <Button onClick={() => removeFromCart(index)}>Remove</Button>
+                                        <Button onClick={() => removeFromCart(smartphone)}>Remove</Button>
                                     </div>
                                 </div>
                             </div>
