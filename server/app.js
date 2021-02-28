@@ -10,7 +10,7 @@ const userRoutes = require('./routes/user');
 const smartphoneRoutes = require('./routes/smartphone');
 const orderController = require('./controllers/order');
 const smartphoneController = require('./controllers/smartphone');
-
+var path = require('path');
 const connectionString = "mongodb+srv://advanced_applications:HC4HlY2ygfLzRyfD@cluster0.hjlul.mongodb.net/node-angular-react";
 mongoose.connect(process.env._MONGODB_URI || connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("connected to mongoDB!!"))
@@ -23,6 +23,7 @@ app.use(cors());
 app.use("/api/order", orderRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/smartphone", smartphoneRoutes);
+console.log(express.static("../client/react/")) 
 
 
 const server = http.createServer(app);
@@ -81,7 +82,7 @@ if(process.env.NODE_ENV === 'production'){
     app.use(express.static('../client/dashboard/dist/angular'));
 
     app.get('*', (req,res) => {
-        res.sendFile(path.resolve(__dirname,'../client/react','build','index.html'))
+        res.sendFile(path.resolve((__dirname,'/../client/react','build','index.html')))
     })
 }
 
