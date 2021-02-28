@@ -7,7 +7,16 @@
     "server": "cd server && npm start",
     "react": "cd client\\react && npm start",
     "angular": "cd client\\dashboard && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\""
+    "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\"",
+    "build-react": "cd client\\react && npm build",
+    "install-react": "cd client\\react && npm install",
+    "build-angular": "cd client\\dashboard && npm build",
+    "install-angular": "cd client\\dashboard && npm install",
+    "heroku-postbuild": "npm run install-angular && npm run install-react && npm run build-react && npm run build-angular",
+    "start": "cd server && npm start"
+
+
+  
   },
   "keywords": [],
   "author": "",

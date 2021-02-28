@@ -11,8 +11,8 @@ const smartphoneRoutes = require('./routes/smartphone');
 const orderController = require('./controllers/order');
 const smartphoneController = require('./controllers/smartphone');
 
-const connectionString = "mongodb+srv://advanced_applications:HC4HlY2ygfLzRyfD@cluster0.hjlul.mongodb.net/node-angular-react" ;
-mongoose.connect(connectionString,{ useNewUrlParser: true, useUnifiedTopology: true })
+const connectionString = "mongodb+srv://advanced_applications:HC4HlY2ygfLzRyfD@cluster0.hjlul.mongodb.net/node-angular-react";
+mongoose.connect(process.env._MONGODB_URI || connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("connected to mongoDB!!"))
     .catch(() => console.log('connection failed!!!'));
 
@@ -56,24 +56,32 @@ io.on('connection', (socket) => {
 
     //When Order is deleted or added
     socket.on('changeOrdersCount', () => {
-        orderController.getOrdersCount(null,null,(ordersCount) => {
+        orderController.getOrdersCount(null, null, (ordersCount) => {
             //ordersCounter = ordersCount;
             socket.broadcast.emit('ordersCounter', ordersCount);
             console.log('Total orders changed !!');
-        });        
+        });
     })
 
     //When Smartphone is deleted or added
     socket.on('changeSmartphonesCount', () => {
-        smartphoneController.getSmartphonesCount(null,null,(smartphonesCount) => {
+        smartphoneController.getSmartphonesCount(null, null, (smartphonesCount) => {
             //smartphonesCounter = smartphonesCount;
             socket.broadcast.emit('smartphonesCounter', smartphonesCount);
             console.log('Total smartphones changed !!');
-        });        
+        });
     })
 
 });
+console.log(process.env.PORT)
+const port = process.env.PORT || 5000
 
-server.listen(5000);
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/react/build'));
+    app.use(express.static('client/dashboard/dist/angular'));
+
+}
+
+server.listen(port);
 
 module.exports = app;
