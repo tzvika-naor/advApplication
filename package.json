@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "server": "cd server && npm start",
-    "react": "cd client\\react && npm start --prefix client",
-    "angular": "cd client\\dashboard && npm start --prefix client",
+    "react": "cd client\\react && npm start ",
+    "angular": "cd client\\dashboard && npm start ",
     "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\"",
-    "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm run angular && npm run react",
     "start": "cd server && npm start"
 
 
