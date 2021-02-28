@@ -8,7 +8,7 @@
     "react": "cd client\\react && npm start ",
     "angular": "cd client\\dashboard && npm start ",
     "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\"",
-    "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm run angular && npm run react",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run angular && npm run react",
     "start": "cd server && npm start"
 
 
