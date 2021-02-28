@@ -4,15 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "cd server && npm start",
-    "react": "cd client\\react && npm start ",
-    "angular": "cd client\\dashboard && npm start ",
+    "server": "npm start --prefix server",
+    "react": "npm start --prefix client\\react",
+    "angular": "npm start --prefix client\\dashboard",
     "dev": "concurrently \"npm run server\" \"npm run angular\" \"npm run react\"",
     "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm run --prefix react && npm run build --prefix react && npm run --prefix dashboard && npm run build --prefix dashboard",
-    "start": "cd server && npm start"
-
-
-  
+    "start": "npm start --prefix server"
   },
   "keywords": [],
   "author": "",
