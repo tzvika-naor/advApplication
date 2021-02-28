@@ -83,7 +83,7 @@ if(process.env.NODE_ENV === 'production'){
 
     app.get('*', (req,res) => {
         res.sendFile(path.resolve(path.join(__dirname,'./client/react','build','index.html')));
-        res.sendFile(path.resolve(path.join(__dirname,'./client/dashboart','dist','index.html')));
+        res.sendFile(path.resolve(path.join(__dirname,'./client/dashboart/angular','dist','index.html')));
 
     })
 }
