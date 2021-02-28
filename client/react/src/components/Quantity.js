@@ -2,7 +2,6 @@ import { useRef } from 'react'
 function Quantity (props) {
 
     console.log(props)
-
     // const index = props.index;
     // const items = props.items;
     const onChange = (event) => {
@@ -11,8 +10,6 @@ function Quantity (props) {
         }
 
     }
-
-
     return (
         <div>
             <li><input className="form-control" type="number" value={props.smartphone.quantity} onChange={onChange}></input></li>

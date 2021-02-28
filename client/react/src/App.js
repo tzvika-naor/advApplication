@@ -111,8 +111,6 @@ function App (props) {
 
             <Route path='/smartphones' render={(props) => <List searchResults={searchResaults} showResults={showResults} setSmartphones={(data) => setSmartphones(data)}
 
-            
-
 
             />} />
 
