@@ -38,7 +38,7 @@ function App (props) {
 
   }, [items])
 
- 
+
 
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function App (props) {
 
   }, [])
 
- 
+
 
 
   const searchResults = (data) => {
@@ -66,11 +66,10 @@ function App (props) {
     setShowResults(false);
   }
   const setSmartphones = (data) => {
-    console.log(items)
+
     if (items) {
-      if (!items.includes(data)) {
-        setItems(items.concat(data))
-      }
+      const filterSmartphones = items.filter(item => item.smartphone.id !== data.smartphone.id);
+      setItems(filterSmartphones.concat(data));
     }
   }
 
@@ -95,7 +94,7 @@ function App (props) {
         {/* good */}
         <Route path='/order' render={() => <Order items={items} setItems={data => setItems(data)}
 
-          connectedUser={connectedUser}  />} />
+          connectedUser={connectedUser} />} />
 
         <Fragment>
 
