@@ -45,10 +45,8 @@ function Order (props) {
             status: 'completed'
         }
         axios.post("http://localhost:5000/api/order", order).then(res => console.log(res))
-        alert('order completed');
-        props.setItems([]);
-        setTotalPrice(0);
-        history.push("/smartphones");
+        alert('order completed')
+        history.push("/smartphones")
     }
     const setQuantity = (index, quantity) => {
         let itemsCopy = [...items]
