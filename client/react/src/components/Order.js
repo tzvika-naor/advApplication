@@ -54,7 +54,6 @@ function Order (props) {
 
     }
     const onCheckout = () => {
-
     }
 
     const setQuantity = (index, quantity) => {
