@@ -1,18 +1,11 @@
-// import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import Quantity from './Quantity';
 import history from '../History';
-import io from "socket.io-client";
-import { get } from 'react-hook-form';
 
-//const socket = io.connect("http://localhost:5000");
 function Order (props) {
 
-    console.log(props)
-
-    let quantity = props.items;
     const [items, setItems] = useState(props.items);
     const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState(props.connectedUser)
@@ -28,34 +21,39 @@ function Order (props) {
 
     }, [])
 
-
-
-    useEffect(() => {
-
-        console.log(items)
-
-    }, [items])
-
     const goBack = () => {
-        props.setItems(items)
-        history.push("/smartphones")
+        
+        setTotalPrice(0);
+        props.setItems([]);
+        history.push("/smartphones");
     }
 
     const calculateTotalPrice = smartphones => {
-
         if (smartphones.length > 0) {
             const getPrice = smartphones.map(item => (item.smartphone.price) * item.quantity)
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
             const total = getPrice.reduce(reducer)
             setTotalPrice(total)
         }
-        else
-            setTotalPrice(0)
-
+        else {
+            setTotalPrice(0);
+            history.push("/smartphones");
+        }
     }
     const onCheckout = () => {
+        const newItem = items.map(item => item = { id: item.smartphone._id, quantity: item.quantity })
+        const order = {
+            userId: user._id,
+            smartphones: newItem,
+            totalPrice: totalPrice,
+            status: 'completed'
+        }
+        axios.post("http://localhost:5000/api/order", order).then(res => console.log(res))
+        alert('order completed');
+        props.setItems([]);
+        setTotalPrice(0);
+        history.push("/smartphones");
     }
-
     const setQuantity = (index, quantity) => {
         let itemsCopy = [...items]
         itemsCopy[index].quantity = +quantity;
@@ -64,23 +62,16 @@ function Order (props) {
         calculateTotalPrice(itemsCopy)
         localStorage.setItem("cart", JSON.stringify(itemsCopy))
     }
-    useEffect(() => {
-        console.log(items)
-    }, [items])
 
     const removeFromCart = (item) => {
-
         const filterItem = items.filter(itemEl => itemEl.smartphone.id !== item.smartphone.id)
         calculateTotalPrice(filterItem)
         setItems(filterItem)
         localStorage.setItem("cart", JSON.stringify(filterItem))
         props.setItems(filterItem)
     }
-
-
     return (
         <div >
-            {/* <h4> Order Id: {orderId}</h4> */}
             <div className="col-4" >
                 <ul className="list-unstyled" >
                     <h4 style={{ marginBottom: "20px", marginTop: "40px", marginLeft: "40px", color: "white" }}> Your Cart </h4>

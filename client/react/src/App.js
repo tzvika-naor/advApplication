@@ -66,10 +66,12 @@ function App (props) {
     setShowResults(false);
   }
   const setSmartphones = (data) => {
-
-    if (items) {
+    console.log(items)
+    if (items.length > 0) {
       const filterSmartphones = items.filter(item => item.smartphone.id !== data.smartphone.id);
       setItems(filterSmartphones.concat(data));
+    } else {
+      setItems(items.concat(data))
     }
   }
 
