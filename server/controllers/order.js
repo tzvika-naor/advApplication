@@ -116,7 +116,6 @@ exports.getOrderByUserId = async (req, res, next) => {
 }
 
 exports.createOrder = (req, res, next) => {
-    console.log(req.body)
     const order = new Order({
         smartphones: req.body.smartphones,
         totalPrice: req.body.totalPrice,
@@ -137,7 +136,7 @@ exports.createOrder = (req, res, next) => {
         .catch(error => {
             res.status(500).json({
                 message: 'Creating a Order failed!',
-                error: error,
+                error: err,
             });
         });
 };
